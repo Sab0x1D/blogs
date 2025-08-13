@@ -135,7 +135,7 @@ SVG-based phishing is not a theoretical threat — it’s an increasingly common
 Understanding the **SVG phishing attack chain** is the first step in defending against it. Organizations should update their email filters, security awareness training, and endpoint defenses to account for this evolving threat vector.  
 
 The days of treating images as inherently safe are over — vigilance and layered defenses are now essential.
-  
-  
-  
-⬅️ [Return to Blog Index](../readme.md)
+<br>
+<br>
+<br>
+⬅️ [Return to Blog Index](../)
