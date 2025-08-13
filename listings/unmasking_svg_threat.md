@@ -1,6 +1,8 @@
-# Unmasking the SVG Threat: How Hackers Use Vector Graphics for Phishing Attacks
-
-![SVG Phishing Attack Chain](c911f070-f5a7-4fef-8616-bdbbe4b4bbbd.png)
+<h1 align="center">
+   Unmasking the SVG threat <br>
+   How Hackers use vector graphics for Phishing attacks
+</h1>
+<p align="center"><img src="assets/svg_pic.png"></p>
 
 ## Introduction
 
@@ -133,7 +135,7 @@ SVG-based phishing is not a theoretical threat — it’s an increasingly common
 Understanding the **SVG phishing attack chain** is the first step in defending against it. Organizations should update their email filters, security awareness training, and endpoint defenses to account for this evolving threat vector.  
 
 The days of treating images as inherently safe are over — vigilance and layered defenses are now essential.
-
----
-*References:*  
-- [Seqrite Blog – Unmasking the SVG Threat: How Hackers Use Vector Graphics for Phishing Attacks](https://www.seqrite.com/blog/unmasking-the-svg-threat-how-hackers-use-vector-graphics-for-phishing-attacks/)
+  
+  
+  
+⬅️ [Return to Blog Index](../readme.md)
