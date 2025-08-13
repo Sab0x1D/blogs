@@ -3,6 +3,6 @@
 <br>
 <br>
 ###
-- [Masquerading with “ん” — A clever unicode trick in Booking.com phishing campaigns](listings/booking_unicode_phish.md)
+- [Masquerading with “ん”: A clever unicode trick in Booking.com phishing campaigns](listings/booking_unicode_phish.md)
 - [Unmasking the SVG threat: How Hackers use vector graphics for phishing attacks](listings/unmasking_svg_threat.md)
 
