@@ -1,40 +1,67 @@
+/* ---------- Theme tokens ---------- */
+/* Light = default */
+:root {
+  --bg: #ffffff;
+  --text: #111827;      /* slate-900 */
+  --muted: #6b7280;     /* slate-500 */
+  --link: #0b57d0;
 
-/* === Sab0x1D Light/Dark Toggle ============================================ */
-/* Default is light; dark rules apply when <html data-theme="dark"> */
+  --card: #ffffff;
+  --card-border: #e5e7eb;   /* slate-200 */
 
-:root { --toggle-border: rgba(255,255,255,.2); }
+  --chip-bg: #ffffff;
+  --chip-border: #e5e7eb;
 
-/* Button in header (non-destructive) */
-.site-header { position: relative; }
-.theme-toggle {
-  position: absolute; right: 12px; top: 10px;
-  display: inline-flex; align-items: center; justify-content: center;
-  width: 36px; height: 36px; border-radius: 10px;
-  background: transparent; border: 1px solid var(--toggle-border);
-  cursor: pointer; padding: 0; outline: none;
+  --footer-bg: #f8fafc;
+  --footer-text: #4b5563;
 }
-.theme-toggle svg { width: 18px; height: 18px; }
 
-/* --- Dark theme overrides --- */
-html[data-theme="dark"] body { background: #0f1318; color: #cfd6e0; }
-html[data-theme="dark"] .site-header { background:#0b0f14; border-bottom:1px solid #222831; }
-html[data-theme="dark"] .site-title, 
-html[data-theme="dark"] .site-title:visited,
-html[data-theme="dark"] .site-nav .page-link { color:#cfd6e0 !important; }
-html[data-theme="dark"] .site-footer { background:#0b0f14; border-top:1px solid #222831; }
-html[data-theme="dark"] a { color:#8ab4ff; }
-html[data-theme="dark"] a:hover { color:#b3ccff; }
+/* Dark overrides */
+:root[data-theme="dark"] {
+  --bg: #0b0f14;
+  --text: #e5eef8;
+  --muted: #9aa7b8;
+  --link: #8bb4ff;
 
-/* Cards/excerpts (override any inline styles) */
-html[data-theme="dark"] .card { background:#0d1117 !important; border-color:#2d333b !important; }
-html[data-theme="dark"] .excerpt, 
-html[data-theme="dark"] .post-meta { color:#97a0ad !important; }
+  --card: #141a22;         /* panel */
+  --card-border: #273244;  /* panel border */
 
-/* Code blocks / hr / blockquotes for dark */
-html[data-theme="dark"] pre, 
-html[data-theme="dark"] code { background:#0b0f14; color:#dfe7f3; }
-html[data-theme="dark"] blockquote { border-left:4px solid #222831; color:#97a0ad; }
-html[data-theme="dark"] hr { border:0; border-top:1px solid #222831; }
+  --chip-bg: #0f141b;
+  --chip-border: #243146;
 
-/* Make sure toggle border visible on light too */
-html[data-theme="light"] .theme-toggle { border-color: rgba(0,0,0,.2); }
+  --footer-bg: #0d1218;
+  --footer-text: #9aa7b8;
+}
+
+/* ---------- Base usage of tokens ---------- */
+html, body {
+  background: var(--bg);
+  color: var(--text);
+}
+
+a { color: var(--link); }
+
+/* Typical “card” + borders should use the tokens */
+.card {
+  background: var(--card);
+  border-color: var(--card-border);
+  color: var(--text);
+}
+
+/* Chips, pager, etc. also use tokens (site.css can rely on these) */
+.chip {
+  background: var(--chip-bg);
+  border-color: var(--chip-border);
+  color: var(--text);
+}
+.pager a, .pager span {
+  background: var(--card);
+  border-color: var(--card-border);
+  color: var(--text);
+}
+
+/* Footer (if used) */
+.site-footer {
+  background: var(--footer-bg);
+  color: var(--footer-text);
+}

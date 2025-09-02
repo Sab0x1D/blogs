@@ -26,12 +26,12 @@
   display: flex;
   flex-direction: column;
   height: 100%;
-  border: 1px solid #e5e7eb;
+  border: 1px solid var(--card-border);
   border-radius: 14px;
   overflow: hidden;
-  background: #fff;
+  background: var(--card);
   text-decoration: none;
-  color: inherit;
+  color: var(--text);
   transition: transform .15s ease, box-shadow .15s ease, border-color .15s ease;
 }
 .card:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(0,0,0,.08); }
@@ -43,7 +43,7 @@
   height: auto;                  /* aspect-ratio controls height */
   object-fit: cover;
   display: block;
-  background: #f6f8fa;
+  background: var(--card-border);
   border-top-left-radius: 14px;
   border-top-right-radius: 14px;
 }
@@ -56,6 +56,7 @@
   margin: 0;
   font-size: 16px;
   line-height: 1.3;
+
   /* multi-line clamp (current + future) */
   display: -webkit-box;
   -webkit-line-clamp: 2;   /* works today in Chromium/Safari */
@@ -71,7 +72,7 @@
 .card .meta{
   margin-top: 2px;
   font-size: 12px;
-  color: #9ca3af;
+  color: var(--muted);
   display: block;
 }
 
@@ -82,19 +83,23 @@
 /* Chips (Popular topics) */
 .chips { margin: 12px 0 4px; display: flex; flex-wrap: wrap; gap: 10px; }
 .chip {
-  border: 1px solid #e5e7eb; background: #fff; color: #374151;
+  border: 1px solid var(--chip-border);
+  background: var(--chip-bg);
+  color: var(--text);
   border-radius: 999px; padding: 6px 10px; font-size: 13px; cursor: pointer;
 }
-.chip.active { background: #111827; color: #fff; border-color: #111827; }
+.chip.active { background: var(--text); color: var(--bg); border-color: var(--text); }
 
 /* Pagination */
 .pager { margin: 16px 0; }
 .pager ul { list-style: none; padding: 0; display: flex; gap: 8px; }
 .pager a, .pager span {
-  display: inline-block; padding: 6px 10px; border: 1px solid #e5e7eb; border-radius: 8px; font-size: 14px;
-  text-decoration: none; color: #111827; background: #fff;
+  display: inline-block; padding: 6px 10px;
+  border: 1px solid var(--card-border);
+  border-radius: 8px; font-size: 14px;
+  text-decoration: none; color: var(--text); background: var(--card);
 }
-.pager .active span { background: #111827; color: #fff; border-color: #111827; }
+.pager .active span { background: var(--text); color: var(--bg); border-color: var(--text); }
 
 /* Remove underline inside cards on hover */
 .grid .card, .featured-row .card,
