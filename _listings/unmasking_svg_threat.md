@@ -2,7 +2,7 @@
 layout: listing
 title: "Unmasking the SVG threat: How Hackers use vector graphics for phishing attacks"
 excerpt: "Vectors, invisible layers, and redirects hiding in plain sight."
-thumb: assets/unmasking_svg_thumb.png
+thumb: assets/svg_thumb1.jpg
 date: 2025-08-18
 ---
 
