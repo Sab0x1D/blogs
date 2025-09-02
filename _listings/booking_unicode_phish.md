@@ -2,7 +2,7 @@
 layout: listing
 title: "Masquerading with “ん”: A clever Unicode trick in Booking.com phishing campaigns"
 excerpt: "Hiragana 'ん' used in URL paths to evade filters and trick users — plus FakeCaptcha and HijackLoader payloads."
-thumb: assets/booking_unicode_thumb.png
+thumb: assets/booking.jpg
 date: 2025-08-13
 ---
 
