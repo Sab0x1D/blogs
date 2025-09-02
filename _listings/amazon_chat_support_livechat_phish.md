@@ -2,7 +2,7 @@
 layout: listing
 title: "Impersonating Amazon Chat Support: LiveChat abuse in Phishing Campaigns"
 excerpt: "Abusing LiveChat SaaS + refund lure to harvest emails."
-thumb: assets/amz_thumb.webp
+thumb: assets/img/amz_thumb.webp
 date: 2025-09-02
 ---
 
