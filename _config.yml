@@ -1,7 +1,13 @@
-title: "Sab0x1D // Cyber Aware"
+title: "Sab0x1D // Cyber Awareness"
 description: "Case studies and practical defenses for modern phishing & social engineering."
 theme: minima
 markdown: kramdown
+
+url: "https://sab0x1d.github.io"  # GitHub Pages root
+baseurl: "/blogs"                 # EXACT repo name, with leading slash
+
+# used when a post has no 'thumb:' in its front-matter
+default_thumb: assets/default_thumb.png
 
 # Blog posts live in /listings
 collections:
