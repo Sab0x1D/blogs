@@ -1,0 +1,29 @@
+title: "Sab0x1D // Cyber Aware"
+description: "Case studies and practical defenses for modern phishing & social engineering."
+theme: minima
+markdown: kramdown
+
+# Blog posts live in /listings
+collections:
+  listings:
+    output: true
+    permalink: /listings/:name
+
+plugins:
+  - jekyll-feed
+  - jekyll-seo-tag
+
+exclude:
+  - node_modules
+  - vendor
+  - Gemfile.lock
+  - package.json
+  - README.md
+
+# Apply the 'listing' layout by default to items in the collection
+defaults:
+  - scope:
+      path: "listings"
+      type: "listings"
+    values:
+      layout: listing
