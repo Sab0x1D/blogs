@@ -1,5 +1,5 @@
-title: "Sab0x1D // Cyber Awareness"
-description: "Case studies and practical defenses for modern phishing & social engineering."
+title: "Sab0x1D::Cyber Awareness"
+description: ""
 theme: minima
 markdown: kramdown
 
@@ -18,6 +18,10 @@ collections:
 plugins:
   - jekyll-feed
   - jekyll-seo-tag
+
+# Show ONLY these pages in the header nav
+header_pages:
+  - index.html
 
 exclude:
   - node_modules
