@@ -1,6 +1,6 @@
 ---
 layout: listing
-title: "Impersonating Amazon Chat Support: LiveChat Abuse in Phishing Campaigns"
+title: "Impersonating Amazon Chat Support: LiveChat abuse in Phishing Campaigns"
 excerpt: "Abusing LiveChat SaaS + refund lure to harvest emails."
 thumb: assets/amz_thumb.webp
 date: 2025-09-02
@@ -87,10 +87,10 @@ Due to limited engagement and lack of confirmed IOCs, this case was classified a
 
 ## Key Takeaways
 
-1. **Trusted domains are not always safe.** Attackers increasingly abuse SaaS providers (LiveChat, Slack, Dropbox, Google Docs) to host phishing content.  
-2. **The “refund” lure remains effective.** Promises of financial reimbursement create urgency and lower suspicion.  
-3. **Minimal branding can be enough.** Even a logo and a simple greeting can trick users into thinking they are dealing with a legitimate support channel.  
-4. **Email address collection is valuable.** It may seem harmless, but it can fuel broader attacks such as account takeover attempts.  
+- **Trusted domains are not always safe.** Attackers increasingly abuse SaaS providers (LiveChat, Slack, Dropbox, Google Docs) to host phishing content.  
+- **The “refund” lure remains effective.** Promises of financial reimbursement create urgency and lower suspicion.  
+- **Minimal branding can be enough.** Even a logo and a simple greeting can trick users into thinking they are dealing with a legitimate support channel.  
+- **Email address collection is valuable.** It may seem harmless, but it can fuel broader attacks such as account takeover attempts.  
 
 <br>
 <br>
