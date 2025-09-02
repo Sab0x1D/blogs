@@ -59,3 +59,22 @@ html[data-theme="light"] .theme-toggle { border-color: rgba(0,0,0,.2); }
 .blog-grid .card * {
   text-decoration: none !important;
 }
+
+/* Make header a positioning context */
+.site-header { position: relative; }
+
+/* Toggle placement + z-index */
+.theme-toggle {
+  position: absolute;
+  right: 12px;   /* desktop */
+  top: 10px;
+  z-index: 5;
+}
+
+/* On mobile, scoot it left so it clears the hamburger */
+@media (max-width: 767px) {
+  .theme-toggle { right: 56px; top: 8px; }
+}
+
+/* If you’d rather hide the toggle on mobile, use this instead of the block above: */
+/* @media (max-width: 767px) { .theme-toggle { display: none; } } */
