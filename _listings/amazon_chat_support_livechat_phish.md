@@ -95,7 +95,3 @@ Due to limited engagement and lack of confirmed IOCs, this case was classified a
 
 <br>
 <br>
-<br>
-
-⬅ [Return to Blog Index](../)
-
