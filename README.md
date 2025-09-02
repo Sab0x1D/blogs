@@ -5,6 +5,8 @@
 ###
 - [Masquerading with “ん”: A clever unicode trick in Booking.com phishing campaigns](listings/booking_unicode_phish.md)
 - [Unmasking the SVG threat: How Hackers use vector graphics for phishing attacks](listings/unmasking_svg_threat.md)
+- [Impersonating Amazon Chat Support: LiveChat Abuse in Phishing Campaigns](listings/amazon_chat_support_livechat_phish.md)  
+
 
 ### Coming Soon  
 - (Coming Soon: The PDF Trap – Weaponized invoices and reports in phishing campaigns)  
