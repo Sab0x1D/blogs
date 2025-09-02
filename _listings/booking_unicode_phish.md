@@ -170,5 +170,3 @@ This campaign blends:
 Stay alert — and remember, in cybersecurity, **every character counts**.
 <br>
 <br>
-<br>
-⬅️ [Return to Blog Index](../)
