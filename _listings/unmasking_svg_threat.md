@@ -145,5 +145,3 @@ Understanding the **SVG phishing attack chain** is the first step in defending a
 The days of treating images as inherently safe are over — vigilance and layered defenses are now essential.
 <br>
 <br>
-<br>
-⬅️ [Return to Blog Index](../)
