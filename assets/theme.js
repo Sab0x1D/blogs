@@ -9,15 +9,14 @@
     updateButton(mode);
   }
 
-  function currentTheme(){
-    try {
-      var saved = localStorage.getItem(storageKey);
-      if (saved) return saved;
-    } catch(e){}
-    var isMobile = window.matchMedia('(max-width: 767px)').matches;
-    var prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-    return isMobile ? 'light' : (prefersDark ? 'dark' : 'light');
-  }
+function currentTheme(){
+  try {
+    var saved = localStorage.getItem('sab0x1d-theme');
+    if (saved) return saved;   // use the user's choice if they have one
+  } catch(e){}
+  return 'light';              // default: light on all devices
+}
+
 
   var sun = '<svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M6.76 4.84l-1.8-1.79-1.41 1.41 1.79 1.8 1.42-1.42zm10.48 0l1.79-1.8 1.41 1.41-1.8 1.79-1.4-1.4zM12 4V1h0v3zm0 19v-3h0v3zM4 12H1v0h3zm22 0h-3v0h3zM6.76 19.16l-1.42 1.42-1.79-1.8 1.41-1.41 1.8 1.79zm10.48 0l1.4 1.4 1.8-1.79-1.41-1.41-1.79 1.8zM12 7a5 5 0 100 10 5 5 0 000-10z"/></svg>';
   var moon = '<svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"/></svg>';
