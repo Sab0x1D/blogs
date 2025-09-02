@@ -1,0 +1,21 @@
+{%- comment -%}
+Usage:
+  {% include card.html doc=p variant="sm" %}
+  {% include card.html doc=p variant="lg" %}
+{%- endcomment -%}
+{%- assign d = include.doc -%}
+{%- assign v = include.variant | default: "lg" -%}
+{%- assign thumb = d.thumb | default: site.default_thumb -%}
+<a class="card card--{{ v }}" href="{{ d.url | relative_url }}" data-tags="{{ d.tags | join: ',' }}">
+  <img class="thumb" loading="lazy" decoding="async" src="{{ thumb | relative_url }}" alt="{{ d.title }}">
+  <div class="body">
+    <h3 class="title">{{ d.title }}</h3>
+    <p class="excerpt">{{ d.excerpt }}</p>
+    <p class="meta">
+      {%- if d.date -%}<span class="date">{{ d.date | date: "%d %b %Y" }}</span>{%- endif -%}
+      {%- if d.tags and d.tags.size > 0 -%}
+        <span class="dot">•</span><span class="tags">{{ d.tags | join: ", " }}</span>
+      {%- endif -%}
+    </p>
+  </div>
+</a>
