@@ -1,80 +1,67 @@
 
-/* === Sab0x1D Light/Dark Toggle ============================================ */
-/* Default is light; dark rules apply when <html data-theme="dark"> */
+/* ===== Homepage layout ===== */
+.home { padding: 24px; }
+.section-title { margin: 12px 0 8px; font-size: 18px; font-weight: 700; }
 
-:root { --toggle-border: rgba(255,255,255,.2); }
-
-/* Button in header (non-destructive) */
-.site-header { position: relative; }
-.theme-toggle {
-  position: absolute; right: 12px; top: 10px;
-  display: inline-flex; align-items: center; justify-content: center;
-  width: 36px; height: 36px; border-radius: 10px;
-  background: transparent; border: 1px solid var(--toggle-border);
-  cursor: pointer; padding: 0; outline: none;
+/* Featured row (smaller cards) */
+.featured-row {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0,1fr));
+  gap: 16px;
 }
-.theme-toggle svg { width: 18px; height: 18px; }
+@media (max-width: 1100px){ .featured-row { grid-template-columns: repeat(3, minmax(0,1fr)); } }
+@media (max-width: 800px){ .featured-row { grid-template-columns: repeat(2, minmax(0,1fr)); } }
+@media (max-width: 520px){ .featured-row { grid-template-columns: 1fr; } }
 
-/* --- Dark theme overrides --- */
-html[data-theme="dark"] body { background: #0f1318; color: #cfd6e0; }
-html[data-theme="dark"] .site-header { background:#0b0f14; border-bottom:1px solid #222831; }
-html[data-theme="dark"] .site-title, 
-html[data-theme="dark"] .site-title:visited,
-html[data-theme="dark"] .site-nav .page-link { color:#cfd6e0 !important; }
-html[data-theme="dark"] .site-footer { background:#0b0f14; border-top:1px solid #222831; }
-html[data-theme="dark"] a { color:#8ab4ff; }
-html[data-theme="dark"] a:hover { color:#b3ccff; }
-
-/* Cards/excerpts (override any inline styles) */
-html[data-theme="dark"] .card { background:#0d1117 !important; border-color:#2d333b !important; }
-html[data-theme="dark"] .excerpt, 
-html[data-theme="dark"] .post-meta { color:#97a0ad !important; }
-
-/* Code blocks / hr / blockquotes for dark */
-html[data-theme="dark"] pre, 
-html[data-theme="dark"] code { background:#0b0f14; color:#dfe7f3; }
-html[data-theme="dark"] blockquote { border-left:4px solid #222831; color:#97a0ad; }
-html[data-theme="dark"] hr { border:0; border-top:1px solid #222831; }
-
-/* Make sure toggle border visible on light too */
-html[data-theme="light"] .theme-toggle { border-color: rgba(0,0,0,.2); }
-
-/* Remove link underline on blog cards (light + dark) */
-.blog-grid .card,
-.blog-grid .card:visited,
-.blog-grid .card:hover,
-.blog-grid .card:focus,
-.blog-grid .card:active {
-  text-decoration: none !important;
+/* Previous posts grid (bigger cards, 3 per row) */
+.grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0,1fr));
+  gap: 18px;
 }
+@media (max-width: 1100px){ .grid { grid-template-columns: repeat(2, minmax(0,1fr)); } }
+@media (max-width: 640px){ .grid { grid-template-columns: 1fr; } }
 
-/* Ensure the title never gets a bottom border/underline */
-.blog-grid .card .title,
-.blog-grid .card .title a {
-  text-decoration: none !important;
-  border-bottom: 0 !important;
+/* Card styles */
+.card {
+  border: 1px solid #e5e7eb;
+  border-radius: 14px;
+  overflow: hidden;
+  background: #fff;
+  text-decoration: none;
+  color: inherit;
+  transition: transform .15s ease, box-shadow .15s ease;
 }
+.card:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(0,0,0,.08); }
+.card .thumb { width: 100%; height: 160px; object-fit: cover; display: block; background: #f6f8fa; }
+.card .body { padding: 12px 14px 14px; }
+.card .title { margin: 0 0 6px; font-size: 18px; }
+.card .excerpt { margin: 0; color: #6b7280; font-size: 14px; }
+.card .meta { margin: 8px 0 0; color: #9ca3af; font-size: 12px; display:flex; gap:8px; align-items:center; }
+.card .meta .dot { opacity: .6; }
 
-/* Extra safety: no underline on any text inside the card */
-.blog-grid .card * {
-  text-decoration: none !important;
+/* Variant sizes */
+.card--sm .thumb { height: 120px; }
+.card--sm .title { font-size: 16px; }
+.card--sm .excerpt { display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
+
+/* Chips (Popular topics) */
+.chips { margin: 12px 0 4px; display: flex; flex-wrap: wrap; gap: 10px; }
+.chip {
+  border: 1px solid #e5e7eb; background: #fff; color: #374151;
+  border-radius: 999px; padding: 6px 10px; font-size: 13px; cursor: pointer;
 }
+.chip.active { background: #111827; color: #fff; border-color: #111827; }
 
-/* Make header a positioning context */
-.site-header { position: relative; }
-
-/* Toggle placement + z-index */
-.theme-toggle {
-  position: absolute;
-  right: 12px;   /* desktop */
-  top: 10px;
-  z-index: 5;
+/* Pagination */
+.pager { margin: 16px 0; }
+.pager ul { list-style: none; padding: 0; display: flex; gap: 8px; }
+.pager a, .pager span {
+  display: inline-block; padding: 6px 10px; border: 1px solid #e5e7eb; border-radius: 8px; font-size: 14px;
+  text-decoration: none; color: #111827; background: #fff;
 }
+.pager .active span { background: #111827; color: #fff; border-color: #111827; }
 
-/* On mobile, scoot it left so it clears the hamburger */
-@media (max-width: 767px) {
-  .theme-toggle { right: 56px; top: 8px; }
-}
-
-/* If you’d rather hide the toggle on mobile, use this instead of the block above: */
-/* @media (max-width: 767px) { .theme-toggle { display: none; } } */
+/* Remove underline inside cards on hover */
+.grid .card, .featured-row .card,
+.grid .card * , .featured-row .card * { text-decoration: none !important; }
