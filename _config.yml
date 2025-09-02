@@ -29,7 +29,7 @@ exclude:
 # Apply the 'listing' layout by default to items in the collection
 defaults:
   - scope:
-      path: "listings"
-      type: "listings"
+      path: ""            # apply everywhere
+      type: "listings"    # target the collection
     values:
       layout: listing
