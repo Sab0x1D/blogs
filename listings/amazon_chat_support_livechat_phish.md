@@ -22,7 +22,7 @@ From the shortlink, the victim landed on a **direct LiveChat URL** (`https://dir
 
 The page was branded with **Amazon’s logo and color palette**, presenting itself as “Amazon Chat Support.” Victims were greeted with a message offering to “unlock a pending refund” if they engaged with the agent.  
 
-![Amazon Scam Chat Screenshot](../assets/amz2.png)
+<p align="center"><img src="assets/amz3.png"></p>
 
 The attacker immediately asked for the victim’s **email address** under the guise of verifying the order. This is a classic social engineering move:  
 
@@ -32,15 +32,13 @@ The attacker immediately asked for the victim’s **email address** under the gu
 
 If the victim resisted, the attacker pushed further with generic, scripted prompts.  
 
-![Amazon Scam Conversation](../assets/amz3.png)
+<p align="center"><img src="assets/amz2.png"></p>
 
 <br>
 
 ## Fake Amazon Support Page
 
 The chat itself was hosted directly on LiveChat infrastructure, which lent it an extra layer of credibility. The branding was minimal but effective — the Amazon logo, a “Hello!” support greeting, and the interactive chatbox.
-
-![Amazon Fake LiveChat Page](../assets/amz1.png)
 
 Because the page lived on a **legitimate SaaS domain**, it avoided some of the tell-tale signs of a malicious phishing page (like suspicious subdomains or free hosting providers). This is part of a growing trend: **attackers piggybacking on SaaS platforms** to blend in with normal business traffic.
 
