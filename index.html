@@ -1,42 +1,59 @@
 ---
 layout: default
 title: Blog
+page_num: 1
+permalink: /
 ---
 
-<link rel="stylesheet" href="{{ '/assets/theme.css' | relative_url }}">
-<script defer src="{{ '/assets/theme.js' | relative_url }}"></script>
+<link rel="stylesheet" href="{{ '/assets/site.css' | relative_url }}">
+<script defer src="{{ '/assets/site.js' | relative_url }}"></script>
 
-<style>
-  :root{ --card-bg:#0d1117; --card-border:#2d333b; --text:#c9d1d9; --muted:#8b949e; }
-  /* Centered wrapper that caps the grid at 3 columns */
-  .grid-wrap{ max-width: calc(640px * 3 + 18px * 2); margin: 0 auto; padding: 0 16px; }
-  .blog-grid{ display:grid; grid-template-columns: repeat(3, 1fr); gap:18px; }
-  /* Responsive fallbacks */
-  @media (max-width:1024px){ .blog-grid{ grid-template-columns: repeat(2, 1fr);} }
-  @media (max-width:640px){ .blog-grid{ grid-template-columns: 1fr;} }
+<section class="home">
+  {% assign coll = site.listings | sort: "date" | reverse %}
 
-  .card{ border:1px solid var(--card-border); border-radius:14px; overflow:hidden; background:var(--card-bg);
-         text-decoration:none; transition:transform .15s ease, box-shadow .15s ease; }
-  .card:hover{ transform:translateY(-2px); box-shadow:0 8px 24px rgba(0,0,0,.35); }
-  .thumb{ aspect-ratio:16/9; width:100%; display:block; object-fit:cover; background:#0b0f14; }
-  .body{ padding:12px 14px 14px; }
-  .title{ margin:0 0 6px; font-size:18px; color:var(--text); font-weight:700; }
-  .excerpt{ margin:0; color:var(--muted); font-size:14px; line-height:1.4; }
-</style>
+  {% assign curated = coll | where_exp: "p", "p.featured == true" %}
+  {% assign featured = curated %}
+  {% if featured.size == 0 %}{% assign featured = coll %}{% endif %}
 
-<div class="grid-wrap">
-  <section class="blog-grid">
-    {% assign posts = site.listings | sort: "date" | reverse %}
-    {% for p in posts %}
-      {% assign thumb_path = p.thumb | default: site.default_thumb %}
-      <a class="card" href="{{ p.url | relative_url }}">
-        <img class="thumb" loading="lazy" decoding="async"
-             src="{{ thumb_path | relative_url }}" alt="{{ p.title }}">
-        <div class="body">
-          <h3 class="title">{{ p.title }}</h3>
-          <p class="excerpt">{{ p.excerpt }}</p>
-        </div>
-      </a>
+  <h2 class="section-title">Featured</h2>
+  <div class="featured-row">
+    {% assign count = 0 %}
+    {% capture f_urls %}{% endcapture %}
+    {% for p in featured limit:4 %}
+      {% include card.html doc=p variant="sm" %}
+      {% capture f_urls %}{{ f_urls }}|{{ p.url }}|{% endcapture %}
+      {% assign count = count | plus: 1 %}
     {% endfor %}
-  </section>
-</div>
+  </div>
+
+  {% assign page_size = 6 %}
+  {% assign offset = page.page_num | minus: 1 | times: page_size %}
+
+  {% assign previous = "" | split: "," %}
+  {% for p in coll %}
+    {% unless f_urls contains p.url %}
+      {% assign previous = previous | push: p %}
+    {% endunless %}
+  {% endfor %}
+
+  {% assign total_pages = previous.size | divided_by: page_size %}
+  {% if previous.size > page_size %}{% assign total_pages = previous.size | plus: page_size | minus: 1 | divided_by: page_size %}{% endif %}
+
+  <h2 class="section-title">Previous posts</h2>
+  <div class="grid">
+    {% for p in previous limit: page_size offset: offset %}
+      {% include card.html doc=p variant="lg" %}
+    {% endfor %}
+  </div>
+
+  {% include pagination.html page_num=page.page_num total_pages=total_pages %}
+
+  <h2 class="section-title">Popular topics</h2>
+  {% assign topics = site.popular_topics | default: "Malware,Phish,Scam" | split: "," %}
+  <div class="chips">
+    {% for t in topics %}
+      {% assign t_clean = t | strip %}
+      <button class="chip" data-topic="{{ t_clean }}">{{ t_clean }}</button>
+    {% endfor %}
+  </div>
+</section>
