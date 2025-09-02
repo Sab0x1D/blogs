@@ -38,3 +38,24 @@ html[data-theme="dark"] hr { border:0; border-top:1px solid #222831; }
 
 /* Make sure toggle border visible on light too */
 html[data-theme="light"] .theme-toggle { border-color: rgba(0,0,0,.2); }
+
+/* Remove link underline on blog cards (light + dark) */
+.blog-grid .card,
+.blog-grid .card:visited,
+.blog-grid .card:hover,
+.blog-grid .card:focus,
+.blog-grid .card:active {
+  text-decoration: none !important;
+}
+
+/* Ensure the title never gets a bottom border/underline */
+.blog-grid .card .title,
+.blog-grid .card .title a {
+  text-decoration: none !important;
+  border-bottom: 0 !important;
+}
+
+/* Extra safety: no underline on any text inside the card */
+.blog-grid .card * {
+  text-decoration: none !important;
+}
