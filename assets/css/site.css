@@ -1,7 +1,7 @@
 /* ===== Design tokens ===== */
 :root{
-  /* Atega-ish page width */
-  --container: 1200px;         /* was 1180 – bumping wider */
+  /* Base page width (header/footer); home content gets its own clamp below */
+  --container: 1200px;
   --round: 22px;
   --gap: 26px;
 
@@ -16,17 +16,18 @@
   --shadow: 0 16px 40px rgba(2,10,30,.08);
 }
 
-/* === Break out of Minima's default width clamp === */
-/* Let our own .container decide page width */
-main.page-content > .wrapper {
+/* === Break out of Minima's default width clamp ===
+   Let our own .container decide page width */
+main.page-content > .wrapper,
+.page-content > .wrapper{
   max-width: none !important;
   padding-left: 0 !important;
   padding-right: 0 !important;
 }
 
-/* Optional: keep header/footer at normal width while content is wide */
+/* Keep header/footer at normal width while content is wide */
 .site-header .wrapper,
-.site-footer .wrapper {
+.site-footer .wrapper{
   max-width: var(--container);
   padding-left: 24px;
   padding-right: 24px;
@@ -39,6 +40,15 @@ main.page-content > .wrapper {
   margin: 0 auto;
   padding: 0 32px;
 }
+
+/* Home gets the wide clamp (Atega-like) */
+.home.container{
+  max-width: 1440px !important;   /* change to 1380px if you prefer */
+  margin: 0 auto;
+  padding-left: 32px;
+  padding-right: 32px;
+}
+
 .home{ padding: 40px 0; }
 .section-title{
   margin: 22px 0 14px;
@@ -86,37 +96,23 @@ main.page-content > .wrapper {
   border-color: rgba(15,23,42,.15); /* slate-900 @ ~15% */
 }
 
-/* image + date pill */
+/* image + date pill (base) */
 .card .media{ position: relative; }
 .card .thumb{
   width: 100%;
-  /* Atega proportions (slightly wider than 4:3); 16/10 looks right */
-  aspect-ratio: 16 / 10;
+  height: auto;           /* ensure aspect-ratio controls height */
   object-fit: cover;
   display: block;
-  background: #f1f5f9; /* slate-100 fallback */
-}
-/* Default image ratio stays for large (Previous posts) cards */
-.card--lg .thumb{
-  width: 100%;
-  aspect-ratio: 16 / 10;        /* wide look for the big cards */
-  object-fit: cover;
-  display: block;
-  background: #f1f5f9;
-}
-/* Make Featured cards (small) taller like Atega */
-.card--sm .thumb{
-  width: 100%;
-  aspect-ratio: 6 / 5;          /* taller than square; try 6/5 if you want even taller */
-  object-fit: cover;
-  display: block;
-  background: #f1f5f9;
-}
-/* Optional: a touch taller on very wide screens */
-@media (min-width: 1440px){
-  .card--sm .thumb{ aspect-ratio: 6 / 5; }  /* comment this out if 5/4 is perfect */
+  background: #f1f5f9;    /* slate-100 fallback */
 }
 
+/* Large cards (Previous posts) – wide look */
+.card--lg .thumb{ aspect-ratio: 16 / 10; }
+
+/* Featured cards (small) – a bit taller than square */
+.card--sm .thumb{ aspect-ratio: 5 / 4; }
+
+/* Date chip */
 .card .meta-top{
   position: absolute;
   left: 12px;
@@ -156,7 +152,7 @@ main.page-content > .wrapper {
   display: flex; gap: 6px; align-items: center;
 }
 
-/* 2-line clamp like Atega; include both standard + webkit to silence VS Code */
+/* 2-line clamp like Atega */
 .card .excerpt{
   margin: 0;
   color: var(--muted);
@@ -167,7 +163,6 @@ main.page-content > .wrapper {
   -webkit-box-orient: vertical;
   overflow: hidden;
 
-  /* compatibility pair – fixes your warnings */
   -webkit-line-clamp: 2;
   line-clamp: 2;
 }
@@ -203,17 +198,14 @@ main.page-content > .wrapper {
   text-decoration: none !important;
 }
 
-/* --- BREAK MINIMA'S 800px WRAPPER ON THE CONTENT AREA --- */
-.page-content > .wrapper { 
-  max-width: none !important; 
-  padding-left: 0 !important; 
-  padding-right: 0 !important; 
-}
+/* ===== FINAL OVERRIDES (keep these last) ===== */
 
-/* Keep the home container wide (Atega-like) */
-.home.container {
-  max-width: 1440px !important;   /* or 1380px if you prefer */
-  margin: 0 auto;
-  padding-left: 32px;
-  padding-right: 32px;
+/* Guard against any later overrides from other stylesheets */
+.featured-row .card.card--sm .thumb{
+  aspect-ratio: 5 / 4 !important;
+  height: auto !important;
+}
+.grid .card.card--lg .thumb{
+  aspect-ratio: 16 / 10 !important;
+  height: auto !important;
 }
