@@ -1,120 +1,104 @@
-/* =========================================================
-   Global container width (overrides Minima .wrapper)
-   ========================================================= */
-:root { --container-max: 1280px; }              /* tweak to taste */
+/* ===== Layout container (centered) ===== */
+.container{ max-width:1280px; margin:0 auto; padding:0 24px; }
+.home{ padding:32px 0; }
+.section-title{ margin:18px 0 12px; font-size:18px; font-weight:700; }
 
-.site-header .wrapper,
-.page-content .wrapper,
-.site-footer .wrapper {
-  max-width: var(--container-max);
-  margin-inline: auto;
-  padding-inline: clamp(16px, 4vw, 28px);       /* nice fluid gutters */
+/* ===== Featured row (smaller cards) ===== */
+.featured-row{
+  display:grid;
+  grid-template-columns:repeat(4, minmax(0,1fr));
+  gap:20px;
 }
+@media (max-width:1200px){ .featured-row{ grid-template-columns:repeat(3, minmax(0,1fr)); } }
+@media (max-width:880px){  .featured-row{ grid-template-columns:repeat(2, minmax(0,1fr)); } }
+@media (max-width:560px){  .featured-row{ grid-template-columns:1fr; } }
 
-/* Optional: allow a touch more width on very large screens */
-@media (min-width: 1600px) {
-  :root { --container-max: 1320px; }
+/* ===== Previous posts grid (bigger cards) ===== */
+.grid{
+  display:grid;
+  grid-template-columns:repeat(3, minmax(0,1fr));
+  gap:24px;
 }
+@media (max-width:1200px){ .grid{ grid-template-columns:repeat(2, minmax(0,1fr)); } }
+@media (max-width:720px){  .grid{ grid-template-columns:1fr; } }
 
-/* Utility container if you ever need one in your markup */
-.container { max-width: var(--container-max); margin: 0 auto; padding: 0 20px; }
+/* ===== Card styles ===== */
+.card{
+  --media-ratio: 16/9;                /* Uniform media aspect ratio */
+  --body-min-sm: 120px;               /* Featured cards body minimum height */
+  --body-min-lg: 150px;               /* Previous cards body minimum height */
 
-/* Home spacing */
-.home { padding: 32px 0; }
-.section-title { margin: 18px 0 12px; font-size: 18px; font-weight: 700; }
-
-/* =========================================================
-   Featured row (smaller cards)
-   ========================================================= */
-.featured-row {
-  display: grid;
-  grid-template-columns: repeat(4, minmax(0,1fr));
-  gap: 20px;
+  display:flex;
+  flex-direction:column;
+  height:100%;
+  border:1px solid var(--card-border);
+  border-radius:18px;
+  overflow:hidden;
+  background:var(--card);
+  color:var(--text);
+  text-decoration:none;
+  transition:transform .16s ease, box-shadow .16s ease, border-color .16s ease;
 }
-@media (max-width: 1200px){ .featured-row { grid-template-columns: repeat(3, minmax(0,1fr)); } }
-@media (max-width: 880px){  .featured-row { grid-template-columns: repeat(2, minmax(0,1fr)); } }
-@media (max-width: 560px){  .featured-row { grid-template-columns: 1fr; } }
+.card.elevated{ box-shadow:0 12px 28px rgba(0,0,0,.06); }
+.card:hover{ transform:translateY(-3px); box-shadow:0 16px 36px rgba(0,0,0,.10); }
 
-/* =========================================================
-   Previous posts grid (bigger cards)
-   ========================================================= */
-.grid {
-  display: grid;
-  grid-template-columns: repeat(3, minmax(0,1fr));
-  gap: 24px;
-}
-@media (max-width: 1200px){ .grid { grid-template-columns: repeat(2, minmax(0,1fr)); } }
-@media (max-width: 720px){  .grid { grid-template-columns: 1fr; } }
-
-/* =========================================================
-   Card styles
-   ========================================================= */
-.card {
-  display: flex;
-  flex-direction: column;
-  height: 100%;
-  border: 1px solid var(--card-border);
-  border-radius: 18px;
-  overflow: hidden;
-  background: var(--card);
-  color: var(--text);
-  text-decoration: none;
-  transition: transform .16s ease, box-shadow .16s ease, border-color .16s ease;
-}
-.card.elevated { box-shadow: 0 12px 28px rgba(0,0,0,.06); }
-.card:hover   { transform: translateY(-3px); box-shadow: 0 16px 36px rgba(0,0,0,.10); }
-
-/* Media with a soft overlay meta bar */
-.card .media { position: relative; }
+/* Media with overlay date chip */
+.card .media{ position:relative; }
 .card .thumb{
-  width: 100%;
-  aspect-ratio: 16 / 10;       /* modern wide look; change to 4/3 if you prefer */
-  object-fit: cover;
-  display: block;
-  background: var(--card-border);
+  width:100%;
+  aspect-ratio:var(--media-ratio);
+  object-fit:cover;
+  display:block;
+  background:var(--card-border);
 }
 .card .meta-top{
-  position: absolute; left: 12px; top: 12px;
-  display: flex; align-items: center; gap: 6px;
-  font-size: 12px; color: var(--text);
-  padding: 6px 10px; border-radius: 999px;
-  background: color-mix(in srgb, var(--card) 70%, transparent);
-  /* fallback for browsers without color-mix */
-  background: rgba(255,255,255,.7);
-  backdrop-filter: blur(6px);
-  border: 1px solid var(--card-border);
+  position:absolute; left:12px; top:12px;
+  display:flex; align-items:center; gap:6px;
+  font-size:12px; color:var(--text);
+  padding:6px 10px; border-radius:999px;
+  background:color-mix(in srgb, var(--card) 70%, transparent);
+  background:rgba(255,255,255,.7);
+  backdrop-filter:blur(6px);
+  border:1px solid var(--card-border);
 }
-:root[data-theme="dark"] .card .meta-top{
-  background: rgba(16,22,28,.6);
-}
+:root[data-theme="dark"] .card .meta-top{ background:rgba(16,22,28,.6); }
 
 /* Card body */
-.card .body { padding: 14px; display: flex; flex-direction: column; gap: 8px; }
-.card .title{ margin: 0; font-size: 18px; line-height: 1.3; }
+.card .body{
+  padding:14px 16px 16px;
+  display:flex;
+  flex-direction:column;
+  gap:8px;
+}
+.card .title{
+  margin:0;
+  font-size:18px;
+  line-height:1.28;
+}
 
-/* Featured = compact */
+/* Featured (small) – fixed minimum body height for consistent card height */
 .card--sm .title{
-  font-size: 16px;
-  display: -webkit-box; -webkit-line-clamp: 2; line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden;
+  font-size:16px;
+  display:-webkit-box; -webkit-line-clamp:2; line-clamp:2; -webkit-box-orient:vertical; overflow:hidden;
 }
+.card--sm .body{ min-height:var(--body-min-sm); }
 
-/* Previous posts = excerpt + chips */
+/* Previous posts (large) – include excerpt and enforce min height */
 .card--lg .excerpt{
-  margin: 0; color: var(--muted); font-size: 14px; line-height: 1.45;
-  display: -webkit-box; -webkit-line-clamp: 2; line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden;
+  margin:0; color:var(--muted); font-size:14px; line-height:1.45;
+  display:-webkit-box; -webkit-line-clamp:2; line-clamp:2; -webkit-box-orient:vertical; overflow:hidden;
 }
+.card--lg .body{ min-height:var(--body-min-lg); }
 
-/* =========================================================
-   Chips
-   ========================================================= */
-.chips { display: flex; flex-wrap: wrap; gap: 8px; }
+/* Chips */
+.chips{ display:flex; flex-wrap:wrap; gap:8px; }
 .chip{
-  border: 1px solid var(--chip-border);
-  background: var(--chip-bg);
-  color: var(--text);
-  border-radius: 999px; padding: 6px 10px; font-size: 12px;
+  border:1px solid var(--chip-border);
+  background:var(--chip-bg);
+  color:var(--text);
+  border-radius:999px; padding:6px 10px; font-size:12px;
 }
 
 /* Remove underline inside cards on hover */
 .grid .card, .featured-row .card,
-.grid .card *, .featured-row .card * { text-decoration: none !important; }
+.grid .card * , .featured-row .card *{ text-decoration:none !important; }
