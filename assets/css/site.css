@@ -107,7 +107,7 @@ main.page-content > .wrapper {
 /* Make Featured cards (small) taller like Atega */
 .card--sm .thumb{
   width: 100%;
-  aspect-ratio: 6 / 4;          /* taller than square; try 6/5 if you want even taller */
+  aspect-ratio: 6 / 5;          /* taller than square; try 6/5 if you want even taller */
   object-fit: cover;
   display: block;
   background: #f1f5f9;
