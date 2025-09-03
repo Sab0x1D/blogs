@@ -10,7 +10,7 @@ date: 2025-08-18
    Unmasking the SVG threat <br>
    How Hackers use vector graphics for Phishing attacks
 </h1>
-<p align="center"><img src="../assets/svg_pic.png"></p>
+<p align="center"><img src="../assets/img/svg_pic.png"></p>
 
 ## Introduction
 

@@ -28,7 +28,7 @@ From the shortlink, the victim landed on a **direct LiveChat URL** (`https://dir
 
 The page was branded with **Amazon’s logo and color palette**, presenting itself as “Amazon Chat Support.” Victims were greeted with a message offering to “unlock a pending refund” if they engaged with the agent.  
 
-<p align="center"><img src="../assets/amz2.png"></p>
+<p align="center"><img src="../assets/img/amz2.png"></p>
 
 
 The attacker immediately asked for the victim’s **email address** under the guise of verifying the order. This is a classic social engineering move:  
@@ -39,7 +39,7 @@ The attacker immediately asked for the victim’s **email address** under the gu
 
 If the victim resisted, the attacker pushed further with generic, scripted prompts.  
 
-<p align="center"><img src="../assets/amz3.png"></p>
+<p align="center"><img src="../assets/img/amz3.png"></p>
 
 <br>
 

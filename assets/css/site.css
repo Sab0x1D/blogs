@@ -1,14 +1,10 @@
-/* ===== Design tokens ===== */
+/* ========= Design tokens ========= */
 :root{
-  /* Page width + spacing */
-  --container: 1440px;     /* <-- set the max page width here */
-  --gutter: 24px;
-
-  /* Card look */
+  --container: 1440px;          /* <— page width */
   --round: 20px;
-  --gap: 22px;
+  --gap: 24px;
 
-  --card: #ffffff;
+  --card: #fff;
   --card-border: #e5e7eb;
   --muted: #6b7280;
 
@@ -16,50 +12,57 @@
   --chip-border: #e5e7eb;
 }
 
-/* ===== Layout containers ===== */
-.container{ max-width:var(--container); margin:0 auto; padding:0 var(--gutter); }
+/* ========= Layout ========= */
+.container{ max-width:var(--container); margin:0 auto; padding:0 28px; }
 .home{ padding:32px 0; }
 .section-title{ margin:18px 0 12px; font-size:18px; font-weight:700; }
 
-/* Make Minima header/footer match the new width */
-.wrapper{ max-width:var(--container); padding-left:var(--gutter); padding-right:var(--gutter); }
-
-/* ===== Featured row (4 across) ===== */
+/* ========= Featured row (4 across) ========= */
 .featured-row{
   display:grid;
   grid-template-columns:repeat(4,minmax(0,1fr));
   gap:var(--gap);
 }
-@media (max-width:1200px){ .featured-row{ grid-template-columns:repeat(3,1fr);} }
-@media (max-width:880px){ .featured-row{ grid-template-columns:repeat(2,1fr);} }
-@media (max-width:560px){ .featured-row{ grid-template-columns:1fr;} }
+@media (max-width:1280px){ .featured-row{ grid-template-columns:repeat(3,1fr); } }
+@media (max-width:880px){  .featured-row{ grid-template-columns:repeat(2,1fr); } }
+@media (max-width:560px){  .featured-row{ grid-template-columns:1fr; } }
 
-/* ===== Previous posts grid (3 across) ===== */
+/* ========= Previous posts grid (3 across) ========= */
 .grid{
   display:grid;
   grid-template-columns:repeat(3,minmax(0,1fr));
   gap:var(--gap);
 }
-@media (max-width:1200px){ .grid{ grid-template-columns:repeat(2,1fr);} }
-@media (max-width:720px){ .grid{ grid-template-columns:1fr;} }
+@media (max-width:1280px){ .grid{ grid-template-columns:repeat(2,1fr); } }
+@media (max-width:720px){  .grid{ grid-template-columns:1fr; } }
 
-/* ===== Cards (Atega-ish compact tile) ===== */
+/* ========= Cards ========= */
 .card{
   display:flex; flex-direction:column; height:100%;
   background:var(--card);
   border:1px solid var(--card-border);
   border-radius:var(--round);
-  overflow:hidden; color:inherit; text-decoration:none;
+  overflow:hidden;
+  color:inherit; text-decoration:none;
   transition:transform .16s ease, box-shadow .16s ease, border-color .16s ease;
 }
 .card:hover{ transform:translateY(-2px); box-shadow:0 12px 28px rgba(0,0,0,.08); }
 
-.card .media{ position:relative; }
+/* Media */
+.card .media{ position:relative; background:var(--card-border); }
 .card .thumb{
   width:100%;
-  aspect-ratio:4 / 3;  /* wide & consistent tiles */
-  object-fit:cover; display:block;
+  display:block;
+  object-fit:cover;
+  /* default; overridden below per variant */
+  aspect-ratio: 16 / 10;
 }
+
+/* Ratios per section (prevents any stretching at wider widths) */
+.card--sm .thumb{ aspect-ratio: 16 / 11; }  /* Featured */
+.card--lg .thumb{ aspect-ratio: 16 / 10; }  /* Previous posts */
+
+/* Date chip */
 .card .meta-top{
   position:absolute; left:12px; top:12px;
   font-size:12px; padding:6px 10px; border-radius:999px;
@@ -67,18 +70,28 @@
   border:1px solid var(--card-border);
 }
 
+/* Body */
 .card .body{ padding:14px; display:flex; flex-direction:column; gap:8px; }
-.card--sm .title{
-  font-size:16px; line-height:1.3;
-  display:-webkit-box; -webkit-line-clamp:2; -webkit-box-orient:vertical; overflow:hidden;
+
+/* Title clamp (fixes VS Code vendor warning by adding the standard property) */
+.card .title{
+  margin:0; line-height:1.3;
+  display:-webkit-box; -webkit-box-orient:vertical; overflow:hidden;
+  -webkit-line-clamp: 2;        /* current browsers */
+  line-clamp: 2;                /* standard */
 }
-.card--lg .title{ font-size:18px; line-height:1.3; }
-.card--lg .excerpt{
+.card--lg .title{ font-size:18px; }
+.card--sm .title{ font-size:16px; }
+
+/* Excerpt clamp */
+.card .excerpt{
   margin:0; color:var(--muted); font-size:14px; line-height:1.45;
-  display:-webkit-box; -webkit-line-clamp:2; -webkit-box-orient:vertical; overflow:hidden;
+  display:-webkit-box; -webkit-box-orient:vertical; overflow:hidden;
+  -webkit-line-clamp: 2;
+  line-clamp: 2;
 }
 
-/* ===== Chips / topics ===== */
+/* Chips / topics */
 .chips{ display:flex; flex-wrap:wrap; gap:8px; }
 .chip{
   border:1px solid var(--chip-border);
@@ -86,7 +99,7 @@
   border-radius:999px; padding:6px 10px; font-size:12px;
 }
 
-/* ===== Pager ===== */
+/* Pager */
 .pager{ margin:18px 0; }
 .pager ul{ list-style:none; padding:0; display:flex; gap:8px; }
 .pager a, .pager span{
