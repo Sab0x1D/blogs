@@ -6,68 +6,66 @@ permalink: /page/2/
 ---
 
 <link rel="stylesheet" href="{{ '/assets/css/theme.css' | relative_url }}">
-<link rel="stylesheet" href="{{ '/assets/css/site.css' | relative_url }}">
+<link rel="stylesheet" href="{{ '/assets/css/site.css'  | relative_url }}">
 <script defer src="{{ '/assets/js/theme.js' | relative_url }}"></script>
-<script defer src="{{ '/assets/js/site.js' | relative_url }}"></script>
+<script defer src="{{ '/assets/js/site.js'   | relative_url }}"></script>
 
-<section class="home container">
-  {%- assign coll = site.listings | sort: 'date' | reverse -%}
+<section class="home">
+  <div class="container">
+    {%- assign coll = site.listings | sort: 'date' | reverse -%}
 
-  <h2 class="section-title">Featured</h2>
-  <div class="featured-row">
-    {%- for p in coll limit:4 -%}
-      <a class="card card--sm" href="{{ p.url | relative_url }}">
-        <div class="media">
-          <img class="thumb" src="{{ (p.thumb | default: site.default_thumb) | relative_url }}" alt="{{ p.title }}">
-          <span class="meta-top">{{ p.date | date: "%d %b %Y" }}</span>
-        </div>
-        <div class="body">
-          <h3 class="title">{{ p.title }}</h3>
-        </div>
-      </a>
-    {%- endfor -%}
-  </div>
+    {%- comment -%}
+      Page math
+      - featured_count = # of featured items on page 1
+      - page_size      = # of "previous posts" per page
+      - skip           = featured_count + page_size * (page_num - 1)
+    {%- endcomment -%}
+    {%- assign featured_count = 4 -%}
+    {%- assign page_size      = 6 -%}
 
-  <h2 class="section-title">Previous posts</h2>
+    {%- assign previous_total = coll.size | minus: featured_count -%}
+    {%- if previous_total < 0 -%}{%- assign previous_total = 0 -%}{%- endif -%}
 
-  {%- assign page_size = 6 -%}
-  {%- assign previous_total = coll.size | minus: 4 -%}
-  {%- if previous_total < 0 -%}{% assign previous_total = 0 %}{% endif %}
+    {%- assign page_index = page.page_num | minus: 1 -%}
+    {%- assign skip = page_size | times: page_index | plus: featured_count -%}
 
-  {%- assign skip = 4 | plus: (page.page_num | minus: 1) | times: page_size -%}
-  <div class="grid">
-    {%- for p in coll offset:skip limit:page_size -%}
-      <a class="card card--lg" href="{{ p.url | relative_url }}">
-        <div class="media">
-          <img class="thumb" src="{{ (p.thumb | default: site.default_thumb) | relative_url }}" alt="{{ p.title }}">
-          <span class="meta-top">{{ p.date | date: "%d %b %Y" }}</span>
-        </div>
-        <div class="body">
-          <h3 class="title">{{ p.title }}</h3>
-          {%- if p.excerpt -%}
-            <p class="excerpt">{{ p.excerpt | strip_html | truncate: 150 }}</p>
-          {%- endif -%}
-        </div>
-      </a>
-    {%- endfor -%}
-  </div>
+    <!-- Previous posts only on page 2+ -->
+    <h2 class="section-title">Previous posts</h2>
 
-  {%- assign total_pages = (previous_total | plus: page_size | minus: 1) | divided_by: page_size -%}
-  {%- if total_pages > 1 -%}
-  <nav class="pager">
-    <ul>
-      {%- for i in (1..total_pages) -%}
-        {%- if i == page.page_num -%}
-          <li class="active"><span>{{ i }}</span></li>
-        {%- else -%}
-          <li>
-            <a href="{% if i == 1 %}{{ '/' | relative_url }}{% else %}{{ '/page/' | append: i | append: '/' | relative_url }}{% endif %}">
-              {{ i }}
-            </a>
-          </li>
-        {%- endif -%}
+    <section class="grid" aria-label="Previous posts">
+      {%- for p in coll offset: skip limit: page_size -%}
+        <a class="card card--lg" href="{{ p.url | relative_url }}">
+          <div class="media">
+            <img class="thumb" src="{{ (p.thumb | default: site.default_thumb) | relative_url }}" alt="{{ p.title }}">
+            <span class="meta-top">{{ p.date | date: "%d %b %Y" }}</span>
+          </div>
+          <div class="body">
+            <h3 class="title">{{ p.title }}</h3>
+            {%- if p.excerpt -%}
+              <p class="excerpt">{{ p.excerpt | strip_html | truncate: 150 }}</p>
+            {%- endif -%}
+          </div>
+        </a>
       {%- endfor -%}
-    </ul>
-  </nav>
-  {%- endif -%}
+    </section>
+
+    {%- assign total_pages = (previous_total | plus: page_size | minus: 1) | divided_by: page_size -%}
+    {%- if total_pages > 1 -%}
+      <nav class="pager" aria-label="Pagination">
+        <ul>
+          {%- for i in (1..total_pages) -%}
+            {%- if i == page.page_num -%}
+              <li class="active"><span>{{ i }}</span></li>
+            {%- else -%}
+              <li>
+                <a href="{% if i == 1 %}{{ '/' | relative_url }}{% else %}{{ '/page/' | append: i | append: '/' | relative_url }}{% endif %}">
+                  {{ i }}
+                </a>
+              </li>
+            {%- endif -%}
+          {%- endfor -%}
+        </ul>
+      </nav>
+    {%- endif -%}
+  </div>
 </section>
