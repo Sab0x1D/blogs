@@ -14,6 +14,10 @@
   --chip-border: #e5e7eb;
 
   --shadow: 0 16px 40px rgba(2,10,30,.08);
+
+  /* Image area ratios (width / height) */
+  --feat-ar: 4 / 4.5;    /* Featured cards (taller than square) */
+  --prev-ar: 16 / 15;  /* Previous posts (wide) */
 }
 
 /* === Break out of Minima's default width clamp ===
@@ -96,21 +100,19 @@ main.page-content > .wrapper,
   border-color: rgba(15,23,42,.15); /* slate-900 @ ~15% */
 }
 
-/* image + date pill (base) */
+/* image + date pill (base)
+   NOTE: aspect-ratio is applied to .media (wrapper), not the <img>. */
 .card .media{ position: relative; }
+.card--sm .media{ aspect-ratio: var(--feat-ar); }  /* Featured */
+.card--lg .media{ aspect-ratio: var(--prev-ar); }  /* Previous posts */
+
 .card .thumb{
   width: 100%;
-  height: auto;           /* ensure aspect-ratio controls height */
+  height: 100%;
   object-fit: cover;
   display: block;
   background: #f1f5f9;    /* slate-100 fallback */
 }
-
-/* Large cards (Previous posts) – wide look */
-.card--lg .thumb{ aspect-ratio: 16 / 15; }
-
-/* Featured cards (small) – a bit taller than square */
-.card--sm .thumb{ aspect-ratio: 4 / 4.5; }
 
 /* Date chip */
 .card .meta-top{
@@ -198,14 +200,7 @@ main.page-content > .wrapper,
   text-decoration: none !important;
 }
 
-/* ===== FINAL OVERRIDES (keep these last) ===== */
-
-/* Guard against any later overrides from other stylesheets */
-.featured-row .card.card--sm .thumb{
-  aspect-ratio: 4 / 4.5 !important;
-  height: auto !important;
-}
-.grid .card.card--lg .thumb{
-  aspect-ratio: 16 / 15 !important;
-  height: auto !important;
-}
+/* ===== FINAL GUARDS (keep these last) ===== */
+/* Keep the ratios on .media (not the <img>) even if other styles load later. */
+.featured-row .card.card--sm .media{ aspect-ratio: var(--feat-ar) !important; }
+.grid .card.card--lg .media{ aspect-ratio: var(--prev-ar) !important; }
