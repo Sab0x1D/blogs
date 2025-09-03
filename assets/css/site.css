@@ -1,7 +1,7 @@
 /* ===== Design tokens ===== */
 :root{
-  /* Atega-like width */
-  --container: 1440px;
+  /* Atega-ish page width */
+  --container: 1200px;         /* was 1180 – bumping wider */
   --round: 22px;
   --gap: 26px;
 
@@ -14,6 +14,23 @@
   --chip-border: #e5e7eb;
 
   --shadow: 0 16px 40px rgba(2,10,30,.08);
+}
+
+/* === Break out of Minima's default width clamp === */
+/* Let our own .container decide page width */
+main.page-content > .wrapper {
+  max-width: none !important;
+  padding-left: 0 !important;
+  padding-right: 0 !important;
+}
+
+/* Optional: keep header/footer at normal width while content is wide */
+.site-header .wrapper,
+.site-footer .wrapper {
+  max-width: var(--container);
+  padding-left: 24px;
+  padding-right: 24px;
+  margin-inline: auto;
 }
 
 /* ===== Layout container ===== */
@@ -29,25 +46,23 @@
   font-weight: 700;
 }
 
-/* ===== Grids ===== */
-.featured-row,
-.grid{
-  display: grid;
-  gap: var(--gap);
-  align-items: stretch;      /* stretch cards to equal row height */
-}
-
-/* Featured: 4 across */
+/* ===== Featured row (4 across) ===== */
 .featured-row{
+  display: grid;
   grid-template-columns: repeat(4, minmax(0,1fr));
+  gap: var(--gap);
+  align-items: stretch;
 }
 @media (max-width:1200px){ .featured-row{ grid-template-columns: repeat(3,1fr);} }
 @media (max-width:880px){  .featured-row{ grid-template-columns: repeat(2,1fr);} }
 @media (max-width:560px){  .featured-row{ grid-template-columns: 1fr;} }
 
-/* Previous posts: 3 across */
+/* ===== Previous posts grid (3 across) ===== */
 .grid{
+  display: grid;
   grid-template-columns: repeat(3, minmax(0,1fr));
+  gap: var(--gap);
+  align-items: stretch;
 }
 @media (max-width:1200px){ .grid{ grid-template-columns: repeat(2,1fr);} }
 @media (max-width:720px){  .grid{ grid-template-columns: 1fr;} }
@@ -71,11 +86,11 @@
   border-color: rgba(15,23,42,.15); /* slate-900 @ ~15% */
 }
 
-/* media + date pill */
+/* image + date pill */
 .card .media{ position: relative; }
 .card .thumb{
   width: 100%;
-  /* Atega proportions – stable visual rhythm */
+  /* Atega proportions (slightly wider than 4:3); 16/10 looks right */
   aspect-ratio: 16 / 10;
   object-fit: cover;
   display: block;
@@ -104,30 +119,24 @@
   flex-direction: column;
   gap: 8px;
 }
-
-/* Titles: clamp to 2 lines to keep cards equal height */
 .card .title{
   margin: 0;
   font-weight: 700;
-  line-height: 1.3;
-  display: -webkit-box;
-  -webkit-box-orient: vertical;
-  overflow: hidden;
-  -webkit-line-clamp: 2; /* Chrome/Safari */
-  line-clamp: 2;         /* spec-ish – quiets VSCode */
+  line-height: 1.25;
 }
-
-/* Size variants */
 .card--sm .title{ font-size: 16px; }
 .card--lg .title{ font-size: 18px; }
 
-/* Featured cards (small): no excerpt, so body gets a small min-height so all 4 line up */
-.card--sm .body{
-  min-height: 72px;   /* ~2 lines + gap */
+/* meta + excerpt */
+.card .meta{
+  margin-top: 2px;
+  font-size: 12px;
+  color: var(--muted-2);
+  display: flex; gap: 6px; align-items: center;
 }
 
-/* Previous posts (large): add excerpt (2 lines) and give body a min-height so rows align */
-.card--lg .excerpt{
+/* 2-line clamp like Atega; include both standard + webkit to silence VS Code */
+.card .excerpt{
   margin: 0;
   color: var(--muted);
   font-size: 14px;
@@ -136,12 +145,10 @@
   display: -webkit-box;
   -webkit-box-orient: vertical;
   overflow: hidden;
+
+  /* compatibility pair – fixes your warnings */
   -webkit-line-clamp: 2;
   line-clamp: 2;
-}
-.card--lg .body{
-  /* room for 2-line title + 2-line excerpt + gaps */
-  min-height: 140px;
 }
 
 /* ===== Chips / topics ===== */
