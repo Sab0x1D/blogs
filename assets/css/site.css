@@ -1,36 +1,23 @@
 /* ===== Design tokens ===== */
 :root{
-  /* Atega-ish page width */
-  --container: 1380px;         /* was 1180 – bumping wider */
+  /* page / card geometry */
+  --container: 1440px;        /* make the page wider */
   --round: 22px;
   --gap: 26px;
 
-  --card: #ffffff;
-  --card-border: #e5e7eb;      /* slate-200 */
-  --muted: #6b7280;            /* slate-500 */
-  --muted-2: #94a3b8;          /* slate-400 */
+  /* fixed image heights (Atega-style) */
+  --featH: 170px;             /* featured row image height */
+  --postH: 232px;             /* previous posts image height */
 
-  --chip-bg: #f8fafc;          /* slate-50 */
+  /* colors */
+  --card: #ffffff;
+  --card-border: #e5e7eb;     /* slate-200 */
+  --muted: #6b7280;           /* slate-500 */
+  --muted-2: #94a3b8;         /* slate-400 */
+  --chip-bg: #f8fafc;         /* slate-50 */
   --chip-border: #e5e7eb;
 
   --shadow: 0 16px 40px rgba(2,10,30,.08);
-}
-
-/* === Break out of Minima's default width clamp === */
-/* Let our own .container decide page width */
-main.page-content > .wrapper {
-  max-width: none !important;
-  padding-left: 0 !important;
-  padding-right: 0 !important;
-}
-
-/* Optional: keep header/footer at normal width while content is wide */
-.site-header .wrapper,
-.site-footer .wrapper {
-  max-width: var(--container);
-  padding-left: 24px;
-  padding-right: 24px;
-  margin-inline: auto;
 }
 
 /* ===== Layout container ===== */
@@ -40,15 +27,11 @@ main.page-content > .wrapper {
   padding: 0 32px;
 }
 .home{ padding: 40px 0; }
-.section-title{
-  margin: 22px 0 14px;
-  font-size: 18px;
-  font-weight: 700;
-}
+.section-title{ margin: 22px 0 14px; font-size: 18px; font-weight: 700; }
 
 /* ===== Featured row (4 across) ===== */
 .featured-row{
-  display: grid;
+  display:grid;
   grid-template-columns: repeat(4, minmax(0,1fr));
   gap: var(--gap);
   align-items: stretch;
@@ -59,7 +42,7 @@ main.page-content > .wrapper {
 
 /* ===== Previous posts grid (3 across) ===== */
 .grid{
-  display: grid;
+  display:grid;
   grid-template-columns: repeat(3, minmax(0,1fr));
   gap: var(--gap);
   align-items: stretch;
@@ -69,115 +52,90 @@ main.page-content > .wrapper {
 
 /* ===== Card (Atega-like) ===== */
 .card{
-  display: flex;
-  flex-direction: column;
-  height: 100%;
-  background: var(--card);
-  border: 1px solid var(--card-border);
-  border-radius: var(--round);
-  overflow: hidden;
-  color: inherit;
-  text-decoration: none;
+  display:flex;
+  flex-direction:column;
+  height:100%;
+  background:var(--card);
+  border:1px solid var(--card-border);
+  border-radius:var(--round);
+  overflow:hidden;
+  color:inherit;
+  text-decoration:none;
   transition: transform .16s ease, box-shadow .16s ease, border-color .16s ease;
 }
 .card:hover{
   transform: translateY(-3px);
   box-shadow: var(--shadow);
-  border-color: rgba(15,23,42,.15); /* slate-900 @ ~15% */
+  border-color: rgba(15,23,42,.15);
 }
 
-/* image + date pill */
-.card .media{ position: relative; }
+/* media block */
+.card .media{ position:relative; }
+
+/* IMPORTANT: fixed heights (no aspect-ratio) + crop */
 .card .thumb{
-  width: 100%;
-  /* Atega proportions (slightly wider than 4:3); 16/10 looks right */
-  aspect-ratio: 16 / 10;
-  object-fit: cover;
-  display: block;
-  background: #f1f5f9; /* slate-100 fallback */
+  width:100%;
+  display:block;
+  object-fit:cover;           /* crop, don’t distort */
+  background:#f1f5f9;         /* slate-100 fallback */
 }
+.featured-row .card .thumb{ height: var(--featH); }
+.grid         .card .thumb{ height: var(--postH); }
+
+/* date pill */
 .card .meta-top{
-  position: absolute;
-  left: 12px;
-  top: 12px;
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-  font-size: 12px;
-  color: #0f172a; /* slate-900 */
-  padding: 6px 10px;
-  border-radius: 999px;
-  background: rgba(255,255,255,.78);
-  backdrop-filter: blur(6px);
-  border: 1px solid var(--card-border);
+  position:absolute; left:12px; top:12px;
+  display:inline-flex; align-items:center; gap:6px;
+  font-size:12px; color:#0f172a;
+  padding:6px 10px; border-radius:999px;
+  background:rgba(255,255,255,.78);
+  backdrop-filter:blur(6px);
+  border:1px solid var(--card-border);
 }
 
 /* body */
 .card .body{
-  padding: 16px 18px 18px;
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
+  padding:16px 18px 18px;
+  display:flex; flex-direction:column; gap:8px;
+  flex:1;                          /* stretch so heights match */
 }
-.card .title{
-  margin: 0;
-  font-weight: 700;
-  line-height: 1.25;
-}
-.card--sm .title{ font-size: 16px; }
-.card--lg .title{ font-size: 18px; }
+.featured-row .card .body{ min-height:86px; }  /* compact */
+.grid         .card .body{ min-height:120px; } /* room for excerpt */
+
+.card .title{ margin:0; font-weight:700; line-height:1.25; }
+.card--sm .title{ font-size:16px; }
+.card--lg .title{ font-size:18px; }
 
 /* meta + excerpt */
 .card .meta{
-  margin-top: 2px;
-  font-size: 12px;
-  color: var(--muted-2);
-  display: flex; gap: 6px; align-items: center;
+  margin-top:2px; font-size:12px; color:var(--muted-2);
+  display:flex; gap:6px; align-items:center;
 }
-
-/* 2-line clamp like Atega; include both standard + webkit to silence VS Code */
+/* 2-line clamp (compat pair fixes VS Code warning) */
 .card .excerpt{
-  margin: 0;
-  color: var(--muted);
-  font-size: 14px;
-  line-height: 1.5;
-
-  display: -webkit-box;
-  -webkit-box-orient: vertical;
-  overflow: hidden;
-
-  /* compatibility pair – fixes your warnings */
-  -webkit-line-clamp: 2;
-  line-clamp: 2;
+  margin:0; color:var(--muted); font-size:14px; line-height:1.5;
+  display:-webkit-box; -webkit-box-orient:vertical; overflow:hidden;
+  -webkit-line-clamp:2; line-clamp:2;
 }
 
 /* ===== Chips / topics ===== */
-.chips{ display: flex; flex-wrap: wrap; gap: 8px; }
+.chips{ display:flex; flex-wrap:wrap; gap:8px; }
 .chip{
-  border: 1px solid var(--chip-border);
-  background: var(--chip-bg);
-  color: inherit;
-  border-radius: 999px;
-  padding: 6px 10px;
-  font-size: 12px;
+  border:1px solid var(--chip-border);
+  background:var(--chip-bg);
+  color:inherit;
+  border-radius:999px; padding:6px 10px; font-size:12px;
 }
 
 /* ===== Pager ===== */
-.pager{ margin: 22px 0; }
-.pager ul{ list-style: none; padding: 0; display: flex; gap: 8px; }
+.pager{ margin:22px 0; }
+.pager ul{ list-style:none; padding:0; display:flex; gap:8px; }
 .pager a, .pager span{
-  display: inline-block;
-  padding: 6px 10px;
-  border: 1px solid var(--card-border);
-  border-radius: 8px;
-  text-decoration: none;
+  display:inline-block; padding:6px 10px; border:1px solid var(--card-border);
+  border-radius:8px; text-decoration:none;
 }
-.pager .active span{
-  background: #111827; color: #fff; border-color: #111827;
-}
+.pager .active span{ background:#111827; color:#fff; border-color:#111827; }
 
-/* Never underline anything inside cards */
+/* never underline inside cards */
 .grid .card, .featured-row .card,
-.grid .card *, .featured-row .card *{
-  text-decoration: none !important;
-}
+.grid .card *, .featured-row .card *{ text-decoration:none !important; }
