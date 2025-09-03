@@ -96,6 +96,27 @@ main.page-content > .wrapper {
   display: block;
   background: #f1f5f9; /* slate-100 fallback */
 }
+/* Default image ratio stays for large (Previous posts) cards */
+.card--lg .thumb{
+  width: 100%;
+  aspect-ratio: 16 / 10;        /* wide look for the big cards */
+  object-fit: cover;
+  display: block;
+  background: #f1f5f9;
+}
+/* Make Featured cards (small) taller like Atega */
+.card--sm .thumb{
+  width: 100%;
+  aspect-ratio: 5 / 4;          /* taller than square; try 6/5 if you want even taller */
+  object-fit: cover;
+  display: block;
+  background: #f1f5f9;
+}
+/* Optional: a touch taller on very wide screens */
+@media (min-width: 1440px){
+  .card--sm .thumb{ aspect-ratio: 6 / 5; }  /* comment this out if 5/4 is perfect */
+}
+
 .card .meta-top{
   position: absolute;
   left: 12px;
