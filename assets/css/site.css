@@ -107,7 +107,7 @@ main.page-content > .wrapper,
 }
 
 /* Large cards (Previous posts) – wide look */
-.card--lg .thumb{ aspect-ratio: 16 / 14; }
+.card--lg .thumb{ aspect-ratio: 16 / 15; }
 
 /* Featured cards (small) – a bit taller than square */
 .card--sm .thumb{ aspect-ratio: 4 / 4.5; }
@@ -206,6 +206,6 @@ main.page-content > .wrapper,
   height: auto !important;
 }
 .grid .card.card--lg .thumb{
-  aspect-ratio: 16 / 14 !important;
+  aspect-ratio: 16 / 15 !important;
   height: auto !important;
 }
