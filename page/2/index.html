@@ -6,10 +6,65 @@ permalink: /page/2/
 ---
 
 <link rel="stylesheet" href="{{ '/assets/css/theme.css' | relative_url }}">
-<link rel="stylesheet" href="{{ '/assets/css/site.css'  | relative_url }}">
+<link rel="stylesheet" href="{{ '/assets/css/site.css' | relative_url }}">
 <script defer src="{{ '/assets/js/theme.js' | relative_url }}"></script>
-<script defer src="{{ '/assets/js/site.js'  | relative_url }}"></script>
+<script defer src="{{ '/assets/js/site.js' | relative_url }}"></script>
 
-<div class="container home">
-  {% include homefeed.html %}
-</div>
+<section class="home container">
+  {%- assign coll = site.listings | sort: 'date' | reverse -%}
+
+  <h2 class="section-title">Featured</h2>
+  <div class="featured-row">
+    {%- assign featured = coll | slice: 0, 4 -%}
+    {%- for p in featured -%}
+      <a class="card card--sm" href="{{ p.url | relative_url }}">
+        <div class="media">
+          <img class="thumb" src="{{ (p.thumb | default: site.default_thumb) | relative_url }}" alt="{{ p.title }}">
+          <span class="meta-top">{{ p.date | date: "%d %b %Y" }}</span>
+        </div>
+        <div class="body">
+          <h3 class="title">{{ p.title }}</h3>
+        </div>
+      </a>
+    {%- endfor -%}
+  </div>
+
+  <h2 class="section-title">Previous posts</h2>
+  {%- assign previous_all = coll | slice: 4, coll.size -%}
+  {%- assign page_size = 6 -%}
+  {%- assign offset = (page.page_num | minus: 1) | times: page_size -%}
+
+  <div class="grid">
+    {%- for p in previous_all limit: page_size offset: offset -%}
+      <a class="card card--lg" href="{{ p.url | relative_url }}">
+        <div class="media">
+          <img class="thumb" src="{{ (p.thumb | default: site.default_thumb) | relative_url }}" alt="{{ p.title }}">
+          <span class="meta-top">{{ p.date | date: "%d %b %Y" }}</span>
+        </div>
+        <div class="body">
+          <h3 class="title">{{ p.title }}</h3>
+          {%- if p.excerpt -%}
+            <p class="excerpt">{{ p.excerpt | strip_html | truncate: 150 }}</p>
+          {%- endif -%}
+        </div>
+      </a>
+    {%- endfor -%}
+  </div>
+
+  {%- assign total_pages = (previous_all.size | plus: page_size | minus: 1) | divided_by: page_size -%}
+  <nav class="pager">
+    <ul>
+      {%- for i in (1..total_pages) -%}
+        {%- if i == page.page_num -%}
+          <li class="active"><span>{{ i }}</span></li>
+        {%- else -%}
+          {%- if i == 1 -%}
+            <li><a href="{{ '/' | relative_url }}">{{ i }}</a></li>
+          {%- else -%}
+            <li><a href="{{ '/page/' | append: i | append: '/' | relative_url }}">{{ i }}</a></li>
+          {%- endif -%}
+        {%- endif -%}
+      {%- endfor -%}
+    </ul>
+  </nav>
+</section>
