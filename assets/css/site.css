@@ -1,7 +1,7 @@
 /* ===== Design tokens ===== */
 :root{
   /* Atega-ish page width */
-  --container: 1380px;         /* was 1180 – bumping wider */
+  --container: 1440px;         /* was 1180 – bumping wider */
   --round: 22px;
   --gap: 26px;
 
