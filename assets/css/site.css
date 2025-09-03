@@ -202,7 +202,7 @@ main.page-content > .wrapper,
 
 /* Guard against any later overrides from other stylesheets */
 .featured-row .card.card--sm .thumb{
-  aspect-ratio: 5 / 4 !important;
+  aspect-ratio: 3 / 5 !important;
   height: auto !important;
 }
 .grid .card.card--lg .thumb{
