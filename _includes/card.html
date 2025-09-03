@@ -1,39 +1,26 @@
-{%- assign d = include.doc -%}
-{%- assign v = include.variant | default: 'lg' -%}
-
-{%- comment -%}
-  FIELDS USED:
-    d.title, d.url, d.date, d.tags, d.excerpt, d.author (optional)
-    d.thumb (optional) — falls back to site.default_thumb
-{%- endcomment -%}
-
-{%- assign thumb = d.thumb | default: site.default_thumb -%}
-
-<a class="card card--{{ v }} elevated" href="{{ d.url | relative_url }}" data-tags="{{ d.tags | join: ',' }}">
+{%- assign p = include.p -%}
+{%- assign variant = include.variant | default: "prev" -%}
+<a class="card card--{{ variant }}" href="{{ p.url | relative_url }}">
   <div class="media">
-    <img class="thumb" loading="lazy" decoding="async" src="{{ thumb | relative_url }}" alt="{{ d.title }}">
-    <div class="meta-top">
-      {%- assign by = d.author | default: site.author_name -%}
-      {%- if by %}<span class="by">{{ by }}</span><span class="sep">–</span>{% endif %}
-      {%- if d.date %}<span class="date">{{ d.date | date: "%d %b %Y" }}</span>{% endif %}
-    </div>
+    <img
+      class="thumb"
+      src="{{ p.thumb | default: site.default_thumb | relative_url }}"
+      alt="{{ p.title | escape }}"
+      loading="lazy" decoding="async">
   </div>
 
   <div class="body">
-    <h3 class="title">{{ d.title }}</h3>
+    {% if p.date %}
+      <div class="eyebrow">{{ p.date | date: "%d %b %Y" }}</div>
+    {% endif %}
+    <h3 class="title">{{ p.title }}</h3>
 
-    {%- if v == 'lg' -%}
-      {%- if d.excerpt -%}
-        <p class="excerpt">{{ d.excerpt }}</p>
-      {%- endif -%}
-
-      {%- if d.tags and d.tags.size > 0 -%}
-        <div class="chips">
-          {%- for t in d.tags -%}
-            <span class="chip">{{ t }}</span>
-          {%- endfor -%}
-        </div>
-      {%- endif -%}
-    {%- endif -%}
+    {%- comment -%}
+      For “prev” cards we can optionally show a tiny excerpt.
+      We leave it present but visually hidden by CSS clamp.
+    {%- endcomment -%}
+    {% if variant == "prev" and p.excerpt %}
+      <p class="excerpt">{{ p.excerpt }}</p>
+    {% endif %}
   </div>
 </a>
