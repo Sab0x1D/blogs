@@ -1,94 +1,91 @@
-/* ===== Layout container (centered) ===== */
-.container { max-width: 1320px; margin: 0 auto; padding: 0 24px; }
-.home { padding: 32px 0; }
-.section-title { margin: 18px 0 12px; font-size: 18px; font-weight: 700; }
+/* ===== Design tokens ===== */
+:root{
+  --container: 1180px;
+  --round: 20px;
+  --gap: 22px;
 
-/* Featured row (4 across) */
-.featured-row {
-  display: grid;
-  grid-template-columns: repeat(4, minmax(0,1fr));
-  gap: 20px;
+  --card: #ffffff;
+  --card-border: #e5e7eb;
+  --muted: #6b7280;
+
+  --chip-bg: #f8fafc;
+  --chip-border: #e5e7eb;
 }
-@media (max-width: 1200px){ .featured-row { grid-template-columns: repeat(3, minmax(0,1fr)); } }
-@media (max-width: 880px){  .featured-row { grid-template-columns: repeat(2, minmax(0,1fr)); } }
-@media (max-width: 560px){  .featured-row { grid-template-columns: 1fr; } }
 
-/* Previous posts grid (3 across) */
-.grid {
-  display: grid;
-  grid-template-columns: repeat(3, minmax(0,1fr));
-  gap: 24px;
+/* ===== Layout container ===== */
+.container{ max-width:var(--container); margin:0 auto; padding:0 24px; }
+.home{ padding:32px 0; }
+.section-title{ margin:18px 0 12px; font-size:18px; font-weight:700; }
+
+/* ===== Featured row (4 across) ===== */
+.featured-row{
+  display:grid;
+  grid-template-columns:repeat(4,minmax(0,1fr));
+  gap:var(--gap);
 }
-@media (max-width: 1200px){ .grid { grid-template-columns: repeat(2, minmax(0,1fr)); } }
-@media (max-width: 720px){  .grid { grid-template-columns: 1fr; } }
+@media (max-width:1200px){ .featured-row{ grid-template-columns:repeat(3,1fr);} }
+@media (max-width:880px){ .featured-row{ grid-template-columns:repeat(2,1fr);} }
+@media (max-width:560px){ .featured-row{ grid-template-columns:1fr;} }
 
-/* ===== Card styles ===== */
-.card {
-  display: flex;
-  flex-direction: column;
-  height: 100%;
-  border: 1px solid var(--card-border);
-  border-radius: 18px;
-  overflow: hidden;
-  background: var(--card);
-  color: var(--text);
-  text-decoration: none;
-  transition: transform .16s ease, box-shadow .16s ease, border-color .16s ease;
+/* ===== Previous posts grid (3 across) ===== */
+.grid{
+  display:grid;
+  grid-template-columns:repeat(3,minmax(0,1fr));
+  gap:var(--gap);
 }
-.card.elevated { box-shadow: 0 12px 28px rgba(0,0,0,.06); }
-.card:hover { transform: translateY(-3px); box-shadow: 0 16px 36px rgba(0,0,0,.10); }
+@media (max-width:1200px){ .grid{ grid-template-columns:repeat(2,1fr);} }
+@media (max-width:720px){ .grid{ grid-template-columns:1fr;} }
 
-/* Media with overlay date chip */
-.card .media{ position: relative; }
+/* ===== Cards (Atega-ish compact tile) ===== */
+.card{
+  display:flex; flex-direction:column; height:100%;
+  background:var(--card); border:1px solid var(--card-border); border-radius:var(--round);
+  overflow:hidden; color:inherit; text-decoration:none;
+  transition:transform .16s ease, box-shadow .16s ease, border-color .16s ease;
+}
+.card:hover{ transform:translateY(-2px); box-shadow:0 12px 28px rgba(0,0,0,.08); }
+
+.card .media{ position:relative; }
 .card .thumb{
-  width: 100%;
-  object-fit: cover;
-  display:block;
-  background: var(--card-border);
+  width:100%;
+  aspect-ratio:4 / 3;    /* match the reference look */
+  object-fit:cover; display:block;
 }
 .card .meta-top{
-  position: absolute; left: 10px; top: 10px;
-  display:flex; align-items:center; gap:6px;
-  font-size: 12px; color: var(--text);
-  padding: 6px 10px; border-radius: 999px;
-  background: rgba(255,255,255,.75);
-  border: 1px solid var(--card-border);
-  backdrop-filter: blur(6px);
-}
-:root[data-theme="dark"] .card .meta-top{
-  background: rgba(16,22,28,.55);
+  position:absolute; left:12px; top:12px;
+  font-size:12px; padding:6px 10px; border-radius:999px;
+  background:rgba(255,255,255,.75); backdrop-filter:blur(6px);
+  border:1px solid var(--card-border);
 }
 
-/* Aspect ratios to match reference look */
-.card--sm .thumb { aspect-ratio: 1 / 1; }     /* Featured (square) */
-.card--lg .thumb { aspect-ratio: 16 / 9; }    /* Previous (wide) */
-
-/* Body */
-.card .body { padding: 14px; display:flex; flex-direction:column; gap:8px; }
-.card .meta-line{ margin:0; color: var(--muted); font-size: 13px; }
-.card .title{ margin:0; font-size: 18px; line-height:1.3; }
-
-/* Featured = compact (no excerpt) */
+.card .body{ padding:14px; display:flex; flex-direction:column; gap:8px; }
 .card--sm .title{
-  font-size: 16px;
-  display:-webkit-box; -webkit-line-clamp:2; line-clamp:2; -webkit-box-orient:vertical; overflow:hidden;
+  font-size:16px; line-height:1.3;
+  display:-webkit-box; -webkit-line-clamp:2; -webkit-box-orient:vertical; overflow:hidden;
 }
-
-/* Previous posts = allow excerpt */
+.card--lg .title{ font-size:18px; line-height:1.3; }
 .card--lg .excerpt{
-  margin:0; color: var(--muted); font-size: 14px; line-height:1.45;
-  display:-webkit-box; -webkit-line-clamp:2; line-clamp:2; -webkit-box-orient:vertical; overflow:hidden;
+  margin:0; color:var(--muted); font-size:14px; line-height:1.45;
+  display:-webkit-box; -webkit-line-clamp:2; -webkit-box-orient:vertical; overflow:hidden;
 }
 
-/* Chips */
+/* ===== Chips / topics ===== */
 .chips{ display:flex; flex-wrap:wrap; gap:8px; }
 .chip{
   border:1px solid var(--chip-border);
-  background: var(--chip-bg);
-  color: var(--text);
+  background:var(--chip-bg); color:inherit;
   border-radius:999px; padding:6px 10px; font-size:12px;
 }
 
-/* Remove underline inside cards */
+/* ===== Pager ===== */
+.pager{ margin:18px 0; }
+.pager ul{ list-style:none; padding:0; display:flex; gap:8px; }
+.pager a, .pager span{
+  display:inline-block; padding:6px 10px; border:1px solid var(--card-border); border-radius:8px;
+  text-decoration:none;
+}
+.pager .active span{ background:#111827; color:#fff; border-color:#111827; }
+
+/* Never underline anything inside cards */
 .grid .card, .featured-row .card,
-.grid .card * , .featured-row .card * { text-decoration: none !important; }
+.grid .card *, .featured-row .card *{ text-decoration:none !important; }
