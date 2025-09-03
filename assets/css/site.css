@@ -1,7 +1,7 @@
 /* ===== Design tokens ===== */
 :root{
   /* Atega-ish page width */
-  --container: 1440px;         /* was 1180 – bumping wider */
+  --container: 1380px;         /* was 1180 – bumping wider */
   --round: 22px;
   --gap: 26px;
 
@@ -14,6 +14,23 @@
   --chip-border: #e5e7eb;
 
   --shadow: 0 16px 40px rgba(2,10,30,.08);
+}
+
+/* === Break out of Minima's default width clamp === */
+/* Let our own .container decide page width */
+main.page-content > .wrapper {
+  max-width: none !important;
+  padding-left: 0 !important;
+  padding-right: 0 !important;
+}
+
+/* Optional: keep header/footer at normal width while content is wide */
+.site-header .wrapper,
+.site-footer .wrapper {
+  max-width: var(--container);
+  padding-left: 24px;
+  padding-right: 24px;
+  margin-inline: auto;
 }
 
 /* ===== Layout container ===== */
