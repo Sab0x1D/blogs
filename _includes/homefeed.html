@@ -1,3 +1,9 @@
+{%- comment -%}
+  Home feed (safe for GitHub Pages)
+  - Shows 4 featured posts (explicit `featured: true` if present, else most recent 4)
+  - Paginates "previous posts" using limit/offset
+{%- endcomment -%}
+
 {%- assign coll = site.listings | sort: 'date' | reverse -%}
 {%- assign explicit = coll | where_exp:'p','p.featured == true' -%}
 
@@ -12,18 +18,18 @@
 <h2 class="section-title">Featured</h2>
 <div class="featured-row">
   {%- for p in featured -%}
-    {% include card.html doc=p variant:'sm' %}
+    {% include card.html doc=p variant='sm' %}
   {%- endfor -%}
 </div>
 
 <h2 class="section-title">Previous posts</h2>
+
 {%- assign page_size = 6 -%}
-{%- assign start = (page.page_num | minus: 1) | times: page_size -%}
-{%- assign previous = previous_all | slice: start, page_size -%}
+{%- assign offset = (page.page_num | minus: 1) | times: page_size -%}
 
 <div class="grid">
-  {%- for p in previous -%}
-    {% include card.html doc=p variant:'lg' %}
+  {%- for p in previous_all limit:page_size offset:offset -%}
+    {% include card.html doc=p variant='lg' %}
   {%- endfor -%}
 </div>
 
