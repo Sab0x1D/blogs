@@ -110,7 +110,7 @@ main.page-content > .wrapper,
 .card--lg .thumb{ aspect-ratio: 16 / 10; }
 
 /* Featured cards (small) – a bit taller than square */
-.card--sm .thumb{ aspect-ratio: 4 / 5; }
+.card--sm .thumb{ aspect-ratio: 3 / 4; }
 
 /* Date chip */
 .card .meta-top{
@@ -202,7 +202,7 @@ main.page-content > .wrapper,
 
 /* Guard against any later overrides from other stylesheets */
 .featured-row .card.card--sm .thumb{
-  aspect-ratio: 4 / 5 !important;
+  aspect-ratio: 3 / 4 !important;
   height: auto !important;
 }
 .grid .card.card--lg .thumb{
