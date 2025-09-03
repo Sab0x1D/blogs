@@ -181,3 +181,18 @@ main.page-content > .wrapper {
 .grid .card *, .featured-row .card *{
   text-decoration: none !important;
 }
+
+/* --- BREAK MINIMA'S 800px WRAPPER ON THE CONTENT AREA --- */
+.page-content > .wrapper { 
+  max-width: none !important; 
+  padding-left: 0 !important; 
+  padding-right: 0 !important; 
+}
+
+/* Keep the home container wide (Atega-like) */
+.home.container {
+  max-width: 1440px !important;   /* or 1380px if you prefer */
+  margin: 0 auto;
+  padding-left: 32px;
+  padding-right: 32px;
+}
