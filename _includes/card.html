@@ -1,26 +1,34 @@
-{%- assign p = include.p -%}
-{%- assign variant = include.variant | default: "prev" -%}
-<a class="card card--{{ variant }}" href="{{ p.url | relative_url }}">
+{%- comment -%}
+Usage: {% include card.html doc=p variant:'sm' %} or variant:'lg'
+{%- endcomment -%}
+
+{%- assign v = include.variant | default: 'lg' -%}
+{%- assign p = include.doc -%}
+
+<a class="card card--{{ v }}" href="{{ p.url | relative_url }}">
   <div class="media">
-    <img
-      class="thumb"
-      src="{{ p.thumb | default: site.default_thumb | relative_url }}"
-      alt="{{ p.title | escape }}"
-      loading="lazy" decoding="async">
+    <img class="thumb"
+         src="{{ p.thumb | default: site.default_thumb | relative_url }}"
+         alt="{{ p.title | escape }}">
+    <span class="meta-top">{{ p.date | date: "%d %b %Y" }}</span>
   </div>
 
   <div class="body">
-    {% if p.date %}
-      <div class="eyebrow">{{ p.date | date: "%d %b %Y" }}</div>
-    {% endif %}
+    <p class="meta-line">
+      {{ p.author | default: site.title }} — {{ p.date | date: "%-d %b, %Y" }}
+    </p>
     <h3 class="title">{{ p.title }}</h3>
 
-    {%- comment -%}
-      For “prev” cards we can optionally show a tiny excerpt.
-      We leave it present but visually hidden by CSS clamp.
-    {%- endcomment -%}
-    {% if variant == "prev" and p.excerpt %}
+    {%- if v == 'lg' and p.excerpt -%}
       <p class="excerpt">{{ p.excerpt }}</p>
-    {% endif %}
+    {%- endif -%}
+
+    {%- if v == 'lg' and p.tags -%}
+      <div class="chips">
+        {%- for t in p.tags limit: 3 -%}
+          <span class="chip">{{ t }}</span>
+        {%- endfor -%}
+      </div>
+    {%- endif -%}
   </div>
 </a>
