@@ -11,5 +11,37 @@ permalink: /page/2/
 <script defer src="{{ '/assets/js/site.js'  | relative_url }}"></script>
 
 <div class="container home">
-  {% include_relative ../index.html %}
+  <h2 class="section-title">Featured</h2>
+
+  {% assign coll = site.listings | sort: 'date' | reverse %}
+  {% assign explicit = coll | where_exp:'p','p.featured == true' %}
+
+  {% if explicit.size > 0 %}
+    {% assign featured = explicit | slice: 0, 4 %}
+    {% assign previous_all = coll | where_exp:'p','p.featured != true' %}
+  {% else %}
+    {% assign featured = coll | slice: 0, 4 %}
+    {% assign tail = coll.size | minus: 4 %}
+    {% assign previous_all = coll | slice: 4, tail %}
+  {% endif %}
+
+  <div class="featured-row">
+    {% for p in featured %}
+      {% include card.html doc=p variant:'sm' %}
+    {% endfor %}
+  </div>
+
+  <h2 class="section-title">Previous posts</h2>
+  {% assign page_size = 6 %}
+  {% assign start = (page.page_num | minus: 1) | times: page_size %}
+  {% assign previous = previous_all | slice: start, page_size %}
+
+  <div class="grid">
+    {% for p in previous %}
+      {% include card.html doc=p variant:'lg' %}
+    {% endfor %}
+  </div>
+
+  {% assign total_pages = (previous_all.size | plus: page_size | minus: 1) | divided_by: page_size %}
+  {% include pagination.html page_num=page.page_num total_pages=total_pages %}
 </div>
