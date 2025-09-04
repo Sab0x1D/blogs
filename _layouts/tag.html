@@ -8,19 +8,17 @@ layout: default
 <section class="home">
   <div class="container">
 
-    {%- comment -%} Gather and filter by tag (GitHub Pages–safe) {%- endcomment -%}
-    {% assign coll   = site.listings | sort: 'date' | reverse %}
-    {% assign tagged = coll | where_exp: 'p', 'p.tags and p.tags contains page.tag' %}
+    {%- assign coll = site.listings | sort: 'date' | reverse -%}
 
     <!-- Centered title -->
     <header class="tag-hero">
       <h1 class="tag-title">{{ page.title | default: page.tag }}</h1>
     </header>
 
-    {% if tagged and tagged.size > 0 %}
-      <!-- Same grid + card markup as index "Previous posts" -->
-      <section class="grid" aria-label="Posts for this topic">
-        {% for p in tagged %}
+    <!-- Same grid + card markup as index "Previous posts" -->
+    <section class="grid" aria-label="Posts for this topic">
+      {%- for p in coll -%}
+        {%- if p.tags and p.tags contains page.tag -%}
           <a class="card card--lg" href="{{ p.url | relative_url }}">
             <div class="media">
               <img class="thumb" src="{{ (p.thumb | default: site.default_thumb) | relative_url }}" alt="{{ p.title }}">
@@ -28,17 +26,15 @@ layout: default
             </div>
             <div class="body">
               <h3 class="title">{{ p.title }}</h3>
-              {% if p.excerpt %}
+              {%- if p.excerpt -%}
                 <p class="excerpt">{{ p.excerpt | strip_html | truncate: 150 }}</p>
-              {% endif %}
-              {% comment %} no chips below cards on tag pages {% endcomment %}
+              {%- endif -%}
+              {%- comment -%} no chips on tag pages {%- endcomment -%}
             </div>
           </a>
-        {% endfor %}
-      </section>
-    {% else %}
-      <p style="margin: 20px 0 0; color: var(--muted);">No posts for this topic yet.</p>
-    {% endif %}
+        {%- endif -%}
+      {%- endfor -%}
+    </section>
 
     <!-- Back to main -->
     <div class="tag-back-wrap">
