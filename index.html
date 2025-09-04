@@ -61,7 +61,7 @@ permalink: /
       TEMP: lock to 3 pages so pager shows “Page 1 of 3” until real content exists.
       When ready, delete the next line and use a computed total_pages.
     {%- endcomment -%}
-    {%- assign total_pages = 3 -%}
+    {%- assign total_pages = 2 -%}
 
     {%- assign current = page.page_num | plus: 0 -%}
     {%- assign prev_num = current | minus: 1 -%}
