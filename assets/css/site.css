@@ -7,6 +7,7 @@
   --round: 22px;
   --gap: 26px;
 
+  --text: #0f172a;           /* slate-900 (used in titles/hover) */
   --card: #ffffff;
   --card-border: #e5e7eb;    /* slate-200 */
   --muted: #6b7280;          /* slate-500 */
@@ -19,7 +20,7 @@
 
   /* Image area ratios (width / height) */
   --feat-ar: 4 / 4.5;        /* Featured cards (taller than square) */
-  --prev-ar: 16 / 15;        /* Previous posts (wide) */
+  --prev-ar: 16 / 15;        /* Previous posts (wide baseline) */
 }
 
 /* =======================
@@ -120,9 +121,13 @@ main.page-content > .wrapper,
 }
 
 /* image + date pill */
-.card .media{ position: relative; }
+.card .media{
+  position: relative;
+  display: block;            /* ensure block-level for aspect-ratio to apply */
+  overflow: hidden;          /* clip overflowing image edges */
+}
 .card--sm .media{ aspect-ratio: var(--feat-ar); }  /* Featured */
-.card--lg .media{ aspect-ratio: var(--prev-ar); }  /* Previous posts */
+.card--lg .media{ aspect-ratio: var(--prev-ar); }  /* Previous posts (baseline) */
 
 .card .thumb{
   width: 100%;
@@ -219,11 +224,14 @@ main.page-content > .wrapper,
   text-decoration: none;
   font-size: 14px;
   font-weight: 500;
-  transition: background .15s ease, color .15s ease;
+  transition: background .15s ease, color .15s ease, border-color .15s ease;
+  color: var(--text);
+  background: #fff;
 }
 .pager a:hover{
   background: var(--text);
   color: #fff;
+  border-color: var(--text);
 }
 .pager .active span{
   background: #111827;
@@ -317,17 +325,14 @@ main.page-content > .wrapper,
 
 /* Respect users who prefer reduced motion */
 @media (prefers-reduced-motion: reduce){
+  .card,
+  .card:hover,
   .topic-card,
   .topic-card:hover{
     transform: none !important;
     transition: none !important;
   }
 }
-
-/* If you prefer fixed aspect tiles, keep height rules above.
-   If you want consistent 16:9 aspect instead, you can replace with:
-   .topic-thumb{ aspect-ratio: 16 / 9; height: auto; } */
-
 
 /* ============================================================
    PREVIOUS POSTS — refined presentation
@@ -342,6 +347,8 @@ main.page-content > .wrapper,
 .grid .card.card--lg .body{
   padding: 18px 20px 20px;
   gap: 10px;
+  /* Gentle stability so rows line up even with meta/excerpt variance */
+  min-height: 210px;
 }
 
 .grid .card.card--lg .title{
