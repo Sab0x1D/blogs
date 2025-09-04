@@ -261,6 +261,7 @@ main.page-content > .wrapper,
   border-color: rgba(15,23,42,.15);
 }
 
+/* Topic tile */
 .topic-thumb{
   position: relative;
   width: 100%;
@@ -279,6 +280,14 @@ main.page-content > .wrapper,
   display: block;
 }
 
+/* Subtle gradient overlay to help chip contrast */
+.topic-thumb::after{
+  content:"";
+  position:absolute; inset:0;
+  background: linear-gradient(to top, rgba(0,0,0,.18), rgba(0,0,0,0) 55%);
+  pointer-events:none;
+}
+
 /* Overlay chip on topic images */
 .topic-chip{
   position: absolute;
@@ -295,4 +304,26 @@ main.page-content > .wrapper,
   background: rgba(255,255,255,.92);
   border: 1px solid var(--card-border);
   border-radius: 999px;
+  box-shadow: 0 6px 16px rgba(2,10,30,.15);
+  backdrop-filter: blur(4px);
 }
+
+/* Keyboard focus (a11y) */
+.topic-card:focus-visible{
+  outline: 2px solid var(--link, #0b57d0);
+  outline-offset: 3px;
+  border-radius: 22px;
+}
+
+/* Respect users who prefer reduced motion */
+@media (prefers-reduced-motion: reduce){
+  .topic-card,
+  .topic-card:hover{
+    transform: none !important;
+    transition: none !important;
+  }
+}
+
+/* If you prefer fixed aspect tiles, keep height rules above.
+   If you want consistent 16:9 aspect instead, you can replace with:
+   .topic-thumb{ aspect-ratio: 16 / 9; height: auto; } */
