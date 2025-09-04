@@ -3,51 +3,25 @@ layout: default
 ---
 
 <link rel="stylesheet" href="{{ '/assets/css/theme.css' | relative_url }}">
-<link rel="stylesheet" href="{{ '/assets/css/site.css'  | relative_url }}">
+<script defer src="{{ '/assets/js/theme.js' | relative_url }}"></script>
 
-<section class="article">
-  <div class="container">
+<style>
+  /* Comfortable reading width (approx 75 characters), centered */
+  .post-wrap { max-width: 78ch; margin: 0 auto; padding: 0 20px; }
+  .post-header h1 { margin: 0.4rem 0 0.2rem; }
+  .post-meta { color: #8b949e; margin-bottom: 1.25rem; }
+  .post-content img { max-width: 100%; height: auto; border-radius: 10px; }
+</style>
 
-    <!-- HERO -->
-    <header class="post-hero">
-      <div class="post-lead">
-        {% if page.tags %}
-        <ul class="post-tags" aria-label="Post tags">
-          {% for t in page.tags %}
-            <li><a class="chip" href="{{ '/tag/' | append: t | downcase | append: '/' | relative_url }}">{{ t }}</a></li>
-          {% endfor %}
-        </ul>
-        {% endif %}
-
-        <h1 class="post-title">{{ page.title }}</h1>
-
-        {% if page.excerpt %}
-          <p class="post-desc">{{ page.excerpt | strip_html }}</p>
-        {% endif %}
-
-        <div class="post-byline">
-          {% if page.author_avatar %}
-            <img class="avatar" src="{{ page.author_avatar | relative_url }}" alt="" loading="lazy" decoding="async">
-          {% endif %}
-          <div class="who">
-            <div class="name">{{ page.author | default: site.author.name | default: 'Sab0x1D' }}</div>
-            <div class="date">{{ page.date | date: "%d %B, %Y" }}</div>
-          </div>
-        </div>
-      </div>
-
-      {% assign hero_src = page.hero | default: page.thumb %}
-      {% if hero_src %}
-      <figure class="post-media">
-        <img src="{{ hero_src | relative_url }}" alt="{{ page.title }}" loading="eager" class="hero-img">
-      </figure>
-      {% endif %}
+<article class="post">
+  <div class="post-wrap">
+    <header class="post-header">
+      <h1>{{ page.title }}</h1>
+      {% if page.date %}<p class="post-meta">{{ page.date | date: "%d %b %Y" }}</p>{% endif %}
     </header>
-
-    <!-- BODY -->
-    <article class="post-body">
+    <div class="post-content">
       {{ content }}
-    </article>
-
+      <p style="margin-top:2rem;"><a href="{{ "/" | relative_url }}">⬅ Return to Blog Index</a></p>
+    </div>
   </div>
-</section>
+</article>
