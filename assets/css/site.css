@@ -182,7 +182,13 @@ main.page-content > .wrapper,
 
 /* ===== Pager ===== */
 .pager{ margin: 22px 0; }
-.pager ul{ list-style: none; padding: 0; display: flex; gap: 8px; }
+.pager ul{
+  list-style: none;
+  padding: 0;
+  display: flex;
+  gap: 8px;
+  justify-content: center;   /* ⬅ center horizontally */
+}
 .pager a, .pager span{
   display: inline-block;
   padding: 6px 10px;
