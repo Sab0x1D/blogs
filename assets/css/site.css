@@ -18,8 +18,11 @@
   --shadow: 0 16px 40px rgba(2,10,30,.08);
 
   /* Image area ratios (width / height) */
-  --feat-ar: 4 / 4.5;        /* Featured cards (taller than square) */
-  --prev-ar: 16 / 15;        /* Previous posts (wide) */
+  --feat-ar: 4 / 4.5;        /* kept for reference if needed elsewhere */
+  --prev-ar: 16 / 15;        /* kept for reference if needed elsewhere */
+
+  /* NEW: single media ratio for all cards (shallower = smaller image) */
+  --card-media: 16 / 7;
 }
 
 /* =======================
@@ -121,8 +124,12 @@ main.page-content > .wrapper,
 
 /* image + date pill */
 .card .media{ position: relative; }
-.card--sm .media{ aspect-ratio: var(--feat-ar); }  /* Featured */
-.card--lg .media{ aspect-ratio: var(--prev-ar); }  /* Previous posts */
+
+/* UNIFY media height for ALL card sizes */
+.card--sm .media,
+.card--lg .media{
+  aspect-ratio: var(--card-media) !important;
+}
 
 .card .thumb{
   width: 100%;
@@ -151,16 +158,19 @@ main.page-content > .wrapper,
 
 /* body */
 .card .body{
-  padding: 16px 18px 18px;
+  padding: 18px 20px 20px;
   display: flex;
   flex-direction: column;
-  gap: 8px;
+  gap: 10px;
 }
+
+/* Base title style (toned down) */
 .card .title{
   margin: 0;
-  font-weight: 700;
-  line-height: 1.25;
-  font-size: 18px;          /* Atega-style bump */
+  font-weight: 600;         /* lighter base weight */
+  line-height: 1.3;
+  font-size: 18px;
+  letter-spacing: -0.005em;
   color: var(--text);
 }
 
@@ -195,8 +205,9 @@ main.page-content > .wrapper,
 }
 
 /* Keep the ratios on .media (not the <img>) even if other styles load later. */
-.featured-row .card.card--sm .media{ aspect-ratio: var(--feat-ar) !important; }
-.grid .card.card--lg .media{ aspect-ratio: var(--prev-ar) !important; }
+/* (We now override both to --card-media above, so these remain for safety) */
+.featured-row .card.card--sm .media{ aspect-ratio: var(--card-media) !important; }
+.grid .card.card--lg .media{ aspect-ratio: var(--card-media) !important; }
 
 /* =======================
    Pager
@@ -330,45 +341,28 @@ main.page-content > .wrapper,
 
 
 /* ============================================================
-   PREVIOUS POSTS — Atega-like presentation tweaks
-   (smaller image, bolder title, 3-line excerpt)
-   Place AFTER the final guards so it wins.
+   PREVIOUS POSTS — presentation tweaks
+   (unified image height, toned title, 4-line excerpt)
    ============================================================ */
 
-/* Shorter media area so image uses < half the card height */
-.grid .card.card--lg .media{
-  aspect-ratio: 16 / 7 !important;  /* wider = less tall */
-}
-
-/* Roomier body spacing for text stack */
-.grid .card.card--lg .body{
-  padding: 18px 20px 20px;
-  gap: 10px;
-}
-
-/* Beefier title like the reference card */
+/* Emphasize previous-post titles (but not too bold) */
 .grid .card.card--lg .title{
-  font-size: 22px;
-  font-weight: 800;
+  font-size: 20px;
+  font-weight: 700;
   line-height: 1.35;
   letter-spacing: -0.01em;
 }
 
-/* Three-line excerpt for previous posts */
+/* Four-line excerpt for previous posts */
 .grid .card.card--lg .excerpt{
-  font-size: 15px;
-  line-height: 1.6;
   -webkit-line-clamp: 4;
   line-clamp: 4;
 }
 
-/* Slightly more breathing room above title */
-.grid .card.card--lg .meta{
-  margin-top: 4px;
-}
+/* Slightly more space above the title block */
+.grid .card.card--lg .meta{ margin-top: 4px; }
 
-/* Responsive tune: scale title & image on narrower screens */
+/* Responsive tune */
 @media (max-width: 980px){
-  .grid .card.card--lg .title{ font-size: 20px; }
-  .grid .card.card--lg .media{ aspect-ratio: 16 / 8.5 !important; }
+  .grid .card.card--lg .title{ font-size: 19px; }
 }
