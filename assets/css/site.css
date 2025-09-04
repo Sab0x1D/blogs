@@ -240,3 +240,75 @@ main.page-content > .wrapper,
   border: 1px solid var(--card-border);
   color: var(--text);
 }
+
+/* ===== Atega-style typography & cards ===== */
+
+/* --- Headings / section titles --- */
+.section-title {
+  font-size: 20px;          /* slightly larger */
+  font-weight: 800;         /* bolder for emphasis */
+  letter-spacing: -0.01em;  /* subtle tighten */
+  color: var(--text);
+}
+
+/* --- Card titles --- */
+.card .title {
+  font-size: 18px;          /* larger than before */
+  font-weight: 700;
+  line-height: 1.4;
+  color: var(--text);
+}
+
+/* --- Meta text (dates, tags, etc.) --- */
+.card .meta,
+.card .meta-top,
+.topic-chip {
+  font-size: 13px;          /* Atega uses a touch bigger */
+  font-weight: 500;
+  letter-spacing: 0.01em;
+  color: var(--muted-2);
+}
+
+/* --- Excerpts / descriptions --- */
+.card .excerpt {
+  font-size: 15px;
+  line-height: 1.6;
+  color: var(--muted);
+  -webkit-line-clamp: 2;
+}
+
+/* --- Topic cards (general look) --- */
+.topic-card {
+  border-radius: 20px;       /* smoother corners */
+  overflow: hidden;
+  box-shadow: 0 8px 22px rgba(2,10,30,.06);
+  transition: transform .2s ease, box-shadow .2s ease;
+}
+.topic-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 14px 36px rgba(2,10,30,.12);
+}
+
+/* --- Topic chip overlay --- */
+.topic-chip {
+  font-size: 13px;
+  padding: 6px 12px;
+  background: rgba(255,255,255,.92);
+  border: 1px solid var(--card-border);
+  border-radius: 999px;
+  font-weight: 600;
+  color: var(--text);
+}
+
+/* --- Pager (pagination) --- */
+.pager a, .pager span {
+  font-size: 14px;
+  font-weight: 500;
+  padding: 8px 14px;
+  border-radius: 999px;       /* pill-like buttons */
+  transition: background .15s ease, color .15s ease;
+}
+.pager a:hover {
+  background: var(--text);
+  color: #fff;
+}
