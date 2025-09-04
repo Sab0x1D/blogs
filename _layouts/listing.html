@@ -3,25 +3,51 @@ layout: default
 ---
 
 <link rel="stylesheet" href="{{ '/assets/css/theme.css' | relative_url }}">
-<script defer src="{{ '/assets/js/theme.js' | relative_url }}"></script>
+<link rel="stylesheet" href="{{ '/assets/css/site.css'  | relative_url }}">
 
-<style>
-  /* Comfortable reading width (approx 75 characters), centered */
-  .post-wrap { max-width: 78ch; margin: 0 auto; padding: 0 20px; }
-  .post-header h1 { margin: 0.4rem 0 0.2rem; }
-  .post-meta { color: #8b949e; margin-bottom: 1.25rem; }
-  .post-content img { max-width: 100%; height: auto; border-radius: 10px; }
-</style>
+<section class="home">
+  <div class="container">
 
-<article class="post">
-  <div class="post-wrap">
-    <header class="post-header">
-      <h1>{{ page.title }}</h1>
-      {% if page.date %}<p class="post-meta">{{ page.date | date: "%d %b %Y" }}</p>{% endif %}
+    {%- assign coll = site.listings | sort: 'date' | reverse -%}
+    {%- assign excerpt_limit = site.excerpt_chars | default: 220 -%}
+    {%- assign t = page.tag | downcase -%}
+
+    <!-- Centered title only -->
+    <header class="tag-hero">
+      <h1 class="tag-title">{{ page.title | default: page.tag }}</h1>
     </header>
-    <div class="post-content">
-      {{ content }}
-      <p style="margin-top:2rem;"><a href="{{ "/" | relative_url }}">⬅ Return to Blog Index</a></p>
-    </div>
+
+    {%- comment -%} Check if any posts match this tag (case-insensitive) {%- endcomment -%}
+    {%- assign any = 0 -%}
+    {%- for p in coll -%}
+      {%- if p.tags and (p.tags | join:'|' | downcase) contains t -%}
+        {%- assign any = 1 -%}{%- break -%}
+      {%- endif -%}
+    {%- endfor -%}
+
+    {%- if any == 1 -%}
+      <!-- Same large cards as main "Previous posts" -->
+      <section class="grid" aria-label="Posts for this topic">
+        {%- for p in coll -%}
+          {%- if p.tags and (p.tags | join:'|' | downcase) contains t -%}
+            <a class="card card--lg" href="{{ p.url | relative_url }}">
+              <div class="media">
+                <img class="thumb" src="{{ (p.thumb | default: site.default_thumb) | relative_url }}" alt="{{ p.title }}">
+                <span class="meta-top">{{ p.date | date: "%d %b %Y" }}</span>
+              </div>
+              <div class="body">
+                <h3 class="title">{{ p.title }}</h3>
+                {%- if p.excerpt -%}
+                  <p class="excerpt">{{ p.excerpt | strip_html | truncate: excerpt_limit }}</p>
+                {%- endif -%}
+              </div>
+            </a>
+          {%- endif -%}
+        {%- endfor -%}
+      </section>
+    {%- else -%}
+      <p style="margin:20px 0;color:var(--muted);">No posts for this topic yet.</p>
+    {%- endif -%}
+
   </div>
-</article>
+</section>

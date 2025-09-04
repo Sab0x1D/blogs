@@ -1,4 +1,8 @@
 ---
+author: Sab0x1D
+author_avatar: /assets/img/you.png   # optional
+hero: /assets/img/hero.jpg           # optional (falls back to thumb)
+
 layout: listing
 title: "Impersonating Amazon Chat Support: LiveChat abuse in Phishing Campaigns"
 excerpt: "Abusing LiveChat SaaS + refund lure to harvest emails. Attackers continue to exploit the trust that users place in well-known brands and legitimate SaaS platforms."
