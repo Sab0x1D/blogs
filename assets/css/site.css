@@ -2,25 +2,35 @@
    Design tokens
    ======================= */
 :root{
-  /* Base page width (header/footer); home content gets its own clamp below */
   --container: 1200px;
   --round: 22px;
   --gap: 26px;
 
-  --text: #0f172a;           /* slate-900 (used in titles/hover) */
+  /* Atega-like palette */
+  --text: #0b0f19;          /* stronger title/body */
   --card: #ffffff;
-  --card-border: #e5e7eb;    /* slate-200 */
-  --muted: #6b7280;          /* slate-500 */
-  --muted-2: #94a3b8;        /* slate-400 */
+  --card-border: #e5e7eb;   /* slate-200 */
+  --muted: #6b7280;         /* slate-500 - body muted */
+  --muted-2: #9aa3b2;       /* slightly softer than slate-400 for meta */
 
-  --chip-bg: #f8fafc;        /* slate-50 */
+  --chip-bg: #f8fafc;       /* slate-50 */
   --chip-border: #e5e7eb;
 
   --shadow: 0 16px 40px rgba(2,10,30,.08);
 
   /* Image area ratios (width / height) */
-  --feat-ar: 4 / 3.75;        /* Featured cards (taller than square) */
-  --prev-ar: 16 / 15.5;        /* Previous posts (wide baseline) */
+  --feat-ar: 4 / 3.75;      /* Featured cards */
+  --prev-ar: 16 / 15.5;     /* Previous baseline */
+}
+
+/* Global typography to mirror Atega feel */
+html{
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+body{
+  font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Inter, "Helvetica Neue", Arial, "Noto Sans", "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+  color: var(--text);
 }
 
 /* =======================
@@ -58,21 +68,17 @@ main.page-content > .wrapper,
 .home{ padding: 0; }
 
 /* =======================
-   Section titles
+   Section titles (Atega style)
    ======================= */
 .section-title{
-  /* Default spacing between sections (Atega-like) */
-  margin: 80px 0 28px;
-  /* Atega-ish type */
-  font-size: 20px;
-  font-weight: 800;
-  letter-spacing: -0.01em;
+  margin: 56px 0 22px;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  color: var(--muted);
 }
-
-/* Tighter under the site header on ALL pages */
-.home .section-title:first-of-type{
-  margin-top: 40px;
-}
+.home .section-title:first-of-type{ margin-top: 28px; }
 
 /* =======================
    Featured row (4 across)
@@ -100,7 +106,7 @@ main.page-content > .wrapper,
 @media (max-width:720px){  .grid{ grid-template-columns: 1fr;} }
 
 /* =======================
-   Card (Atega-like)
+   Card
    ======================= */
 .card{
   display: flex;
@@ -123,11 +129,11 @@ main.page-content > .wrapper,
 /* image + date pill */
 .card .media{
   position: relative;
-  display: block;            /* ensure block-level for aspect-ratio to apply */
-  overflow: hidden;          /* clip overflowing image edges */
+  display: block;
+  overflow: hidden;
 }
 .card--sm .media{ aspect-ratio: var(--feat-ar); }  /* Featured */
-.card--lg .media{ aspect-ratio: var(--prev-ar); }  /* Previous posts (baseline) */
+.card--lg .media{ aspect-ratio: var(--prev-ar); }  /* Previous */
 
 .card .thumb{
   width: 100%;
@@ -146,7 +152,7 @@ main.page-content > .wrapper,
   align-items: center;
   gap: 6px;
   font-size: 12px;
-  color: #0f172a;           /* slate-900 */
+  color: #0b0f19;
   padding: 6px 10px;
   border-radius: 999px;
   background: rgba(255,255,255,.78);
@@ -161,18 +167,21 @@ main.page-content > .wrapper,
   flex-direction: column;
   gap: 8px;
 }
+
+/* Titles — darker & heavier like Atega */
 .card .title{
   margin: 0;
-  font-weight: 700;
+  font-weight: 800;         /* stronger */
   line-height: 1.25;
-  font-size: 18px;          /* Atega-style bump */
+  font-size: 18px;          /* featured baseline */
   color: var(--text);
+  letter-spacing: -0.01em;
 }
 
-/* meta + excerpt */
+/* meta + excerpt colors to match Atega softness */
 .card .meta{
   margin-top: 2px;
-  font-size: 13px;          /* Atega slightly bigger */
+  font-size: 13px;
   font-weight: 500;
   letter-spacing: 0.01em;
   color: var(--muted-2);
@@ -180,11 +189,10 @@ main.page-content > .wrapper,
   gap: 6px;
   align-items: center;
 }
-
 .card .excerpt{
   margin: 0;
   color: var(--muted);
-  font-size: 15px;          /* Atega slightly bigger */
+  font-size: 15px;
   line-height: 1.6;
   display: -webkit-box;
   -webkit-box-orient: vertical;
@@ -199,15 +207,15 @@ main.page-content > .wrapper,
   text-decoration: none !important;
 }
 
-/* Keep the ratios on .media (not the <img>) even if other styles load later. */
+/* Keep aspect on wrapper */
 .featured-row .card.card--sm .media{ aspect-ratio: var(--feat-ar) !important; }
 .grid .card.card--lg .media{ aspect-ratio: var(--prev-ar) !important; }
 
 /* =======================
-   Pager
+   Pager (colors aligned)
    ======================= */
 .pager{
-  margin: 60px 0;           /* generous breathing room */
+  margin: 60px 0;
 }
 .pager ul{
   list-style: none;
@@ -218,15 +226,15 @@ main.page-content > .wrapper,
 }
 .pager a, .pager span{
   display: inline-block;
-  padding: 8px 14px;        /* Atega-like pill sizing */
+  padding: 8px 14px;
   border: 1px solid var(--card-border);
-  border-radius: 999px;     /* pill buttons */
+  border-radius: 999px;
   text-decoration: none;
   font-size: 14px;
-  font-weight: 500;
-  transition: background .15s ease, color .15s ease, border-color .15s ease;
+  font-weight: 600;
   color: var(--text);
   background: #fff;
+  transition: background .15s ease, color .15s ease, border-color .15s ease;
 }
 .pager a:hover{
   background: var(--text);
@@ -247,7 +255,7 @@ main.page-content > .wrapper,
   grid-template-columns: repeat(6, minmax(0,1fr));
   gap: var(--gap);
   align-items: stretch;
-  margin-top: 48px;         /* space before topics */
+  margin-top: 48px;
 }
 @media (max-width:1280px){ .topic-grid{ grid-template-columns: repeat(4,1fr);} }
 @media (max-width:980px){  .topic-grid{ grid-template-columns: repeat(3,1fr);} }
@@ -259,7 +267,7 @@ main.page-content > .wrapper,
   padding: 0;
   background: var(--card);
   border: 1px solid var(--card-border);
-  border-radius: 20px;      /* smoother Atega corners */
+  border-radius: 20px;
   box-shadow: 0 8px 22px rgba(2,10,30,.06);
   transition: transform .2s ease, box-shadow .2s ease, border-color .16s ease;
 }
@@ -287,8 +295,6 @@ main.page-content > .wrapper,
   object-fit: cover;
   display: block;
 }
-
-/* Subtle gradient overlay to help chip contrast */
 .topic-thumb::after{
   content:"";
   position:absolute; inset:0;
@@ -304,8 +310,8 @@ main.page-content > .wrapper,
   display: inline-flex;
   align-items: center;
   gap: 6px;
-  font-size: 13px;          /* Atega-ish */
-  font-weight: 600;
+  font-size: 13px;
+  font-weight: 700;
   letter-spacing: 0.01em;
   padding: 6px 12px;
   color: var(--text);
@@ -316,14 +322,14 @@ main.page-content > .wrapper,
   backdrop-filter: blur(4px);
 }
 
-/* Keyboard focus (a11y) */
+/* Keyboard focus */
 .topic-card:focus-visible{
   outline: 2px solid var(--link, #0b57d0);
   outline-offset: 3px;
   border-radius: 22px;
 }
 
-/* Respect users who prefer reduced motion */
+/* Reduced motion */
 @media (prefers-reduced-motion: reduce){
   .card,
   .card:hover,
@@ -335,44 +341,37 @@ main.page-content > .wrapper,
 }
 
 /* ============================================================
-   PREVIOUS POSTS — refined presentation
-   (consistent, smaller media; toned title; 4-line excerpt)
+   PREVIOUS POSTS — title scale + clamp like Atega
    ============================================================ */
-
 .grid .card.card--lg .media{
-  /* Shallower banner so the image uses ~half (or less) of the card */
-  aspect-ratio: 16 / 12 !important;
+  aspect-ratio: 16 / 12 !important; /* your chosen depth */
 }
-
 .grid .card.card--lg .body{
   padding: 18px 20px 20px;
   gap: 10px;
-  /* Gentle stability so rows line up even with meta/excerpt variance */
   min-height: 210px;
 }
-
 .grid .card.card--lg .title{
-  /* Less shouty than before */
-  font-size: 20px;
-  font-weight: 700;
-  line-height: 1.35;
+  font-size: 22px;          /* larger like Atega */
+  font-weight: 800;
+  line-height: 1.3;
   letter-spacing: -0.01em;
+  color: var(--text);
 }
-
 .grid .card.card--lg .excerpt{
-  /* 4 visible lines like the reference */
   font-size: 15px;
   line-height: 1.6;
+  color: var(--muted);
   -webkit-line-clamp: 4;
   line-clamp: 4;
 }
-
 .grid .card.card--lg .meta{
   margin-top: 4px;
+  color: var(--muted-2);
 }
 
 /* Responsive tweak */
 @media (max-width: 980px){
-  .grid .card.card--lg .title{ font-size: 19px; }
+  .grid .card.card--lg .title{ font-size: 20px; }
   .grid .card.card--lg .media{ aspect-ratio: 16 / 9 !important; }
 }
