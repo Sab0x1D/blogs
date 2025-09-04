@@ -4,6 +4,8 @@ title: "Impersonating Amazon Chat Support: LiveChat abuse in Phishing Campaigns"
 excerpt: "Abusing LiveChat SaaS + refund lure to harvest emails."
 thumb: assets/img/amz_thumb.webp
 date: 2025-09-02
+featured: false
+tags: [Phish]
 ---
 
 Attackers continue to exploit the trust that users place in well-known brands and legitimate SaaS platforms. In this case study, we look at a phishing campaign that attempted to impersonate **Amazon Customer Support** by abusing the **LiveChat service** — a popular SaaS tool that companies often use for genuine customer engagement.
