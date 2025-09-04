@@ -52,6 +52,14 @@ permalink: /
             {%- if p.excerpt -%}
               <p class="excerpt">{{ p.excerpt | strip_html | truncate: 150 }}</p>
             {%- endif -%}
+
+            {%- if p.tags and p.tags.size > 0 -%}
+              <div class="meta">
+                {%- for tag in p.tags limit:3 -%}
+                  <a class="chip" href="{{ '/tag/' | append: tag | slugify | append: '/' | relative_url }}">{{ tag }}</a>
+                {%- endfor -%}
+              </div>
+            {%- endif -%}
           </div>
         </a>
       {%- endfor -%}
