@@ -19,7 +19,7 @@
   --shadow: 0 16px 40px rgba(2,10,30,.08);
 
   /* Image area ratios (width / height) */
-  --feat-ar: 4 / 4.5;        /* Featured cards (taller than square) */
+  --feat-ar: 4 / 5;        /* Featured cards (taller than square) */
   --prev-ar: 16 / 15.5;        /* Previous posts (wide baseline) */
 }
 
