@@ -219,41 +219,53 @@ main.page-content > .wrapper,
 @media (max-width: 720px){  .topic-grid{ grid-template-columns: repeat(2,1fr); } }
 @media (max-width: 480px){  .topic-grid{ grid-template-columns: 1fr; } }
 
-/* compact topic card */
+/* compact topic card - chip on image */
 .topic-card{
-  display:flex;
-  align-items:center;
-  gap:12px;
-  padding:12px;
+  display:block;
+  padding:0;
   border:1px solid var(--card-border);
-  border-radius: 16px;
+  border-radius:22px;
   background: var(--card);
   text-decoration:none;
   transition: transform .16s ease, box-shadow .16s ease, border-color .16s ease;
-  min-height: 72px;
+  box-shadow: 0 6px 24px rgba(2,10,30,.08);
 }
 .topic-card:hover{
   transform: translateY(-2px);
-  box-shadow: var(--shadow);
+  box-shadow: 0 12px 34px rgba(2,10,30,.12);
   border-color: rgba(15,23,42,.15);
 }
 
-/* optional tiny thumbnail (if used) */
+/* image tile */
 .topic-thumb{
-  width: 84px;
-  height: 56px;
-  border-radius: 14px;
-  overflow: hidden;
-  flex: 0 0 auto;
-  background: #f1f5f9;
+  position:relative;
+  width:100%;
+  height:90px;
+  border-radius:18px;
+  overflow:hidden;
+  background:#f1f5f9;
+}
+@media (min-width:981px){
+  .topic-thumb{ height:110px; }
 }
 .topic-thumb img{
   width:100%; height:100%; object-fit:cover; display:block;
 }
 
-/* text block */
-.topic-meta{ display:flex; flex-direction:column; gap:6px; }
+/* overlay chip */
+.topic-chip{
+  position:absolute; left:10px; bottom:10px;
+  display:inline-flex; align-items:center; gap:6px;
+  font-size:12px;
+  padding:6px 10px;
+  border-radius:999px;
+  background: rgba(255,255,255,.9);
+  border: 1px solid var(--card-border);
+  color: var(--text);
+}
 
+/* (legacy helpers if you keep text blocks) */
+.topic-meta{ display:flex; flex-direction:column; gap:6px; }
 .topic-label{
   display:inline-block;
   font-size:12px;
