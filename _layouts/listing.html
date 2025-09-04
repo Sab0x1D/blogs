@@ -5,49 +5,49 @@ layout: default
 <link rel="stylesheet" href="{{ '/assets/css/theme.css' | relative_url }}">
 <link rel="stylesheet" href="{{ '/assets/css/site.css'  | relative_url }}">
 
-<section class="home">
+<section class="article">
   <div class="container">
 
-    {%- assign coll = site.listings | sort: 'date' | reverse -%}
-    {%- assign excerpt_limit = site.excerpt_chars | default: 220 -%}
-    {%- assign t = page.tag | downcase -%}
+    <!-- HERO -->
+    <header class="post-hero">
+      <div class="post-lead">
+        {% if page.tags %}
+        <ul class="post-tags" aria-label="Post tags">
+          {% for t in page.tags %}
+            <li><a class="chip" href="{{ '/tag/' | append: t | downcase | append: '/' | relative_url }}">{{ t }}</a></li>
+          {% endfor %}
+        </ul>
+        {% endif %}
 
-    <!-- Centered title only -->
-    <header class="tag-hero">
-      <h1 class="tag-title">{{ page.title | default: page.tag }}</h1>
+        <h1 class="post-title">{{ page.title }}</h1>
+
+        {% if page.excerpt %}
+          <p class="post-desc">{{ page.excerpt | strip_html }}</p>
+        {% endif %}
+
+        <div class="post-byline">
+          {% if page.author_avatar %}
+            <img class="avatar" src="{{ page.author_avatar | relative_url }}" alt="" loading="lazy" decoding="async">
+          {% endif %}
+          <div class="who">
+            <div class="name">{{ page.author | default: site.author.name | default: 'Sab0x1D' }}</div>
+            <div class="date">{{ page.date | date: "%d %B, %Y" }}</div>
+          </div>
+        </div>
+      </div>
+
+      {% assign hero_src = page.hero | default: page.thumb %}
+      {% if hero_src %}
+      <figure class="post-media">
+        <img src="{{ hero_src | relative_url }}" alt="{{ page.title }}" loading="eager" class="hero-img">
+      </figure>
+      {% endif %}
     </header>
 
-    {%- comment -%} Check if any posts match this tag (case-insensitive) {%- endcomment -%}
-    {%- assign any = 0 -%}
-    {%- for p in coll -%}
-      {%- if p.tags and (p.tags | join:'|' | downcase) contains t -%}
-        {%- assign any = 1 -%}{%- break -%}
-      {%- endif -%}
-    {%- endfor -%}
-
-    {%- if any == 1 -%}
-      <!-- Same large cards as main "Previous posts" -->
-      <section class="grid" aria-label="Posts for this topic">
-        {%- for p in coll -%}
-          {%- if p.tags and (p.tags | join:'|' | downcase) contains t -%}
-            <a class="card card--lg" href="{{ p.url | relative_url }}">
-              <div class="media">
-                <img class="thumb" src="{{ (p.thumb | default: site.default_thumb) | relative_url }}" alt="{{ p.title }}">
-                <span class="meta-top">{{ p.date | date: "%d %b %Y" }}</span>
-              </div>
-              <div class="body">
-                <h3 class="title">{{ p.title }}</h3>
-                {%- if p.excerpt -%}
-                  <p class="excerpt">{{ p.excerpt | strip_html | truncate: excerpt_limit }}</p>
-                {%- endif -%}
-              </div>
-            </a>
-          {%- endif -%}
-        {%- endfor -%}
-      </section>
-    {%- else -%}
-      <p style="margin:20px 0;color:var(--muted);">No posts for this topic yet.</p>
-    {%- endif -%}
+    <!-- BODY -->
+    <article class="post-body">
+      {{ content }}
+    </article>
 
   </div>
 </section>

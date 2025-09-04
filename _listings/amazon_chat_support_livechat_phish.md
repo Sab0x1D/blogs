@@ -1,7 +1,6 @@
 ---
 author: Sab0x1D
-author_avatar: /assets/img/you.png   # optional
-hero: /assets/img/hero.jpg           # optional (falls back to thumb)
+author_avatar: /assets/img/sab01xd-profile.jpg
 
 layout: listing
 title: "Impersonating Amazon Chat Support: LiveChat abuse in Phishing Campaigns"
