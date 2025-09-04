@@ -13,17 +13,51 @@ permalink: /page/2/
 <section class="home">
   <div class="container">
 
-    <!-- Previous Posts FIRST -->
-    <h2 class="section-title">Previous posts (Page 2)</h2>
-
-    <div style="display:grid;place-items:center;padding:60px 0;">
+    <!-- Previous posts placeholder (no heading) -->
+    <div style="display:grid;place-items:center;padding:60px 0 24px;">
       <img src="{{ '/assets/img/404image.png' | relative_url }}" alt="Coming soon"
            style="max-width:520px;height:auto;border-radius:18px;">
       <p style="margin:20px 0 8px;color:#6b7280;font-size:16px;">Content for page 2 coming soon.</p>
       <p><a href="{{ '/' | relative_url }}">← Back to main page</a></p>
     </div>
 
-    <!-- Popular Topics -->
+    <!-- Pagination (centered, between posts and topics) -->
+    {%- assign total_pages = 3 -%}
+    {%- assign current = page.page_num | plus: 0 -%}
+    {%- assign prev_num = current | minus: 1 -%}
+    {%- assign next_num = current | plus: 1 -%}
+    {%- assign prev_href = '' -%}
+    {%- if prev_num == 1 -%}
+      {%- assign prev_href = '/' | relative_url -%}
+    {%- elsif prev_num > 1 -%}
+      {%- assign prev_href = '/page/' | append: prev_num | append: '/' | relative_url -%}
+    {%- endif -%}
+    {%- assign next_href = '' -%}
+    {%- if next_num <= total_pages -%}
+      {%- assign next_href = '/page/' | append: next_num | append: '/' | relative_url -%}
+    {%- endif -%}
+
+    <nav class="pager" aria-label="Pagination">
+      <ul>
+        <li>
+          {%- if prev_href != '' -%}
+            <a href="{{ prev_href }}">‹ Prev</a>
+          {%- else -%}
+            <span>‹ Prev</span>
+          {%- endif -%}
+        </li>
+        <li><span>Page {{ current }} of {{ total_pages }}</span></li>
+        <li>
+          {%- if next_href != '' -%}
+            <a href="{{ next_href }}">Next ›</a>
+          {%- else -%}
+            <span>Next ›</span>
+          {%- endif -%}
+        </li>
+      </ul>
+    </nav>
+
+    <!-- Popular topics -->
     <h2 class="section-title">Popular topics</h2>
     <div class="topic-grid">
       <a class="topic-card" href="{{ '/tag/malware/' | relative_url }}">
@@ -63,42 +97,6 @@ permalink: /page/2/
         </div>
       </a>
     </div>
-
-    <!-- Pagination -->
-    {%- assign total_pages = 3 -%}
-    {%- assign current = page.page_num | plus: 0 -%}
-    {%- assign prev_num = current | minus: 1 -%}
-    {%- assign next_num = current | plus: 1 -%}
-    {%- assign prev_href = '' -%}
-    {%- if prev_num == 1 -%}
-      {%- assign prev_href = '/' | relative_url -%}
-    {%- elsif prev_num > 1 -%}
-      {%- assign prev_href = '/page/' | append: prev_num | append: '/' | relative_url -%}
-    {%- endif -%}
-    {%- assign next_href = '' -%}
-    {%- if next_num <= total_pages -%}
-      {%- assign next_href = '/page/' | append: next_num | append: '/' | relative_url -%}
-    {%- endif -%}
-
-    <nav class="pager" aria-label="Pagination">
-      <ul>
-        <li>
-          {%- if prev_href != '' -%}
-            <a href="{{ prev_href }}">‹ Prev</a>
-          {%- else -%}
-            <span>‹ Prev</span>
-          {%- endif -%}
-        </li>
-        <li><span>Page {{ current }} of {{ total_pages }}</span></li>
-        <li>
-          {%- if next_href != '' -%}
-            <a href="{{ next_href }}">Next ›</a>
-          {%- else -%}
-            <span>Next ›</span>
-          {%- endif -%}
-        </li>
-      </ul>
-    </nav>
 
   </div>
 </section>
