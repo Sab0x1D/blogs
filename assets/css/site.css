@@ -23,13 +23,16 @@
   --prev-ar: 16 / 15.5;     /* Previous baseline */
 }
 
-/* Global typography to mirror Atega feel */
+/* =======================
+   Global typography
+   ======================= */
 html{
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
+
 body{
-  font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Inter, "Helvetica Neue", Arial, "Noto Sans", "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+  font-family: 'Inter', ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, "Helvetica Neue", Arial, "Noto Sans", "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
   color: var(--text);
 }
 
@@ -77,6 +80,7 @@ main.page-content > .wrapper,
   letter-spacing: .12em;
   text-transform: uppercase;
   color: var(--muted);
+  font-family: 'Inter', sans-serif;
 }
 .home .section-title:first-of-type{ margin-top: 28px; }
 
@@ -158,6 +162,7 @@ main.page-content > .wrapper,
   background: rgba(255,255,255,.78);
   backdrop-filter: blur(6px);
   border: 1px solid var(--card-border);
+  font-family: 'Inter', sans-serif;
 }
 
 /* body */
@@ -168,17 +173,18 @@ main.page-content > .wrapper,
   gap: 8px;
 }
 
-/* Titles — darker & heavier like Atega */
+/* Titles — explicitly Inter */
 .card .title{
   margin: 0;
-  font-weight: 800;         /* stronger */
+  font-weight: 800;
   line-height: 1.25;
-  font-size: 18px;          /* featured baseline */
+  font-size: 18px;
   color: var(--text);
   letter-spacing: -0.01em;
+  font-family: 'Inter', sans-serif;
 }
 
-/* meta + excerpt colors to match Atega softness */
+/* meta + excerpt */
 .card .meta{
   margin-top: 2px;
   font-size: 13px;
@@ -188,6 +194,7 @@ main.page-content > .wrapper,
   display: flex;
   gap: 6px;
   align-items: center;
+  font-family: 'Inter', sans-serif;
 }
 .card .excerpt{
   margin: 0;
@@ -199,6 +206,7 @@ main.page-content > .wrapper,
   overflow: hidden;
   -webkit-line-clamp: 2;
   line-clamp: 2;
+  font-family: 'Inter', sans-serif;
 }
 
 /* Never underline anything inside cards */
@@ -212,7 +220,7 @@ main.page-content > .wrapper,
 .grid .card.card--lg .media{ aspect-ratio: var(--prev-ar) !important; }
 
 /* =======================
-   Pager (colors aligned)
+   Pager
    ======================= */
 .pager{
   margin: 60px 0;
@@ -235,6 +243,7 @@ main.page-content > .wrapper,
   color: var(--text);
   background: #fff;
   transition: background .15s ease, color .15s ease, border-color .15s ease;
+  font-family: 'Inter', sans-serif;
 }
 .pager a:hover{
   background: var(--text);
@@ -270,6 +279,7 @@ main.page-content > .wrapper,
   border-radius: 20px;
   box-shadow: 0 8px 22px rgba(2,10,30,.06);
   transition: transform .2s ease, box-shadow .2s ease, border-color .16s ease;
+  font-family: 'Inter', sans-serif;
 }
 .topic-card:hover{
   transform: translateY(-4px);
@@ -320,6 +330,7 @@ main.page-content > .wrapper,
   border-radius: 999px;
   box-shadow: 0 6px 16px rgba(2,10,30,.15);
   backdrop-filter: blur(4px);
+  font-family: 'Inter', sans-serif;
 }
 
 /* Keyboard focus */
@@ -344,7 +355,7 @@ main.page-content > .wrapper,
    PREVIOUS POSTS — title scale + clamp like Atega
    ============================================================ */
 .grid .card.card--lg .media{
-  aspect-ratio: 16 / 12 !important; /* your chosen depth */
+  aspect-ratio: 16 / 12 !important;
 }
 .grid .card.card--lg .body{
   padding: 18px 20px 20px;
@@ -352,11 +363,12 @@ main.page-content > .wrapper,
   min-height: 210px;
 }
 .grid .card.card--lg .title{
-  font-size: 22px;          /* larger like Atega */
+  font-size: 22px;
   font-weight: 800;
   line-height: 1.3;
   letter-spacing: -0.01em;
   color: var(--text);
+  font-family: 'Inter', sans-serif;
 }
 .grid .card.card--lg .excerpt{
   font-size: 15px;
@@ -364,10 +376,12 @@ main.page-content > .wrapper,
   color: var(--muted);
   -webkit-line-clamp: 4;
   line-clamp: 4;
+  font-family: 'Inter', sans-serif;
 }
 .grid .card.card--lg .meta{
   margin-top: 4px;
   color: var(--muted-2);
+  font-family: 'Inter', sans-serif;
 }
 
 /* Responsive tweak */
