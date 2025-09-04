@@ -1,6 +1,6 @@
 ---
 layout: default
-title: Blog
+title: Blog — Page 3
 page_num: 3
 permalink: /page/3/
 ---
@@ -12,8 +12,21 @@ permalink: /page/3/
 
 <section class="home">
   <div class="container">
-    <h2 class="section-title">Previous posts (Page 3)</h2>
 
+    <!-- Popular Topics (no Featured Posts on page >=2) -->
+    <h2 class="section-title">Popular Topics</h2>
+    <div class="topic-grid">
+      <a class="topic-card" href="{{ '/tag/malware/' | relative_url }}"><div class="topic-label">#Malware</div><p>Analysis & case studies</p></a>
+      <a class="topic-card" href="{{ '/tag/scam/'    | relative_url }}"><div class="topic-label">#Scam</div><p>Consumer & business scams</p></a>
+      <a class="topic-card" href="{{ '/tag/phish/'   | relative_url }}"><div class="topic-label">#Phish</div><p>Phishing breakdowns & tips</p></a>
+      <a class="topic-card" href="{{ '/tag/osint/'   | relative_url }}"><div class="topic-label">#OSINT</div><p>Open-source intel tooling</p></a>
+      <a class="topic-card" href="{{ '/tag/tools/'   | relative_url }}"><div class="topic-label">#Tools</div><p>Utilities, scripts, workflows</p></a>
+      <a class="topic-card" href="{{ '/tag/guides/'  | relative_url }}"><div class="topic-label">#Guides</div><p>How-tos & walkthroughs</p></a>
+    </div>
+
+    <h2 class="section-title" style="margin-top:32px;">Previous posts (Page 3)</h2>
+
+    <!-- Placeholder content until you have 6 posts for page 3 -->
     <div style="display:grid;place-items:center;padding:40px 0;">
       <img src="{{ '/assets/img/404image.png' | relative_url }}" alt="Coming soon" style="max-width:360px;height:auto;border-radius:12px;">
       <p style="margin:14px 0 6px;color:#6b7280;">Content for page 3 coming soon.</p>
@@ -30,6 +43,10 @@ permalink: /page/3/
     {%- elsif prev_num > 1 -%}
       {%- assign prev_href = '/page/' | append: prev_num | append: '/' | relative_url -%}
     {%- endif -%}
+    {%- assign next_href = '' -%}
+    {%- if next_num <= total_pages -%}
+      {%- assign next_href = '/page/' | append: next_num | append: '/' | relative_url -%}
+    {%- endif -%}
 
     <nav class="pager" aria-label="Pagination">
       <ul>
@@ -41,7 +58,13 @@ permalink: /page/3/
           {%- endif -%}
         </li>
         <li><span>Page {{ current }} of {{ total_pages }}</span></li>
-        <li><span>Next ›</span></li>
+        <li>
+          {%- if next_href != '' -%}
+            <a href="{{ next_href }}">Next ›</a>
+          {%- else -%}
+            <span>Next ›</span>
+          {%- endif -%}
+        </li>
       </ul>
     </nav>
   </div>
