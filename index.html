@@ -30,7 +30,7 @@ permalink: /
       {%- endfor -%}
     </section>
 
-    <!-- Previous posts: everything after the first 4, paginated -->
+    <!-- Previous posts: everything after the first 4, paginated (6 per page) -->
     <h2 class="section-title">Previous posts</h2>
 
     {%- assign page_size      = 6 -%}
@@ -56,23 +56,67 @@ permalink: /
       {%- endfor -%}
     </section>
 
-    {%- assign total_pages = (previous_total | plus: page_size | minus: 1) | divided_by: page_size -%}
-    {%- if total_pages > 1 -%}
+    {%- comment -%}
+      TEMP: lock to 3 pages so pager shows “Page 1 of 3” until real content exists.
+      When ready, delete the next line and use a computed total_pages.
+    {%- endcomment -%}
+    {%- assign total_pages = 3 -%}
+
+    {%- assign current = page.page_num | plus: 0 -%}
+    {%- assign prev_num = current | minus: 1 -%}
+    {%- assign next_num = current | plus: 1 -%}
+
+    {%- if total_pages > 0 -%}
+      {%- assign prev_href = '' -%}
+      {%- if prev_num == 1 -%}
+        {%- assign prev_href = '/' | relative_url -%}
+      {%- elsif prev_num > 1 -%}
+        {%- assign prev_href = '/page/' | append: prev_num | append: '/' | relative_url -%}
+      {%- endif -%}
+
+      {%- assign next_href = '' -%}
+      {%- if next_num == 1 -%}
+        {%- assign next_href = '/' | relative_url -%}
+      {%- elsif next_num <= total_pages -%}
+        {%- assign next_href = '/page/' | append: next_num | append: '/' | relative_url -%}
+      {%- endif -%}
+
       <nav class="pager" aria-label="Pagination">
         <ul>
-          {%- for i in (1..total_pages) -%}
-            {%- if i == page.page_num -%}
-              <li class="active"><span>{{ i }}</span></li>
+          <li>
+            {%- if prev_href != '' -%}
+              <a href="{{ prev_href }}">‹ Prev</a>
             {%- else -%}
-              <li>
-                <a href="{% if i == 1 %}{{ '/' | relative_url }}{% else %}{{ '/page/' | append: i | append: '/' | relative_url }}{% endif %}">
-                  {{ i }}
-                </a>
-              </li>
+              <span>‹ Prev</span>
             {%- endif -%}
-          {%- endfor -%}
+          </li>
+          <li><span>Page {{ current }} of {{ total_pages }}</span></li>
+          <li>
+            {%- if next_href != '' -%}
+              <a href="{{ next_href }}">Next ›</a>
+            {%- else -%}
+              <span>Next ›</span>
+            {%- endif -%}
+          </li>
         </ul>
       </nav>
     {%- endif -%}
+
+    <!-- Popular topics (starter row; swap thumbs/links when ready) -->
+    <h2 class="section-title">Popular topics</h2>
+    <section class="featured-row" aria-label="Popular topics">
+      {%- assign topics = 
+        "Malware,Phish,Scam,Ransomware,OSINT,Social Engineering" | split: "," -%}
+      {%- for t in topics -%}
+        <a class="card card--sm" href="{{ '/tag/' | append: t | downcase | replace: ' ', '-' | relative_url }}">
+          <div class="media">
+            <img class="thumb" src="{{ '/assets/img/404image.png' | relative_url }}" alt="{{ t }}">
+          </div>
+          <div class="body">
+            <h3 class="title">{{ t }}</h3>
+          </div>
+        </a>
+      {%- endfor -%}
+    </section>
   </div>
 </section>
