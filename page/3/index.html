@@ -13,48 +13,18 @@ permalink: /page/3/
 
 <section class="home">
   <div class="container">
-    {%- assign coll = site.listings | sort: 'date' | reverse -%}
-    {%- assign page_size = 6 -%}
-    {%- assign featured_count = 4 -%}
-    {%- assign current = page.page_num | plus: 0 -%}
-    {%- assign skip = featured_count | plus: page_size | times: current | minus: page_size -%}
 
-    {%- if coll.size > skip -%}
-      <h2 class="section-title">PREVIOUS POSTS</h2>
-      <section class="grid" aria-label="Previous posts">
-        {%- for p in coll offset: skip limit: page_size -%}
-          <a class="card card--lg" href="{{ p.url | relative_url }}">
-            <div class="media">
-              <img class="thumb" src="{{ (p.thumb | default: site.default_thumb) | relative_url }}" alt="{{ p.title }}">
-              <span class="meta-top">{{ p.date | date: "%d %b %Y" }}</span>
-            </div>
-            <div class="body">
-              <h3 class="title">{{ p.title }}</h3>
-              {%- if p.excerpt -%}
-                <p class="excerpt">{{ p.excerpt | strip_html | truncate: 240 }}</p>
-              {%- endif -%}
-              {%- if p.tags and p.tags.size > 0 -%}
-                <div class="meta">
-                  {%- for tag in p.tags limit:3 -%}
-                    <a class="chip" href="{{ '/tag/' | append: tag | slugify | append: '/' | relative_url }}">{{ tag }}</a>
-                  {%- endfor -%}
-                </div>
-              {%- endif -%}
-            </div>
-          </a>
-        {%- endfor -%}
-      </section>
-    {%- else -%}
-      <!-- Placeholder when there aren't enough posts yet -->
-      <div style="display:grid;place-items:center;padding:60px 0 24px;">
-        <img src="{{ '/assets/img/404image.png' | relative_url }}" alt="Coming soon"
-             style="max-width:520px;height:auto;border-radius:18px;">
-        <p style="margin:20px 0 8px;color:#6b7280;font-size:16px;">Content for page 3 coming soon.</p>
-        <p><a href="{{ '/' | relative_url }}">← Back to main page</a></p>
-      </div>
-    {%- endif -%}
+    <!-- Previous posts placeholder (no heading) -->
+    <div style="display:grid;place-items:center;padding:60px 0 24px;">
+      <img src="{{ '/assets/img/404image.png' | relative_url }}" alt="Coming soon"
+           style="max-width:520px;height:auto;border-radius:18px;">
+      <p style="margin:20px 0 8px;color:#6b7280;font-size:16px;">Content for page 3 coming soon.</p>
+      <p><a href="{{ '/' | relative_url }}">← Back to main page</a></p>
+    </div>
 
+    <!-- Pagination (centered, between posts and topics) -->
     {%- assign total_pages = 3 -%}
+    {%- assign current = page.page_num | plus: 0 -%}
     {%- assign prev_num = current | minus: 1 -%}
     {%- assign next_num = current | plus: 1 -%}
     {%- assign prev_href = '' -%}
@@ -70,51 +40,81 @@ permalink: /page/3/
 
     <nav class="pager" aria-label="Pagination">
       <ul>
-        <li>{% if prev_href != '' %}<a href="{{ prev_href }}">‹ Prev</a>{% else %}<span>‹ Prev</span>{% endif %}</li>
+        <li>
+          {%- if prev_href != '' -%}
+            <a href="{{ prev_href }}">‹ Prev</a>
+          {%- else -%}
+            <span>‹ Prev</span>
+          {%- endif -%}
+        </li>
         <li><span>Page {{ current }} of {{ total_pages }}</span></li>
-        <li>{% if next_href != '' %}<a href="{{ next_href }}">Next ›</a>{% else %}<span>Next ›</span>{% endif %}</li>
+        <li>
+          {%- if next_href != '' -%}
+            <a href="{{ next_href }}">Next ›</a>
+          {%- else -%}
+            <span>Next ›</span>
+          {%- endif -%}
+        </li>
       </ul>
     </nav>
 
-    <!-- Popular topics -->
-    <h2 class="section-title">POPULAR TOPICS</h2>
+    <!-- Popular topics (starter row; swap thumbs/links when ready) -->
+    <h2 class="section-title">Popular topics</h2>
     <div class="topic-grid">
       <a class="topic-card" href="{{ '/tag/malware/' | relative_url }}">
         <div class="topic-thumb">
-          <img src="{{ '/assets/img/malware.png' | relative_url }}" alt="Malware" loading="lazy" decoding="async" fetchpriority="low">
+          <img src="{{ '/assets/img/malware.png' | relative_url }}"
+              alt="Malware"
+              loading="lazy" decoding="async" fetchpriority="low">
           <span class="topic-chip">Malware</span>
         </div>
       </a>
+
       <a class="topic-card" href="{{ '/tag/ransomware/' | relative_url }}">
         <div class="topic-thumb">
-          <img src="{{ '/assets/img/ransomware.avif' | relative_url }}" alt="Ransomware" loading="lazy" decoding="async" fetchpriority="low">
+          <img src="{{ '/assets/img/ransomware.avif' | relative_url }}"
+              alt="Ransomware"
+              loading="lazy" decoding="async" fetchpriority="low">
           <span class="topic-chip">Ransomware</span>
         </div>
       </a>
+
       <a class="topic-card" href="{{ '/tag/phish/' | relative_url }}">
         <div class="topic-thumb">
-          <img src="{{ '/assets/img/phishing.jpg' | relative_url }}" alt="Phishing" loading="lazy" decoding="async" fetchpriority="low">
+          <img src="{{ '/assets/img/phishing.jpg' | relative_url }}"
+              alt="Phishing"
+              loading="lazy" decoding="async" fetchpriority="low">
           <span class="topic-chip">Phish</span>
         </div>
       </a>
+
       <a class="topic-card" href="{{ '/tag/scam/' | relative_url }}">
         <div class="topic-thumb">
-          <img src="{{ '/assets/img/scam.jpg' | relative_url }}" alt="Scams" loading="lazy" decoding="async" fetchpriority="low">
+          <img src="{{ '/assets/img/scam.jpg' | relative_url }}"
+              alt="Scams"
+              loading="lazy" decoding="async" fetchpriority="low">
           <span class="topic-chip">Scam</span>
         </div>
       </a>
+
       <a class="topic-card" href="{{ '/tag/osint/' | relative_url }}">
         <div class="topic-thumb">
-          <img src="{{ '/assets/img/osint.jpg' | relative_url }}" alt="OSINT" loading="lazy" decoding="async" fetchpriority="low">
+          <img src="{{ '/assets/img/osint.jpg' | relative_url }}"
+              alt="OSINT"
+              loading="lazy" decoding="async" fetchpriority="low">
           <span class="topic-chip">Osint</span>
         </div>
       </a>
+
       <a class="topic-card" href="{{ '/tag/tools/' | relative_url }}">
         <div class="topic-thumb">
-          <img src="{{ '/assets/img/tools.webp' | relative_url }}" alt="Security tools" loading="lazy" decoding="async" fetchpriority="low">
+          <img src="{{ '/assets/img/tools.webp' | relative_url }}"
+              alt="Security tools"
+              loading="lazy" decoding="async" fetchpriority="low">
           <span class="topic-chip">Tools</span>
         </div>
       </a>
     </div>
+
   </div>
 </section>
