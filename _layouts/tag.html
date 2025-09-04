@@ -10,18 +10,28 @@ layout: default
 
     {%- assign coll = site.listings | sort: 'date' | reverse -%}
     {%- assign excerpt_limit = site.excerpt_chars | default: 220 -%}
-    {%- assign t = page.tag | downcase -%}
+    {%- assign t = page.tag | downcase | strip -%}
 
     <!-- Centered title only -->
     <header class="tag-hero">
       <h1 class="tag-title">{{ page.title | default: page.tag }}</h1>
     </header>
 
-    {%- comment -%} Check if any posts match this tag (case-insensitive) {%- endcomment -%}
+    {%- comment -%}
+      Check if any posts match this tag (case-insensitive, exact match).
+      Posts with empty/missing tags are ignored.
+    {%- endcomment -%}
     {%- assign any = 0 -%}
     {%- for p in coll -%}
-      {%- if p.tags and (p.tags | join:'|' | downcase) contains t -%}
-        {%- assign any = 1 -%}{%- break -%}
+      {%- if p.tags and p.tags.size > 0 -%}
+        {%- assign matched = 0 -%}
+        {%- for tg in p.tags -%}
+          {%- assign tg_norm = tg | to_s | downcase | strip -%}
+          {%- if tg_norm != '' and tg_norm == t -%}
+            {%- assign matched = 1 -%}{%- break -%}
+          {%- endif -%}
+        {%- endfor -%}
+        {%- if matched == 1 -%}{%- assign any = 1 -%}{%- break -%}{%- endif -%}
       {%- endif -%}
     {%- endfor -%}
 
@@ -29,19 +39,29 @@ layout: default
       <!-- Same large cards as main "Previous posts" -->
       <section class="grid" aria-label="Posts for this topic">
         {%- for p in coll -%}
-          {%- if p.tags and (p.tags | join:'|' | downcase) contains t -%}
-            <a class="card card--lg" href="{{ p.url | relative_url }}">
-              <div class="media">
-                <img class="thumb" src="{{ (p.thumb | default: site.default_thumb) | relative_url }}" alt="{{ p.title }}">
-                <span class="meta-top">{{ p.date | date: "%d %b %Y" }}</span>
-              </div>
-              <div class="body">
-                <h3 class="title">{{ p.title }}</h3>
-                {%- if p.excerpt -%}
-                  <p class="excerpt">{{ p.excerpt | strip_html | truncate: excerpt_limit }}</p>
-                {%- endif -%}
-              </div>
-            </a>
+          {%- if p.tags and p.tags.size > 0 -%}
+            {%- assign matched = 0 -%}
+            {%- for tg in p.tags -%}
+              {%- assign tg_norm = tg | to_s | downcase | strip -%}
+              {%- if tg_norm != '' and tg_norm == t -%}
+                {%- assign matched = 1 -%}{%- break -%}
+              {%- endif -%}
+            {%- endfor -%}
+
+            {%- if matched == 1 -%}
+              <a class="card card--lg" href="{{ p.url | relative_url }}">
+                <div class="media">
+                  <img class="thumb" src="{{ (p.thumb | default: site.default_thumb) | relative_url }}" alt="{{ p.title }}">
+                  <span class="meta-top">{{ p.date | date: "%d %b %Y" }}</span>
+                </div>
+                <div class="body">
+                  <h3 class="title">{{ p.title }}</h3>
+                  {%- if p.excerpt -%}
+                    <p class="excerpt">{{ p.excerpt | strip_html | truncate: excerpt_limit }}</p>
+                  {%- endif -%}
+                </div>
+              </a>
+            {%- endif -%}
           {%- endif -%}
         {%- endfor -%}
       </section>
