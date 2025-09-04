@@ -292,3 +292,8 @@ main.page-content > .wrapper,
   color: var(--muted);
   line-height:1.4;
 }
+
+/* ===== Top-of-page adjustment ===== */
+.home .section-title:first-of-type {
+  margin-top: 40px; /* tighter under header */
+}
