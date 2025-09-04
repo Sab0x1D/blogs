@@ -10,12 +10,12 @@ layout: default
 
     {%- assign coll = site.listings | sort: 'date' | reverse -%}
 
-    <!-- Centered title -->
+    <!-- Centered title only -->
     <header class="tag-hero">
       <h1 class="tag-title">{{ page.title | default: page.tag }}</h1>
     </header>
 
-    <!-- Same grid + card markup as index "Previous posts" -->
+    <!-- Same large cards as main "Previous posts" -->
     <section class="grid" aria-label="Posts for this topic">
       {%- for p in coll -%}
         {%- if p.tags and p.tags contains page.tag -%}
@@ -29,20 +29,11 @@ layout: default
               {%- if p.excerpt -%}
                 <p class="excerpt">{{ p.excerpt | strip_html | truncate: 150 }}</p>
               {%- endif -%}
-              {%- comment -%} no chips on tag pages {%- endcomment -%}
             </div>
           </a>
         {%- endif -%}
       {%- endfor -%}
     </section>
-
-    <!-- Topics -->
-    <!-- {% include topics-grid.html title='POPULAR TOPICS' %} -->
-
-    <!-- Back to main -->
-    <!--<div class="tag-back-wrap">
-      <a class="tag-back" href="{{ '/' | relative_url }}">← Back to main</a>
-    </div> -->
 
   </div>
 </section>
