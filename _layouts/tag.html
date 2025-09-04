@@ -8,11 +8,9 @@ layout: default
 <section class="home">
   <div class="container">
 
-    {%- comment -%} Gather and filter by tag (slug safe) {%- endcomment -%}
-    {% assign coll  = site.listings | sort: 'date' | reverse %}
-    {% assign tslug = page.tag | slugify %}
-    {% assign tagged = coll | where_exp: 'p',
-      'p.tags and (p.tags | join: " " | slugify) contains tslug' %}
+    {%- comment -%} Gather and filter by tag (GitHub Pages–safe) {%- endcomment -%}
+    {% assign coll   = site.listings | sort: 'date' | reverse %}
+    {% assign tagged = coll | where_exp: 'p', 'p.tags and p.tags contains page.tag' %}
 
     <!-- Centered title -->
     <header class="tag-hero">
@@ -33,7 +31,7 @@ layout: default
               {% if p.excerpt %}
                 <p class="excerpt">{{ p.excerpt | strip_html | truncate: 150 }}</p>
               {% endif %}
-              {# no chips below cards on tag pages #}
+              {% comment %} no chips below cards on tag pages {% endcomment %}
             </div>
           </a>
         {% endfor %}
