@@ -15,7 +15,7 @@ permalink: /
     {%- assign coll = site.listings | sort: 'date' | reverse -%}
 
     <!-- Featured: latest 4 -->
-    <h2 class="section-title">Featured</h2>
+    <h2 class="section-title">FEATURED</h2>
     <section class="featured-row" aria-label="Featured posts">
       {%- for p in coll limit: 4 -%}
         <a class="card card--sm" href="{{ p.url | relative_url }}">
@@ -31,7 +31,7 @@ permalink: /
     </section>
 
     <!-- Previous posts: everything after the first 4, paginated (6 per page) -->
-    <h2 class="section-title">Previous posts</h2>
+    <h2 class="section-title">PREVIOUS POSTS</h2>
 
     {%- assign page_size      = 6 -%}
     {%- assign previous_total = coll.size | minus: 4 -%}
@@ -103,7 +103,7 @@ permalink: /
     {%- endif -%}
 
     <!-- Popular topics (starter row; swap thumbs/links when ready) -->
-    <h2 class="section-title">Popular topics</h2>
+    <h2 class="section-title">POPULAR TOPICS</h2>
     <div class="topic-grid">
       <a class="topic-card" href="{{ '/tag/malware/' | relative_url }}">
         <div class="topic-thumb">

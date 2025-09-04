@@ -327,3 +327,48 @@ main.page-content > .wrapper,
 /* If you prefer fixed aspect tiles, keep height rules above.
    If you want consistent 16:9 aspect instead, you can replace with:
    .topic-thumb{ aspect-ratio: 16 / 9; height: auto; } */
+
+
+/* ============================================================
+   PREVIOUS POSTS — Atega-like presentation tweaks
+   (smaller image, bolder title, 3-line excerpt)
+   Place AFTER the final guards so it wins.
+   ============================================================ */
+
+/* Shorter media area so image uses < half the card height */
+.grid .card.card--lg .media{
+  aspect-ratio: 16 / 7 !important;  /* wider = less tall */
+}
+
+/* Roomier body spacing for text stack */
+.grid .card.card--lg .body{
+  padding: 18px 20px 20px;
+  gap: 10px;
+}
+
+/* Beefier title like the reference card */
+.grid .card.card--lg .title{
+  font-size: 22px;
+  font-weight: 800;
+  line-height: 1.35;
+  letter-spacing: -0.01em;
+}
+
+/* Three-line excerpt for previous posts */
+.grid .card.card--lg .excerpt{
+  font-size: 15px;
+  line-height: 1.6;
+  -webkit-line-clamp: 4;
+  line-clamp: 4;
+}
+
+/* Slightly more breathing room above title */
+.grid .card.card--lg .meta{
+  margin-top: 4px;
+}
+
+/* Responsive tune: scale title & image on narrower screens */
+@media (max-width: 980px){
+  .grid .card.card--lg .title{ font-size: 20px; }
+  .grid .card.card--lg .media{ aspect-ratio: 16 / 8.5 !important; }
+}
