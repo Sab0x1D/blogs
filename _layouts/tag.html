@@ -36,6 +36,58 @@ layout: default
       {%- endfor -%}
     </section>
 
+        <!-- Explore other topics -->
+    <h2 class="section-title">POPULAR TOPICS</h2>
+    <div class="topic-grid">
+      <a class="topic-card" href="{{ '/tag/malware/' | relative_url }}">
+        <div class="topic-thumb">
+          <img src="{{ '/assets/img/malware.png' | relative_url }}"
+               alt="Malware" loading="lazy" decoding="async" fetchpriority="low">
+          <span class="topic-chip">Malware</span>
+        </div>
+      </a>
+
+      <a class="topic-card" href="{{ '/tag/ransomware/' | relative_url }}">
+        <div class="topic-thumb">
+          <img src="{{ '/assets/img/ransomware.avif' | relative_url }}"
+               alt="Ransomware" loading="lazy" decoding="async" fetchpriority="low">
+          <span class="topic-chip">Ransomware</span>
+        </div>
+      </a>
+
+      <a class="topic-card" href="{{ '/tag/phish/' | relative_url }}">
+        <div class="topic-thumb">
+          <img src="{{ '/assets/img/phishing.jpg' | relative_url }}"
+               alt="Phishing" loading="lazy" decoding="async" fetchpriority="low">
+          <span class="topic-chip">Phish</span>
+        </div>
+      </a>
+
+      <a class="topic-card" href="{{ '/tag/scam/' | relative_url }}">
+        <div class="topic-thumb">
+          <img src="{{ '/assets/img/scam.jpg' | relative_url }}"
+               alt="Scams" loading="lazy" decoding="async" fetchpriority="low">
+          <span class="topic-chip">Scam</span>
+        </div>
+      </a>
+
+      <a class="topic-card" href="{{ '/tag/osint/' | relative_url }}">
+        <div class="topic-thumb">
+          <img src="{{ '/assets/img/osint.jpg' | relative_url }}"
+               alt="OSINT" loading="lazy" decoding="async" fetchpriority="low">
+          <span class="topic-chip">Osint</span>
+        </div>
+      </a>
+
+      <a class="topic-card" href="{{ '/tag/tools/' | relative_url }}">
+        <div class="topic-thumb">
+          <img src="{{ '/assets/img/tools.webp' | relative_url }}"
+               alt="Security tools" loading="lazy" decoding="async" fetchpriority="low">
+          <span class="topic-chip">Tools</span>
+        </div>
+      </a>
+    </div>
+
     <!-- Back to main -->
     <div class="tag-back-wrap">
       <a class="tag-back" href="{{ '/' | relative_url }}">← Back to main</a>
