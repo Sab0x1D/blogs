@@ -26,19 +26,28 @@ permalink: /
           </div>
           <div class="body">
             <h3 class="title">{{ p.title }}</h3>
+            {%- if p.excerpt -%}
+              <p class="excerpt">{{ p.excerpt | strip_html | truncate: 220 }}</p>
+            {%- endif -%}
+            {%- if p.tags and p.tags.size > 0 -%}
+              <div class="meta">
+                {%- for tag in p.tags limit:2 -%}
+                  <a class="chip" href="{{ '/tag/' | append: tag | slugify | append: '/' | relative_url }}">{{ tag }}</a>
+                {%- endfor -%}
+              </div>
+            {%- endif -%}
           </div>
         </a>
       {%- endfor -%}
     </section>
 
-    <!-- Previous posts: everything after the first 4, paginated (6 per page) -->
+    <!-- Previous posts: paginated (6 per page), start after featured -->
     <h2 class="section-title">PREVIOUS POSTS</h2>
 
-    {%- assign page_size      = 6 -%}
-    {%- assign previous_total = coll.size | minus: 4 -%}
-    {%- if previous_total < 0 -%}{%- assign previous_total = 0 -%}{%- endif -%}
-
-    {%- assign skip = 4 -%} {%- comment -%} start after featured {%- endcomment -%}
+    {%- assign page_size = 6 -%}
+    {%- assign featured_count = 4 -%}
+    {%- assign current = page.page_num | plus: 0 -%}
+    {%- assign skip = featured_count | plus: page_size | times: current | minus: page_size -%}
 
     <section class="grid" aria-label="Previous posts">
       {%- for p in coll offset: skip limit: page_size -%}
@@ -50,20 +59,22 @@ permalink: /
           <div class="body">
             <h3 class="title">{{ p.title }}</h3>
             {%- if p.excerpt -%}
-              <p class="excerpt">{{ p.excerpt | strip_html | truncate: 150 }}</p>
+              <p class="excerpt">{{ p.excerpt | strip_html | truncate: 240 }}</p>
+            {%- endif -%}
+            {%- if p.tags and p.tags.size > 0 -%}
+              <div class="meta">
+                {%- for tag in p.tags limit:3 -%}
+                  <a class="chip" href="{{ '/tag/' | append: tag | slugify | append: '/' | relative_url }}">{{ tag }}</a>
+                {%- endfor -%}
+              </div>
             {%- endif -%}
           </div>
         </a>
       {%- endfor -%}
     </section>
 
-    {%- comment -%}
-      TEMP: lock to 3 pages so pager shows “Page 1 of 3” until real content exists.
-      When ready, delete the next line and use a computed total_pages.
-    {%- endcomment -%}
+    {%- comment -%} TEMP: show 3 pages {%- endcomment -%}
     {%- assign total_pages = 3 -%}
-
-    {%- assign current = page.page_num | plus: 0 -%}
     {%- assign prev_num = current | minus: 1 -%}
     {%- assign next_num = current | plus: 1 -%}
 
@@ -103,59 +114,42 @@ permalink: /
       </nav>
     {%- endif -%}
 
-    <!-- Popular topics (starter row; swap thumbs/links when ready) -->
+    <!-- Popular topics -->
     <h2 class="section-title">POPULAR TOPICS</h2>
     <div class="topic-grid">
       <a class="topic-card" href="{{ '/tag/malware/' | relative_url }}">
         <div class="topic-thumb">
-          <img src="{{ '/assets/img/malware.png' | relative_url }}"
-              alt="Malware"
-              loading="lazy" decoding="async" fetchpriority="low">
+          <img src="{{ '/assets/img/malware.png' | relative_url }}" alt="Malware" loading="lazy" decoding="async" fetchpriority="low">
           <span class="topic-chip">Malware</span>
         </div>
       </a>
-
       <a class="topic-card" href="{{ '/tag/ransomware/' | relative_url }}">
         <div class="topic-thumb">
-          <img src="{{ '/assets/img/ransomware.avif' | relative_url }}"
-              alt="Ransomware"
-              loading="lazy" decoding="async" fetchpriority="low">
+          <img src="{{ '/assets/img/ransomware.avif' | relative_url }}" alt="Ransomware" loading="lazy" decoding="async" fetchpriority="low">
           <span class="topic-chip">Ransomware</span>
         </div>
       </a>
-
       <a class="topic-card" href="{{ '/tag/phish/' | relative_url }}">
         <div class="topic-thumb">
-          <img src="{{ '/assets/img/phishing.jpg' | relative_url }}"
-              alt="Phishing"
-              loading="lazy" decoding="async" fetchpriority="low">
+          <img src="{{ '/assets/img/phishing.jpg' | relative_url }}" alt="Phishing" loading="lazy" decoding="async" fetchpriority="low">
           <span class="topic-chip">Phish</span>
         </div>
       </a>
-
       <a class="topic-card" href="{{ '/tag/scam/' | relative_url }}">
         <div class="topic-thumb">
-          <img src="{{ '/assets/img/scam.jpg' | relative_url }}"
-              alt="Scams"
-              loading="lazy" decoding="async" fetchpriority="low">
+          <img src="{{ '/assets/img/scam.jpg' | relative_url }}" alt="Scams" loading="lazy" decoding="async" fetchpriority="low">
           <span class="topic-chip">Scam</span>
         </div>
       </a>
-
       <a class="topic-card" href="{{ '/tag/osint/' | relative_url }}">
         <div class="topic-thumb">
-          <img src="{{ '/assets/img/osint.jpg' | relative_url }}"
-              alt="OSINT"
-              loading="lazy" decoding="async" fetchpriority="low">
+          <img src="{{ '/assets/img/osint.jpg' | relative_url }}" alt="OSINT" loading="lazy" decoding="async" fetchpriority="low">
           <span class="topic-chip">Osint</span>
         </div>
       </a>
-
       <a class="topic-card" href="{{ '/tag/tools/' | relative_url }}">
         <div class="topic-thumb">
-          <img src="{{ '/assets/img/tools.webp' | relative_url }}"
-              alt="Security tools"
-              loading="lazy" decoding="async" fetchpriority="low">
+          <img src="{{ '/assets/img/tools.webp' | relative_url }}" alt="Security tools" loading="lazy" decoding="async" fetchpriority="low">
           <span class="topic-chip">Tools</span>
         </div>
       </a>
