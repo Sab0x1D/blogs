@@ -1,4 +1,6 @@
-/* ===== Design tokens ===== */
+/* =======================
+   Design tokens
+   ======================= */
 :root{
   /* Base page width (header/footer); home content gets its own clamp below */
   --container: 1200px;
@@ -6,21 +8,23 @@
   --gap: 26px;
 
   --card: #ffffff;
-  --card-border: #e5e7eb;      /* slate-200 */
-  --muted: #6b7280;            /* slate-500 */
-  --muted-2: #94a3b8;          /* slate-400 */
+  --card-border: #e5e7eb;    /* slate-200 */
+  --muted: #6b7280;          /* slate-500 */
+  --muted-2: #94a3b8;        /* slate-400 */
 
-  --chip-bg: #f8fafc;          /* slate-50 */
+  --chip-bg: #f8fafc;        /* slate-50 */
   --chip-border: #e5e7eb;
 
   --shadow: 0 16px 40px rgba(2,10,30,.08);
 
   /* Image area ratios (width / height) */
-  --feat-ar: 4 / 4.5;    /* Featured cards (taller than square) */
-  --prev-ar: 16 / 15;    /* Previous posts (wide) */
+  --feat-ar: 4 / 4.5;        /* Featured cards (taller than square) */
+  --prev-ar: 16 / 15;        /* Previous posts (wide) */
 }
 
-/* === Break out of Minima's default width clamp === */
+/* =======================
+   Layout / wrappers
+   ======================= */
 main.page-content > .wrapper,
 .page-content > .wrapper{
   max-width: none !important;
@@ -28,7 +32,6 @@ main.page-content > .wrapper,
   padding-right: 0 !important;
 }
 
-/* Keep header/footer at normal width while content is wide */
 .site-header .wrapper,
 .site-footer .wrapper{
   max-width: var(--container);
@@ -37,14 +40,13 @@ main.page-content > .wrapper,
   margin-inline: auto;
 }
 
-/* ===== Layout container ===== */
 .container{
   max-width: var(--container);
   margin: 0 auto;
   padding: 0 32px;
 }
 
-/* Home gets the wide clamp (Atega-like) */
+/* Home gets the wide clamp */
 .home.container{
   max-width: 1440px !important;
   margin: 0 auto;
@@ -54,19 +56,26 @@ main.page-content > .wrapper,
 
 .home{ padding: 0; }
 
-/* ===== Section titles ===== */
+/* =======================
+   Section titles
+   ======================= */
 .section-title{
-  margin: 80px 0 28px;   /* default spacing between sections */
-  font-size: 18px;
-  font-weight: 700;
+  /* Default spacing between sections (Atega-like) */
+  margin: 80px 0 28px;
+  /* Atega-ish type */
+  font-size: 20px;
+  font-weight: 800;
+  letter-spacing: -0.01em;
 }
 
-/* First section title on every page = tighter (40px) */
+/* Tighter under the site header on ALL pages */
 .home .section-title:first-of-type{
   margin-top: 40px;
 }
 
-/* ===== Featured row (4 across) ===== */
+/* =======================
+   Featured row (4 across)
+   ======================= */
 .featured-row{
   display: grid;
   grid-template-columns: repeat(4, minmax(0,1fr));
@@ -77,7 +86,9 @@ main.page-content > .wrapper,
 @media (max-width:880px){  .featured-row{ grid-template-columns: repeat(2,1fr);} }
 @media (max-width:560px){  .featured-row{ grid-template-columns: 1fr;} }
 
-/* ===== Previous posts grid (3 across) ===== */
+/* =======================
+   Previous posts grid (3)
+   ======================= */
 .grid{
   display: grid;
   grid-template-columns: repeat(3, minmax(0,1fr));
@@ -87,7 +98,9 @@ main.page-content > .wrapper,
 @media (max-width:1200px){ .grid{ grid-template-columns: repeat(2,1fr);} }
 @media (max-width:720px){  .grid{ grid-template-columns: 1fr;} }
 
-/* ===== Card (Atega-like) ===== */
+/* =======================
+   Card (Atega-like)
+   ======================= */
 .card{
   display: flex;
   flex-direction: column;
@@ -108,15 +121,15 @@ main.page-content > .wrapper,
 
 /* image + date pill */
 .card .media{ position: relative; }
-.card--sm .media{ aspect-ratio: var(--feat-ar); }
-.card--lg .media{ aspect-ratio: var(--prev-ar); }
+.card--sm .media{ aspect-ratio: var(--feat-ar); }  /* Featured */
+.card--lg .media{ aspect-ratio: var(--prev-ar); }  /* Previous posts */
 
 .card .thumb{
   width: 100%;
   height: 100%;
   object-fit: cover;
   display: block;
-  background: #f1f5f9;
+  background: #f1f5f9;      /* slate-100 fallback */
 }
 
 /* Date chip */
@@ -128,7 +141,7 @@ main.page-content > .wrapper,
   align-items: center;
   gap: 6px;
   font-size: 12px;
-  color: #0f172a;
+  color: #0f172a;           /* slate-900 */
   padding: 6px 10px;
   border-radius: 999px;
   background: rgba(255,255,255,.78);
@@ -136,7 +149,7 @@ main.page-content > .wrapper,
   border: 1px solid var(--card-border);
 }
 
-/* Card body */
+/* body */
 .card .body{
   padding: 16px 18px 18px;
   display: flex;
@@ -147,22 +160,27 @@ main.page-content > .wrapper,
   margin: 0;
   font-weight: 700;
   line-height: 1.25;
+  font-size: 18px;          /* Atega-style bump */
+  color: var(--text);
 }
-.card--sm .title{ font-size: 16px; }
-.card--lg .title{ font-size: 18px; }
 
 /* meta + excerpt */
 .card .meta{
   margin-top: 2px;
-  font-size: 12px;
+  font-size: 13px;          /* Atega slightly bigger */
+  font-weight: 500;
+  letter-spacing: 0.01em;
   color: var(--muted-2);
-  display: flex; gap: 6px; align-items: center;
+  display: flex;
+  gap: 6px;
+  align-items: center;
 }
+
 .card .excerpt{
   margin: 0;
   color: var(--muted);
-  font-size: 14px;
-  line-height: 1.5;
+  font-size: 15px;          /* Atega slightly bigger */
+  line-height: 1.6;
   display: -webkit-box;
   -webkit-box-orient: vertical;
   overflow: hidden;
@@ -170,8 +188,22 @@ main.page-content > .wrapper,
   line-clamp: 2;
 }
 
-/* ===== Pager ===== */
-.pager{ margin: 60px 0; }
+/* Never underline anything inside cards */
+.grid .card, .featured-row .card,
+.grid .card *, .featured-row .card *{
+  text-decoration: none !important;
+}
+
+/* Keep the ratios on .media (not the <img>) even if other styles load later. */
+.featured-row .card.card--sm .media{ aspect-ratio: var(--feat-ar) !important; }
+.grid .card.card--lg .media{ aspect-ratio: var(--prev-ar) !important; }
+
+/* =======================
+   Pager
+   ======================= */
+.pager{
+  margin: 60px 0;           /* generous breathing room */
+}
 .pager ul{
   list-style: none;
   padding: 0;
@@ -181,22 +213,33 @@ main.page-content > .wrapper,
 }
 .pager a, .pager span{
   display: inline-block;
-  padding: 6px 10px;
+  padding: 8px 14px;        /* Atega-like pill sizing */
   border: 1px solid var(--card-border);
-  border-radius: 8px;
+  border-radius: 999px;     /* pill buttons */
   text-decoration: none;
+  font-size: 14px;
+  font-weight: 500;
+  transition: background .15s ease, color .15s ease;
+}
+.pager a:hover{
+  background: var(--text);
+  color: #fff;
 }
 .pager .active span{
-  background: #111827; color: #fff; border-color: #111827;
+  background: #111827;
+  color: #fff;
+  border-color: #111827;
 }
 
-/* ===== Popular Topics ===== */
+/* =======================
+   Popular Topics (6 across)
+   ======================= */
 .topic-grid{
-  display:grid;
+  display: grid;
   grid-template-columns: repeat(6, minmax(0,1fr));
   gap: var(--gap);
   align-items: stretch;
-  margin-top: 48px;
+  margin-top: 48px;         /* space before topics */
 }
 @media (max-width:1280px){ .topic-grid{ grid-template-columns: repeat(4,1fr);} }
 @media (max-width:980px){  .topic-grid{ grid-template-columns: repeat(3,1fr);} }
@@ -204,111 +247,52 @@ main.page-content > .wrapper,
 @media (max-width:480px){  .topic-grid{ grid-template-columns: 1fr;} }
 
 .topic-card{
-  display:block;
-  padding:0;
-  border:1px solid var(--card-border);
-  border-radius:22px;
+  display: block;
+  padding: 0;
   background: var(--card);
-  text-decoration:none;
-  transition: transform .16s ease, box-shadow .16s ease, border-color .16s ease;
-  box-shadow: 0 6px 24px rgba(2,10,30,.08);
+  border: 1px solid var(--card-border);
+  border-radius: 20px;      /* smoother Atega corners */
+  box-shadow: 0 8px 22px rgba(2,10,30,.06);
+  transition: transform .2s ease, box-shadow .2s ease, border-color .16s ease;
 }
 .topic-card:hover{
-  transform: translateY(-2px);
-  box-shadow: 0 12px 34px rgba(2,10,30,.12);
-  border-color: rgba(15,23,42,.15);
-}
-.topic-thumb{
-  position:relative;
-  width:100%;
-  height:90px;
-  border-radius:18px;
-  overflow:hidden;
-  background:#f1f5f9;
-}
-@media (min-width:981px){ .topic-thumb{ height:110px; } }
-.topic-thumb img{
-  width:100%; height:100%; object-fit:cover; display:block;
-}
-.topic-chip{
-  position:absolute; left:10px; bottom:10px;
-  display:inline-flex; align-items:center; gap:6px;
-  font-size:12px;
-  padding:6px 10px;
-  border-radius:999px;
-  background: rgba(255,255,255,.9);
-  border: 1px solid var(--card-border);
-  color: var(--text);
-}
-
-/* ===== Atega-style typography & cards ===== */
-
-/* --- Headings / section titles --- */
-.section-title {
-  font-size: 20px;          /* slightly larger */
-  font-weight: 800;         /* bolder for emphasis */
-  letter-spacing: -0.01em;  /* subtle tighten */
-  color: var(--text);
-}
-
-/* --- Card titles --- */
-.card .title {
-  font-size: 18px;          /* larger than before */
-  font-weight: 700;
-  line-height: 1.4;
-  color: var(--text);
-}
-
-/* --- Meta text (dates, tags, etc.) --- */
-.card .meta,
-.card .meta-top,
-.topic-chip {
-  font-size: 13px;          /* Atega uses a touch bigger */
-  font-weight: 500;
-  letter-spacing: 0.01em;
-  color: var(--muted-2);
-}
-
-/* --- Excerpts / descriptions --- */
-.card .excerpt {
-  font-size: 15px;
-  line-height: 1.6;
-  color: var(--muted);
-  -webkit-line-clamp: 2;
-}
-
-/* --- Topic cards (general look) --- */
-.topic-card {
-  border-radius: 20px;       /* smoother corners */
-  overflow: hidden;
-  box-shadow: 0 8px 22px rgba(2,10,30,.06);
-  transition: transform .2s ease, box-shadow .2s ease;
-}
-.topic-card:hover {
   transform: translateY(-4px);
   box-shadow: 0 14px 36px rgba(2,10,30,.12);
+  border-color: rgba(15,23,42,.15);
 }
 
-/* --- Topic chip overlay --- */
-.topic-chip {
-  font-size: 13px;
+.topic-thumb{
+  position: relative;
+  width: 100%;
+  height: 90px;
+  border-radius: 18px;
+  overflow: hidden;
+  background: #f1f5f9;
+}
+@media (min-width:981px){
+  .topic-thumb{ height: 110px; }
+}
+.topic-thumb img{
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+/* Overlay chip on topic images */
+.topic-chip{
+  position: absolute;
+  left: 10px;
+  bottom: 10px;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 13px;          /* Atega-ish */
+  font-weight: 600;
+  letter-spacing: 0.01em;
   padding: 6px 12px;
+  color: var(--text);
   background: rgba(255,255,255,.92);
   border: 1px solid var(--card-border);
   border-radius: 999px;
-  font-weight: 600;
-  color: var(--text);
-}
-
-/* --- Pager (pagination) --- */
-.pager a, .pager span {
-  font-size: 14px;
-  font-weight: 500;
-  padding: 8px 14px;
-  border-radius: 999px;       /* pill-like buttons */
-  transition: background .15s ease, color .15s ease;
-}
-.pager a:hover {
-  background: var(--text);
-  color: #fff;
 }
