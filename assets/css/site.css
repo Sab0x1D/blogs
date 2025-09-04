@@ -20,7 +20,7 @@
 
   /* Image area ratios (width / height) */
   --feat-ar: 4 / 4.5;        /* Featured cards (taller than square) */
-  --prev-ar: 16 / 15;        /* Previous posts (wide baseline) */
+  --prev-ar: 16 / 15.5;        /* Previous posts (wide baseline) */
 }
 
 /* =======================
@@ -341,7 +341,7 @@ main.page-content > .wrapper,
 
 .grid .card.card--lg .media{
   /* Shallower banner so the image uses ~half (or less) of the card */
-  aspect-ratio: 16 / 7 !important;
+  aspect-ratio: 16 / 9 !important;
 }
 
 .grid .card.card--lg .body{
