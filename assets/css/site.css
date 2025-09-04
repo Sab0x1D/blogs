@@ -341,7 +341,7 @@ main.page-content > .wrapper,
 
 .grid .card.card--lg .media{
   /* Shallower banner so the image uses ~half (or less) of the card */
-  aspect-ratio: 16 / 9 !important;
+  aspect-ratio: 16 / 12 !important;
 }
 
 .grid .card.card--lg .body{
@@ -374,5 +374,5 @@ main.page-content > .wrapper,
 /* Responsive tweak */
 @media (max-width: 980px){
   .grid .card.card--lg .title{ font-size: 19px; }
-  .grid .card.card--lg .media{ aspect-ratio: 16 / 8.5 !important; }
+  .grid .card.card--lg .media{ aspect-ratio: 16 / 9 !important; }
 }
