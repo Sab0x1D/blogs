@@ -53,7 +53,7 @@ main.page-content > .wrapper,
   padding-right: 32px;
 }
 
-.home{ padding: 40px 0; }
+.home{ padding: 80px 0 40px; }
 .section-title{
   /* UPDATED: bigger global spacing (Atega-like) */
   margin: 80px 0 28px;
