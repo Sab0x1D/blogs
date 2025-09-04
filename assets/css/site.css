@@ -435,3 +435,24 @@ main.page-content > .wrapper,
   .grid .card.card--lg .title{ font-size: 20px; }
   .grid .card.card--lg .media{ aspect-ratio: 16 / 9 !important; }
 }
+
+/* ===== Sticky Site Header ===== */
+.site-header{
+  position: sticky;          /* stays at the top as you scroll */
+  top: 0;
+  z-index: 100;              /* above cards/dock */
+  background: rgba(255,255,255,.92);
+  backdrop-filter: saturate(180%) blur(10px);
+  border-bottom: 1px solid rgba(15,23,42,.08);
+}
+
+/* Optional: subtle shadow once scrolled (requires tiny JS below) */
+.site-header.is-scrolled{
+  box-shadow: 0 6px 20px rgba(2,10,30,.06);
+  border-bottom-color: rgba(15,23,42,.12);
+}
+
+/* Optional: iOS safe-area nudge */
+@supports(padding:max(0px)){
+  .site-header{ padding-top: max(0px, env(safe-area-inset-top)); }
+}

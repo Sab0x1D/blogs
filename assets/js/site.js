@@ -30,3 +30,9 @@
   var p = new URLSearchParams(window.location.search);
   if(p.get('tag')) applyFilter(p.get('tag'));
 })();
+
+document.addEventListener('scroll', () => {
+  const h = document.querySelector('.site-header');
+  if (!h) return;
+  h.classList.toggle('is-scrolled', window.scrollY > 8);
+});
