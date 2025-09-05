@@ -11,11 +11,6 @@ featured: false
 tags: [Phish, Malware, Unicode]
 ---
 
-<h1 align="center">
-   Masquerading with “ん” <br>
-   A clever Unicode trick in Booking.com Phishing campaigns
-</h1>
-
 > **Reference:** Original finding shared by [James (@JAMESWT_WT)](https://x.com/jameswt_wt/status/1955060839569870991?s=43&t=J_U8kMSz_93ikMaUjsdWnA) on X (formerly Twitter).
 
 One of my malware hunter contacts, **James (@JAMESWT_WT)**, recently uncovered an elegant but dangerous phishing campaign in the wild.  

@@ -11,13 +11,7 @@ featured: false
 tags: [Phish]
 ---
 
-<h1 align="center">
-   Unmasking the SVG threat <br>
-   How Hackers use vector graphics for Phishing attacks
-</h1>
 <p align="center"><img src="../assets/img/svg_pic.png"></p>
-
-## Introduction
 
 The humble image file has long been considered one of the safest attachments a user can receive. While office documents, executable files, and even PDFs have well-documented risks, images are often overlooked as a potential attack vector.  
 
