@@ -2,7 +2,6 @@
 title: "Feature Card Three — Dummy"
 date: 2025-09-08
 excerpt: "Short snippet for visual testing in the featured layout."
-thumb: assets/img/GyG3.png
 featured: true
 tags: [Malware]
 ---
