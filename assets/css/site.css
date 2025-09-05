@@ -1,6 +1,8 @@
+---
+---
 @font-face {
   font-family: 'Futuristic';
-  src: url('{{ "/assets/fonts/Futuristic-Regular.ttf" | relative_url }}') format('truetype');
+  src: url('/blogs/assets/fonts/Futuristic-Regular.ttf') format('truetype');
   font-weight: normal;
   font-style: normal;
   font-display: swap;
@@ -18,7 +20,7 @@
   --text: #0b0f19;          /* stronger title/body */
   --card: #ffffff;
   --card-border: #e5e7eb;   /* slate-200 */
-  --muted: #6b7280;         /* slate-500 - body muted */
+  --muted: #4670c4;         /* slate-500 - body muted */
   --muted-2: #9aa3b2;       /* slightly softer than slate-400 for meta */
 
   --chip-bg: #f8fafc;       /* slate-50 */
