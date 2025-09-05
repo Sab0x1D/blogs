@@ -74,6 +74,7 @@ layout: default
   /* ===== Narrow reading column ===== */
   .post-wrap { max-width: 78ch; margin: 0 auto; padding: 0 20px; }
   .post-content img { max-width: 100%; height: auto; border-radius: 10px; }
+  .post-back { margin-top: 2rem; }
 
   /* ===== Post neighbors (older posts) ===== */
   .post-neighbors{
@@ -162,6 +163,16 @@ layout: default
     </div>
   </div>
 </section>
+
+<!-- NARROW reading area -->
+<article class="post">
+  <div class="post-wrap">
+    <div class="post-content">
+      {{ content }}
+      <p class="post-back"><a href="{{ '/' | relative_url }}">⬅ Return to Blog Index</a></p>
+    </div>
+  </div>
+</article>
 
 {%- comment -%}
   Older posts section — show the next two older items in the collection.
