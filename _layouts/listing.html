@@ -74,7 +74,6 @@ layout: default
   /* ===== Narrow reading column ===== */
   .post-wrap { max-width: 78ch; margin: 0 auto; padding: 0 20px; }
   .post-content img { max-width: 100%; height: auto; border-radius: 10px; }
-  .post-back { margin-top: 2rem; }
 
   /* ===== Post neighbors (older posts) ===== */
   .post-neighbors{
@@ -165,9 +164,7 @@ layout: default
 </section>
 
 {%- comment -%}
-  Compute neighbors once so we can:
-  1) Decide if "Return to Blog Index" should be shown (only when no older post).
-  2) Render up to two Older posts cards.
+  Older posts section — show the next two older items in the collection.
 {%- endcomment -%}
 {%- assign coll = site.listings | sort: "date" | reverse -%}
 {%- assign idx = nil -%}
@@ -177,47 +174,38 @@ layout: default
     {%- break -%}
   {%- endif -%}
 {%- endfor -%}
-{%- assign older1 = coll[idx | plus: 1] -%}
-{%- assign older2 = coll[idx | plus: 2] -%}
 
-<!-- NARROW reading area -->
-<article class="post">
-  <div class="post-wrap">
-    <div class="post-content">
-      {{ content }}
+{%- if idx != nil -%}
+  {%- assign older1_index = idx | plus: 1 -%}
+  {%- assign older2_index = idx | plus: 2 -%}
+  {%- assign older1 = coll[older1_index] -%}
+  {%- assign older2 = coll[older2_index] -%}
 
-      {%- comment -%} Show back link ONLY if there’s no older post {%- endcomment -%}
-      {%- unless older1 -%}
-        <p class="post-back"><a href="{{ '/' | relative_url }}">⬅ Return to Blog Index</a></p>
-      {%- endunless -%}
+  {%- if older1 or older2 -%}
+  <section class="post-neighbors" aria-label="Older posts">
+    <div class="grid">
+
+      {%- if older1 -%}
+      <a class="nav-card" href="{{ older1.url | relative_url }}">
+        <img class="thumb" src="{{ (older1.thumb | default: site.default_thumb) | relative_url }}" alt="">
+        <div>
+          <small>Older post</small>
+          <h3 class="title">{{ older1.title }}</h3>
+        </div>
+      </a>
+      {%- endif -%}
+
+      {%- if older2 -%}
+      <a class="nav-card" href="{{ older2.url | relative_url }}">
+        <img class="thumb" src="{{ (older2.thumb | default: site.default_thumb) | relative_url }}" alt="">
+        <div>
+          <small>Older post</small>
+          <h3 class="title">{{ older2.title }}</h3>
+        </div>
+      </a>
+      {%- endif -%}
+
     </div>
-  </div>
-</article>
-
-{%- if older1 or older2 -%}
-<section class="post-neighbors" aria-label="Older posts">
-  <div class="grid">
-
-    {%- if older1 -%}
-    <a class="nav-card" href="{{ older1.url | relative_url }}">
-      <img class="thumb" src="{{ (older1.thumb | default: site.default_thumb) | relative_url }}" alt="">
-      <div>
-        <small>Older post</small>
-        <h3 class="title">{{ older1.title }}</h3>
-      </div>
-    </a>
-    {%- endif -%}
-
-    {%- if older2 -%}
-    <a class="nav-card" href="{{ older2.url | relative_url }}">
-      <img class="thumb" src="{{ (older2.thumb | default: site.default_thumb) | relative_url }}" alt="">
-      <div>
-        <small>Older post</small>
-        <h3 class="title">{{ older2.title }}</h3>
-      </div>
-    </a>
-    {%- endif -%}
-
-  </div>
-</section>
+  </section>
+  {%- endif -%}
 {%- endif -%}
