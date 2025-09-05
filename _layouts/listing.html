@@ -7,28 +7,34 @@ layout: default
 <script defer src="{{ '/assets/js/theme.js' | relative_url }}"></script>
 
 <style>
-  /* ===== Centered hero / ribbon (uses your .container) ===== */
-  .post-hero { padding: 50px 0 10px; }
-
-  /* Reuse your site container to guarantee proper centering */
-  .post-hero .container {
-    /* your site.css already sets max-width via --container and centers with margin:auto */
-    /* but we want a slightly wider cap for the hero ribbon: */
-    max-width: 1200px;           /* matches your design target */
-    padding-inline: 32px;        /* nice gutters */
+  /* ===== Wide hero / ribbon – override site.css grid ===== */
+  /* site.css makes .post-hero a 2-col grid; kill that so we can center cleanly */
+  .post-hero{
+    display: block !important;              /* <— key override */
+    padding: 50px 0 10px;
+    border-bottom: 1px solid rgba(15,23,42,.06);
   }
 
+  /* Use your global .container to center and cap width */
+  .post-hero > .container{
+    max-width: 1200px;                       /* wider ribbon cap */
+    margin: 0 auto;                          /* center */
+    padding-inline: 32px;                    /* gutters */
+  }
+
+  /* Two-column hero internals */
   .post-hero .hero-grid{
     display: grid;
     grid-template-columns: minmax(0, 1.05fr) minmax(320px, 420px);
     gap: 32px;
     align-items: center;
   }
+
   @media (max-width: 980px){
+    .post-hero > .container{ padding-inline: 20px; }
     .post-hero .hero-grid{
       grid-template-columns: 1fr;
       gap: 18px;
-      padding-inline: 0;         /* container already has padding on small screens */
     }
   }
 
@@ -69,6 +75,7 @@ layout: default
   .post-content img { max-width: 100%; height: auto; border-radius: 10px; }
   .post-back { margin-top: 2rem; }
 </style>
+
 
 {%- assign hero_img = page.hero | default: page.thumb -%}
 
