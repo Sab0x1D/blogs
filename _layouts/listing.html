@@ -130,6 +130,7 @@ layout: default
 </style>
 
 {%- assign hero_img = page.hero | default: page.thumb -%}
+{%- assign display_date = page.index_date | default: page.date -%}
 
 <!-- CENTERED hero/ribbon -->
 <section class="post-hero">
@@ -146,8 +147,8 @@ layout: default
           {% endif %}
           <div>
             <div>{{ page.author | default: site.title }}</div>
-            {% if page.date %}
-              <div>{{ page.date | date: "%d %b %Y" }}</div>
+            {% if display_date %}
+              <div>{{ display_date | date: "%d %b %Y" }}</div>
             {% endif %}
           </div>
         </div>
@@ -163,41 +164,66 @@ layout: default
 </section>
 
 {%- comment -%}
-  Robust "older posts" selection:
-  - Exclude current page
-  - Only items with date strictly less than current page date
-  - Sort by date descending and take the first two
+  Build a collection ordered by allocated date first:
+  - If a doc has `index_date` (your allocated date), sort by that.
+  - Otherwise fall back to `date`.
+  Then walk until we hit the current page and take the next two items.
 {%- endcomment -%}
-{%- assign older_all = site.listings
-    | where_exp: "p", "p.url != page.url and p.date < page.date"
-    | sort: "date" | reverse -%}
-{%- assign older_count = older_all | size -%}
-{%- assign older_two = older_all | slice: 0, 2 -%}
+{%- assign with_index = site.listings | where_exp: "p", "p.index_date" | sort: "index_date" | reverse -%}
+{%- assign without_index = site.listings | where_exp: "p", "p.index_date == nil" | sort: "date" | reverse -%}
+{%- assign coll = with_index | concat: without_index -%}
+
+{%- assign older1 = nil -%}
+{%- assign older2 = nil -%}
+{%- assign seen_current = false -%}
+{%- for doc in coll -%}
+  {%- if seen_current -%}
+    {%- if older1 == nil -%}
+      {%- assign older1 = doc -%}
+    {%- elsif older2 == nil -%}
+      {%- assign older2 = doc -%}
+      {%- break -%}
+    {%- endif -%}
+  {%- endif -%}
+  {%- if doc.url | relative_url == page.url | relative_url -%}
+    {%- assign seen_current = true -%}
+  {%- endif -%}
+{%- endfor -%}
 
 <!-- NARROW reading area -->
 <article class="post">
   <div class="post-wrap">
     <div class="post-content">
       {{ content }}
-      {%- if older_count == 0 -%}
+      {%- unless older1 -%}
         <p class="post-back"><a href="{{ '/' | relative_url }}">⬅ Return to Blog Index</a></p>
-      {%- endif -%}
+      {%- endunless -%}
     </div>
   </div>
 </article>
 
-{%- if older_count > 0 -%}
+{%- if older1 or older2 -%}
 <section class="post-neighbors" aria-label="Older posts">
   <div class="grid">
-    {%- for op in older_two -%}
-      <a class="nav-card" href="{{ op.url | relative_url }}">
-        <img class="thumb" src="{{ (op.thumb | default: site.default_thumb) | relative_url }}" alt="">
-        <div>
-          <small>Older post</small>
-          <h3 class="title">{{ op.title }}</h3>
-        </div>
-      </a>
-    {%- endfor -%}
+    {%- if older1 -%}
+    <a class="nav-card" href="{{ older1.url | relative_url }}">
+      <img class="thumb" src="{{ (older1.thumb | default: site.default_thumb) | relative_url }}" alt="">
+      <div>
+        <small>Older post</small>
+        <h3 class="title">{{ older1.title }}</h3>
+      </div>
+    </a>
+    {%- endif -%}
+
+    {%- if older2 -%}
+    <a class="nav-card" href="{{ older2.url | relative_url }}">
+      <img class="thumb" src="{{ (older2.thumb | default: site.default_thumb) | relative_url }}" alt="">
+      <div>
+        <small>Older post</small>
+        <h3 class="title">{{ older2.title }}</h3>
+      </div>
+    </a>
+    {%- endif -%}
   </div>
 </section>
 {%- endif -%}
