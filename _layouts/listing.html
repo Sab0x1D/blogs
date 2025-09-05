@@ -7,27 +7,43 @@ layout: default
 <script defer src="{{ '/assets/js/theme.js' | relative_url }}"></script>
 
 <style>
-  /* ===== Wide hero / ribbon (wider than body) ===== */
+  /* ========================
+     WIDE hero / full-bleed band
+     ======================== */
   .post-hero{
     padding: 50px 0 10px;
   }
+  /* Full-bleed wrapper: makes the band span the entire viewport width,
+     regardless of any parent padding/constraints */
+  .post-hero .bleed{
+    width: 100vw;
+    position: relative;
+    left: 50%;
+    right: 50%;
+    margin-left: -50vw;
+    margin-right: -50vw;
+  }
+
+  /* Center the inner content and keep it nicely wide */
   .post-hero .hero-grid{
-    /* Center the whole band and keep it nicely wide */
-    --hero-max: 1200px;                         /* change to taste */
-    width: min(var(--hero-max), calc(100vw - 64px));
-    margin-inline: auto;                        /* centers the ribbon */
+    --hero-max: 1200px;              /* adjust if you want it wider/narrower */
+    max-width: var(--hero-max);
+    margin: 0 auto;                  /* centers the grid inside the bleed */
+    padding: 0 32px;                 /* pleasant side gutters */
     display: grid;
     grid-template-columns: 1.05fr minmax(320px, 420px);
     gap: 32px;
     align-items: center;
   }
-  /* single-column on small screens */
+
+  /* Single column on smaller screens */
   @media (max-width: 980px){
-  .post-hero .hero-grid{
-    grid-template-columns: 1fr;
-    gap: 18px;
+    .post-hero .hero-grid{
+      grid-template-columns: 1fr;
+      gap: 18px;
     }
   }
+
   .hero-title{
     margin: 0 0 10px;
     font-weight: 800;
@@ -60,10 +76,10 @@ layout: default
     aspect-ratio: 4 / 3; object-fit: cover;
   }
 
-  /* ===== Narrow reading column (your existing look) ===== */
+  /* ========================
+     Narrow reading column
+     ======================== */
   .post-wrap { max-width: 78ch; margin: 0 auto; padding: 0 20px; }
-  .post-header h1 { margin: 0.4rem 0 0.2rem; }
-  .post-meta { color: #8b949e; margin-bottom: 1.25rem; }
   .post-content img { max-width: 100%; height: auto; border-radius: 10px; }
   .post-back { margin-top: 2rem; }
 </style>
@@ -72,30 +88,32 @@ layout: default
 
 <!-- WIDE hero/ribbon -->
 <section class="post-hero">
-  <div class="hero-grid">
-    <div class="hero-copy">
-      <h1 class="hero-title">{{ page.title }}</h1>
-      {% if page.excerpt %}
-        <p class="hero-excerpt">{{ page.excerpt }}</p>
-      {% endif %}
-      <div class="hero-byline">
-        {% if page.author_avatar %}
-          <img class="avatar" src="{{ page.author_avatar | relative_url }}" alt="{{ page.author | default: site.title }}">
+  <div class="bleed">
+    <div class="hero-grid">
+      <div class="hero-copy">
+        <h1 class="hero-title">{{ page.title }}</h1>
+        {% if page.excerpt %}
+          <p class="hero-excerpt">{{ page.excerpt }}</p>
         {% endif %}
-        <div>
-          <div>{{ page.author | default: site.title }}</div>
-          {% if page.date %}
-            <div>{{ page.date | date: "%d %b %Y" }}</div>
+        <div class="hero-byline">
+          {% if page.author_avatar %}
+            <img class="avatar" src="{{ page.author_avatar | relative_url }}" alt="{{ page.author | default: site.title }}">
           {% endif %}
+          <div>
+            <div>{{ page.author | default: site.title }}</div>
+            {% if page.date %}
+              <div>{{ page.date | date: "%d %b %Y" }}</div>
+            {% endif %}
+          </div>
         </div>
       </div>
-    </div>
 
-    {% if hero_img %}
-      <figure class="hero-media">
-        <img src="{{ hero_img | relative_url }}" alt="">
-      </figure>
-    {% endif %}
+      {% if hero_img %}
+        <figure class="hero-media">
+          <img src="{{ hero_img | relative_url }}" alt="">
+        </figure>
+      {% endif %}
+    </div>
   </div>
 </section>
 
