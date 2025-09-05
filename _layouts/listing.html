@@ -3,104 +3,107 @@ layout: default
 ---
 
 <link rel="stylesheet" href="{{ '/assets/css/theme.css' | relative_url }}">
+<link rel="stylesheet" href="{{ '/assets/css/site.css'  | relative_url }}">
 <script defer src="{{ '/assets/js/theme.js' | relative_url }}"></script>
 
 <style>
-  /* --- Ribbon hero --- */
+  /* ===== Wide hero / ribbon (wider than body) ===== */
   .post-hero{
-    display:grid;
-    grid-template-columns: 1.3fr .9fr;
-    gap:48px;
-    align-items:start;
-    margin:56px auto 28px;
-    padding:0 24px;
-    max-width: 1200px; /* ribbon wider than body */
+    padding: 48px 0 8px;
+  }
+  .post-hero .hero-grid{
+    /* WIDE: wider than 78ch body; uses your site container style */
+    max-width: 1240px;              /* tweak if you want even wider */
+    margin: 0 auto;
+    padding: 0 24px;
+    display: grid;
+    grid-template-columns: 1.1fr minmax(320px, 420px);
+    gap: 32px;
+    align-items: center;
   }
   @media (max-width: 980px){
-    .post-hero{ grid-template-columns: 1fr; gap:24px; }
+    .post-hero .hero-grid{
+      grid-template-columns: 1fr;
+      gap: 18px;
+    }
   }
-
-  .post-lead{ display:flex; flex-direction:column; gap:14px; }
-
-  .post-title{
-    font-family:'Inter', system-ui, -apple-system, Segoe UI, Roboto, "Helvetica Neue", Arial, sans-serif;
-    margin:0;
-    font-weight:800;
-    letter-spacing:-0.015em;
-    line-height:1.08;
-    font-size:42px;
+  .hero-title{
+    margin: 0 0 10px;
+    font-weight: 800;
+    letter-spacing: -0.015em;
+    line-height: 1.1;
+    font-size: clamp(28px, 5.2vw, 48px);
     color: var(--text, #0b0f19);
   }
-  @media (min-width:1100px){ .post-title{ font-size:52px; } }
-
-  .post-excerpt{
-    margin:8px 0 0;
-    font-size:16px;
-    line-height:1.7;
+  .hero-excerpt{
+    margin: 10px 0 14px;
     color: var(--muted, #6b7280);
-    max-width: 70ch;
+    line-height: 1.6;
+    font-size: clamp(16px, 1.7vw, 18px);
+    max-width: 62ch;
+  }
+  .hero-byline{
+    display: flex; align-items: center; gap: 12px;
+    color: var(--muted-2, #9aa3b2);
+    margin-top: 8px;
+    font-size: 14px;
+  }
+  .hero-byline .avatar{
+    width: 38px; height: 38px; border-radius: 50%;
+    object-fit: cover; display: block;
+  }
+  .hero-media img{
+    width: 100%; height: auto; display: block;
+    border-radius: 18px;
+    box-shadow: var(--shadow, 0 16px 40px rgba(2,10,30,.08));
+    aspect-ratio: 4 / 3; object-fit: cover;
   }
 
-  .post-byline{ display:flex; align-items:center; gap:12px; margin-top:6px; }
-  .post-byline .avatar{
-    width:38px; height:38px; border-radius:50%; object-fit:cover;
-  }
-  .post-byline .who{ display:flex; flex-direction:column; line-height:1.2; }
-  .post-byline .name{ font-weight:600; color: var(--text, #0b0f19); }
-  .post-byline .date{ font-size:13px; color: var(--muted-2, #9aa3b2); }
-
-  .post-media{ margin:0; }
-  .post-media .hero-img{
-    width:100%; height:auto; display:block;
-    border-radius:18px;
-    border:1px solid var(--card-border, #e5e7eb);
-    box-shadow:0 12px 28px rgba(2,10,30,.08);
-  }
-
-  /* --- Article body (comfortable width) --- */
-  .post-wrap { max-width: 78ch; margin: 0 auto 64px; padding: 0 20px; }
+  /* ===== Narrow reading column (your existing look) ===== */
+  .post-wrap { max-width: 78ch; margin: 0 auto; padding: 0 20px; }
+  .post-header h1 { margin: 0.4rem 0 0.2rem; }
+  .post-meta { color: #8b949e; margin-bottom: 1.25rem; }
   .post-content img { max-width: 100%; height: auto; border-radius: 10px; }
-  .post-content h2{ margin:28px 0 12px; font-size:22px; }
+  .post-back { margin-top: 2rem; }
 </style>
 
-<article class="post">
+{%- assign hero_img = page.hero | default: page.thumb -%}
 
-  <!-- Ribbon hero -->
-  <header class="post-hero">
-    <div class="post-lead">
-      <h1 class="post-title">{{ page.title }}</h1>
-
+<!-- WIDE hero/ribbon -->
+<section class="post-hero">
+  <div class="hero-grid">
+    <div class="hero-copy">
+      <h1 class="hero-title">{{ page.title }}</h1>
       {% if page.excerpt %}
-        <p class="post-excerpt">{{ page.excerpt | strip_html }}</p>
+        <p class="hero-excerpt">{{ page.excerpt }}</p>
       {% endif %}
-
-      <div class="post-byline">
+      <div class="hero-byline">
         {% if page.author_avatar %}
-          <img class="avatar" src="{{ page.author_avatar | relative_url }}" alt="" loading="lazy" decoding="async">
+          <img class="avatar" src="{{ page.author_avatar | relative_url }}" alt="{{ page.author | default: site.title }}">
         {% endif %}
-        <div class="who">
-          <span class="name">{{ page.author | default: site.author.name | default: 'Sab0x1D' }}</span>
-          {% if page.date %}<span class="date">{{ page.date | date: "%d %B, %Y" }}</span>{% endif %}
+        <div>
+          <div>{{ page.author | default: site.title }}</div>
+          {% if page.date %}
+            <div>{{ page.date | date: "%d %b %Y" }}</div>
+          {% endif %}
         </div>
       </div>
     </div>
 
-    {% assign hero_src = page.hero | default: page.thumb %}
-    {% if hero_src %}
-      <figure class="post-media">
-        <img class="hero-img" src="{{ hero_src | relative_url }}" alt="{{ page.title }}">
+    {% if hero_img %}
+      <figure class="hero-media">
+        <img src="{{ hero_img | relative_url }}" alt="">
       </figure>
     {% endif %}
-  </header>
+  </div>
+</section>
 
-  <!-- Article body -->
+<!-- NARROW reading area -->
+<article class="post">
   <div class="post-wrap">
     <div class="post-content">
       {{ content }}
-      <p style="margin-top:2rem;">
-        <a href="{{ '/' | relative_url }}">⬅ Return to Blog Index</a>
-      </p>
+      <p class="post-back"><a href="{{ '/' | relative_url }}">⬅ Return to Blog Index</a></p>
     </div>
   </div>
-
 </article>
