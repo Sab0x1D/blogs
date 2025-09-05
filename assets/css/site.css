@@ -1,4 +1,10 @@
-@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;600;700&family=Inter:wght@400;600;800&display=swap');
+@font-face {
+  font-family: 'Futuristic';
+  src: url('{{ "/assets/fonts/Futuristic-Regular.ttf" | relative_url }}') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
 
 /* =======================
    Design tokens
@@ -606,17 +612,17 @@ main.page-content > .wrapper,
 .site-title,
 .site-title:link,
 .site-title:visited {
-  font-family: 'Space Grotesk', system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
-  font-weight: 600;
-  font-size: 22px;
-  letter-spacing: -0.015em;
-  color: #0f172a;                 /* slate-900 */
-  text-decoration: none !important;  /* remove underline */
+  font-family: 'Futuristic', sans-serif;
+  font-size: 26px;         /* adjust size */
+  font-weight: normal;
+  letter-spacing: 0.05em;  /* tweak spacing for that cosmic look */
+  color: #0f172a;
+  text-decoration: none !important;
 }
 
 .site-title:hover,
 .site-title:focus {
-  color: #0f172a;                 /* keep same color */
+  color: #0f172a;
   text-decoration: none !important;
 }
 
