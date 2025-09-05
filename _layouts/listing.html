@@ -174,10 +174,14 @@ layout: default
     {%- break -%}
   {%- endif -%}
 {%- endfor -%}
+
 {%- if idx != nil -%}
-  {%- assign older1 = coll[idx | plus: 1] -%}
-  {%- assign older2 = coll[idx | plus: 2] -%}
+  {%- assign older1_index = idx | plus: 1 -%}
+  {%- assign older2_index = idx | plus: 2 -%}
+  {%- assign older1 = coll[older1_index] -%}
+  {%- assign older2 = coll[older2_index] -%}
 {%- endif -%}
+
 
 <!-- NARROW reading area -->
 <article class="post">
