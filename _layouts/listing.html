@@ -7,36 +7,29 @@ layout: default
 <script defer src="{{ '/assets/js/theme.js' | relative_url }}"></script>
 
 <style>
-  /* ========================
-     WIDE hero / full-bleed band
-     ======================== */
+  /* ===== Wide hero / ribbon ===== */
   .post-hero{
     padding: 50px 0 10px;
   }
-  /* Full-bleed wrapper: makes the band span the entire viewport width,
-     regardless of any parent padding/constraints */
-  .post-hero .bleed{
-    width: 100vw;
-    position: relative;
-    left: 50%;
-    right: 50%;
-    margin-left: -50vw;
-    margin-right: -50vw;
+
+  /* NEW: hard-center whatever is inside, regardless of parent layout */
+  .post-hero .hero-center{
+    display: grid;
+    place-items: center; /* centers children both axes */
+    width: 100%;
   }
 
-  /* Center the inner content and keep it nicely wide */
+  /* Inner grid that actually lays out title/author and image */
   .post-hero .hero-grid{
-    --hero-max: 1200px;              /* adjust if you want it wider/narrower */
-    max-width: var(--hero-max);
-    margin: 0 auto;                  /* centers the grid inside the bleed */
-    padding: 0 32px;                 /* pleasant side gutters */
+    --hero-max: 1200px;
+    width: min(var(--hero-max), calc(100% - 64px)); /* nice side gutters */
+    /* no margin:auto needed; hero-center handles centering */
     display: grid;
     grid-template-columns: 1.05fr minmax(320px, 420px);
     gap: 32px;
     align-items: center;
   }
 
-  /* Single column on smaller screens */
   @media (max-width: 980px){
     .post-hero .hero-grid{
       grid-template-columns: 1fr;
@@ -76,9 +69,7 @@ layout: default
     aspect-ratio: 4 / 3; object-fit: cover;
   }
 
-  /* ========================
-     Narrow reading column
-     ======================== */
+  /* ===== Narrow reading column ===== */
   .post-wrap { max-width: 78ch; margin: 0 auto; padding: 0 20px; }
   .post-content img { max-width: 100%; height: auto; border-radius: 10px; }
   .post-back { margin-top: 2rem; }
@@ -88,7 +79,7 @@ layout: default
 
 <!-- WIDE hero/ribbon -->
 <section class="post-hero">
-  <div class="bleed">
+  <div class="hero-center">
     <div class="hero-grid">
       <div class="hero-copy">
         <h1 class="hero-title">{{ page.title }}</h1>
