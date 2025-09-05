@@ -1,4 +1,7 @@
 ---
+author: Sab0x1D
+author_avatar: /assets/img/sab01xd-profile.jpg
+
 layout: listing
 title: "Unmasking the SVG threat: How Hackers use vector graphics for phishing attacks"
 excerpt: "Vectors, invisible layers, and redirects hiding in plain sight. This dual nature is what makes SVG such a compelling choice for cybercriminals: it looks harmless, behaves like an image when viewed, but can execute malicious scripts without the victim realizing what’s happening."
