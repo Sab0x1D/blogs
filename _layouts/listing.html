@@ -7,45 +7,28 @@ layout: default
 <script defer src="{{ '/assets/js/theme.js' | relative_url }}"></script>
 
 <style>
-  /* ===== Wide hero / ribbon ===== */
+  /* ===== Centered hero / ribbon (uses your .container) ===== */
+  .post-hero { padding: 50px 0 10px; }
 
-  /* Full-bleed + centered relative to the viewport,
-     ignoring any parent .container/.wrapper constraints */
-  .post-hero{
-    padding: 50px 0 10px;
-    width: 100vw;
-    margin-left: calc(50% - 50vw);
-    margin-right: calc(50% - 50vw);
+  /* Reuse your site container to guarantee proper centering */
+  .post-hero .container {
+    /* your site.css already sets max-width via --container and centers with margin:auto */
+    /* but we want a slightly wider cap for the hero ribbon: */
+    max-width: 1200px;           /* matches your design target */
+    padding-inline: 32px;        /* nice gutters */
   }
 
-  /* Center the child block regardless of parent layout */
-  .post-hero .hero-center{
-    display: flex;
-    justify-content: center;
-    width: 100%;
-  }
-
-  /* Inner layout: capped width, hard-centered */
   .post-hero .hero-grid{
-    max-width: 1200px;
-    width: min(1200px, calc(100vw - 64px));
-    margin-inline: auto !important;  /* win against container rules */
-    padding-inline: 32px;
-
     display: grid;
     grid-template-columns: minmax(0, 1.05fr) minmax(320px, 420px);
     gap: 32px;
     align-items: center;
-
-    justify-self: center !important; /* stop grid stretch from parents */
   }
-
   @media (max-width: 980px){
     .post-hero .hero-grid{
       grid-template-columns: 1fr;
       gap: 18px;
-      padding-inline: 20px;
-      width: min(1200px, calc(100vw - 40px));
+      padding-inline: 0;         /* container already has padding on small screens */
     }
   }
 
@@ -81,7 +64,7 @@ layout: default
     aspect-ratio: 4 / 3; object-fit: cover;
   }
 
-  /* ===== Narrow reading column ===== */
+  /* ===== Narrow reading column (unchanged) ===== */
   .post-wrap { max-width: 78ch; margin: 0 auto; padding: 0 20px; }
   .post-content img { max-width: 100%; height: auto; border-radius: 10px; }
   .post-back { margin-top: 2rem; }
@@ -89,9 +72,9 @@ layout: default
 
 {%- assign hero_img = page.hero | default: page.thumb -%}
 
-<!-- WIDE hero/ribbon -->
+<!-- CENTERED hero/ribbon -->
 <section class="post-hero">
-  <div class="hero-center">
+  <div class="container">
     <div class="hero-grid">
       <div class="hero-copy">
         <h1 class="hero-title">{{ page.title }}</h1>
