@@ -130,7 +130,6 @@ layout: default
 </style>
 
 {%- assign hero_img = page.hero | default: page.thumb -%}
-{%- assign display_date = page.index_date | default: page.date -%}
 
 <!-- CENTERED hero/ribbon -->
 <section class="post-hero">
@@ -147,8 +146,8 @@ layout: default
           {% endif %}
           <div>
             <div>{{ page.author | default: site.title }}</div>
-            {% if display_date %}
-              <div>{{ display_date | date: "%d %b %Y" }}</div>
+            {% if page.date %}
+              <div>{{ page.date | date: "%d %b %Y" }}</div>
             {% endif %}
           </div>
         </div>
@@ -164,14 +163,15 @@ layout: default
 </section>
 
 {%- comment -%}
-  Build a collection ordered by allocated date first:
-  - If a doc has `index_date` (your allocated date), sort by that.
-  - Otherwise fall back to `date`.
-  Then walk until we hit the current page and take the next two items.
+  Older posts:
+  - Use only non-featured listings
+  - Sort by front-matter `date` (newest → oldest)
+  - Walk until current page, then take the next two (older) items
 {%- endcomment -%}
-{%- assign with_index = site.listings | where_exp: "p", "p.index_date" | sort: "index_date" | reverse -%}
-{%- assign without_index = site.listings | where_exp: "p", "p.index_date == nil" | sort: "date" | reverse -%}
-{%- assign coll = with_index | concat: without_index -%}
+{%- assign coll = site.listings
+  | where_exp: "p", "p.featured != true"
+  | sort: "date"
+  | reverse -%}
 
 {%- assign older1 = nil -%}
 {%- assign older2 = nil -%}
