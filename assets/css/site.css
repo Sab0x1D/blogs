@@ -423,10 +423,23 @@ main.page-content > .wrapper,
 .site-title:hover,
 .site-title:focus{ color:#0f172a; text-decoration:none !important; }
 
-/* (Optional) top nav appearance */
-.site-nav .page-link{ font-family:'Inter', sans-serif; text-decoration:none; line-height:1; padding:8px 10px; }
+/* (Optional) top nav appearance — Home on the right, underline on hover */
+.site-nav{
+  margin-left: auto;                   /* push nav (Home) to the right */
+  display: flex;
+  align-items: center;                 /* vertical centering */
+}
+.site-nav .page-link{
+  font-family:'Inter', sans-serif;
+  text-decoration:none;
+  line-height:1;
+  padding:8px 10px;
+}
 .site-nav .page-link:hover,
-.site-nav .page-link:focus{ text-decoration:none; }
+.site-nav .page-link:focus{
+  text-decoration: underline;          /* restore underline on hover/focus */
+  text-underline-offset: 3px;
+}
 
 /* Mobile header tweaks */
 @media (max-width: 720px){
