@@ -337,6 +337,15 @@ main.page-content > .wrapper,
 .site-header.is-scrolled{ box-shadow: 0 6px 20px rgba(2,10,30,.06); border-bottom-color: rgba(15,23,42,.12); }
 @supports(padding:max(0px)){ .site-header{ padding-top: max(0px, env(safe-area-inset-top)); } }
 
+/* NEW: Header row alignment (desktop + mobile) */
+.site-header .wrapper{
+  display: flex;
+  align-items: center;              /* vertical centering */
+  justify-content: space-between;
+  min-height: 64px;                 /* desktop bar height */
+  gap: 20px;
+}
+
 /* =======================
    Article / single post
    ======================= */
@@ -405,7 +414,9 @@ main.page-content > .wrapper,
   font-size: clamp(28px, 2.6vw, 36px);  /* responsive bump */
   font-weight: 400;
   letter-spacing: 0.06em;
-  line-height: 1.1;
+  line-height: 1;                      /* kill extra leading */
+  margin: 0;                           /* no stray margins */
+  padding-block: 8px;                  /* subtle vertical balance */
   color: #0f172a;
   text-decoration: none !important;
 }
@@ -413,6 +424,19 @@ main.page-content > .wrapper,
 .site-title:focus{ color:#0f172a; text-decoration:none !important; }
 
 /* (Optional) top nav appearance */
-.site-nav .page-link{ font-family:'Inter', sans-serif; text-decoration:none; }
+.site-nav .page-link{ font-family:'Inter', sans-serif; text-decoration:none; line-height:1; padding:8px 10px; }
 .site-nav .page-link:hover,
 .site-nav .page-link:focus{ text-decoration:none; }
+
+/* Mobile header tweaks */
+@media (max-width: 720px){
+  .site-header .wrapper{
+    min-height: 56px;
+    padding-left: 16px;
+    padding-right: 16px;
+  }
+  .site-title{
+    font-size: clamp(24px, 6.5vw, 30px);
+    letter-spacing: 0.075em;
+  }
+}
