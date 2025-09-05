@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap');
+
 /* =======================
    Design tokens
    ======================= */
@@ -599,3 +601,20 @@ main.page-content > .wrapper,
   border-radius: 14px;
   box-shadow: 0 10px 28px rgba(2,10,30,.08);
 }
+
+/* ==== Header branding (Site Title) — techy/minimal ==== */
+.site-title a {
+  font-family: 'Space Grotesk', system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
+  font-weight: 600;
+  font-size: 22px;            /* adjust as needed */
+  letter-spacing: -0.015em;
+  color: #0f172a;             /* slate-900 */
+  text-decoration: none !important;
+}
+
+.site-title a:hover,
+.site-title a:focus {
+  color: #0f172a;             /* keep same color */
+  text-decoration: none !important; /* remove underline */
+}
+
