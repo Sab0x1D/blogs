@@ -12,28 +12,34 @@ layout: default
     padding: 50px 0 10px;
   }
 
-  /* NEW: hard-center whatever is inside, regardless of parent layout */
+  /* Hard-center the hero block, no matter what the page wrapper is doing */
   .post-hero .hero-center{
-    display: grid;
-    place-items: center; /* centers children both axes */
+    display: flex;
+    justify-content: center;   /* centers the child horizontally */
     width: 100%;
   }
 
-  /* Inner grid that actually lays out title/author and image */
+  /* Inner layout: fixed max, full width otherwise */
   .post-hero .hero-grid{
-    --hero-max: 1200px;
-    width: min(var(--hero-max), calc(100% - 64px)); /* nice side gutters */
-    /* no margin:auto needed; hero-center handles centering */
+    max-width: 1200px;          /* cap the band width */
+    width: 100%;                /* but fill within that cap */
+    padding-inline: 32px;       /* nice gutters */
+    margin: 0;                  /* hero-center handles centering */
+
     display: grid;
-    grid-template-columns: 1.05fr minmax(320px, 420px);
+    grid-template-columns: minmax(0, 1.05fr) minmax(320px, 420px);
     gap: 32px;
     align-items: center;
+
+    /* In case any parent forces stretch, explicitly opt out: */
+    justify-self: center;
   }
 
   @media (max-width: 980px){
     .post-hero .hero-grid{
       grid-template-columns: 1fr;
       gap: 18px;
+      padding-inline: 20px;
     }
   }
 
