@@ -1,65 +1,33 @@
 ---
 layout: default
-title: Blog — Page 2
-page_num: 2
+title: Redirecting…
 permalink: /page/2/
 ---
 
 <link rel="stylesheet" href="{{ '/assets/css/theme.css' | relative_url }}">
 <link rel="stylesheet" href="{{ '/assets/css/site.css'  | relative_url }}">
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-<script defer src="{{ '/assets/js/theme.js' | relative_url }}"></script>
-<script defer src="{{ '/assets/js/site.js'  | relative_url }}"></script>
 
-<section class="home">
-  <div class="container">
+<!-- Instant client-side redirect -->
+<script>
+  (function () {
+    var target = '{{ "/" | relative_url }}';
+    if (location.pathname !== target) {
+      location.replace(target);
+    }
+  })();
+</script>
 
-    <!-- Previous posts placeholder (no heading) -->
-    <div style="display:grid;place-items:center;padding:60px 0 24px;">
-      <img src="{{ '/assets/img/404image.png' | relative_url }}" alt="Coming soon"
-           style="max-width:520px;height:auto;border-radius:18px;">
-      <p style="margin:20px 0 8px;color:#6b7280;font-size:16px;">Content for page 2 coming soon.</p>
-      <p><a href="{{ '/' | relative_url }}">← Back to main page</a></p>
+<!-- No-JS fallback (responsive and on-brand) -->
+<noscript>
+  <section class="home">
+    <div class="container" style="text-align:center; padding:64px 20px;">
+      <h1 style="margin:0 0 10px; font-weight:800; letter-spacing:-0.02em;">
+        More posts coming soon
+      </h1>
+      <p style="color:var(--muted); margin:0 0 18px;">
+        We don’t have enough posts for page 2 yet.
+      </p>
+      <a class="tag-back" href="{{ '/' | relative_url }}">← Back to main</a>
     </div>
-
-    <!-- Pagination (centered, between posts and topics) -->
-    {%- assign total_pages = 2 -%}
-    {%- assign current = page.page_num | plus: 0 -%}
-    {%- assign prev_num = current | minus: 1 -%}
-    {%- assign next_num = current | plus: 1 -%}
-    {%- assign prev_href = '' -%}
-    {%- if prev_num == 1 -%}
-      {%- assign prev_href = '/' | relative_url -%}
-    {%- elsif prev_num > 1 -%}
-      {%- assign prev_href = '/page/' | append: prev_num | append: '/' | relative_url -%}
-    {%- endif -%}
-    {%- assign next_href = '' -%}
-    {%- if next_num <= total_pages -%}
-      {%- assign next_href = '/page/' | append: next_num | append: '/' | relative_url -%}
-    {%- endif -%}
-
-    <nav class="pager" aria-label="Pagination">
-      <ul>
-        <li>
-          {%- if prev_href != '' -%}
-            <a href="{{ prev_href }}">‹ Prev</a>
-          {%- else -%}
-            <span>‹ Prev</span>
-          {%- endif -%}
-        </li>
-        <li><span>Page {{ current }} of {{ total_pages }}</span></li>
-        <li>
-          {%- if next_href != '' -%}
-            <a href="{{ next_href }}">Next ›</a>
-          {%- else -%}
-            <span>Next ›</span>
-          {%- endif -%}
-        </li>
-      </ul>
-    </nav>
-
-    <!-- Popular topics (starter row; swap thumbs/links when ready) -->
-    {% include topics-grid.html title='POPULAR TOPICS' %}
-
-  </div>
-</section>
+  </section>
+</noscript>
