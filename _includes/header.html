@@ -13,13 +13,22 @@
         </span>
       </label>
 
+      {%- comment -%}
+        Normalize current URL for reliable comparisons:
+        - Apply relative_url (handles baseurl)
+        - Treat "/index.html" as "/"
+      {%- endcomment -%}
+      {%- assign current = page.url | relative_url | replace: '/index.html', '/' -%}
+
       <div class="trigger">
-        {%- for p in site.header_pages -%}
-          {%- assign page_obj = site.pages | where: "path", p | first -%}
+        {%- for path in site.header_pages -%}
+          {%- assign page_obj = site.pages | where: "path", path | first -%}
           {%- if page_obj -%}
+            {%- assign href = page_obj.url | relative_url | replace: '/index.html', '/' -%}
             <a
-              class="page-link{% if page.url == page_obj.url %} is-active{% endif %}"
-              href="{{ page_obj.url | relative_url }}"
+              class="page-link{% if href == current %} is-active{% endif %}"
+              href="{{ href }}"
+              {% if href == current %}aria-current="page"{% endif %}
             >
               {{ page_obj.title | default: page_obj.name | escape }}
             </a>

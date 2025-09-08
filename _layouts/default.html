@@ -1,14 +1,17 @@
 ---
 layout: nil
 ---
-<!DOCTYPE html>
+<!doctype html>
 <html lang="{{ page.lang | default: site.lang | default: 'en' }}">
-  {% include head.html %}
+  <head>
+    {% include head.html %}
+  </head>
   <body>
     {% include header.html %}
 
     <main class="page-content" aria-label="Content">
-      <div class="wrapper">
+      <!-- Use your container, not Minima’s .wrapper -->
+      <div class="container page-body">
         {{ content }}
       </div>
     </main>
