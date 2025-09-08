@@ -453,3 +453,36 @@ main.page-content > .wrapper,
     letter-spacing: 0.075em;
   }
 }
+
+/* ===== Nav: subtle underline on hover, blue dot for active ===== */
+.site-nav .page-link {
+  position: relative;
+  display: inline-block;
+  padding: 8px 10px;
+  text-decoration: none;
+  color: var(--text);
+}
+
+/* keep your subtle underline on hover */
+.site-nav .page-link:hover {
+  text-decoration: underline;
+}
+
+/* active dot (Atega-style) */
+.site-nav .page-link.is-active::before {
+  content: "";
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  /* place the dot just above the text; tweak as needed for your header height */
+  top: -6px;
+  width: 6px;
+  height: 6px;
+  border-radius: 999px;
+  background: #2563eb; /* blue */
+}
+
+/* Optional: hide the dot on very small screens if it clashes with mobile menu */
+@media (max-width: 640px) {
+  .site-nav .page-link.is-active::before { display: none; }
+}

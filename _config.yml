@@ -24,6 +24,9 @@ plugins:
 # Show ONLY these pages in the header nav
 header_pages:
   - index.html
+  - about.md
+  - repos.md
+  - tools.md
 
 exclude:
   - node_modules
