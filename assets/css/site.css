@@ -531,3 +531,54 @@ main.page-content > .wrapper,
 /* ===== Nav underline + active dot (kept) ===== */
 .site-nav .page-link { color: var(--text); }
 .site-nav .page-link:hover { text-decoration: underline; }
+
+/* =========================
+   Sticky header (iOS Safari fix)
+   ========================= */
+.site-header{
+  position: sticky;
+  position: -webkit-sticky;   /* old iOS Safari */
+  top: 0;
+  z-index: 1000;
+  flex: 0 0 auto;             /* don’t let flex layout mess with sticky */
+}
+
+/* =========================
+   Mobile hamburger: force dropdown on small screens
+   ========================= */
+@media (max-width: 880px){
+  /* show hamburger */
+  .site-nav label{ display:block; cursor:pointer; }
+  .site-nav .menu-icon{ display:block; }
+
+  /* hide links by default on mobile */
+  .site-nav .trigger{ display:none; }
+
+  /* open when the checkbox is checked */
+  .site-nav .nav-trigger:checked ~ .trigger{
+    display:block;
+  }
+
+  /* dropdown styling, not inline row */
+  .site-nav .trigger{
+    position: fixed;               /* avoids layout shift */
+    right: 16px;
+    top: calc(64px + 8px);         /* just under the header bar */
+    min-width: 200px;
+    background:#fff;
+    border:1px solid var(--card-border);
+    border-radius:14px;
+    padding:10px;
+    box-shadow: var(--shadow);
+  }
+
+  /* vertical links inside the dropdown */
+  .site-nav .trigger .page-link{
+    display:block;
+    padding:10px 12px;
+    border-radius:10px;
+  }
+
+  /* ensure header height for the calc() above */
+  .site-header .wrapper{ min-height:64px; }
+}
