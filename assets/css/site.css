@@ -638,3 +638,37 @@ main.page-content{
 
 /* Ensure footer sits flush to the bottom */
 .site-footer{ margin-top: 0 !important; }
+
+/* --- Force mobile hamburger behaviour (strongest selector) --- */
+@media (max-width: 900px){
+  /* hide inline links by default on small screens */
+  .site-header .site-nav .trigger{
+    display: none !important;
+  }
+  /* show the dropdown ONLY when the checkbox is checked */
+  .site-header .site-nav .nav-trigger:checked + label + .trigger{
+    display: block !important;
+    position: absolute;
+    right: 16px;
+    top: calc(var(--header-h) + 8px);
+    min-width: 200px;
+    background: #fff;
+    border: 1px solid var(--card-border);
+    border-radius: 12px;
+    padding: 10px;
+    box-shadow: var(--shadow);
+    z-index: 1001;
+  }
+  /* make sure the burger itself is visible */
+  .site-header .site-nav label[for="nav-trigger"],
+  .site-header .site-nav .menu-icon{
+    display: flex !important;
+    align-items: center;
+    padding: 8px;
+  }
+}
+
+/* --- Footer always sticks even on short/empty pages --- */
+.site-footer{
+  margin-top: auto !important;   /* push footer to the bottom in flex column */
+}
