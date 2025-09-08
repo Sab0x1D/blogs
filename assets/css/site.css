@@ -16,11 +16,11 @@
   --round: 22px;
   --gap: 26px;
 
-  /* Atega-like palette */
+  /* Palette */
   --text: #0b0f19;
   --card: #ffffff;
   --card-border: #e5e7eb;
-  --muted: #4670c4;
+  --muted: #6b7280;       /* back to neutral grey */
   --muted-2: #9aa3b2;
 
   --chip-bg: #f8fafc;
@@ -40,10 +40,17 @@ html{
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
+/* Sticky footer layout */
+html, body { height:100%; }
 body{
+  display:flex;
+  flex-direction:column;
+  min-height:100vh;
   font-family: 'Inter', ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, "Helvetica Neue", Arial, "Noto Sans", "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
   color: var(--text);
 }
+.page-content{ flex:1 0 auto; }
+.site-footer{ flex-shrink:0; }
 
 /* =======================
    Layout / wrappers
@@ -200,6 +207,12 @@ main.page-content > .wrapper,
   font-family: 'Inter', sans-serif;
 }
 
+/* Links inside cards must not turn blue */
+.featured-row .card a,
+.grid .card a { color: inherit !important; text-decoration: none !important; }
+.featured-row .card a:visited,
+.grid .card a:visited { color: inherit !important; }
+
 /* Tag chips */
 .chip{
   display: inline-flex; align-items: center;
@@ -337,14 +350,88 @@ main.page-content > .wrapper,
 .site-header.is-scrolled{ box-shadow: 0 6px 20px rgba(2,10,30,.06); border-bottom-color: rgba(15,23,42,.12); }
 @supports(padding:max(0px)){ .site-header{ padding-top: max(0px, env(safe-area-inset-top)); } }
 
-/* NEW: Header row alignment (desktop + mobile) */
+/* Header row alignment */
 .site-header .wrapper{
   display: flex;
-  align-items: center;              /* vertical centering */
+  align-items: center;
   justify-content: space-between;
-  min-height: 64px;                 /* desktop bar height */
+  min-height: 64px;
   gap: 20px;
 }
+
+/* ===== Responsive header / hamburger ===== */
+.site-nav{ position:relative; display:flex; align-items:center; gap:18px; }
+
+/* burger control default hidden on desktop */
+.site-nav .nav-trigger{ display:none; }
+.site-nav label{ display:none; }
+.site-nav .menu-icon{ display:none; }
+
+/* desktop link row */
+.site-nav .trigger{ display:flex; gap:18px; align-items:center; }
+
+/* mobile dropdown */
+@media (max-width: 880px){
+  .site-nav label{ display:block; cursor:pointer; }
+  .site-nav .menu-icon{ display:block; padding:8px; border-radius:10px; }
+  .site-nav .trigger{
+    position:absolute;
+    right:0; top:calc(100% + 8px);
+    min-width:190px;
+    background:#fff;
+    border:1px solid var(--card-border);
+    border-radius:14px;
+    padding:10px;
+    box-shadow:var(--shadow);
+    display:block;
+  }
+  /* closed by default */
+  .site-nav .nav-trigger:not(:checked) ~ .trigger{ display:none; }
+
+  /* vertical links in dropdown */
+  .site-nav .trigger .page-link{ display:block; padding:10px 12px; border-radius:10px; }
+}
+
+/* ==== Header branding ==== */
+.site-title,
+.site-title:link,
+.site-title:visited{
+  font-family: 'Futuristic', sans-serif;
+  font-size: clamp(28px, 2.6vw, 36px);
+  font-weight: 400;
+  letter-spacing: 0.06em;
+  line-height: 1;
+  margin: 0;
+  padding-block: 8px;
+  color: #0f172a;
+  text-decoration: none !important;
+}
+.site-title:hover,
+.site-title:focus{ color:#0f172a; text-decoration:none !important; }
+
+/* Nav links + hover underline */
+.site-nav .page-link{
+  font-family:'Inter', sans-serif;
+  text-decoration:none;
+  line-height:1;
+  padding:8px 10px;
+  color: var(--text);
+}
+.site-nav .page-link:hover,
+.site-nav .page-link:focus{
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+/* Active blue dot */
+.site-nav .page-link { position:relative; }
+.site-nav .page-link.is-active::before{
+  content:"";
+  position:absolute;
+  left:50%; transform:translateX(-50%);
+  top:-6px; width:6px; height:6px; border-radius:999px; background:#2563eb;
+}
+@media (max-width:640px){ .site-nav .page-link.is-active::before{ display:none; } }
 
 /* =======================
    Article / single post
@@ -366,7 +453,7 @@ main.page-content > .wrapper,
 }
 .post-tags .chip:hover{ color:var(--text); border-color:rgba(15,23,42,.18); background:#fff; }
 
-/* Big ribbon title (wider than body) */
+/* Ribbon title */
 .post-title{
   margin: 0 0 12px;
   font-family: 'Inter', sans-serif;
@@ -378,7 +465,7 @@ main.page-content > .wrapper,
   color: var(--text);
 }
 
-/* Short deck/summary under title */
+/* Deck */
 .post-desc{ margin: 8px 0 14px; max-width: 760px; color: var(--muted); font-size:16px; line-height:1.7; }
 
 /* Byline */
@@ -406,40 +493,27 @@ main.page-content > .wrapper,
 .post-body p{ margin:12px 0; }
 .post-body img{ max-width:100%; height:auto; border-radius:14px; box-shadow:0 10px 28px rgba(2,10,30,.08); }
 
-/* ==== Header branding (minima uses <a class="site-title">) ==== */
-.site-title,
-.site-title:link,
-.site-title:visited{
-  font-family: 'Futuristic', sans-serif;
-  font-size: clamp(28px, 2.6vw, 36px);  /* responsive bump */
-  font-weight: 400;
-  letter-spacing: 0.06em;
-  line-height: 1;                      /* kill extra leading */
-  margin: 0;                           /* no stray margins */
-  padding-block: 8px;                  /* subtle vertical balance */
-  color: #0f172a;
-  text-decoration: none !important;
+/* ===== Markdown tables & code ===== */
+.post-content table{
+  width:100%; border-collapse:collapse; margin:16px 0; font-size:.98rem;
 }
-.site-title:hover,
-.site-title:focus{ color:#0f172a; text-decoration:none !important; }
-
-/* (Optional) top nav appearance — Home on the right, underline on hover */
-.site-nav{
-  margin-left: auto;                   /* push nav (Home) to the right */
-  display: flex;
-  align-items: center;                 /* vertical centering */
+.post-content th, .post-content td{
+  border:1px solid var(--card-border);
+  padding:8px 10px; vertical-align:top; text-align:left;
 }
-.site-nav .page-link{
-  font-family:'Inter', sans-serif;
-  text-decoration:none;
-  line-height:1;
-  padding:8px 10px;
+.post-content thead th{ background:#f8fafc; font-weight:600; }
+.post-content code{
+  font-family: ui-monospace,SFMono-Regular,Menlo,Consolas,"Liberation Mono",monospace;
+  background:#f8fafc; border:1px solid var(--card-border);
+  border-radius:6px; padding:0 .25em; font-size:.95em;
 }
-.site-nav .page-link:hover,
-.site-nav .page-link:focus{
-  text-decoration: underline;          /* restore underline on hover/focus */
-  text-underline-offset: 3px;
+.post-content pre{
+  font-family: ui-monospace,SFMono-Regular,Menlo,Consolas,"Liberation Mono",monospace;
+  background:#0b12201a; border:1px solid var(--card-border);
+  border-radius:12px; padding:12px 14px; overflow:auto;
+  font-size:.95rem; line-height:1.5;
 }
+.post-content pre code{ background:transparent; border:0; padding:0; }
 
 /* Mobile header tweaks */
 @media (max-width: 720px){
@@ -454,35 +528,6 @@ main.page-content > .wrapper,
   }
 }
 
-/* ===== Nav: subtle underline on hover, blue dot for active ===== */
-.site-nav .page-link {
-  position: relative;
-  display: inline-block;
-  padding: 8px 10px;
-  text-decoration: none;
-  color: var(--text);
-}
-
-/* keep your subtle underline on hover */
-.site-nav .page-link:hover {
-  text-decoration: underline;
-}
-
-/* active dot (Atega-style) */
-.site-nav .page-link.is-active::before {
-  content: "";
-  position: absolute;
-  left: 50%;
-  transform: translateX(-50%);
-  /* place the dot just above the text; tweak as needed for your header height */
-  top: -6px;
-  width: 6px;
-  height: 6px;
-  border-radius: 999px;
-  background: #2563eb; /* blue */
-}
-
-/* Optional: hide the dot on very small screens if it clashes with mobile menu */
-@media (max-width: 640px) {
-  .site-nav .page-link.is-active::before { display: none; }
-}
+/* ===== Nav underline + active dot (kept) ===== */
+.site-nav .page-link { color: var(--text); }
+.site-nav .page-link:hover { text-decoration: underline; }
