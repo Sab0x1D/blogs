@@ -31,6 +31,13 @@
   /* Image area ratios (width / height) */
   --feat-ar: 4 / 3.75;
   --prev-ar: 16 / 15.5;
+
+  /* Layout sizing for sticky header/footer math */
+  --header-h: 64px;   /* desktop header height */
+  --footer-h: 120px;  /* adjust if your footer is taller/shorter */
+}
+@media (max-width: 720px){
+  :root{ --header-h: 56px; }   /* mobile header height */
 }
 
 /* =======================
@@ -40,17 +47,25 @@ html{
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
-/* Sticky footer layout */
+/* Sticky footer + fixed header spacing */
 html, body { height:100%; }
 body{
   display:flex;
   flex-direction:column;
   min-height:100vh;
+  padding-top: var(--header-h);           /* space for fixed header */
   font-family: 'Inter', ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, "Helvetica Neue", Arial, "Noto Sans", "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
   color: var(--text);
 }
-.page-content{ flex:1 0 auto; }
-.site-footer{ flex-shrink:0; }
+/* page content must fill available viewport height even when empty */
+main.page-content{
+  flex:1 0 auto;
+  min-height: calc(100dvh - var(--header-h) - var(--footer-h));
+}
+.site-footer{
+  flex-shrink:0;
+  min-height: var(--footer-h);
+}
 
 /* =======================
    Layout / wrappers
@@ -342,54 +357,76 @@ main.page-content > .wrapper,
 
 /* ===== Sticky Site Header ===== */
 .site-header{
-  position: sticky; top: 0; z-index: 100;
+  position: fixed !important;          /* robust pin */
+  top: 0; left: 0; right: 0;
+  z-index: 1000;
   background: rgba(255,255,255,.92);
   backdrop-filter: saturate(180%) blur(10px);
   border-bottom: 1px solid rgba(15,23,42,.08);
 }
 .site-header.is-scrolled{ box-shadow: 0 6px 20px rgba(2,10,30,.06); border-bottom-color: rgba(15,23,42,.12); }
-@supports(padding:max(0px)){ .site-header{ padding-top: max(0px, env(safe-area-inset-top)); } }
 
 /* Header row alignment */
 .site-header .wrapper{
   display: flex;
   align-items: center;
   justify-content: space-between;
-  min-height: 64px;
+  min-height: var(--header-h);
   gap: 20px;
 }
 
 /* ===== Responsive header / hamburger ===== */
 .site-nav{ position:relative; display:flex; align-items:center; gap:18px; }
 
-/* burger control default hidden on desktop */
-.site-nav .nav-trigger{ display:none; }
-.site-nav label{ display:none; }
-.site-nav .menu-icon{ display:none; }
+/* IMPORTANT: keep the checkbox clickable (don't use display:none) */
+.site-header .site-nav .nav-trigger{
+  position:absolute;
+  left:-9999px;                     /* visually hide */
+  display:block; width:1px; height:1px; /* but keep it active for the label */
+}
+.site-header .site-nav label{ display:none; }
+.site-header .site-nav .menu-icon{ display:none; }
 
 /* desktop link row */
-.site-nav .trigger{ display:flex; gap:18px; align-items:center; }
+.site-header .site-nav .trigger{ display:flex; gap:18px; align-items:center; }
 
 /* mobile dropdown */
 @media (max-width: 880px){
-  .site-nav label{ display:block; cursor:pointer; }
-  .site-nav .menu-icon{ display:block; padding:8px; border-radius:10px; }
-  .site-nav .trigger{
+  .site-header .site-nav label{
+    display:block; cursor:pointer;
+  }
+  .site-header .site-nav .menu-icon{
+    display:block; padding:8px; border-radius:10px;
+  }
+  .site-header .site-nav .menu-icon svg{ width:22px; height:18px; }
+
+  /* closed by default on mobile */
+  .site-header .site-nav .trigger{ display:none; }
+
+  /* open when checkbox is checked */
+  .site-header .site-nav .nav-trigger:checked ~ .trigger{
+    display:block;
     position:absolute;
-    right:0; top:calc(100% + 8px);
-    min-width:190px;
+    right:16px;
+    top: calc(var(--header-h) + 8px);
+    min-width:200px;
     background:#fff;
     border:1px solid var(--card-border);
-    border-radius:14px;
+    border-radius:12px;
     padding:10px;
-    box-shadow:var(--shadow);
-    display:block;
+    box-shadow: var(--shadow);
+    z-index:1001;
   }
-  /* closed by default */
-  .site-nav .nav-trigger:not(:checked) ~ .trigger{ display:none; }
 
   /* vertical links in dropdown */
-  .site-nav .trigger .page-link{ display:block; padding:10px 12px; border-radius:10px; }
+  .site-header .site-nav .trigger .page-link{
+    display:block;
+    padding:10px 12px;
+    border-radius:10px;
+  }
+
+  /* hide the active dot in the dropdown to avoid clutter */
+  .site-header .site-nav .page-link.is-active::before{ display:none; }
 }
 
 /* ==== Header branding ==== */
@@ -409,22 +446,20 @@ main.page-content > .wrapper,
 .site-title:hover,
 .site-title:focus{ color:#0f172a; text-decoration:none !important; }
 
-/* Nav links + hover underline */
+/* Nav links + hover underline + active dot */
 .site-nav .page-link{
   font-family:'Inter', sans-serif;
   text-decoration:none;
   line-height:1;
   padding:8px 10px;
   color: var(--text);
+  position: relative;
 }
 .site-nav .page-link:hover,
 .site-nav .page-link:focus{
   text-decoration: underline;
   text-underline-offset: 3px;
 }
-
-/* Active blue dot */
-.site-nav .page-link { position:relative; }
 .site-nav .page-link.is-active::before{
   content:"";
   position:absolute;
@@ -528,130 +563,6 @@ main.page-content > .wrapper,
   }
 }
 
-/* ===== Nav underline + active dot (kept) ===== */
+/* Nav underline + active dot (kept) */
 .site-nav .page-link { color: var(--text); }
 .site-nav .page-link:hover { text-decoration: underline; }
-
-/* =========================
-   Sticky header (iOS Safari fix)
-   ========================= */
-.site-header{
-  position: sticky;
-  position: -webkit-sticky;   /* old iOS Safari */
-  top: 0;
-  z-index: 1000;
-  flex: 0 0 auto;             /* don’t let flex layout mess with sticky */
-}
-
-/* =========================================================
-   1) Always-pinned header (robust on iOS / long pages)
-   ---------------------------------------------------------
-   We switch from sticky to fixed and create a safe top
-   spacer via body padding tied to a CSS variable.
-   ========================================================= */
-:root{
-  --header-h: 64px;      /* desktop header height */
-}
-@media (max-width: 720px){
-  :root{ --header-h: 56px; }   /* mobile header height */
-}
-
-/* Pin the header */
-.site-header{
-  position: fixed !important;
-  top: 0; left: 0; right: 0;
-  z-index: 1000;
-}
-
-/* Create space so content doesn't slide under the fixed bar */
-body{
-  padding-top: var(--header-h);
-}
-
-/* Keep the glassy look and shadow you already use */
-.site-header{
-  background: rgba(255,255,255,.92);
-  backdrop-filter: saturate(180%) blur(10px);
-  border-bottom: 1px solid rgba(15,23,42,.08);
-}
-.site-header.is-scrolled{
-  box-shadow: 0 6px 20px rgba(2,10,30,.06);
-  border-bottom-color: rgba(15,23,42,.12);
-}
-
-/* Ensure the row has a predictable height (matches --header-h) */
-.site-header .wrapper{
-  min-height: var(--header-h);
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 20px;
-}
-
-/* =========================================================
-   2) Mobile hamburger using existing minima markup
-   ---------------------------------------------------------
-   Desktop: show inline links, hide hamburger
-   Mobile:  hide links, show hamburger; open dropdown when
-            #nav-trigger is checked.
-   ========================================================= */
-
-/* Baseline (desktop) */
-.site-header .site-nav .nav-trigger{ position:absolute; left:-9999px; } /* hide checkbox */
-.site-header .site-nav label{ display:none; }
-.site-header .site-nav .menu-icon{ display:none; }
-.site-header .site-nav .trigger{
-  display:flex;
-  align-items:center;
-  gap: 14px;
-}
-
-/* Mobile behavior */
-@media (max-width: 880px){
-  /* show hamburger, hide link row by default */
-  .site-header .site-nav label{ display:block; cursor:pointer; }
-  .site-header .site-nav .menu-icon{ display:block; }
-  .site-header .site-nav .trigger{ display:none; }
-
-  /* when menu is toggled open */
-  .site-header .site-nav .nav-trigger:checked ~ .trigger{
-    display:block;
-    position: absolute;
-    right: 16px;
-    top: calc(var(--header-h) + 8px);   /* just below the bar */
-    min-width: 200px;
-    background:#fff;
-    border:1px solid var(--card-border);
-    border-radius:12px;
-    padding:10px;
-    box-shadow: var(--shadow);
-    z-index: 1001;                      /* above header */
-  }
-
-  /* vertical links inside the dropdown */
-  .site-header .site-nav .trigger .page-link{
-    display:block;
-    padding:10px 12px;
-    border-radius:10px;
-  }
-
-  /* optional: hide the blue active dot inside the dropdown */
-  .site-header .site-nav .page-link.is-active::before{ display:none; }
-}
-
-/* Keep your subtle underline + blue dot from before */
-.site-nav .page-link{
-  position:relative;
-  display:inline-block;
-  padding:8px 10px;
-  text-decoration:none;
-  color: var(--text);
-}
-.site-nav .page-link:hover{ text-decoration: underline; text-underline-offset: 3px; }
-.site-nav .page-link.is-active::before{
-  content:"";
-  position:absolute;
-  left:50%; transform:translateX(-50%);
-  top:-6px; width:6px; height:6px; border-radius:999px;
-  background:#2563eb;
-}
