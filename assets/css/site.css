@@ -543,42 +543,115 @@ main.page-content > .wrapper,
   flex: 0 0 auto;             /* don’t let flex layout mess with sticky */
 }
 
-/* =========================
-   Mobile hamburger: force dropdown on small screens
-   ========================= */
+/* =========================================================
+   1) Always-pinned header (robust on iOS / long pages)
+   ---------------------------------------------------------
+   We switch from sticky to fixed and create a safe top
+   spacer via body padding tied to a CSS variable.
+   ========================================================= */
+:root{
+  --header-h: 64px;      /* desktop header height */
+}
+@media (max-width: 720px){
+  :root{ --header-h: 56px; }   /* mobile header height */
+}
+
+/* Pin the header */
+.site-header{
+  position: fixed !important;
+  top: 0; left: 0; right: 0;
+  z-index: 1000;
+}
+
+/* Create space so content doesn't slide under the fixed bar */
+body{
+  padding-top: var(--header-h);
+}
+
+/* Keep the glassy look and shadow you already use */
+.site-header{
+  background: rgba(255,255,255,.92);
+  backdrop-filter: saturate(180%) blur(10px);
+  border-bottom: 1px solid rgba(15,23,42,.08);
+}
+.site-header.is-scrolled{
+  box-shadow: 0 6px 20px rgba(2,10,30,.06);
+  border-bottom-color: rgba(15,23,42,.12);
+}
+
+/* Ensure the row has a predictable height (matches --header-h) */
+.site-header .wrapper{
+  min-height: var(--header-h);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+}
+
+/* =========================================================
+   2) Mobile hamburger using existing minima markup
+   ---------------------------------------------------------
+   Desktop: show inline links, hide hamburger
+   Mobile:  hide links, show hamburger; open dropdown when
+            #nav-trigger is checked.
+   ========================================================= */
+
+/* Baseline (desktop) */
+.site-header .site-nav .nav-trigger{ position:absolute; left:-9999px; } /* hide checkbox */
+.site-header .site-nav label{ display:none; }
+.site-header .site-nav .menu-icon{ display:none; }
+.site-header .site-nav .trigger{
+  display:flex;
+  align-items:center;
+  gap: 14px;
+}
+
+/* Mobile behavior */
 @media (max-width: 880px){
-  /* show hamburger */
-  .site-nav label{ display:block; cursor:pointer; }
-  .site-nav .menu-icon{ display:block; }
+  /* show hamburger, hide link row by default */
+  .site-header .site-nav label{ display:block; cursor:pointer; }
+  .site-header .site-nav .menu-icon{ display:block; }
+  .site-header .site-nav .trigger{ display:none; }
 
-  /* hide links by default on mobile */
-  .site-nav .trigger{ display:none; }
-
-  /* open when the checkbox is checked */
-  .site-nav .nav-trigger:checked ~ .trigger{
+  /* when menu is toggled open */
+  .site-header .site-nav .nav-trigger:checked ~ .trigger{
     display:block;
-  }
-
-  /* dropdown styling, not inline row */
-  .site-nav .trigger{
-    position: fixed;               /* avoids layout shift */
+    position: absolute;
     right: 16px;
-    top: calc(64px + 8px);         /* just under the header bar */
+    top: calc(var(--header-h) + 8px);   /* just below the bar */
     min-width: 200px;
     background:#fff;
     border:1px solid var(--card-border);
-    border-radius:14px;
+    border-radius:12px;
     padding:10px;
     box-shadow: var(--shadow);
+    z-index: 1001;                      /* above header */
   }
 
   /* vertical links inside the dropdown */
-  .site-nav .trigger .page-link{
+  .site-header .site-nav .trigger .page-link{
     display:block;
     padding:10px 12px;
     border-radius:10px;
   }
 
-  /* ensure header height for the calc() above */
-  .site-header .wrapper{ min-height:64px; }
+  /* optional: hide the blue active dot inside the dropdown */
+  .site-header .site-nav .page-link.is-active::before{ display:none; }
+}
+
+/* Keep your subtle underline + blue dot from before */
+.site-nav .page-link{
+  position:relative;
+  display:inline-block;
+  padding:8px 10px;
+  text-decoration:none;
+  color: var(--text);
+}
+.site-nav .page-link:hover{ text-decoration: underline; text-underline-offset: 3px; }
+.site-nav .page-link.is-active::before{
+  content:"";
+  position:absolute;
+  left:50%; transform:translateX(-50%);
+  top:-6px; width:6px; height:6px; border-radius:999px;
+  background:#2563eb;
 }
