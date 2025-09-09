@@ -583,3 +583,12 @@ main.page-content{
 
 /* (Optional) make the sticky-footer math tighter now that it's short */
 :root{ --footer-h: 72px; }  /* was 120px */
+
+/* Give the topics row on the home page the same breathing room as posts */
+.home .topic-grid { 
+  margin-bottom: 80px; 
+}
+
+@media (max-width: 720px){
+  .home .topic-grid { margin-bottom: 64px; }
+}
