@@ -1,22 +1,11 @@
 <!-- _includes/header.html -->
 <header class="site-header" role="banner">
   <div class="wrapper">
-    <a class="site-title" rel="author" href="{{ '/' | relative_url }}">
-      {{ site.title | escape }}
-    </a>
+    <a class="site-title" rel="author" href="{{ '/' | relative_url }}">{{ site.title | escape }}</a>
 
-    <nav class="site-nav" aria-label="Primary">
-      {%- assign current_url = page.url | relative_url -%}
-      {%- for p in site.header_pages -%}
-        {%- assign page_obj = site.pages | where: "path", p | first -%}
-        {%- if page_obj -%}
-          {%- assign href = page_obj.url | relative_url -%}
-          <a class="page-link{% if current_url == href %} is-active{% endif %}"
-             href="{{ href }}">
-            {{ page_obj.title | default: page_obj.name | escape }}
-          </a>
-        {%- endif -%}
-      {%- endfor -%}
+    <nav class="site-nav">
+      <a class="page-link{% if page.url == '/' %} is-active{% endif %}"
+         href="{{ '/' | relative_url }}">Home</a>
     </nav>
   </div>
 </header>
