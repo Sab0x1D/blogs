@@ -17,10 +17,7 @@ permalink: /
     {%- assign excerpt_limit = site.excerpt_chars | default: 220 -%}
 
     {%- comment -%}
-      Build the Featured row manually:
-      1) take newest posts with `featured: true`
-      2) top up with newest non-featured until we reach 4
-      Keep track of which URLs we printed so we can exclude them below.
+      FEATURED: newest posts with `featured: true`, then top up with newest non-featured.
     {%- endcomment -%}
     {%- assign featured_ids = "" -%}
     {%- assign featured_printed = 0 -%}
@@ -28,7 +25,6 @@ permalink: /
 
     <h2 class="section-title">FEATURED</h2>
     <section class="featured-row" aria-label="Featured posts">
-
       {%- for p in manual -%}
         {%- if featured_printed < 4 -%}
           <a class="card card--sm" href="{{ p.url | relative_url }}">
@@ -36,9 +32,7 @@ permalink: /
               <img class="thumb" src="{{ (p.thumb | default: site.default_thumb) | relative_url }}" alt="{{ p.title }}">
               <span class="meta-top">{{ p.date | date: "%d %b %Y" }}</span>
             </div>
-            <div class="body">
-              <h3 class="title">{{ p.title }}</h3>
-            </div>
+            <div class="body"><h3 class="title">{{ p.title }}</h3></div>
           </a>
           {%- assign featured_ids = featured_ids | append: p.url | append: '|' -%}
           {%- assign featured_printed = featured_printed | plus: 1 -%}
@@ -53,9 +47,7 @@ permalink: /
                 <img class="thumb" src="{{ (p.thumb | default: site.default_thumb) | relative_url }}" alt="{{ p.title }}">
                 <span class="meta-top">{{ p.date | date: "%d %b %Y" }}</span>
               </div>
-              <div class="body">
-                <h3 class="title">{{ p.title }}</h3>
-              </div>
+              <div class="body"><h3 class="title">{{ p.title }}</h3></div>
             </a>
             {%- assign featured_ids = featured_ids | append: p.url | append: '|' -%}
             {%- assign featured_printed = featured_printed | plus: 1 -%}
@@ -64,41 +56,42 @@ permalink: /
       {%- endif -%}
     </section>
 
-    <!-- Previous posts: everything NOT printed above (first page shows 6) -->
+    <!-- Previous posts: show ALL posts (duplication with Featured allowed), paginated -->
     <h2 class="section-title">PREVIOUS POSTS</h2>
 
     {%- assign page_size = 6 -%}
+    {%- assign current   = page.page_num | plus: 0 -%}
+    {%- if current <= 0 %}{% assign current = 1 %}{% endif %}
+
+    {%- comment -%} ceil(coll.size / page_size) {%- endcomment -%}
+    {%- assign base_pages = coll.size | divided_by: page_size -%}
+    {%- assign remainder  = coll.size | modulo: page_size -%}
+    {%- assign total_pages = base_pages -%}
+    {%- if remainder > 0 -%}{%- assign total_pages = base_pages | plus: 1 -%}{%- endif -%}
+
+    {%- assign offset = page_size | times: current | minus: page_size -%}
+
     <section class="grid" aria-label="Previous posts">
-      {%- assign shown = 0 -%}
-      {%- for p in coll -%}
-        {%- if shown < page_size and (featured_ids contains p.url) == false -%}
-          <a class="card card--lg" href="{{ p.url | relative_url }}">
-            <div class="media">
-              <img class="thumb" src="{{ (p.thumb | default: site.default_thumb) | relative_url }}" alt="{{ p.title }}">
-              <span class="meta-top">{{ p.date | date: "%d %b %Y" }}</span>
-            </div>
-            <div class="body">
-              <h3 class="title">{{ p.title }}</h3>
-              {%- if p.excerpt -%}
-                <p class="excerpt">{{ p.excerpt | strip_html | truncate: excerpt_limit }}</p>
-              {%- endif -%}
-            </div>
-          </a>
-          {%- assign shown = shown | plus: 1 -%}
-        {%- endif -%}
+      {%- for p in coll offset: offset limit: page_size -%}
+        <a class="card card--lg" href="{{ p.url | relative_url }}">
+          <div class="media">
+            <img class="thumb" src="{{ (p.thumb | default: site.default_thumb) | relative_url }}" alt="{{ p.title }}">
+            <span class="meta-top">{{ p.date | date: "%d %b %Y" }}</span>
+          </div>
+          <div class="body">
+            <h3 class="title">{{ p.title }}</h3>
+            {%- if p.excerpt -%}
+              <p class="excerpt">{{ p.excerpt | strip_html | truncate: excerpt_limit }}</p>
+            {%- endif -%}
+          </div>
+        </a>
       {%- endfor -%}
     </section>
 
-    {%- comment -%}
-      TEMP pager (unchanged). If/when you wire real pagination,
-      replicate the "exclude featured_ids" logic on subsequent pages.
-    {%- endcomment -%}
-    {%- assign total_pages = 2 -%}
-    {%- assign current = page.page_num | plus: 0 -%}
-    {%- assign prev_num = current | minus: 1 -%}
-    {%- assign next_num = current | plus: 1 -%}
+    {%- if total_pages > 1 -%}
+      {%- assign prev_num = current | minus: 1 -%}
+      {%- assign next_num = current | plus: 1 -%}
 
-    {%- if total_pages > 0 -%}
       {%- assign prev_href = '' -%}
       {%- if prev_num == 1 -%}
         {%- assign prev_href = '/' | relative_url -%}
@@ -135,6 +128,5 @@ permalink: /
     {%- endif -%}
 
     {% include topics-grid.html title='POPULAR TOPICS' %}
-
   </div>
 </section>
