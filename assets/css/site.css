@@ -375,58 +375,51 @@ main.page-content > .wrapper,
   gap: 20px;
 }
 
-/* ===== Responsive header / hamburger ===== */
+/* ===== Responsive header / hamburger — MOBILE-FIRST ===== */
 .site-nav{ position:relative; display:flex; align-items:center; gap:18px; }
 
-/* IMPORTANT: keep the checkbox clickable (don't use display:none) */
+/* Keep the checkbox accessible (visually hidden) */
 .site-header .site-nav .nav-trigger{
-  position:absolute;
-  left:-9999px;                     /* visually hide */
-  display:block; width:1px; height:1px; /* but keep it active for the label */
+  position:absolute; left:-9999px; width:1px; height:1px; display:block;
 }
-.site-header .site-nav label{ display:none; }
-.site-header .site-nav .menu-icon{ display:none; }
 
-/* desktop link row */
-.site-header .site-nav .trigger{ display:flex; gap:18px; align-items:center; }
+/* Default (mobile): show burger, hide inline links */
+.site-header .site-nav label{
+  display:flex; align-items:center; padding:8px; cursor:pointer;
+  -webkit-tap-highlight-color: transparent;
+}
+.site-header .site-nav .menu-icon{ display:block; }
+.site-header .site-nav .trigger{ display:none; }
 
-/* mobile dropdown */
-@media (max-width: 880px){
-  .site-header .site-nav label{
-    display:block; cursor:pointer;
+/* Open dropdown when toggled */
+.site-header .site-nav .nav-trigger:checked + label + .trigger{
+  display:block;
+  position:absolute;
+  right:16px;
+  top: calc(var(--header-h) + 8px);
+  min-width:200px;
+  background:#fff;
+  border:1px solid var(--card-border);
+  border-radius:12px;
+  padding:10px;
+  box-shadow: var(--shadow);
+  z-index:1001;
+}
+.site-header .site-nav .trigger .page-link{
+  display:block; padding:10px 12px; border-radius:10px;
+}
+/* Hide the active dot inside the dropdown */
+.site-header .site-nav .trigger .page-link.is-active::before{ display:none; }
+
+/* Desktop overrides */
+@media (min-width: 881px){
+  .site-header .site-nav label,
+  .site-header .site-nav .menu-icon{ display:none !important; }
+  .site-header .site-nav .trigger{
+    display:flex !important; gap:18px; align-items:center;
+    position:static; right:auto; top:auto;
+    min-width:0; padding:0; border:0; border-radius:0; background:transparent; box-shadow:none;
   }
-  .site-header .site-nav .menu-icon{
-    display:block; padding:8px; border-radius:10px;
-  }
-  .site-header .site-nav .menu-icon svg{ width:22px; height:18px; }
-
-  /* closed by default on mobile */
-  .site-header .site-nav .trigger{ display:none; }
-
-  /* open when checkbox is checked */
-  .site-header .site-nav .nav-trigger:checked ~ .trigger{
-    display:block;
-    position:absolute;
-    right:16px;
-    top: calc(var(--header-h) + 8px);
-    min-width:200px;
-    background:#fff;
-    border:1px solid var(--card-border);
-    border-radius:12px;
-    padding:10px;
-    box-shadow: var(--shadow);
-    z-index:1001;
-  }
-
-  /* vertical links in dropdown */
-  .site-header .site-nav .trigger .page-link{
-    display:block;
-    padding:10px 12px;
-    border-radius:10px;
-  }
-
-  /* hide the active dot in the dropdown to avoid clutter */
-  .site-header .site-nav .page-link.is-active::before{ display:none; }
 }
 
 /* ==== Header branding ==== */
@@ -568,107 +561,14 @@ main.page-content > .wrapper,
 .site-nav .page-link:hover { text-decoration: underline; }
 
 /* =========================================================
-   FIX 1 — Mobile hamburger always visible + working
-   (wins over Minima's defaults)
+   Sticky footer on short/empty pages (fallback + dvh)
    ========================================================= */
-
-/* Keep the checkbox clickable (don't use display:none) */
-.site-header .site-nav .nav-trigger{
-  position: absolute;
-  left: -9999px;            /* visually hidden, still clickable via label */
-  width: 1px;
-  height: 1px;
-  display: block;
-}
-
-/* Force hamburger ON and link row OFF under 880px */
-@media (max-width: 880px){
-  .site-header .site-nav label[for="nav-trigger"]{
-    display: flex !important;
-    align-items: center;
-    padding: 8px;
-    cursor: pointer;
-    -webkit-tap-highlight-color: transparent;
-  }
-  .site-header .site-nav .menu-icon{ display: block !important; }
-  .site-header .site-nav .trigger{ display: none !important; }
-
-  /* Open dropdown when the checkbox is checked */
-  .site-header .site-nav .nav-trigger:checked ~ .trigger{
-    display: block !important;
-    position: absolute;
-    right: 16px;
-    top: calc(var(--header-h) + 8px);
-    min-width: 200px;
-    background: #fff;
-    border: 1px solid var(--card-border);
-    border-radius: 12px;
-    padding: 10px;
-    box-shadow: var(--shadow);
-    z-index: 1001;
-  }
-
-  /* Vertical links in the dropdown */
-  .site-header .site-nav .trigger .page-link{
-    display: block;
-    padding: 10px 12px;
-    border-radius: 10px;
-  }
-
-  /* Hide the blue dot inside the dropdown to avoid clutter */
-  .site-header .site-nav .page-link.is-active::before{ display:none; }
-}
-
-/* =========================================================
-   FIX 2 — Sticky footer on short/empty pages
-   (vh fallback + dvh upgrade)
-   ========================================================= */
-
-/* Fallback for browsers without 100dvh */
 main.page-content{
   min-height: calc(100vh - var(--header-h) - var(--footer-h)) !important;
 }
-
-/* Prefer dynamic viewport height when supported */
 @supports (height: 100dvh){
   main.page-content{
     min-height: calc(100dvh - var(--header-h) - var(--footer-h)) !important;
   }
 }
-
-/* Ensure footer sits flush to the bottom */
-.site-footer{ margin-top: 0 !important; }
-
-/* --- Force mobile hamburger behaviour (strongest selector) --- */
-@media (max-width: 900px){
-  /* hide inline links by default on small screens */
-  .site-header .site-nav .trigger{
-    display: none !important;
-  }
-  /* show the dropdown ONLY when the checkbox is checked */
-  .site-header .site-nav .nav-trigger:checked + label + .trigger{
-    display: block !important;
-    position: absolute;
-    right: 16px;
-    top: calc(var(--header-h) + 8px);
-    min-width: 200px;
-    background: #fff;
-    border: 1px solid var(--card-border);
-    border-radius: 12px;
-    padding: 10px;
-    box-shadow: var(--shadow);
-    z-index: 1001;
-  }
-  /* make sure the burger itself is visible */
-  .site-header .site-nav label[for="nav-trigger"],
-  .site-header .site-nav .menu-icon{
-    display: flex !important;
-    align-items: center;
-    padding: 8px;
-  }
-}
-
-/* --- Footer always sticks even on short/empty pages --- */
-.site-footer{
-  margin-top: auto !important;   /* push footer to the bottom in flex column */
-}
+.site-footer{ margin-top: auto !important; }  /* push to bottom */
