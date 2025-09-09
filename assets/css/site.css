@@ -586,9 +586,9 @@ main.page-content{
 
 /* Give the topics row on the home page the same breathing room as posts */
 .home .topic-grid { 
-  margin-bottom: 80px; 
+  margin-bottom: 50px; 
 }
 
 @media (max-width: 720px){
-  .home .topic-grid { margin-bottom: 64px; }
+  .home .topic-grid { margin-bottom: 50px; }
 }
