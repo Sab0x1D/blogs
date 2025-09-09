@@ -32,6 +32,9 @@
   --feat-ar: 4 / 3.75;
   --prev-ar: 16 / 15.5;
 
+  /* Mobile featured tile height (edit this to make thinner/taller) */
+  --feat-mobile-ar: 16 / 10;
+
   /* Layout sizing for sticky header/footer math */
   --header-h: 64px;   /* desktop header height */
   --footer-h: 120px;  /* adjust if your footer is taller/shorter */
@@ -620,9 +623,9 @@ main.page-content { padding-bottom: 20px !important; }
     background: #0b0f19;
   }
 
-  /* Media-first aspect ratio (still looks like a tile) */
+  /* Media-first aspect ratio (set via variable) */
   .featured-row .card.card--sm .media{
-    aspect-ratio: 16 / 9 !important;
+    aspect-ratio: var(--feat-mobile-ar) !important;
   }
 
   /* Ensure the image fills the tile */
