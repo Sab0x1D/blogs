@@ -572,3 +572,14 @@ main.page-content{
   }
 }
 .site-footer{ margin-top: auto !important; }  /* push to bottom */
+
+/* Simple one-line footer */
+.site-footer { background:#f8fafc; border-top:1px solid var(--card-border); }
+.site-footer .wrapper {
+  display:flex; justify-content:center; align-items:center;
+  padding: 18px 24px;
+}
+.footer-quote { margin:0; font-size:14px; color:var(--muted); text-align:center; font-style:italic; }
+
+/* (Optional) make the sticky-footer math tighter now that it's short */
+:root{ --footer-h: 72px; }  /* was 120px */
