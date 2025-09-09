@@ -16,28 +16,26 @@ permalink: /page/2/
     {%- assign coll = site.listings | sort: 'date' | reverse -%}
     {%- assign excerpt_limit = site.excerpt_chars | default: 220 -%}
 
-    {# -----------------------------
-       PAGE 2: no Featured section
-       ----------------------------- #}
+    {%- comment -%} PAGE 2: no Featured section {%- endcomment -%}
 
     <h2 class="section-title">PREVIOUS POSTS</h2>
 
     {%- comment -%}
-      Page 1 shows 6 large cards. Keep pagination math based on 6 so
-      total_pages stays consistent across pages, but on page 2 we show 9 cards.
+      Pagination math:
+      • Page 1 shows 6 large cards (base_page_size = 6)
+      • Page 2 (and later) shows up to 9 cards each
+      • total_pages is computed using the base_page_size so the pager stays consistent.
     {%- endcomment -%}
-    {%- assign base_page_size = 6 -%}   {# page-1 page size #}
-    {%- assign page_size      = 9 -%}   {# page-2 grid size  #}
+    {%- assign base_page_size = 6 -%}
+    {%- assign page_size      = 9 -%}
     {%- assign current        = page.page_num | plus: 0 -%}
     {%- if current <= 0 %}{% assign current = 1 %}{% endif %}
 
-    {# total pages based on base_page_size (page 1 = 6) #}
-    {%- assign base_pages = coll.size | divided_by: base_page_size -%}
-    {%- assign remainder  = coll.size | modulo: base_page_size -%}
+    {%- assign base_pages  = coll.size | divided_by: base_page_size -%}
+    {%- assign remainder   = coll.size | modulo:    base_page_size -%}
     {%- assign total_pages = base_pages -%}
     {%- if remainder > 0 -%}{%- assign total_pages = base_pages | plus: 1 -%}{%- endif -%}
 
-    {# offset for page 2 = 6, page 3 = 12, etc. #}
     {%- assign offset = base_page_size | times: current | minus: base_page_size -%}
 
     <section class="grid" aria-label="Previous posts">
@@ -96,6 +94,12 @@ permalink: /page/2/
       </nav>
     {%- endif -%}
 
-    {% include topics-grid.html title='POPULAR TOPICS' %}
+    {%- comment -%}
+      Optional: topics grid on page 2.
+      My recommendation: keep it homepage-only.
+      If you want it here, just remove the surrounding comment tags below.
+    {%- endcomment -%}
+    {%- comment -%}{% include topics-grid.html title='POPULAR TOPICS' %}{%- endcomment -%}
+
   </div>
 </section>
