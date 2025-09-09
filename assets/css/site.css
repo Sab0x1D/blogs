@@ -33,7 +33,7 @@
   --prev-ar: 16 / 15.5;
 
   /* Mobile featured tile height (edit this to make thinner/taller) */
-  --feat-mobile-ar: 16 / 8;
+  --feat-mobile-ar: 16 / 6;
 
   /* Layout sizing for sticky header/footer math */
   --header-h: 64px;   /* desktop header height */
