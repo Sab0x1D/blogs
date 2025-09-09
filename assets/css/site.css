@@ -605,9 +605,9 @@ main.page-content { padding-bottom: 20px !important; }
 
 /* ===== Featured → compact tiles on mobile (match "Popular Topics") ===== */
 @media (max-width: 640px){
-  /* Force 2-up grid for Featured on phones */
+  /* Switch to **single column** for readability */
   .featured-row{
-    grid-template-columns: repeat(2, minmax(0,1fr)) !important;
+    grid-template-columns: 1fr !important;
     gap: var(--gap);
   }
 
@@ -617,10 +617,10 @@ main.page-content { padding-bottom: 20px !important; }
     overflow: hidden;
     border-radius: 20px;
     box-shadow: var(--shadow);
-    background: #0b0f19; /* allows nice fade/edge on slow image loads */
+    background: #0b0f19;
   }
 
-  /* Keep a compact, media-first aspect ratio like the topic tiles */
+  /* Media-first aspect ratio (still looks like a tile) */
   .featured-row .card.card--sm .media{
     aspect-ratio: 16 / 9 !important;
   }
@@ -634,11 +634,11 @@ main.page-content { padding-bottom: 20px !important; }
     object-fit: cover;
   }
 
-  /* Soft gradient for legible text */
+  /* Stronger gradient for legible text on busy images */
   .featured-row .card.card--sm::after{
     content:"";
     position:absolute; inset:0;
-    background: linear-gradient(to top, rgba(0,0,0,.55), rgba(0,0,0,0) 55%);
+    background: linear-gradient(to top, rgba(0,0,0,.65), rgba(0,0,0,0) 55%);
     pointer-events:none;
   }
 
@@ -647,9 +647,10 @@ main.page-content { padding-bottom: 20px !important; }
     position:absolute;
     top:10px; left:10px;
     z-index:2;
+    background: rgba(255,255,255,.9);
   }
 
-  /* Overlay the title at the bottom (compact, like topic labels) */
+  /* Overlay the title at the bottom (compact, readable) */
   .featured-row .card.card--sm .body{
     position: absolute;
     left: 12px; right: 12px; bottom: 10px;
@@ -660,10 +661,10 @@ main.page-content { padding-bottom: 20px !important; }
   .featured-row .card.card--sm .title{
     color:#fff;
     font-weight:800;
-    font-size:14px;
-    line-height:1.2;
+    font-size:15px;
+    line-height:1.25;
     margin:0;
-    text-shadow: 0 1px 2px rgba(0,0,0,.6);
+    text-shadow: 0 1px 2px rgba(0,0,0,.7);
   }
 
   /* Hide desktop-only bits on mobile tiles */
@@ -673,7 +674,7 @@ main.page-content { padding-bottom: 20px !important; }
   }
 }
 
-/* Single-column fallback for very small phones */
+/* Single-column fallback for ultra-small phones (kept for clarity) */
 @media (max-width: 360px){
   .featured-row{ grid-template-columns: 1fr !important; }
 }
