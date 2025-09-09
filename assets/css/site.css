@@ -602,3 +602,105 @@ main.page-content { padding-bottom: 20px !important; }
 
 /* (Optional) if another section is last on the page, this helps too */
 .container > .section:last-child { margin-bottom: 20px; }
+
+/* ===== Featured → compact tiles on mobile (match "Popular Topics") ===== */
+@media (max-width: 640px){
+  /* Force 2-up grid for Featured on phones */
+  .featured-row{
+    grid-template-columns: repeat(2, minmax(0,1fr)) !important;
+    gap: var(--gap);
+  }
+
+  /* Tile look for each featured card */
+  .featured-row .card.card--sm{
+    position: relative;
+    overflow: hidden;
+    border-radius: 20px;
+    box-shadow: var(--shadow);
+    background: #0b0f19; /* allows nice fade/edge on slow image loads */
+  }
+
+  /* Keep a compact, media-first aspect ratio like the topic tiles */
+  .featured-row .card.card--sm .media{
+    aspect-ratio: 16 / 9 !important;
+  }
+
+  /* Ensure the image fills the tile */
+  .featured-row .card.card--sm .thumb{
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  /* Soft gradient for legible text */
+  .featured-row .card.card--sm::after{
+    content:"";
+    position:absolute; inset:0;
+    background: linear-gradient(to top, rgba(0,0,0,.55), rgba(0,0,0,0) 55%);
+    pointer-events:none;
+  }
+
+  /* Date chip stays top-left */
+  .featured-row .card.card--sm .meta-top{
+    position:absolute;
+    top:10px; left:10px;
+    z-index:2;
+  }
+
+  /* Overlay the title at the bottom (compact, like topic labels) */
+  .featured-row .card.card--sm .body{
+    position: absolute;
+    left: 12px; right: 12px; bottom: 10px;
+    padding: 0;
+    background: transparent;
+    z-index: 2;
+  }
+  .featured-row .card.card--sm .title{
+    color:#fff;
+    font-weight:800;
+    font-size:14px;
+    line-height:1.2;
+    margin:0;
+    text-shadow: 0 1px 2px rgba(0,0,0,.6);
+  }
+
+  /* Hide desktop-only bits on mobile tiles */
+  .featured-row .card.card--sm .excerpt,
+  .featured-row .card.card--sm .meta{
+    display: none !important;
+  }
+}
+
+/* Single-column fallback for very small phones */
+@media (max-width: 360px){
+  .featured-row{ grid-template-columns: 1fr !important; }
+}
+
+/* ===== Responsive brand: keep logo/title on one line on small screens ===== */
+.site-header .wrapper{ min-width: 0; }               /* allow children to shrink */
+.site-title{
+  white-space: nowrap;                                /* never wrap */
+  overflow: hidden; text-overflow: ellipsis;          /* trim gracefully if needed */
+  flex: 1 1 auto;                                     /* title takes available space */
+}
+.site-nav{ flex: 0 0 auto; }                          /* nav stays compact */
+
+/* Tighten spacing + scale title down a bit more on phones */
+@media (max-width: 640px){
+  .site-header .wrapper{ gap: 12px; }
+  .site-title{
+    font-size: clamp(20px, 6.2vw, 28px);              /* slightly smaller than before */
+    letter-spacing: 0.06em;                           /* reduce tracking to avoid wrap */
+  }
+  .site-nav .page-link{ font-size: 15px; padding: 8px 8px; }
+}
+
+/* Ultra-small phones */
+@media (max-width: 360px){
+  .site-title{
+    font-size: clamp(18px, 5.6vw, 24px);
+    letter-spacing: 0.045em;
+  }
+}
