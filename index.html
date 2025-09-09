@@ -16,53 +16,84 @@ permalink: /
     {%- assign coll = site.listings | sort: 'date' | reverse -%}
     {%- assign excerpt_limit = site.excerpt_chars | default: 220 -%}
 
-    <!-- Featured: latest 4 -->
+    {%- comment -%}
+      Build the Featured row manually:
+      1) take newest posts with `featured: true`
+      2) top up with newest non-featured until we reach 4
+      Keep track of which URLs we printed so we can exclude them below.
+    {%- endcomment -%}
+    {%- assign featured_ids = "" -%}
+    {%- assign featured_printed = 0 -%}
+    {%- assign manual = coll | where_exp: 'p', 'p.featured == true' -%}
+
     <h2 class="section-title">FEATURED</h2>
     <section class="featured-row" aria-label="Featured posts">
-      {%- for p in coll limit: 4 -%}
-        <a class="card card--sm" href="{{ p.url | relative_url }}">
-          <div class="media">
-            <img class="thumb" src="{{ (p.thumb | default: site.default_thumb) | relative_url }}" alt="{{ p.title }}">
-            <span class="meta-top">{{ p.date | date: "%d %b %Y" }}</span>
-          </div>
-          <div class="body">
-            <h3 class="title">{{ p.title }}</h3>
-          </div>
-        </a>
+
+      {%- for p in manual -%}
+        {%- if featured_printed < 4 -%}
+          <a class="card card--sm" href="{{ p.url | relative_url }}">
+            <div class="media">
+              <img class="thumb" src="{{ (p.thumb | default: site.default_thumb) | relative_url }}" alt="{{ p.title }}">
+              <span class="meta-top">{{ p.date | date: "%d %b %Y" }}</span>
+            </div>
+            <div class="body">
+              <h3 class="title">{{ p.title }}</h3>
+            </div>
+          </a>
+          {%- assign featured_ids = featured_ids | append: p.url | append: '|' -%}
+          {%- assign featured_printed = featured_printed | plus: 1 -%}
+        {%- endif -%}
       {%- endfor -%}
+
+      {%- if featured_printed < 4 -%}
+        {%- for p in coll -%}
+          {%- if featured_printed < 4 and (featured_ids contains p.url) == false and p.featured != true -%}
+            <a class="card card--sm" href="{{ p.url | relative_url }}">
+              <div class="media">
+                <img class="thumb" src="{{ (p.thumb | default: site.default_thumb) | relative_url }}" alt="{{ p.title }}">
+                <span class="meta-top">{{ p.date | date: "%d %b %Y" }}</span>
+              </div>
+              <div class="body">
+                <h3 class="title">{{ p.title }}</h3>
+              </div>
+            </a>
+            {%- assign featured_ids = featured_ids | append: p.url | append: '|' -%}
+            {%- assign featured_printed = featured_printed | plus: 1 -%}
+          {%- endif -%}
+        {%- endfor -%}
+      {%- endif -%}
     </section>
 
-    <!-- Previous posts: everything after the first 4, paginated (6 per page) -->
+    <!-- Previous posts: everything NOT printed above (first page shows 6) -->
     <h2 class="section-title">PREVIOUS POSTS</h2>
 
-    {%- assign page_size      = 6 -%}
-    {%- assign previous_total = coll.size | minus: 4 -%}
-    {%- if previous_total < 0 -%}{%- assign previous_total = 0 -%}{%- endif -%}
-
-    {%- assign skip = 4 -%} {%- comment -%} start after featured {%- endcomment -%}
-
+    {%- assign page_size = 6 -%}
     <section class="grid" aria-label="Previous posts">
-      {%- for p in coll offset: skip limit: page_size -%}
-        <a class="card card--lg" href="{{ p.url | relative_url }}">
-          <div class="media">
-            <img class="thumb" src="{{ (p.thumb | default: site.default_thumb) | relative_url }}" alt="{{ p.title }}">
-            <span class="meta-top">{{ p.date | date: "%d %b %Y" }}</span>
-          </div>
-          <div class="body">
-            <h3 class="title">{{ p.title }}</h3>
-            {%- if p.excerpt -%}
-              <p class="excerpt">{{ p.excerpt | strip_html | truncate: excerpt_limit }}</p>
-            {%- endif -%}
-          </div>
-        </a>
+      {%- assign shown = 0 -%}
+      {%- for p in coll -%}
+        {%- if shown < page_size and (featured_ids contains p.url) == false -%}
+          <a class="card card--lg" href="{{ p.url | relative_url }}">
+            <div class="media">
+              <img class="thumb" src="{{ (p.thumb | default: site.default_thumb) | relative_url }}" alt="{{ p.title }}">
+              <span class="meta-top">{{ p.date | date: "%d %b %Y" }}</span>
+            </div>
+            <div class="body">
+              <h3 class="title">{{ p.title }}</h3>
+              {%- if p.excerpt -%}
+                <p class="excerpt">{{ p.excerpt | strip_html | truncate: excerpt_limit }}</p>
+              {%- endif -%}
+            </div>
+          </a>
+          {%- assign shown = shown | plus: 1 -%}
+        {%- endif -%}
       {%- endfor -%}
     </section>
 
     {%- comment -%}
-      TEMP: lock to 2 pages so pager shows “Page 1 of 2” until real content exists.
+      TEMP pager (unchanged). If/when you wire real pagination,
+      replicate the "exclude featured_ids" logic on subsequent pages.
     {%- endcomment -%}
     {%- assign total_pages = 2 -%}
-
     {%- assign current = page.page_num | plus: 0 -%}
     {%- assign prev_num = current | minus: 1 -%}
     {%- assign next_num = current | plus: 1 -%}
