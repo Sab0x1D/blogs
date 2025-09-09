@@ -590,15 +590,15 @@ main.page-content{
    ========================================================= */
 
 /* Always leave 40px between the last content and the footer */
-main.page-content { padding-bottom: 40px !important; }
+main.page-content { padding-bottom: 20px !important; }
 
 /* Home: give the topics row the final gap before the footer */
-.home .topic-grid { margin-bottom: 40px; }
+.home .topic-grid { margin-bottom: 20px; }
 
 /* Tag pages: add 40px after the grid/back link or the empty state text */
-.tag-hero ~ .grid { margin-bottom: 40px; }
+.tag-hero ~ .grid { margin-bottom: 20px; }
 .tag-back-wrap { margin-bottom: 40px; }
 .tag-hero + p { margin-bottom: 40px; }  /* “No posts for this topic yet.” */
 
 /* (Optional) if another section is last on the page, this helps too */
-.container > .section:last-child { margin-bottom: 40px; }
+.container > .section:last-child { margin-bottom: 20px; }
