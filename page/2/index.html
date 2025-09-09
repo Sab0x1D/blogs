@@ -16,58 +16,29 @@ permalink: /page/2/
     {%- assign coll = site.listings | sort: 'date' | reverse -%}
     {%- assign excerpt_limit = site.excerpt_chars | default: 220 -%}
 
-    {%- comment -%}
-      FEATURED: newest posts with `featured: true`, then top up to 4 with newest non-featured.
-    {%- endcomment -%}
-    {%- assign featured_ids = "" -%}
-    {%- assign featured_printed = 0 -%}
-    {%- assign manual = coll | where_exp: 'p', 'p.featured == true' -%}
-
-    <h2 class="section-title">FEATURED</h2>
-    <section class="featured-row" aria-label="Featured posts">
-      {%- for p in manual -%}
-        {%- if featured_printed < 4 -%}
-          <a class="card card--sm" href="{{ p.url | relative_url }}">
-            <div class="media">
-              <img class="thumb" src="{{ (p.thumb | default: site.default_thumb) | relative_url }}" alt="{{ p.title }}">
-              <span class="meta-top">{{ p.date | date: "%d %b %Y" }}</span>
-            </div>
-            <div class="body"><h3 class="title">{{ p.title }}</h3></div>
-          </a>
-          {%- assign featured_ids = featured_ids | append: p.url | append: '|' -%}
-          {%- assign featured_printed = featured_printed | plus: 1 -%}
-        {%- endif -%}
-      {%- endfor -%}
-
-      {%- if featured_printed < 4 -%}
-        {%- for p in coll -%}
-          {%- if featured_printed < 4 and (featured_ids contains p.url) == false and p.featured != true -%}
-            <a class="card card--sm" href="{{ p.url | relative_url }}">
-              <div class="media">
-                <img class="thumb" src="{{ (p.thumb | default: site.default_thumb) | relative_url }}" alt="{{ p.title }}">
-                <span class="meta-top">{{ p.date | date: "%d %b %Y" }}</span>
-              </div>
-              <div class="body"><h3 class="title">{{ p.title }}</h3></div>
-            </a>
-            {%- assign featured_ids = featured_ids | append: p.url | append: '|' -%}
-            {%- assign featured_printed = featured_printed | plus: 1 -%}
-          {%- endif -%}
-        {%- endfor -%}
-      {%- endif -%}
-    </section>
+    {# -----------------------------
+       PAGE 2: no Featured section
+       ----------------------------- #}
 
     <h2 class="section-title">PREVIOUS POSTS</h2>
 
-    {%- assign page_size = 6 -%}
-    {%- assign current   = page.page_num | plus: 0 -%}
+    {%- comment -%}
+      Page 1 shows 6 large cards. Keep pagination math based on 6 so
+      total_pages stays consistent across pages, but on page 2 we show 9 cards.
+    {%- endcomment -%}
+    {%- assign base_page_size = 6 -%}   {# page-1 page size #}
+    {%- assign page_size      = 9 -%}   {# page-2 grid size  #}
+    {%- assign current        = page.page_num | plus: 0 -%}
     {%- if current <= 0 %}{% assign current = 1 %}{% endif %}
 
-    {%- assign base_pages = coll.size | divided_by: page_size -%}
-    {%- assign remainder  = coll.size | modulo: page_size -%}
+    {# total pages based on base_page_size (page 1 = 6) #}
+    {%- assign base_pages = coll.size | divided_by: base_page_size -%}
+    {%- assign remainder  = coll.size | modulo: base_page_size -%}
     {%- assign total_pages = base_pages -%}
     {%- if remainder > 0 -%}{%- assign total_pages = base_pages | plus: 1 -%}{%- endif -%}
 
-    {%- assign offset = page_size | times: current | minus: page_size -%}
+    {# offset for page 2 = 6, page 3 = 12, etc. #}
+    {%- assign offset = base_page_size | times: current | minus: base_page_size -%}
 
     <section class="grid" aria-label="Previous posts">
       {%- for p in coll offset: offset limit: page_size -%}
