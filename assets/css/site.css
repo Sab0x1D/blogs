@@ -32,6 +32,9 @@
   --feat-ar: 4 / 3;
   --prev-ar: 16 / 15.5;
 
+  /* Banner aspect ratio (width / height) */
+  --banner-ar: 16 / 6;
+
   /* Mobile featured tile height (edit this to make thinner/taller) */
   --feat-mobile-ar: 16 / 6;
 
@@ -745,5 +748,13 @@ main.page-content { padding-bottom: 20px !important; }
   margin: 0 auto 2rem auto;     /* centers and adds space below */
   border-radius: var(--round);  /* reuse your design token for consistency */
   box-shadow: var(--shadow);    /* subtle lift effect */
-  object-fit: cover;            /* ensures images scale nicely */
+  object-fit: cover;
+  aspect-ratio: var(--banner-ar);            /* ensures images scale nicely */
+}
+
+
+@media (max-width: 720px){
+  :root{
+    --banner-ar: 4 / 3;   /* taller banners on mobile */
+  }
 }
