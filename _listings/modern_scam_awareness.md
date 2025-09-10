@@ -3,9 +3,9 @@ author: Sab0x1D
 author_avatar: /assets/img/sab01xd-profile.jpeg
 
 layout: listing
-title: "Modern Scam Awareness — A Complete Guide"
+title: "Modern Scam Awareness [A Complete Guide]"
 excerpt: "From fake renewals to crypto giveaways, tech support calls, parcel texts, and romance investment schemes — this post centralizes the most high-impact scams you need to know about, with real-world examples and red flags to spot."
-thumb: /assets/img/scams-overview.jpg
+thumb: /assets/img/scam_img.jpg
 date: 2025-09-10
 featured: true
 tags: [Scam]
