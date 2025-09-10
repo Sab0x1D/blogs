@@ -9,17 +9,17 @@ layout: default
 <style>
   /* ===== Wide hero / ribbon – override site.css grid ===== */
   .post-hero{
-    display: block !important;              /* <— key override */
+    display: block !important;
     padding: 50px 0 20px;
     border-bottom: 1px solid rgba(15,23,42,.06);
-    margin-bottom: 28px;                    /* space *below* the divider line */
+    margin-bottom: 28px;
   }
 
   /* Use your global .container to center and cap width */
   .post-hero > .container{
-    max-width: 1200px;                       /* wider ribbon cap */
-    margin: 0 auto;                          /* center */
-    padding-inline: 32px;                    /* gutters */
+    max-width: 1200px;
+    margin: 0 auto;
+    padding-inline: 32px;
   }
 
   /* Two-column hero internals */
@@ -80,6 +80,7 @@ layout: default
     max-width: 1100px;
     margin: 48px auto 24px;
     padding: 0 20px;
+    display: block !important; /* safety */
   }
   .post-neighbors .grid{
     display: grid;
@@ -163,36 +164,42 @@ layout: default
 </section>
 
 {%- comment -%}
-  Robust "Older posts" logic:
-  1) Build a full, date-sorted list so we always find the current page (even if featured).
-  2) After we pass the current page, pick the next two items that are NOT featured (and NOT drafts).
+  OLDER POSTS — Liquid-safe version (no "not", no boolean expressions in assign).
+  Uses the page's collection when present, else falls back to site.posts.
 {%- endcomment -%}
-{%- assign master = site.listings | sort: "date" | reverse -%}
+{%- assign coll = site[page.collection] -%}
+{%- if coll == nil or coll.size == 0 -%}
+  {%- assign coll = site.posts -%}
+{%- endif -%}
+
+{%- assign master = coll | sort: "date" | reverse -%}
 {%- assign older1 = nil -%}
 {%- assign older2 = nil -%}
 {%- assign seen_current = false -%}
-{%- assign this_url = page.url | relative_url -%}
 
 {%- for doc in master -%}
-  {%- assign doc_url = doc.url | relative_url -%}
+  {%- if doc.id == page.id -%}
+    {%- assign is_self = true -%}
+  {%- else -%}
+    {%- assign is_self = false -%}
+  {%- endif -%}
 
-  {%- if seen_current -%}
+  {%- if seen_current and is_self != true -%}
     {%- assign skip = false -%}
-    {%- if doc.featured == true -%}{%- assign skip = true -%}{%- endif -%}
     {%- if doc.draft == true -%}{%- assign skip = true -%}{%- endif -%}
-    {%- if doc_url == this_url -%}{%- assign skip = true -%}{%- endif -%}
+    {%- if doc.featured == true -%}{%- assign skip = true -%}{%- endif -%}
 
-    {%- unless skip -%}
+    {%- if skip != true -%}
       {%- if older1 == nil -%}
         {%- assign older1 = doc -%}
       {%- elsif older2 == nil -%}
         {%- assign older2 = doc -%}
         {%- break -%}
       {%- endif -%}
-    {%- endunless -%}
+    {%- endif -%}
   {%- endif -%}
 
-  {%- if doc_url == this_url -%}
+  {%- if is_self == true -%}
     {%- assign seen_current = true -%}
   {%- endif -%}
 {%- endfor -%}
