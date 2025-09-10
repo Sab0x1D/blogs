@@ -512,4 +512,6 @@ Scammers adapt quickly, leveraging urgency, trust, and emotion to manipulate vic
 
 ---
 
-*Share this guide with colleagues, friends, or family — awareness is the strongest first line of defense.*
+<blockquote class="featured-quote">
+    Share this guide with colleagues, friends, or family — awareness is the strongest first line of defense.
+</blockquote>

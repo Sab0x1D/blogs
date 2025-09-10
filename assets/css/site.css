@@ -758,3 +758,42 @@ main.page-content { padding-bottom: 20px !important; }
     --banner-ar: 4 / 3;   /* taller banners on mobile */
   }
 }
+
+/* ================================
+   Featured Quote Within Blog Posts
+   ================================ */
+.featured-quote {
+  position: relative;
+  font-family: 'Inter', sans-serif;
+  font-size: 22px;
+  font-weight: 700;
+  line-height: 1.6;
+  color: var(--text);
+  max-width: 640px;        /* narrower than article width */
+  margin: 48px auto;       /* center with spacing above/below */
+  padding-left: 36px;      /* space for decorative mark */
+  text-align: center;
+}
+
+.featured-quote::before {
+  content: "“";
+  position: absolute;
+  left: 0;
+  top: -20px;
+  font-size: 80px;
+  line-height: 1;
+  color: #2563eb;          /* blue quotation mark */
+  font-weight: 800;
+}
+
+/* Responsive tweak for mobile */
+@media (max-width: 720px) {
+  .featured-quote {
+    font-size: 18px;
+    padding-left: 28px;
+  }
+  .featured-quote::before {
+    font-size: 60px;
+    top: -12px;
+  }
+}
