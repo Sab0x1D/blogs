@@ -7,7 +7,7 @@ title: "Shortcut to Infection: XenoRAT via Malicious .lnk → WSF → Python"
 excerpt: "A fake invoice lure leads to a shortcut (.lnk) that fetches a WSF, stages dual ZIP archives (me.zip, deb.zip), and launches pythonw.exe from the user’s Contacts directory. Explorer.exe then takes over network comms, connecting to C2. "
 thumb: assets/img/xenorat_thumb.webp
 date: 2025-09-08
-featured: true
+featured: false
 tags: [Phish, Malware, LNK, XenoRAT, LOLBins]
 ---
 
