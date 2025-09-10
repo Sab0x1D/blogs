@@ -3,7 +3,7 @@ author: Sab0x1D
 author_avatar: /assets/img/sab01xd-profile.jpeg
 
 layout: listing
-title: "Modern Scam Awareness [A Complete Guide]"
+title: "Scam Awareness <br><span class='subtitle'>[A Complete Guide]</span>"
 excerpt: "From fake renewals to crypto giveaways, tech support calls, parcel texts, and romance investment schemes — this post centralizes the most high-impact scams you need to know about, with real-world examples and red flags to spot."
 thumb: /assets/img/scam_img.jpg
 date: 2025-09-10
@@ -132,12 +132,12 @@ Legitimate companies process refunds via their official website or app, not thro
 
 ## TL;DR: Subscription Scam Red Flags
 
-- [ ] Fake renewal invoices for antivirus, streaming, or cloud services  
-- [ ] Urges you to call a number or click a link for payment/refunds  
-- [ ] Requests remote access or banking details  
-- [ ] Emails/texts with odd addresses, typos, or generic logos  
-- [ ] Real vendors don’t demand payment via unsolicited calls  
-- [ ] **Quick Action**: Always verify subscriptions directly on the official website.  
+- Fake renewal invoices for antivirus, streaming, or cloud services  
+- Urges you to call a number or click a link for payment/refunds  
+- Requests remote access or banking details  
+- Emails/texts with odd addresses, typos, or generic logos  
+- Real vendors don’t demand payment via unsolicited calls  
+- **Quick Action**: Always verify subscriptions directly on the official website.  
 
 ---
 
@@ -150,7 +150,7 @@ Legitimate companies process refunds via their official website or app, not thro
 
 ---
 
-<img src="/assets/img/banners/scam-crypto.jpg" alt="Crypto Giveaway Scam" class="section-banner">
+<img src="../assets/img/banners/scam-crypto.jpg" alt="Crypto Giveaway Scam" class="section-banner">
 
 # Crypto Giveaway Scams — Elon’s Not Sending ETH
 
@@ -233,16 +233,16 @@ The wallet is controlled by the scammer, and transactions are irreversible.
 
 ## TL;DR: Crypto Giveaway Scam Signs
 
-- [ ] Promises of free ETH, BTC, or NFTs in return for sending crypto  
-- [ ] Uses celebrity names and real interviews to look legit  
-- [ ] Fake livestreams or hacked social accounts promote the scam  
-- [ ] Wallet connection or QR code leads to theft  
-- [ ] Real platforms never ask you to “verify” wallet with funds  
-- [ ] Once you send crypto, it’s gone — no recovery  
+- Promises of free ETH, BTC, or NFTs in return for sending crypto  
+- Uses celebrity names and real interviews to look legit  
+- Fake livestreams or hacked social accounts promote the scam  
+- Wallet connection or QR code leads to theft  
+- Real platforms never ask you to “verify” wallet with funds  
+- Once you send crypto, it’s gone — no recovery  
 
 ---
 
-<img src="/assets/img/banners/scam-support.webp" alt="Call Center Tech Support Scam" class="section-banner">
+<img src="../assets/img/banners/scam-support.webp" alt="Call Center Tech Support Scam" class="section-banner">
 
 # Call Center Tech Support Scams — What They Say and Why
 
@@ -326,17 +326,17 @@ In the background, they may quietly exfiltrate files or install malware.
 
 ## TL;DR: Tech Support Scam Warning Signs
 
-- [ ] Fake popups or voicemails claim your device is infected  
-- [ ] Prompts you to call a support number — always fake  
-- [ ] Uses fear to push remote access or payment  
-- [ ] Real companies don’t cold call or lock your browser  
-- [ ] Asks for payment via gift cards or wire  
-- [ ] Event Viewer errors or CMD output are misused to scare  
-- [ ] Always verify through official websites only  
+- Fake popups or voicemails claim your device is infected  
+- Prompts you to call a support number — always fake  
+- Uses fear to push remote access or payment  
+- Real companies don’t cold call or lock your browser  
+- Asks for payment via gift cards or wire  
+- Event Viewer errors or CMD output are misused to scare  
+- Always verify through official websites only  
 
 ---
 
-<img src="/assets/img/banners/scam-parcel.png" alt="Parcel SMS Scam" class="section-banner">
+<img src="../assets/img/banners/scam-parcel.png" alt="Parcel SMS Scam" class="section-banner">
 
 # “Your Parcel Is Held” Text Messages Explained
 
@@ -412,16 +412,16 @@ On Android, the link also installs spyware that silently monitors messages.
 
 ## TL;DR: Parcel Scam Red Flags
 
-- [ ] SMS claims your parcel is held or needs redelivery  
-- [ ] Asks for a small fee or verification via a fake link  
-- [ ] Site steals personal or payment details  
-- [ ] Android phones may be prompted to install spyware  
-- [ ] Real delivery companies don’t charge random fees via SMS  
-- [ ] Always verify parcels through official channels  
+- SMS claims your parcel is held or needs redelivery  
+- Asks for a small fee or verification via a fake link  
+- Site steals personal or payment details  
+- Android phones may be prompted to install spyware  
+- Real delivery companies don’t charge random fees via SMS  
+- Always verify parcels through official channels  
 
 ---
 
-<img src="/assets/img/banners/scam-romance.webp" alt="Romance & Investment Scam" class="section-banner">
+<img src="../assets/img/banners/scam-romance.webp" alt="Romance & Investment Scam" class="section-banner">
 
 # Romance & Investment Scam Red Flags
 
@@ -493,12 +493,12 @@ Eventually, she loses over $20,000 and never hears from him again.
 
 ## TL;DR: Romance/Investment Scam Red Flags
 
-- [ ] Relationship moves quickly, with flattery and emotional intensity  
-- [ ] Talk of crypto investing or business opportunities arises  
-- [ ] They avoid meeting in person or video calling  
-- [ ] Fake apps or trading platforms are introduced  
-- [ ] You’re asked to send money, then pressured to send more  
-- [ ] Emotional manipulation is used to suppress doubt  
+- Relationship moves quickly, with flattery and emotional intensity  
+- Talk of crypto investing or business opportunities arises  
+- They avoid meeting in person or video calling  
+- Fake apps or trading platforms are introduced  
+- You’re asked to send money, then pressured to send more  
+- Emotional manipulation is used to suppress doubt  
 
 
 
