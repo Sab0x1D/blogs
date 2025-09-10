@@ -17,7 +17,7 @@ tags: [Scam]
 
 ---
 
-<img src="/assets/img/banners/scam-subscription.avif" alt="Subscription Renewal Scam" class="section-banner">
+<img src="../assets/img/banners/scam-subscription.avif" alt="Subscription Renewal Scam" class="section-banner">
 
 # Subscription Renewal Scams — “Your Norton Is Expiring”
 
