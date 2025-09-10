@@ -127,6 +127,9 @@ layout: default
     line-height: 1.25;
     font-size: 16px;
   }
+
+  /* Safety: never let neighbors get hidden by other rules */
+  .post-neighbors { display: block !important; }
 </style>
 
 {%- assign hero_img = page.hero | default: page.thumb -%}
@@ -163,36 +166,34 @@ layout: default
 </section>
 
 {%- comment -%}
-  Robust "Older posts" logic:
-  1) Build a full, date-sorted list so we always find the current page (even if featured).
-  2) After we pass the current page, pick the next two items that are NOT featured (and NOT drafts).
+  OLDER POSTS — auto-detect collection, match by page.id.
+  Falls back to site.posts so it works for standard blog posts.
 {%- endcomment -%}
-{%- assign master = site.listings | sort: "date" | reverse -%}
+{%- assign coll = site[page.collection] -%}
+{%- if coll == nil or coll.size == 0 -%}
+  {%- assign coll = site.posts -%}
+{%- endif -%}
+
+{%- assign master = coll | sort: "date" | reverse -%}
 {%- assign older1 = nil -%}
 {%- assign older2 = nil -%}
 {%- assign seen_current = false -%}
-{%- assign this_url = page.url | relative_url -%}
 
 {%- for doc in master -%}
-  {%- assign doc_url = doc.url | relative_url -%}
+  {%- assign is_self = (doc.id == page.id) -%}
 
-  {%- if seen_current -%}
-    {%- assign skip = false -%}
-    {%- if doc.featured == true -%}{%- assign skip = true -%}{%- endif -%}
-    {%- if doc.draft == true -%}{%- assign skip = true -%}{%- endif -%}
-    {%- if doc_url == this_url -%}{%- assign skip = true -%}{%- endif -%}
-
-    {%- unless skip -%}
+  {%- if seen_current and not is_self -%}
+    {%- if doc.draft != true -%}
       {%- if older1 == nil -%}
         {%- assign older1 = doc -%}
       {%- elsif older2 == nil -%}
         {%- assign older2 = doc -%}
         {%- break -%}
       {%- endif -%}
-    {%- endunless -%}
+    {%- endif -%}
   {%- endif -%}
 
-  {%- if doc_url == this_url -%}
+  {%- if is_self -%}
     {%- assign seen_current = true -%}
   {%- endif -%}
 {%- endfor -%}

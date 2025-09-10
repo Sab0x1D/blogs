@@ -723,3 +723,5 @@ main.page-content { padding-bottom: 20px !important; }
   }
 }
 
+/* Safety: never hide the older-posts section */
+.post-neighbors { display:block !important; }
