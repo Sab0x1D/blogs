@@ -80,7 +80,6 @@ layout: default
     max-width: 1100px;
     margin: 48px auto 24px;
     padding: 0 20px;
-    display: block !important; /* safety to avoid accidental collapse */
   }
   .post-neighbors .grid{
     display: grid;
@@ -128,6 +127,9 @@ layout: default
     line-height: 1.25;
     font-size: 16px;
   }
+
+  /* Safety: never let neighbors get hidden by other rules */
+  .post-neighbors { display: block !important; }
 </style>
 
 {%- assign hero_img = page.hero | default: page.thumb -%}
@@ -164,9 +166,8 @@ layout: default
 </section>
 
 {%- comment -%}
-  OLDER POSTS — use the collection this page belongs to when available,
-  otherwise fall back to site.posts. Match by page.id like before.
-  Skips drafts and featured items to mirror earlier behavior.
+  OLDER POSTS — auto-detect collection, match by page.id.
+  Falls back to site.posts so it works for standard blog posts.
 {%- endcomment -%}
 {%- assign coll = site[page.collection] -%}
 {%- if coll == nil or coll.size == 0 -%}
@@ -182,18 +183,14 @@ layout: default
   {%- assign is_self = (doc.id == page.id) -%}
 
   {%- if seen_current and not is_self -%}
-    {%- assign skip = false -%}
-    {%- if doc.draft == true -%}{%- assign skip = true -%}{%- endif -%}
-    {%- if doc.featured == true -%}{%- assign skip = true -%}{%- endif -%}
-
-    {%- unless skip -%}
+    {%- if doc.draft != true -%}
       {%- if older1 == nil -%}
         {%- assign older1 = doc -%}
       {%- elsif older2 == nil -%}
         {%- assign older2 = doc -%}
         {%- break -%}
       {%- endif -%}
-    {%- endunless -%}
+    {%- endif -%}
   {%- endif -%}
 
   {%- if is_self -%}
