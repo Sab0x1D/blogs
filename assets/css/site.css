@@ -357,7 +357,7 @@ main.page-content > .wrapper,
 .tag-back{
   display:inline-block; padding:10px 16px; border:1px solid var(--card-border);
   border-radius:999px; text-decoration:none; font-weight:600; font-size:14px;
-  color:var(--text); background:#fff; transition:background .15s, color .15s, border-color .15s;
+  color:var(--text); background: #fff; transition:background .15s, color .15s, border-color .15s;
 }
 .tag-back:hover{ background:var(--text); color:#fff; border-color:var(--text); }
 
@@ -733,3 +733,17 @@ main.page-content { padding-bottom: 20px !important; }
 
 /* Safety: never hide the older-posts section */
 .post-neighbors { display:block !important; }
+
+
+/* =======================
+   Section Banners
+   ======================= */
+.section-banner {
+  width: 100%;
+  max-width: var(--container);  /* keeps it aligned with your content width */
+  display: block;
+  margin: 0 auto 2rem auto;     /* centers and adds space below */
+  border-radius: var(--round);  /* reuse your design token for consistency */
+  box-shadow: var(--shadow);    /* subtle lift effect */
+  object-fit: cover;            /* ensures images scale nicely */
+}
