@@ -20,7 +20,7 @@
   --text: #0b0f19;
   --card: #ffffff;
   --card-border: #e5e7eb;
-  --muted: #6b7280;
+  --muted: #6b7280;       /* back to neutral grey */
   --muted-2: #9aa3b2;
 
   --chip-bg: #f8fafc;
@@ -29,8 +29,8 @@
   --shadow: 0 16px 40px rgba(2,10,30,.08);
 
   /* Image area ratios (width / height) */
-  --feat-ar: 4 / 3;        /* desktop Featured cards */
-  --prev-ar: 16 / 15.5;    /* previous posts */
+  --feat-ar: 4 / 3;
+  --prev-ar: 16 / 15.5;
 
   /* Mobile featured tile height (edit this to make thinner/taller) */
   --feat-mobile-ar: 16 / 6;
@@ -40,7 +40,7 @@
   --footer-h: 120px;  /* adjust if your footer is taller/shorter */
 }
 @media (max-width: 720px){
-  :root{ --header-h: 56px; }
+  :root{ --header-h: 56px; }   /* mobile header height */
 }
 
 /* =======================
@@ -50,15 +50,17 @@ html{
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
+/* Sticky footer + fixed header spacing */
 html, body { height:100%; }
 body{
   display:flex;
   flex-direction:column;
   min-height:100vh;
-  padding-top: var(--header-h);
+  padding-top: var(--header-h);           /* space for fixed header */
   font-family: 'Inter', ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, "Helvetica Neue", Arial, "Noto Sans", "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
   color: var(--text);
 }
+/* page content must fill available viewport height even when empty */
 main.page-content{
   flex:1 0 auto;
   min-height: calc(100dvh - var(--header-h) - var(--footer-h));
@@ -338,7 +340,7 @@ main.page-content > .wrapper,
 .grid .card.card--lg .meta{ margin-top: 4px; color: var(--muted-2); font-family:'Inter', sans-serif; }
 
 /* =======================
-   Tag page header
+   Tag page header (for /tag/<slug>/)
    ======================= */
 .tag-hero{ display:flex; justify-content:center; align-items:center; margin:56px 0 28px; }
 .tag-title{ font-weight:800; letter-spacing:-0.02em; font-size:40px; text-align:center; font-family:'Inter',sans-serif; }
@@ -358,7 +360,7 @@ main.page-content > .wrapper,
 
 /* ===== Sticky Site Header ===== */
 .site-header{
-  position: fixed !important;
+  position: fixed !important;          /* robust pin */
   top: 0; left: 0; right: 0;
   z-index: 1000;
   background: rgba(255,255,255,.92);
@@ -378,19 +380,6 @@ main.page-content > .wrapper,
 
 /* ===== Responsive header / hamburger — MOBILE-FIRST ===== */
 .site-nav{ position:relative; display:flex; align-items:center; gap:18px; }
-
-/* Toggle button styling (in header) */
-.theme-toggle{
-  display:inline-flex; align-items:center; justify-content:center;
-  width:36px; height:36px; border-radius:999px;
-  border:1px solid var(--card-border);
-  background: var(--chip-bg);
-  cursor:pointer; user-select:none;
-  font-size:18px; line-height:1;
-  padding:0;
-}
-.theme-toggle:hover{ transform:translateY(-1px); box-shadow: var(--shadow); }
-.theme-toggle:focus-visible{ outline:2px solid #2563eb; outline-offset:2px; }
 
 /* Keep the checkbox accessible (visually hidden) */
 .site-header .site-nav .nav-trigger{
@@ -422,6 +411,7 @@ main.page-content > .wrapper,
 .site-header .site-nav .trigger .page-link{
   display:block; padding:10px 12px; border-radius:10px;
 }
+/* Hide the active dot inside the dropdown */
 .site-header .site-nav .trigger .page-link.is-active::before{ display:none; }
 
 /* Desktop overrides */
@@ -584,7 +574,9 @@ main.page-content{
     min-height: calc(100dvh - var(--header-h) - var(--footer-h)) !important;
   }
 }
-.site-footer{ margin-top: auto !important; }
+.site-footer{ margin-top: auto !important; }  /* push to bottom */
+
+/* Simple one-line footer */
 .site-footer { background:#f8fafc; border-top:1px solid var(--card-border); }
 .site-footer .wrapper {
   display:flex; justify-content:center; align-items:center;
@@ -593,24 +585,36 @@ main.page-content{
 .footer-quote { margin:0; font-size:14px; color:var(--muted); text-align:center; font-style:italic; }
 
 /* (Optional) make the sticky-footer math tighter now that it's short */
-:root{ --footer-h: 72px; }
+:root{ --footer-h: 72px; }  /* was 120px */
+
 
 /* =========================================================
    UNIVERSAL 40PX BREATHING ROOM ABOVE THE FOOTER
    ========================================================= */
+
+/* Always leave 40px between the last content and the footer */
 main.page-content { padding-bottom: 20px !important; }
+
+/* Home: give the topics row the final gap before the footer */
 .home .topic-grid { margin-bottom: 20px; }
+
+/* Tag pages: add 40px after the grid/back link or the empty state text */
 .tag-hero ~ .grid { margin-bottom: 20px; }
 .tag-back-wrap { margin-bottom: 40px; }
-.tag-hero + p { margin-bottom: 40px; }
+.tag-hero + p { margin-bottom: 40px; }  /* “No posts for this topic yet.” */
+
+/* (Optional) if another section is last on the page, this helps too */
 .container > .section:last-child { margin-bottom: 20px; }
 
 /* ===== Featured → compact tiles on mobile (match "Popular Topics") ===== */
 @media (max-width: 640px){
+  /* Switch to **single column** for readability */
   .featured-row{
     grid-template-columns: 1fr !important;
     gap: var(--gap);
   }
+
+  /* Tile look for each featured card */
   .featured-row .card.card--sm{
     position: relative;
     overflow: hidden;
@@ -618,119 +622,104 @@ main.page-content { padding-bottom: 20px !important; }
     box-shadow: var(--shadow);
     background: #0b0f19;
   }
+
+  /* Media-first aspect ratio (set via variable) */
   .featured-row .card.card--sm .media{
     aspect-ratio: var(--feat-mobile-ar) !important;
   }
+
+  /* Ensure the image fills the tile */
   .featured-row .card.card--sm .thumb{
-    position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover;
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
   }
+
+  /* Stronger gradient for legible text on busy images */
   .featured-row .card.card--sm::after{
-    content:""; position:absolute; inset:0;
+    content:"";
+    position:absolute; inset:0;
     background: linear-gradient(to top, rgba(0,0,0,.65), rgba(0,0,0,0) 55%);
     pointer-events:none;
   }
+
+  /* Date chip stays top-left */
   .featured-row .card.card--sm .meta-top{
-    position:absolute; top:10px; left:10px; z-index:2; background: rgba(255,255,255,.9);
+    position:absolute;
+    top:10px; left:10px;
+    z-index:2;
+    background: rgba(255,255,255,.9);
   }
+
+  /* Overlay the title at the bottom (compact, readable) */
   .featured-row .card.card--sm .body{
-    position: absolute; left: 12px; right: 12px; bottom: 10px; padding: 0; background: transparent; z-index: 2;
+    position: absolute;
+    left: 12px; right: 12px; bottom: 10px;
+    padding: 0;
+    background: transparent;
+    z-index: 2;
   }
   .featured-row .card.card--sm .title{
-    color:#fff; font-weight:800; font-size:15px; line-height:1.25; margin:0;
+    color:#fff;
+    font-weight:800;
+    font-size:15px;
+    line-height:1.25;
+    margin:0;
     text-shadow: 0 1px 2px rgba(0,0,0,.7);
   }
+
+  /* Hide desktop-only bits on mobile tiles */
   .featured-row .card.card--sm .excerpt,
-  .featured-row .card.card--sm .meta{ display: none !important; }
+  .featured-row .card.card--sm .meta{
+    display: none !important;
+  }
 }
+
+/* Single-column fallback for ultra-small phones (kept for clarity) */
 @media (max-width: 360px){
   .featured-row{ grid-template-columns: 1fr !important; }
 }
 
 /* ===== Responsive brand: keep logo/title on one line on small screens ===== */
-.site-header .wrapper{ min-width: 0; }
+.site-header .wrapper{ min-width: 0; }               /* allow children to shrink */
 .site-title{
-  white-space: nowrap; overflow: hidden; text-overflow: ellipsis; flex: 1 1 auto;
+  white-space: nowrap;                                /* never wrap */
+  overflow: hidden; text-overflow: ellipsis;          /* trim gracefully if needed */
+  flex: 1 1 auto;                                     /* title takes available space */
 }
-.site-nav{ flex: 0 0 auto; }
+.site-nav{ flex: 0 0 auto; }                          /* nav stays compact */
+
+/* Tighten spacing + scale title down a bit more on phones */
 @media (max-width: 640px){
   .site-header .wrapper{ gap: 12px; }
-  .site-title{ font-size: clamp(20px, 6.2vw, 28px); letter-spacing: 0.06em; }
+  .site-title{
+    font-size: clamp(20px, 6.2vw, 28px);              /* slightly smaller than before */
+    letter-spacing: 0.06em;                           /* reduce tracking to avoid wrap */
+  }
   .site-nav .page-link{ font-size: 15px; padding: 8px 8px; }
 }
+
+/* Ultra-small phones */
 @media (max-width: 360px){
-  .site-title{ font-size: clamp(18px, 5.6vw, 24px); letter-spacing: 0.045em; }
-}
-
-/* ===== Centering: Page 2 (single & two-card) without changing card size ===== */
-@supports(selector(:has(*))) {
-  @media (min-width: 1201px) {
-    /* single card → place in middle column */
-    .grid:has(> :nth-child(1)):not(:has(> :nth-child(2))) { grid-auto-flow: dense; }
-    .grid:has(> :nth-child(1)):not(:has(> :nth-child(2))) > :first-child { grid-column: 2; justify-self: stretch; }
-
-    /* exactly two cards → place them in columns 1 and 3 (symmetrically centered) */
-    .grid:has(> :nth-child(2)):not(:has(> :nth-child(3))) { grid-auto-flow: dense; }
-    .grid:has(> :nth-child(2)):not(:has(> :nth-child(3))) > :nth-child(1) { grid-column: 1; }
-    .grid:has(> :nth-child(2)):not(:has(> :nth-child(3))) > :nth-child(2) { grid-column: 3; }
+  .site-title{
+    font-size: clamp(18px, 5.6vw, 24px);
+    letter-spacing: 0.045em;
   }
 }
 
-/* =======================
-   DARK THEME
-   ======================= */
-:root.theme-dark {
-  --text: #e6e8ef;
-  --card: #0b0f19;
-  --card-border: #1f2937;
-  --muted: #9aa3b2;
-  --muted-2: #7b8697;
-
-  --chip-bg: #121826;
-  --chip-border: #243041;
-
-  --shadow: 0 16px 40px rgba(0,0,0,.35);
-  --link: #8ab4ff;
+/* Center a single card on Page 2 (desktop) without changing its size */
+@supports(selector(:has(*))) {
+  /* Desktop = 3-column grid */
+  @media (min-width: 1201px) {
+    .grid:has(> :nth-child(1)):not(:has(> :nth-child(2))) {
+      grid-auto-flow: dense;
+    }
+    .grid:has(> :nth-child(1)):not(:has(> :nth-child(2))) > :first-child {
+      grid-column: 2;            /* use the middle column → centered, same width */
+      justify-self: stretch;     /* keep full column width */
+    }
+  }
 }
 
-/* Base surfaces */
-.theme-dark body { background: #0a0f18; color: var(--text); }
-.theme-dark .site-header { background: rgba(10,15,24,.86); border-bottom-color: rgba(148,163,184,.15); }
-.theme-dark .site-footer { background: #0a0f18; border-top-color: var(--card-border); }
-.theme-dark .section-title { color: var(--muted); }
-
-/* Cards */
-.theme-dark .card { background: var(--card); border-color: var(--card-border); }
-.theme-dark .card:hover { border-color: rgba(255,255,255,.12); }
-.theme-dark .card .title { color: var(--text); }
-.theme-dark .card .excerpt { color: var(--muted); }
-.theme-dark .card .meta { color: var(--muted-2); }
-
-/* Date chip on images */
-.theme-dark .card .meta-top {
-  background: rgba(10,15,24,.72);
-  border-color: rgba(148,163,184,.28);
-  color: #e6e8ef;
-}
-
-/* Topic tiles */
-.theme-dark .topic-card { background: var(--card); border-color: var(--card-border); }
-.theme-dark .topic-thumb::after {
-  background: linear-gradient(to top, rgba(0,0,0,.28), rgba(0,0,0,0) 55%);
-}
-.theme-dark .topic-chip {
-  color: #e6e8ef;
-  background: rgba(10,15,24,.8);
-  border-color: rgba(148,163,184,.28);
-}
-
-/* Pager */
-.theme-dark .pager a, .theme-dark .pager span {
-  background: #0b1220; color: var(--text); border-color: var(--card-border);
-}
-.theme-dark .pager a:hover { background:#e6e8ef; color:#0b0f19; border-color:#e6e8ef; }
-.theme-dark .pager .active span { background:#1f2937; color:#fff; border-color:#1f2937; }
-
-/* Toggle in dark */
-.theme-dark .theme-toggle{
-  background:#0b1220; border-color:#243041; color:#e6e8ef;
-}
