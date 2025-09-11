@@ -16,7 +16,7 @@ tags: [Phish]
 Phishing isn’t just “bad emails.” It’s a full attack chain that plays on urgency, trust, and routine. This guide centralizes what staff and everyday users actually face: shady messages, pixel-perfect fake portals, and QR-code bait. Each section mirrors real life with examples, red flags, and precise actions to stay safe.
 </blockquote>
 <br>
----
+
 
 <img src="../assets/img/banners/phish-redflags.png" alt="Phishing Red Flags Banner" class="section-banner">
 
@@ -79,12 +79,12 @@ Phishing succeeds because it targets people, not systems. Whether via **email**,
 
 ## Key Takeaway — Message Red Flags
 
-- [ ] Odd sender/domain or display-name spoofing  
-- [ ] Urgent/fear-based language  
-- [ ] Typos, tone off, inconsistent branding  
-- [ ] Hovered link doesn’t match the claimed site  
-- [ ] Attachments you weren’t expecting  
-- [ ] Requests for credentials, payment, or MFA codes  
+- Odd sender/domain or display-name spoofing  
+- Urgent/fear-based language  
+- Typos, tone off, inconsistent branding  
+- Hovered link doesn’t match the claimed site  
+- Attachments you weren’t expecting  
+- Requests for credentials, payment, or MFA codes  
 
 ---
 
@@ -138,12 +138,12 @@ The email is just the bait. The real trap is often a **cloned login page** desig
 
 ## Key Takeaway — Portal Red Flags
 
-- [ ] Domain isn’t exactly right  
-- [ ] Cert warnings / no lock icon  
-- [ ] Visual inconsistencies vs the real site  
-- [ ] Login appeared after a random email/QR  
-- [ ] Requests password **and** MFA in one flow  
-- [ ] Slow or glitchy behavior
+- Domain isn’t exactly right  
+- Cert warnings / no lock icon  
+- Visual inconsistencies vs the real site  
+- Login appeared after a random email/QR  
+- Requests password **and** MFA in one flow  
+- Slow or glitchy behavior
 
 ---
 
@@ -195,11 +195,11 @@ QR codes are convenient — and abusable. They hide the URL until after you’ve
 
 ## Key Takeaway — QR Cheat Sheet
 
-- [ ] Don’t scan untrusted QR codes  
-- [ ] Always preview the URL before tapping  
-- [ ] Never log in or pay from a QR link you didn’t initiate  
-- [ ] Short links + odd domains = walk away  
-- [ ] Report suspicious QR posters or emails
+- Don’t scan untrusted QR codes  
+- Always preview the URL before tapping  
+- Never log in or pay from a QR link you didn’t initiate  
+- Short links + odd domains = walk away  
+- Report suspicious QR posters or emails
 
 ---
 
