@@ -792,7 +792,3 @@ html.dark .post-content blockquote:not(.featured-quote){
   .featured-quote{ font-size: 18px; padding-left: 28px; }
   .featured-quote::before{ font-size: 60px; top: -12px; }
 }
-
-.post-body hr {
-  display: none;
-}
