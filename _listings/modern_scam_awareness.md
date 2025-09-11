@@ -3,10 +3,11 @@ author: Sab0x1D
 author_avatar: /assets/img/sab01xd-profile.jpeg
 
 layout: listing
-title: "Scam Awareness <br><span class='subtitle'>[A Complete Guide]</span>"
+title: "Scam Awareness [A Complete Guide]"
+pretty_title: "Scam Awareness <br>[A Complete Guide]"
 excerpt: "From fake renewals to crypto giveaways, tech support calls, parcel texts, and romance investment schemes, this post centralizes the most high-impact scams you need to know about, with real-world examples and red flags to spot."
 thumb: /assets/img/scam_img.jpg
-date: 2025-09-10
+date: 2025-09-08
 featured: true
 tags: [Scam]
 ---
