@@ -1,19 +1,31 @@
-<!-- _layouts/default.html -->
 <!doctype html>
 <html lang="en">
 <head>
-  {% include head.html %}
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <!-- Title: page title | site title -->
+  <title>{{ page.title | escape }} | {{ site.title | escape }}</title>
+
+  <!-- Favicon(s) -->
+  <link rel="icon" href="{{ '/assets/img/favicon.png' | relative_url }}" type="image/x-icon">
+  <link rel="shortcut icon" href="{{ '/assets/img/favicon.ico' | relative_url }}" type="image/x-icon">
+  <link rel="apple-touch-icon" href="{{ '/assets/img/sab01xd-profile.jpeg' | relative_url }}">
+
+  <!-- SEO / Open Graph via jekyll-seo-tag -->
+  {% seo %}
+
+  <!-- Fallback OG/Twitter image (in case a page doesn’t set one) -->
+  <meta property="og:image" content="{{ '/assets/img/sab01xd-profile.jpeg' | relative_url }}">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:image" content="{{ '/assets/img/sab01xd-profile.jpeg' | relative_url }}">
+
+  <!-- Your styles -->
+  <link rel="stylesheet" href="{{ '/assets/css/theme.css' | relative_url }}">
+  <link rel="stylesheet" href="{{ '/assets/css/site.css'  | relative_url }}">
 </head>
 <body>
-  {% include header.html %}
-
-  <main class="page-content" aria-label="Content">
-    <div class="wrapper">
-      {{ content }}
-    </div>
-  </main>
-
-  {% include footer.html %}
+  {{ content }}
   <script defer src="{{ '/assets/js/theme.js' | relative_url }}"></script>
   <script defer src="{{ '/assets/js/site.js'  | relative_url }}"></script>
 </body>

@@ -1,5 +1,5 @@
 title: "Sab0x1D::Cyber Awareness"
-description: ""
+description: "Cyber Awareness, Malware Research & Security Insights"
 footer_quote: "Stay curious. Stay skeptical."
 theme: minima
 markdown: kramdown
@@ -25,9 +25,6 @@ plugins:
 # Show ONLY these pages in the header nav
 header_pages:
   - index.html
-  - about.md
-  - repos.md
-  - tools.md
 
 exclude:
   - node_modules
