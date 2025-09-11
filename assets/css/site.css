@@ -797,3 +797,22 @@ main.page-content { padding-bottom: 20px !important; }
     top: -12px;
   }
 }
+
+/* =======================
+   Normal Blockquotes
+   ======================= */
+.post-body blockquote {
+  margin: 24px 0;
+  padding: 12px 18px;
+  border-left: 4px solid var(--card-border); /* vertical line */
+  background: #f8fafc;                       /* light gray background */
+  color: var(--muted);                       /* greyish font color */
+  font-size: 15px;
+  line-height: 1.6;
+  border-radius: 8px;                        /* soften edges */
+}
+
+/* Make any bold text inside stand out more */
+.post-body blockquote strong {
+  color: var(--text);
+}
