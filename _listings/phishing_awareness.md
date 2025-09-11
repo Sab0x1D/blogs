@@ -9,7 +9,7 @@ excerpt: "Email tricks, fake login portals, QR-code traps, and more. This consol
 thumb: /assets/img/phishing_img.png
 date: 2025-09-10
 featured: true
-tags: [Phishing]
+tags: [Phish]
 ---
 
 <blockquote class="featured-quote">
