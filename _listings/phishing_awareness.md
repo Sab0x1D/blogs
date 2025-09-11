@@ -7,7 +7,7 @@ title: "Phishing Awareness [A Complete Guide]"
 pretty_title: "Phishing Awareness <br>[A Complete Guide]"
 excerpt: "Email tricks, fake login portals, QR-code traps, and more. This consolidated guide shows the most common phishing tactics in 2025, with red flags, real examples, and step-by-step defenses you can put into practice immediately."
 thumb: /assets/img/phishing_img.png
-date: 2025-09-10
+date: 2025-09-09
 featured: true
 tags: [Phish]
 ---
