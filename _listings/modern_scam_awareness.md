@@ -131,7 +131,7 @@ Legitimate companies process refunds via their official website or app, not thro
 
 ---
 
-## TL;DR: Subscription Scam Red Flags
+## Key Takeaway: Subscription Scam Red Flags
 
 - Fake renewal invoices for antivirus, streaming, or cloud services  
 - Urges you to call a number or click a link for payment/refunds  
@@ -232,7 +232,7 @@ The wallet is controlled by the scammer, and transactions are irreversible.
 
 ---
 
-## TL;DR: Crypto Giveaway Scam Signs
+## Key Takeaway: Crypto Giveaway Scam Signs
 
 - Promises of free ETH, BTC, or NFTs in return for sending crypto  
 - Uses celebrity names and real interviews to look legit  
@@ -325,7 +325,7 @@ In the background, they may quietly exfiltrate files or install malware.
 
 ---
 
-## TL;DR: Tech Support Scam Warning Signs
+## Key Takeaway: Tech Support Scam Warning Signs
 
 - Fake popups or voicemails claim your device is infected  
 - Prompts you to call a support number — always fake  
@@ -411,7 +411,7 @@ On Android, the link also installs spyware that silently monitors messages.
 
 ---
 
-## TL;DR: Parcel Scam Red Flags
+## Key Takeaway: Parcel Scam Red Flags
 
 - SMS claims your parcel is held or needs redelivery  
 - Asks for a small fee or verification via a fake link  
@@ -492,7 +492,7 @@ Eventually, she loses over $20,000 and never hears from him again.
 
 ---
 
-## TL;DR: Romance/Investment Scam Red Flags
+## Key Takeaway: Romance/Investment Scam Red Flags
 
 - Relationship moves quickly, with flattery and emotional intensity  
 - Talk of crypto investing or business opportunities arises  
