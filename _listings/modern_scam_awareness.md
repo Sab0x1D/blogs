@@ -4,7 +4,7 @@ author_avatar: /assets/img/sab01xd-profile.jpeg
 
 layout: listing
 title: "Scam Awareness <br><span class='subtitle'>[A Complete Guide]</span>"
-excerpt: "From fake renewals to crypto giveaways, tech support calls, parcel texts, and romance investment schemes — this post centralizes the most high-impact scams you need to know about, with real-world examples and red flags to spot."
+excerpt: "From fake renewals to crypto giveaways, tech support calls, parcel texts, and romance investment schemes, this post centralizes the most high-impact scams you need to know about, with real-world examples and red flags to spot."
 thumb: /assets/img/scam_img.jpg
 date: 2025-09-10
 featured: true
@@ -12,7 +12,7 @@ tags: [Scam]
 ---
 
 <blockquote class="featured-quote">
-Scams are no longer simple email tricks — they are multi-layered social engineering attacks designed to exploit urgency, trust, and emotion. In this consolidated guide, we’ll explore the most prevalent scams targeting everyday users and staff in 2025. Each section is presented in full detail, exactly as you’d encounter them in practice, including red flags, examples, and step-by-step defense tips.
+Scams are no longer simple email tricks, they are multi-layered social engineering attacks designed to exploit urgency, trust, and emotion. In this consolidated guide, we’ll explore the most prevalent scams targeting everyday users and staff in 2025. Each section is presented in full detail, exactly as you’d encounter them in practice, including red flags, examples, and step-by-step defense tips.
 </blockquote>
 <br>
 ---

@@ -725,13 +725,13 @@ main.page-content { padding-bottom: 20px !important; }
 }
 
 /* =======================
-   Normal Blockquotes (override)
+   Normal Blockquotes (ONLY standard ones)
    ======================= */
-.article .post-body blockquote,
-.article .post-content blockquote,
-.post-body .post-content blockquote,
-.post-body blockquote,
-.post-content blockquote{
+.article .post-body blockquote:not(.featured-quote),
+.article .post-content blockquote:not(.featured-quote),
+.post-body .post-content blockquote:not(.featured-quote),
+.post-body blockquote:not(.featured-quote),
+.post-content blockquote:not(.featured-quote){
   margin: 24px 0 !important;
   padding: 12px 18px !important;
   border-left: 4px solid var(--card-border) !important; /* vertical line */
@@ -741,22 +741,54 @@ main.page-content { padding-bottom: 20px !important; }
   line-height: 1.6;
   border-radius: 8px;
 }
-/* remove extra inner spacing */
-.article .post-body blockquote > p,
-.article .post-content blockquote > p,
-.post-body blockquote > p,
-.post-content blockquote > p{ margin: 0 !important; }
-/* stronger text inside */
-.article .post-body blockquote strong,
-.article .post-content blockquote strong,
-.post-body blockquote strong,
-.post-content blockquote strong{ color: var(--text) !important; }
-/* optional dark mode */
-html.dark .article .post-body blockquote,
-html.dark .article .post-content blockquote,
-html.dark .post-body blockquote,
-html.dark .post-content blockquote{
+
+/* remove extra inner spacing for standard quotes only */
+.article .post-body blockquote:not(.featured-quote) > p,
+.article .post-content blockquote:not(.featured-quote) > p,
+.post-body blockquote:not(.featured-quote) > p,
+.post-content blockquote:not(.featured-quote) > p{
+  margin: 0 !important;
+}
+
+/* stronger text inside standard quotes */
+.article .post-body blockquote:not(.featured-quote) strong,
+.article .post-content blockquote:not(.featured-quote) strong,
+.post-body blockquote:not(.featured-quote) strong,
+.post-content blockquote:not(.featured-quote) strong{
+  color: var(--text) !important;
+}
+
+/* optional dark mode for standard quotes */
+html.dark .article .post-body blockquote:not(.featured-quote),
+html.dark .article .post-content blockquote:not(.featured-quote),
+html.dark .post-body blockquote:not(.featured-quote),
+html.dark .post-content blockquote:not(.featured-quote){
   background: rgba(11,18,32,0.10) !important;
   border-left-color: rgba(255,255,255,0.18) !important;
   color: #cbd5e1 !important;
+}
+
+/* Featured pull-quote (unchanged) */
+.featured-quote{
+  position: relative;
+  font-family: 'Inter', sans-serif;
+  font-size: 22px;
+  font-weight: 700;
+  line-height: 1.6;
+  color: var(--text);
+  max-width: 640px;
+  margin: 48px auto;
+  padding-left: 36px;       /* space for decorative mark */
+  text-align: center;
+}
+.featured-quote::before{
+  content: "“";
+  position: absolute;
+  left: 0; top: -20px;
+  font-size: 80px; line-height: 1;
+  color: #2563eb; font-weight: 800;
+}
+@media (max-width: 720px){
+  .featured-quote{ font-size: 18px; padding-left: 28px; }
+  .featured-quote::before{ font-size: 60px; top: -12px; }
 }
