@@ -6,10 +6,12 @@ layout: listing
 title: "Branded Phishing disguised as MS Office 365"
 pretty_title: "Branded Phishing <br>[Fake RFP Email]"
 excerpt: "This campaign abuses trusted branding and RFP (Request for Proposal) lures to harvest corporate credentials. Attackers create realistic email templates, spoofed document invites, and redirect victims into credential harvesting portals disguised as Microsoft Office 365 login pages."
-thumb: /assets/img/branded_ms_phish.jpg
+thumb: assets/img/branded_ms_phish.jpg
 date: 2025-09-15
 featured: false
 tags: [Phish]
+permalink: /listings/branded-phishing-disguised-as-ms-office-365/
+published: true
 ---
 
 Attackers are increasingly blending corporate branding, document lures, and email templates into phishing kits that look indistinguishable from genuine business correspondence. This campaign demonstrates how a fake RFP request with embedded redirects ultimately delivers a credential harvesting page.
