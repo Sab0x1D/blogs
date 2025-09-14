@@ -16,7 +16,7 @@ default_thumb: assets/img/default_thumb.png
 collections:
   listings:
     output: true
-    permalink: /listings/:name
+    permalink: /listings/:name/
 
 plugins:
   - jekyll-feed
