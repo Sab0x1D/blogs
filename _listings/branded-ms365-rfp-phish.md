@@ -79,7 +79,7 @@ Victims finally land on a **Microsoft Office 365 lookalike portal**:
 
 ---
 
-## 🎭 Phishing Portal
+## Phishing Portal
 
 The final phishing page is styled to match **Microsoft 365 login**, including:  
 
