@@ -35,7 +35,7 @@ This email makes use of **legitimate branding** (logos and footers from a real S
 
 ---
 
-<img src="/assets/img/branded_phish1.png" alt="Fake RFP Email Example">
+<img src="../assets/img/branded_phish1.png" alt="Fake RFP Email Example">
 
 ---
 
@@ -75,7 +75,7 @@ Victims finally land on a **Microsoft Office 365 lookalike portal**:
 
 ---
 
-<img src="/assets/img/branded_phish3.png" alt="Redirect Chain Example">
+<img src="../assets/img/branded_phish3.png" alt="Redirect Chain Example">
 
 ---
 
@@ -95,7 +95,7 @@ https://segv2.cc/api/login
 
 ---
 
-<img src="/assets/img/branded_phish4.png" alt="Fake Microsoft 365 Login">
+<img src="../assets/img/branded_phish4.png" alt="Fake Microsoft 365 Login">
 
 ---
 
