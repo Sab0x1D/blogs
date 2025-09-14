@@ -3,7 +3,7 @@ author: Sab0x1D
 author_avatar: /assets/img/sab01xd-profile.jpeg
 
 layout: listing
-title: "Phishing Awareness [A Complete Guide]"
+title: "Phishing Awareness"
 pretty_title: "Phishing Awareness <br>[A Complete Guide]"
 excerpt: "Email tricks, fake login portals, QR-code traps, and more. This consolidated guide shows the most common phishing tactics in 2025, with red flags, real examples, and step-by-step defenses you can put into practice immediately."
 thumb: /assets/img/phishing_img.png

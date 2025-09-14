@@ -3,7 +3,7 @@ author: Sab0x1D
 author_avatar: /assets/img/sab01xd-profile.jpeg
 
 layout: listing
-title: "Business Email Compromise [A Complete Guide]"
+title: "Business Email Compromise Explained"
 pretty_title: "Business Email Compromise <br>[A Complete Guide]"
 excerpt: "From invoice fraud to vendor hijacks, payroll redirection, and stealth mailbox rules, this guide breaks down Business Email Compromise (BEC) attacks in detail — how they work, real-world examples, and a playbook to detect and defend against them."
 thumb: /assets/img/bec_img.jpg
