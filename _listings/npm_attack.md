@@ -6,7 +6,7 @@ layout: listing
 title: "When the Foundation Cracks: Inside the 2025 NPM Supply Chain Attack"
 pretty_title: "When the Foundation Cracks: <br>Inside the 2025 NPM Supply Chain Attack"
 excerpt: "A phishing lure, a stolen maintainer account, and 18 poisoned NPM packages: the September 2025 supply chain attack is the most widespread compromise in NPM history. This deep dive explains what NPM is, how dependency chains amplify risk, what the malware did, and how to rethink supply chain security."
-thumb: /assets/img/npm_attack_thumb.jpg
+thumb: /assets/img/npm_attack_thumb.webp
 date: 2025-09-15
 featured: false
 tags: [Phish, Malware]
