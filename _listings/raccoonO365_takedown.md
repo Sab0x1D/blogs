@@ -6,7 +6,7 @@ layout: listing
 title: "RaccoonO365: Inside the Global Phishing-as-a-Service Takedown"
 pretty_title: "RaccoonO365: <br>Inside the Global Phishing-as-a-Service Takedown"
 excerpt: "Microsoft and Cloudflare dismantled RaccoonO365, a $355/month phishing-as-a-service empire that stole 5,000+ Microsoft 365 credentials across 94 countries. This deep dive explains how the service operated, the scale of its impact, and what the takedown means for defenders."
-thumb: /assets/img/raccoon_thumb.webp
+thumb: /assets/img/raccoon_thumb.png
 date: 2025-09-20
 featured: false
 tags: [Phish, Malware]
