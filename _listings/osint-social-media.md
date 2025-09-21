@@ -191,6 +191,6 @@ The solution? Awareness, privacy discipline, and smarter investigation technique
 ---
 
 **Up Next:**  
-[OSINT Pt.3: Geolocation from Images & Videos – Landmarks, Shadows & Weather](/listings/osint-pt3-geolocation)  
+[OSINT Pt.3: Geolocation from Images & Videos – Landmarks, Shadows & Weather]({{ "/listings/osint-pt3-geolocation" | relative_url }})  
 
 ---
