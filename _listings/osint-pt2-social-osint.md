@@ -1,19 +1,13 @@
----
 author: Sab0x1D
 author_avatar: /assets/img/sab01xd-profile.jpeg
 layout: listing
-title: 'OSINT Pt.2: TikTok, Facebook & Instagram OSINT – Location Clues, Trends &
-  Impersonation Risks'
+title: 'OSINT Pt.2: TikTok, Facebook & Instagram OSINT – Location Clues, Trends & Impersonation Risks'
 pretty_title: 'OSINT Pt.2: Social Media OSINT <br>TikTok, Facebook & Instagram'
-excerpt: Billions of posts, selfies, and stories uploaded every day make social media
-  a goldmine for OSINT. From geotags to background clues, we’ll explore how TikTok,
-  Facebook, and Instagram reveal more than users intend—and how attackers exploit
-  it.
+excerpt: Billions of posts, selfies, and stories uploaded every day make social media a goldmine for OSINT. From geotags to background clues, we’ll explore how TikTok, Facebook, and Instagram reveal more than users intend—and how attackers exploit it.
 thumb: /assets/img/osint_social.jpg
 date: 2025-09-22
 featured: false
-tags:
-- OSINT
+tags: [OSINT]
 permalink: /listings/osint-social-media
 redirect_from:
 - /listings/osint-pt2-social-osint/
