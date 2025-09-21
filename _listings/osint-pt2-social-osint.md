@@ -1,3 +1,4 @@
+---   
 author: Sab0x1D
 author_avatar: /assets/img/sab01xd-profile.jpeg
 layout: listing
@@ -15,6 +16,7 @@ redirect_from:
 - /blogs/listings/osint-pt2-social-osint
 - /blogs/listings/osint-pt2-social-osint/
 published: true
+---   
 
 <blockquote class="featured-quote">
 Every post tells a story. Social media OSINT is about reading the hidden chapters—location data, timelines, patterns, and impersonation campaigns—that most users never realize they’re revealing.
