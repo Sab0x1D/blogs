@@ -10,11 +10,6 @@ date: 2025-09-22
 featured: false
 tags: [OSINT]
 permalink: /listings/osint-social-media
-redirect_from:
-- /listings/osint-pt2-social-osint/
-- /listings/osint-pt2-social-osint
-- /blogs/listings/osint-pt2-social-osint
-- /blogs/listings/osint-pt2-social-osint/
 published: true
 ---   
 
