@@ -9,7 +9,7 @@ thumb: /assets/img/osint_social.jpg
 date: 2025-09-22
 featured: false
 tags: [OSINT]
-permalink: /listings/osint-social-media
+permalink: /blogs/listings/osint-social-media
 published: true
 ---   
 
