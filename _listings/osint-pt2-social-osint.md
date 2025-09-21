@@ -14,14 +14,12 @@ date: 2025-09-22
 featured: false
 tags:
 - OSINT
-permalink: /blogs/listings/osint-social-media
+permalink: /listings/osint-social-media
 redirect_from:
 - /blogs/listings/osint-pt2-social-osint
 - /blogs/listings/osint-pt2-social-osint/
-- /listings/osint-pt2-social-osint
-- /listings/osint-pt2-social-osint/
-- /listings/osint-social-media
-- /listings/osint-social-media/
+- /blogs/listings/osint-social-media
+- /blogs/listings/osint-social-media/
 published: true
 ---   
 
