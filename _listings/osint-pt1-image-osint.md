@@ -173,6 +173,6 @@ By practicing Image OSINT, you protect yourself from scams **and** sharpen your 
 ---
 
 **Up Next:**  
-[OSINT Pt.2: TikTok, Facebook & Instagram OSINT – Location clues, trends & impersonation risks](/blogs/listings/osint-pt2-social-osint)  
+[OSINT Pt.2: TikTok, Facebook & Instagram OSINT – Location clues, trends & impersonation risks](/blogs/listings/osint-social-media)  
 
 ---
