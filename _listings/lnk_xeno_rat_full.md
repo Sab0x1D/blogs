@@ -54,18 +54,18 @@ Expanded view:
 1. Victim downloads and extracts ZIP.  
 2. `.lnk` reaches out to:  
    ```
-   https://breaks-emily-exclusion-panel.trycloudflare[.]com/Downloads/Rechnung-92658.pdf.lnk
+   https://breaks-emily-exclusion-panel[.]trycloudflare[.]com/Downloads/Rechnung-92658.pdf.lnk
    ```  
 3. Fetches and executes **zub.wsf**:  
    ```
-   https://breaks-emily-exclusion-panel.trycloudflare[.]com/at/zub.wsf
+   https://breaks-emily-exclusion-panel[.]trycloudflare[.]com/at/zub.wsf
    ```  
 4. WSF spawns **PowerShell**, downloading two more ZIPs:  
    - `me.zip`  
    - `deb.zip`  
 5. Archives unpack into the **Contacts folder**:  
    ```
-   C:\Users\REM\Contacts\Deb\ch_extracted\
+   C:\Users\[user]\Contacts\Deb\ch_extracted\
    ```  
 6. Launch command observed:  
    ```
@@ -133,7 +133,7 @@ Strings recovered from memory clearly reference **“xeno rat client”** compon
 Explorer.exe maintains outbound TCP sessions to the attacker’s C2:  
 
 ```
-144.126.202.249:8789
+144[.]126[.]202[.]249:8789
 ```
 
 <p align="center">
@@ -148,10 +148,10 @@ This abuse of **explorer.exe as the network-facing process** is highly evasive: 
 
 **Domains & URLs**
 ```
-breaks-emily-exclusion-panel.trycloudflare[.]com/Downloads/Rechnung-92658.pdf.lnk
-breaks-emily-exclusion-panel.trycloudflare[.]com/at/zub.wsf
-student-chronic-photos-weblogs.trycloudflare[.]com/me.zip
-student-chronic-photos-weblogs.trycloudflare[.]com/deb.zip
+breaks-emily-exclusion-panel[.]trycloudflare[.]com/Downloads/Rechnung-92658.pdf.lnk
+breaks-emily-exclusion-panel[.]trycloudflare[.]com/at/zub.wsf
+student-chronic-photos-weblogs[.]trycloudflare[.]com/me.zip
+student-chronic-photos-weblogs[.]trycloudflare[.]com/deb.zip
 bell[.]ca/Styles/OneBill/BillInserts/ (used as decoy)
 ```
 
@@ -170,7 +170,7 @@ k.txt
 
 **Network**
 ```
-144.126.202.249:8789 (C2)
+144[.]126[.]202[.]249:8789 (C2)
 ```
 
 ---
