@@ -25,7 +25,7 @@ The campaign began with a **Twitter/X t.co shortlink**, which redirected unsuspe
 - **Click tracking:** The adversary gains visibility into who clicked, helping to prioritize victims.  
 - **Reduced scrutiny:** End users familiar with t.co links are less likely to question them.  
 
-From the shortlink, the victim landed on a **direct LiveChat URL** (`https://direct.lc.chat/...`). At first glance, this looked legitimate because the domain belongs to LiveChat, a well-established SaaS provider.
+From the shortlink, the victim landed on a **direct LiveChat URL** (`https://direct[.]lc[.]chat/...`). At first glance, this looked legitimate because the domain belongs to LiveChat, a well-established SaaS provider.
 
 <br>
 
