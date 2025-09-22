@@ -46,7 +46,7 @@ Analysis of the embedded URLs reveals a **multi-stage redirect sequence**:
 ### Stage 1: Infection URL
 
 ```
-https://wxpaeao.clicks.mslsend.com/tj/cl/eyJ2Ijoie1wiYW... 
+https://wxpaeao[.]clicks[.]mslsend[.]com/tj/cl/eyJ2Ijoie1wiYW... 
 ```
 
 - First click leads through an email marketing/campaign service abused by the threat actor.  
@@ -55,9 +55,9 @@ https://wxpaeao.clicks.mslsend.com/tj/cl/eyJ2Ijoie1wiYW...
 ### Stage 2: Redirect URLs
 
 ```
-https://overviewsummary.powerappsportals.com/#3dc25vb...
-https://links.info4tdsolutions.com/ls/click?upn=u001...
-https://loginmcr0sftonIine-kulouuz.az2554844132065184848541514.cc
+https://overviewsummary[.]powerappsportals[.]com/#3dc25vb...
+https://links[.]info4tdsolutions[.]com/ls/click?upn=u001...
+https://loginmcr0sftonIine-kulouuz[.]az2554844132065184848541514[.]cc
 ```
 
 - Multiple nested redirects add complexity, make analysis harder, and evade automated filters.  
@@ -69,7 +69,7 @@ Victims finally land on a **Microsoft Office 365 lookalike portal**:
 - Uses **Cloudflare CAPTCHA** to feign legitimacy.  
 - URL is **not Microsoft**:  
   ```
-  loginmcr0sftonIine-kulouuz.az2554844132065184848541514.cc
+  loginmcr0sftonIine-kulouuz[.]az2554844132065184848541514[.]cc
   ```
 - Notice deliberate misspelling: `mcr0sftonIine` instead of `microsoftonline`.  
 
@@ -90,7 +90,7 @@ The final phishing page is styled to match **Microsoft 365 login**, including:
 After submission, credentials are sent to the attacker-controlled endpoint:  
 
 ```
-https://segv2.cc/api/login
+https://segv2[.]cc/api/login
 ```
 
 ---
@@ -103,21 +103,21 @@ https://segv2.cc/api/login
 
 **Observed Infection URLs:**  
 
-- `https://wxpaeao.clicks.mslsend.com/...`  
-- `https://overviewsummary.powerappsportals.com/...`  
-- `https://links.info4tdsolutions.com/...`  
+- `https://wxpaeao[.]clicks[.]mslsend[.]com/...`  
+- `https://overviewsummary[.]powerappsportals[.]com/...`  
+- `https://links[.]info4tdsolutions[.]com/...`  
 
 **Observed Payload URLs:**  
 
-- `https://loginmcr0sftonIine-kulouuz.az2554844132065184848541514.cc`  
-- `https://segv2.cc/api/login` ← credential POST address  
+- `https://loginmcr0sftonIine-kulouuz[.]az2554844132065184848541514[.]cc`  
+- `https://segv2[.]cc/api/login` ← credential POST address  
 
 **Observed IPs:**  
 
-- `104.17.107.239`  
-- `104.17.108.239`  
-- `3.162.125.34`  
-- `3.162.125.43`  
+- `104[.]17[.]107[.]239`  
+- `104[.]17[.]108[.]239`  
+- `3[.]162[.]125[.]34`  
+- `3[.]162[.]125[.]43`  
 
 ---
 
