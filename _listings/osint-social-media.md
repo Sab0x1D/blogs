@@ -10,7 +10,7 @@ excerpt: Billions of posts, selfies, and stories uploaded every day make social 
   Facebook, and Instagram reveal more than users intend—and how attackers exploit
   it.
 thumb: /assets/img/osint_social.jpg
-date: '2025-09-21'
+date: '2025-09-22'
 featured: false
 tags:
 - OSINT
