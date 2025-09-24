@@ -6,7 +6,7 @@ layout: listing
 title: "OSINT Pt.3: Geolocation from Images & Videos – Landmarks, Shadows & Weather"
 pretty_title: "OSINT Pt.3: Geolocation OSINT <br>Landmarks, Shadows & Weather"
 excerpt: "Geolocation is one of the crown jewels of OSINT. By analyzing photos and videos—landmarks, skylines, sun shadows, and even weather—you can pinpoint where and when something happened. In this post, we’ll explore step-by-step how geolocation works and why it’s such a powerful tool for investigators, journalists, and everyday users."
-thumb: /assets/img/osint_geolocation.jpg
+thumb: /assets/img/osint-geolocation.jpg
 date: 2025-09-24
 featured: false
 tags: [OSINT]
@@ -19,7 +19,7 @@ Every image has a story beyond the subject. Landmarks, skylines, shadows, and we
 </blockquote>
 <br>
 
-<img src="../assets/img/banners/osint-banner-3.png" alt="Geolocation OSINT banner">
+<img src="../assets/img/banners/osint-banner-3.jpg" alt="Geolocation OSINT banner">
 
 ## Why Geolocation is So Powerful  
 Geolocation OSINT is the art of extracting **where (and sometimes when)** an image or video was captured by analyzing what’s visible (and sometimes hidden).  
