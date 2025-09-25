@@ -8,7 +8,7 @@ pretty_title: "Malvertising <br>When Ads Deliver Malware"
 excerpt: "Malvertising has evolved into one of the most dangerous attack vectors of 2025. This guide traces its origins, explains how poisoned ads work, dissects real campaigns, and provides detailed defense strategies for both individuals and enterprises."
 thumb: /assets/img/malvertising_thumb.webp
 date: 2025-09-25
-featured: true
+featured: false
 tags: [Malware, Scam]
 ---
 
