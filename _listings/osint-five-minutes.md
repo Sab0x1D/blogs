@@ -12,11 +12,6 @@ featured: false
 tags: [OSINT]
 published: true
 permalink: /listings/osint-five-minutes
-redirect_from:
-  - /listings/osint-pt5-five-minutes
-  - /listings/osint-pt5-five-minutes/
-  - /blogs/listings/osint-pt5-five-minutes
-  - /blogs/listings/osint-pt5-five-minutes/
 ---
 
 <blockquote class="featured-quote">
