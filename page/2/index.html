@@ -21,24 +21,33 @@ permalink: /page/2/
     <h2 class="section-title">PREVIOUS POSTS</h2>
 
     {%- comment -%}
-      Pagination math based only on non-featured posts.
+      Build list of previous posts (exclude only the 4 actually displayed featured).
       • Page 1 shows 6 large cards.
       • Page 2 (and later) shows up to 9 cards each.
     {%- endcomment -%}
-    {%- assign non_featured = coll | where_exp: 'p', 'p.featured != true' -%}
+    {%- assign featured_list = coll | where_exp: 'p', 'p.featured == true' | slice: 0, 4 -%}
+    {%- assign featured_urls = featured_list | map: 'url' -%}
+
+    {%- assign previous = "" | split: "" -%}
+    {%- for p in coll -%}
+      {%- unless featured_urls contains p.url -%}
+        {%- assign previous = previous | push: p -%}
+      {%- endunless -%}
+    {%- endfor -%}
+
     {%- assign base_page_size = 6 -%}
     {%- assign page_size      = 9 -%}
     {%- assign current        = page.page_num | plus: 0 -%}
     {%- if current <= 0 %}{% assign current = 1 %}{% endif %}
 
-    {%- assign base_pages  = non_featured.size | divided_by: base_page_size -%}
-    {%- assign remainder   = non_featured.size | modulo:    base_page_size -%}
+    {%- assign base_pages  = previous.size | divided_by: base_page_size -%}
+    {%- assign remainder   = previous.size | modulo:    base_page_size -%}
     {%- assign total_pages = base_pages -%}
     {%- if remainder > 0 -%}{%- assign total_pages = base_pages | plus: 1 -%}{%- endif -%}
 
     {%- comment -%}
       Offset math:
-      - Page 1 consumes 6 non-featured.
+      - Page 1 consumes 6.
       - Page 2 starts at item 6, shows 9.
       - Page 3 starts at 15, etc.
     {%- endcomment -%}
@@ -46,7 +55,7 @@ permalink: /page/2/
     {%- if current == 2 -%}{%- assign offset = base_page_size -%}{%- endif -%}
 
     <section class="grid" aria-label="Previous posts">
-      {%- for p in non_featured offset: offset limit: page_size -%}
+      {%- for p in previous offset: offset limit: page_size -%}
         <a class="card card--lg" href="{{ p.url | relative_url }}">
           <div class="media">
             <img class="thumb" src="{{ (p.thumb | default: site.default_thumb) | relative_url }}" alt="{{ p.title }}">
@@ -104,7 +113,6 @@ permalink: /page/2/
     {%- comment -%}
       Optional: topics grid on page 2.
       My recommendation: keep it homepage-only.
-      If you want it here, just remove the surrounding comment tags below.
     {%- endcomment -%}
     {%- comment -%}{% include topics-grid.html title='POPULAR TOPICS' %}{%- endcomment -%}
 
