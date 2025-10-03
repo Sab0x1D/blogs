@@ -8,7 +8,7 @@ pretty_title: "Business Email Compromise <br>[A Complete Guide]"
 excerpt: "From invoice fraud to vendor hijacks, payroll redirection, and stealth mailbox rules, this guide breaks down Business Email Compromise (BEC) attacks in detail — how they work, real-world examples, and a playbook to detect and defend against them."
 thumb: /assets/img/bec_img.jpg
 date: 2025-09-11
-featured: true
+featured: false
 tags: [Scam]
 ---
 
