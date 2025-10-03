@@ -56,7 +56,7 @@ permalink: /
       {%- endif -%}
     </section> 
 
-    <!-- Previous posts: show ALL posts (duplication with Featured allowed), paginated -->
+    <!-- Previous posts: show all EXCEPT the 4 actually displayed in Featured -->
     <h2 class="section-title">PREVIOUS POSTS</h2>
 
     {%- assign page_size = 6 -%}
@@ -64,20 +64,27 @@ permalink: /
     {%- if current <= 0 %}{% assign current = 1 %}{% endif %}
 
     {%- comment -%}
-      Compute pagination ONLY from non-featured posts so we don't overcount pages.
+      Build list of previous posts (exclude only the 4 displayed featured).
     {%- endcomment -%}
-    {%- assign non_featured = coll | where_exp: 'p', 'p.featured != true' -%}
+    {%- assign featured_list = coll | where_exp: 'p', 'p.featured == true' | slice: 0, 4 -%}
+    {%- assign featured_urls = featured_list | map: 'url' -%}
 
-    {%- comment -%} ceil(non_featured.size / page_size) {%- endcomment -%}
-    {%- assign base_pages = non_featured.size | divided_by: page_size -%}
-    {%- assign remainder  = non_featured.size | modulo: page_size -%}
+    {%- assign previous = "" | split: "" -%}
+    {%- for p in coll -%}
+      {%- unless featured_urls contains p.url -%}
+        {%- assign previous = previous | push: p -%}
+      {%- endunless -%}
+    {%- endfor -%}
+
+    {%- assign base_pages = previous.size | divided_by: page_size -%}
+    {%- assign remainder  = previous.size | modulo: page_size -%}
     {%- assign total_pages = base_pages -%}
     {%- if remainder > 0 -%}{%- assign total_pages = base_pages | plus: 1 -%}{%- endif -%}
 
     {%- assign offset = page_size | times: current | minus: page_size -%}
 
     <section class="grid" aria-label="Previous posts">
-      {%- for p in non_featured offset: offset limit: page_size -%}
+      {%- for p in previous offset: offset limit: page_size -%}
         <a class="card card--lg" href="{{ p.url | relative_url }}">
           <div class="media">
             <img class="thumb" src="{{ (p.thumb | default: site.default_thumb) | relative_url }}" alt="{{ p.title }}">
