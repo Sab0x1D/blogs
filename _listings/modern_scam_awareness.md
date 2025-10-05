@@ -17,8 +17,7 @@ Scams are no longer simple email tricks, they are multi-layered social engineeri
 </blockquote>
 <br>
 
-
-<img src="../assets/img/banners/scam-subscription.avif" alt="Subscription Renewal Scam" class="section-banner">
+![Subscription Renewal Scam]({{ '/assets/img/banners/scam-subscription.avif' | relative_url }}){: .img-center }\
 
 # Subscription Renewal Scams — “Your Norton Is Expiring”
 
@@ -151,7 +150,7 @@ Legitimate companies process refunds via their official website or app, not thro
 
 ---
 
-<img src="../assets/img/banners/scam-crypto.jpg" alt="Crypto Giveaway Scam" class="section-banner">
+![Crypto Giveaway Scam]({{ '/assets/img/banners/scam-crypto.jpg' | relative_url }}){: .img-center }\
 
 # Crypto Giveaway Scams — Elon’s Not Sending ETH
 
@@ -243,7 +242,7 @@ The wallet is controlled by the scammer, and transactions are irreversible.
 
 ---
 
-<img src="../assets/img/banners/scam-support.webp" alt="Call Center Tech Support Scam" class="section-banner">
+![Call Center Tech Support Scam]({{ '/assets/img/banners/scam-support.webp' | relative_url }}){: .img-center }\
 
 # Call Center Tech Support Scams — What They Say and Why
 
@@ -337,7 +336,7 @@ In the background, they may quietly exfiltrate files or install malware.
 
 ---
 
-<img src="../assets/img/banners/scam-parcel.png" alt="Parcel SMS Scam" class="section-banner">
+![Parcel SMS Scam]({{ '/assets/img/banners/scam-parcel.png' | relative_url }}){: .img-center }\
 
 # “Your Parcel Is Held” Text Messages Explained
 
@@ -422,7 +421,8 @@ On Android, the link also installs spyware that silently monitors messages.
 
 ---
 
-<img src="../assets/img/banners/scam-romance.webp" alt="Romance & Investment Scam" class="section-banner">
+![Romance & Investment Scam]({{ '/assets/img/banners/scam-romance.webp' | relative_url }}){: .img-center }\
+
 
 # Romance & Investment Scam Red Flags
 
