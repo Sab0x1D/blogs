@@ -33,9 +33,8 @@ Rechnung 92658.zip
 
 Inside is a **shortcut file** (`Rechnung-92658.pdf.lnk`), disguised to look like an invoice.  
 
-<p align="center">
-  <img src="../assets/img/xeno_img1.png">
-</p>
+![xeno]({{ '/assets/img/xeno_img1.png' | relative_url }}){: .img-center }
+
 
 When clicked, the `.lnk` does not open a PDF, but instead retrieves a **WSF (Windows Script File)** hosted on a disposable Cloudflare subdomain.
 
@@ -74,9 +73,7 @@ Expanded view:
 7. `explorer.exe` assumes network activity, maintaining C2 sessions.  
 8. Meanwhile, the victim is shown a **fake Bill invoice page** as distraction.  
 
-<p align="center">
-  <img src="../assets/img/xeno_img4.png">
-</p>
+![xeno]({{ '/assets/img/xeno_img4.png' | relative_url }}){: .img-center }\
 
 ---
 
@@ -99,9 +96,7 @@ Files seen:
 
 Instead of common `AppData` or `Temp` directories, the chain **drops Python runtime and scripts under Contacts** — an unusual but stealthy choice.  
 
-<p align="center">
-  <img src="../assets/img/xeno_img5.png">
-</p>
+![xeno]({{ '/assets/img/xeno_img5.png' | relative_url }}){: .img-center }\
 
 The extracted bundle included:
 
@@ -122,9 +117,7 @@ cmd.exe → pythonw.exe → explorer.exe
 
 Strings recovered from memory clearly reference **“xeno rat client”** components, handlers, and managers.
 
-<p align="center">
-  <img src="../assets/img/xeno_img6.png">
-</p>
+![xeno]({{ '/assets/img/xeno_img6.png' | relative_url }}){: .img-center }\
 
 ---
 
@@ -136,9 +129,7 @@ Explorer.exe maintains outbound TCP sessions to the attacker’s C2:
 144[.]126[.]202[.]249:8789
 ```
 
-<p align="center">
-  <img src="../assets/img/xeno_img3.png">
-</p>
+![xeno]({{ '/assets/img/xeno_img3.png' | relative_url }}){: .img-center }\
 
 This abuse of **explorer.exe as the network-facing process** is highly evasive: many defenses don’t expect Explorer to manage TCP sessions.
 
