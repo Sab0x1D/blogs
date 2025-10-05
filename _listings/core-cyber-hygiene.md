@@ -21,7 +21,7 @@ Strong passwords, multi-factor authentication, and software updates are not opti
 </blockquote>
 <br>
 
-<img src="../assets/img/banners/core_hygiene1_intro.png" alt="Core Cyber Hygiene Banner">
+<img src="../assets/img/banners/core_hygiene1_intro.jpg" alt="Core Cyber Hygiene Banner">
 
 ## Introduction
 
