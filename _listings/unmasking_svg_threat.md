@@ -11,7 +11,8 @@ featured: false
 tags: [Phish]
 ---
 
-<p align="center"><img src="../assets/img/svg_pic.png"></p>
+![SVG]({{ '/assets/img/svg_pic.png' | relative_url }}){: .img-center }
+
 
 The humble image file has long been considered one of the safest attachments a user can receive. While office documents, executable files, and even PDFs have well-documented risks, images are often overlooked as a potential attack vector.  
 
