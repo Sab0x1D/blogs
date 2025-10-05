@@ -13,12 +13,6 @@ permalink: /listings/core-cyber-hygiene/
 redirect_from:
   - /blogs/listings/core-cyber-hygiene
   - /blogs/listings/core-cyber-hygiene/
-  - /blogs/listings/core_cyber_hygiene
-  - /blogs/listings/core_cyber_hygiene/
-  - /listings/core-cyber-hygiene
-  - /listings/core-cyber-hygiene/
-  - /listings/core_cyber_hygiene
-  - /listings/core_cyber_hygiene/
 published: true
 ---
 
