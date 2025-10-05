@@ -9,7 +9,7 @@ thumb: /assets/img/core_hygiene1_thumb.jpg
 date: 2025-10-06
 featured: false
 tags: [Cyber Hygiene, Awareness]
-permalink: /blogs/listings/core-cyber-hygiene/
+permalink: /blogs/listings/core_cyber_hygiene/
 ---
 
 <blockquote class="featured-quote">
