@@ -17,7 +17,7 @@ Scams are no longer simple email tricks, they are multi-layered social engineeri
 </blockquote>
 <br>
 
-![Subscription Renewal Scam]({{ '/assets/img/banners/scam-subscription.avif' | relative_url }}){: .img-center }\
+![Subscription Renewal Scam]({{ '/assets/img/banners/scam-subscription.avif' | relative_url }}){: .img-center }
 
 # Subscription Renewal Scams — “Your Norton Is Expiring”
 
