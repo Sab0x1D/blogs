@@ -1,42 +1,65 @@
 title: "Sab0x1D::Cyber Awareness"
-description: "Cyber Awareness, Malware Research & Security Insights"
-footer_quote: "Stay curious. Stay skeptical."
-theme: minima
+description: "Cybersecurity awareness series and threat education by Sab0x1D"
+url: "https://sab0x1d.github.io"
+baseurl: "/blogs"
+future: true
+timezone: "Australia/Adelaide"
+
+# Theme + Markdown
 markdown: kramdown
-excerpt_chars: 220
+highlighter: rouge
+theme: minima
 
-
-url: "https://sab0x1d.github.io"  # GitHub Pages root
-baseurl: "/blogs"                 # EXACT repo name, with leading slash
-
-# used when a post has no 'thumb:' in its front-matter
-default_thumb: assets/img/default_thumb.png
-
-# Blog posts live in /listings
-collections:
-  listings:
-    output: true
-    permalink: /listings/:name
-
+# Plugins
 plugins:
   - jekyll-feed
   - jekyll-seo-tag
+  - jekyll-redirect-from
 
-# Show ONLY these pages in the header nav
-header_pages:
-  - index.html
+# Collections
+collections:
+  listings:
+    output: true
+    permalink: /listings/:name/
 
-exclude:
-  - node_modules
-  - vendor
-  - Gemfile.lock
-  - package.json
-  - README.md
-
-# Apply the 'listing' layout by default to items in the collection
+# Defaults
 defaults:
   - scope:
-      path: ""            # apply everywhere
-      type: "listings"    # target the collection
+      path: ""
+      type: "listings"
     values:
-      layout: listing
+      layout: "listing"
+      author: "Sab0x1D"
+      author_avatar: "/assets/img/sab01xd-profile.jpeg"
+      featured: false
+      published: true
+
+# Exclude and include paths
+exclude:
+  - README.md
+  - Gemfile
+  - Gemfile.lock
+  - node_modules
+  - vendor
+  - .gitignore
+  - .github/
+  - _site/
+  - .vscode/
+  - .DS_Store
+
+# Feed
+feed:
+  path: feed.xml
+
+# SEO + Social
+social_links:
+  github: sab0x1d
+  twitter: sab0x1d
+
+# Pagination (if used)
+paginate: 6
+paginate_path: "/page:num/"
+
+# Sass settings (if applicable)
+sass:
+  style: compressed
