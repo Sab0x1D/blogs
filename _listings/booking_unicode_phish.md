@@ -47,11 +47,11 @@ The result?
 The email lure is professionally done, visually matching Booking.com’s branding, with an urgent **complaint notice** or **security alert**.  
 1. **Fake Service Complaint Notice** – claiming a guest lodged a complaint, urging the recipient to click a verification link.
 
-   ![Complaint email]({{ '/assets/img/banners/GyG1.jpg' | relative_url }}){: .img-center }
+   ![Complaint email]({{ '/assets/img/GyG1.jpg' | relative_url }}){: .img-center }
 
 2. **New Device Login Alert** – stating someone logged in from a suspicious location, prompting the user to “terminate access.”
 
-   ![New device alert]({{ '/assets/img/banners/GyG2.jpg' | relative_url }}){: .img-center }
+   ![New device alert]({{ '/assets/img/GyG2.jpg' | relative_url }}){: .img-center }
 
 Both lead to the malicious domain with the embedded “ん” character.
 
