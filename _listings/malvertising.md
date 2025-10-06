@@ -17,7 +17,7 @@ Malvertising is not just about shady pop-ups anymore. It is the abuse of trusted
 </blockquote>
 <br>
 
-<img src="../assets/img/banners/malvertising_intro.jpg" alt="Malvertising Introduction Banner">
+![Malvertising Introduction Banner]({{ '/assets/img/banners/malvertising_intro.jpg' | relative_url }}){: .img-center }
 
 ## Introduction
 
