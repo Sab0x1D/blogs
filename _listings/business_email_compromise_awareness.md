@@ -17,7 +17,7 @@ BEC is one of the most financially damaging forms of cybercrime today — exploi
 </blockquote>
 <br>
 
-<img src="../assets/img/banners/bec_intro.webp" alt="BEC Intro Banner" class="banner-image">
+![BEC Intro Banner]({{ '/assets/img/banners/bec_intro.webp' | relative_url }}){: .img-center }
 
 ---
 
@@ -77,7 +77,7 @@ The victim processes the payment, believing it’s genuine.
 
 ---
 
-<img src="../assets/img/banners/bec_vendor.jpg" alt="Vendor Hijack Banner" class="banner-image">
+![Vendor Hijack Banner]({{ '/assets/img/banners/bec_vendor.jpg' | relative_url }}){: .img-center }
 
 ---
 
@@ -111,7 +111,7 @@ A vendor email account gets compromised. Days or weeks later, the attacker strik
 
 ---
 
-<img src="../assets/img/banners/bec_payroll.png" alt="Payroll Redirect Banner" class="banner-image">
+![Payroll Redirect Banner]({{ '/assets/img/banners/bec_payroll.png' | relative_url }}){: .img-center }
 
 ---
 
@@ -147,7 +147,7 @@ Short, urgent, personal:
 
 ---
 
-<img src="../assets/img/banners/bec_detection.png" alt="Detection Playbook Banner" class="banner-image">
+![Detection Playbook Banner]({{ '/assets/img/banners/bec_detection.png' | relative_url }}){: .img-center }
 
 ---
 
