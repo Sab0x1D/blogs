@@ -17,8 +17,7 @@ Phishing isn’t just “bad emails.” It’s a full attack chain that plays on
 </blockquote>
 <br>
 
-
-<img src="../assets/img/banners/phish-redflags.png" alt="Phishing Red Flags Banner" class="section-banner">
+![Phishing Red Flags Banner]({{ '/assets/img/banners/phish-redflags.png' | relative_url }}){: .img-center }
 
 # Phishing Red Flags — How to Spot a Trap
 
@@ -88,7 +87,7 @@ Phishing succeeds because it targets people, not systems. Whether via **email**,
 
 ---
 
-<img src="../assets/img/banners/phish-portals.webp" alt="Fake Login Portals Banner" class="section-banner">
+![Fake Login Portals Banner]({{ '/assets/img/banners/phish-portals.webp' | relative_url }}){: .img-center }
 
 # Fake Login Portals — Pixel-Perfect Credential Traps
 
@@ -147,7 +146,7 @@ The email is just the bait. The real trap is often a **cloned login page** desig
 
 ---
 
-<img src="../assets/img/banners/phish-qr.jpg" alt="QR Code Phishing Banner" class="section-banner">
+![QR Code Phishing Banner]({{ '/assets/img/banners/phish-qr.jpg' | relative_url }}){: .img-center }
 
 # QR Code Phishing (Quishing) — “Scan to Be Scammed”
 
