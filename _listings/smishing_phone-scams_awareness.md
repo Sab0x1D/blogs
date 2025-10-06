@@ -17,8 +17,7 @@ SMS and phone call scams aren’t just random spam, they are highly targeted soc
 </blockquote>
 <br>
 
-
-<img src="../assets/img/banners/smishing_phone_banner1.jpg" alt="Smishing and phone scam awareness banner">
+![Smishing and phone scam awareness banner]({{ '/assets/img/banners/smishing_phone_banner1.jpg' | relative_url }}){: .img-center }
 
 # Smishing Examples & Response Guide
 
@@ -95,7 +94,7 @@ It may be a login attempt — someone is trying to reset your password or access
 
 ---
 
-<img src="../assets/img/banners/smishing_phone_banner2.webp" alt="Phone scam defense banner">
+![Phone scam defense banner]({{ '/assets/img/banners/smishing_phone_banner2.webp' | relative_url }}){: .img-center }
 
 # Common Phone Scams & What to Say
 
