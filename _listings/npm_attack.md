@@ -77,7 +77,7 @@ Maintainer → NPM Registry → Developer's npm install → Build pipeline → P
 The attackers didn’t breach NPM itself — they **phished maintainers**.  
 
 ### The lure email
-<img src="../assets/img/npm_phish_lure.jpg" alt="Phishing email used in NPM compromise">
+![Phishing email used in NPM compromise]({{ '/assets/img/npm_phish_lure.jpg' | relative_url }}){: .img-center }
 
 ### It looks convincing, right?
 - **Branding:** Used the NPM logo + formatting.  
