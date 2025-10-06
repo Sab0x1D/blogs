@@ -150,7 +150,7 @@ Legitimate companies process refunds via their official website or app, not thro
 
 ---
 
-![Crypto Giveaway Scam]({{ '/assets/img/banners/scam-crypto.jpg' | relative_url }}){: .img-center }\
+![Crypto Giveaway Scam]({{ '/assets/img/banners/scam-crypto.jpg' | relative_url }}){: .img-center }
 
 # Crypto Giveaway Scams — Elon’s Not Sending ETH
 
@@ -242,7 +242,7 @@ The wallet is controlled by the scammer, and transactions are irreversible.
 
 ---
 
-![Call Center Tech Support Scam]({{ '/assets/img/banners/scam-support.webp' | relative_url }}){: .img-center }\
+![Call Center Tech Support Scam]({{ '/assets/img/banners/scam-support.webp' | relative_url }}){: .img-center }
 
 # Call Center Tech Support Scams — What They Say and Why
 
@@ -336,7 +336,7 @@ In the background, they may quietly exfiltrate files or install malware.
 
 ---
 
-![Parcel SMS Scam]({{ '/assets/img/banners/scam-parcel.png' | relative_url }}){: .img-center }\
+![Parcel SMS Scam]({{ '/assets/img/banners/scam-parcel.png' | relative_url }}){: .img-center }
 
 # “Your Parcel Is Held” Text Messages Explained
 
@@ -421,7 +421,7 @@ On Android, the link also installs spyware that silently monitors messages.
 
 ---
 
-![Romance & Investment Scam]({{ '/assets/img/banners/scam-romance.webp' | relative_url }}){: .img-center }\
+![Romance & Investment Scam]({{ '/assets/img/banners/scam-romance.webp' | relative_url }}){: .img-center }
 
 
 # Romance & Investment Scam Red Flags
