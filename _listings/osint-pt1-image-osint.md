@@ -17,7 +17,7 @@ OSINT isn’t hacking .. it’s assembling intelligence from what’s already pu
 </blockquote>
 <br>
 
-<img src="../assets/img/banners/osint-banner-1.jpg" alt="Image OSINT banner">
+![Image OSINT banner]({{ '/assets/img/banners/osint-banner-1.jpg' | relative_url }}){: .img-center }
 
 ## What is OSINT?  
 **OSINT (Open-Source Intelligence)** is the practice of collecting and analyzing data that’s already public. This isn’t about breaking into systems or stealing secrets .. it’s about finding clues in plain sight.  
