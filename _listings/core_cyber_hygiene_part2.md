@@ -16,7 +16,7 @@ Good cyber hygiene isn’t about paranoia — it’s about awareness. The more y
 </blockquote>
 <br>
 
-![Core Cyber Hygiene Banner]({{ '/assets/img/banners/core_hygiene2_intro.webp' | relative_url }}){: .img-center }
+![Core Cyber Hygiene Banner]({{ '/assets/img/banners/core_hygiene2_intro.jpg' | relative_url }}){: .img-center }
 
 ## Introduction
 
