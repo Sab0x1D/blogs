@@ -6,7 +6,7 @@ layout: listing
 title: "Sextortion Scams Are Back: What They Are, How They Work, and Why They’re So Effective"
 pretty_title: "Sextortion Scams Are Back<br>What They Are, How They Work, and Why They’re So Effective"
 excerpt: "Sextortion scams are resurfacing — exploiting fear, shame, and privacy for profit. Learn how they work, why they’re effective, and how to protect yourself."
-thumb: /assets/img/thumbs/sextortion.jpg
+thumb: /assets/img/sextortion.jpg
 hero: /assets/img/banners/sextortion_banner.jpg
 date: 2025-10-12
 featured: true
@@ -18,7 +18,7 @@ Sextortion scams exploit the most powerful human emotions — fear, shame, and e
 </blockquote>
 <br>
 
-![Sextortion Awareness Banner]({ '/assets/img/banners/sextortion_banner.jpg' | relative_url }){: .img-center }
+![Sextortion Awareness Banner]({{ '/assets/img/banners/sextortion_banner.jpg' | relative_url }}){: .img-center }
 
 ## Introduction
 
@@ -45,19 +45,19 @@ While the specifics may vary, sextortion campaigns generally follow the same str
 1. **The Threat Email Arrives**  
    Victims receive an email claiming their system has been hacked and their webcam accessed.  
 
-   ![Sextortion Lure Email]({ '/assets/img/sextortion_lure.jpg' | relative_url }){: .img-center }
+   ![Sextortion Lure Email]({{ '/assets/img/sextortion_lure.jpg' | relative_url }}){: .img-center }
 
-2. **False Technical Claims**  
+3. **False Technical Claims**  
    The message references supposed Trojans, backdoors, or remote desktop access to sound credible. Some even claim that the malware updates “every 4 hours.”
 
-3. **Ransom Demand**  
+4. **Ransom Demand**  
    Victims are told to pay a ransom — typically **$500 to $2,000 in Bitcoin** — to prevent public release of the alleged footage.  
    Example wallet: `bc1qsr3pmz0vefsgw4cnfs820acmkl948k2mj76mkz`
 
-4. **Urgency and Fear**  
+5. **Urgency and Fear**  
    The email sets a short deadline (often 24–48 hours) to pressure the victim into paying without verifying the claim.
 
-5. **False Proof of Compromise**  
+6. **False Proof of Compromise**  
    In some versions, the attacker includes the victim’s real password (from old data breaches) or claims to have access to their social media contacts.
 
 Despite the lack of evidence, these tactics are effective because they exploit **human emotion**, not logic.
@@ -70,7 +70,7 @@ A sample email shows the attacker using `macurdy@eudorawebmail.com` and referenc
 
 The Bitcoin address linked to this campaign received **two confirmed payments**, totaling **$1,195 USD**, before the funds were quickly withdrawn — a common sign of automated laundering or cryptocurrency mixers.
 
-![Sextortion Transactions]({ '/assets/img/sextortion_transactions.jpg' | relative_url }){: .img-center }
+![Sextortion Transactions]({{ '/assets/img/sextortion_transactions.jpg' | relative_url }}){: .img-center }
 
 Key traits observed:
 - Generic but localized subject lines  
@@ -159,7 +159,7 @@ Bitcoin enables anonymity that traditional banking cannot. Attackers typically:
 
 The observed wallet (**bc1qsr3pmz0vefsgw4cnfs820acmkl948k2mj76mkz**) demonstrates a clear pattern of instant withdrawal — a strong indicator of automated laundering systems.
 
-![Sextortion Transactions]({ '/assets/img/sextortion_transactions.jpg' | relative_url }){: .img-center }
+![Sextortion Transactions]({{ '/assets/img/sextortion_transactions.jpg' | relative_url }}){: .img-center }
 
 ---
 
