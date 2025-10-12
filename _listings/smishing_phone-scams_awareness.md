@@ -8,7 +8,7 @@ pretty_title: "Smishing & Phone Scams"
 excerpt: "From fake parcel delivery texts to tech support calls claiming you’ve got a virus, this guide covers the most common SMS and phone-based scams. Learn how attackers exploit urgency, trust, and fear — and how to respond safely every time."
 thumb: /assets/img/smishing_phone_img.webp
 date: 2025-09-10
-featured: true
+featured: false
 tags: [Scam, Smishing, Vishing]
 ---
 
