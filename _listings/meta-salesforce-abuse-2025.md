@@ -9,7 +9,7 @@ excerpt: "Threat actors are leveraging Salesforce’s trusted infrastructure to 
 thumb: /assets/img/salesforce_meta_abuse_thumb.jpg
 hero: /assets/img/salesforce_meta_abuse_thumb.jpg
 date: 2025-10-16
-featured: true
+featured: false
 tags: [Cyber Awareness, Phish, Salesforce, Meta, Brand Abuse, SaaS Abuse]
 ---
 
@@ -17,8 +17,6 @@ tags: [Cyber Awareness, Phish, Salesforce, Meta, Brand Abuse, SaaS Abuse]
 Threat actors are abusing Salesforce’s trusted infrastructure to deliver convincing phishing campaigns that impersonate Meta’s Business Support team. This emerging trend highlights how legitimate SaaS ecosystems can be weaponized to bypass enterprise defenses and target digital marketers, ad managers, and corporate users worldwide.
 </blockquote>
 <br>
-
-![Salesforce Meta Phish Banner]({{ '/assets/img/banners/salesforce_meta_abuse.jpg' | relative_url }}){: .img-center }
 
 ## Introduction
 
