@@ -21,7 +21,7 @@ The result is deceptively simple: a candidate clones a repo as part of a technic
 
 > **Important:** this write‑up is **defensive** and educational. It intentionally avoids showing working malicious payloads or step‑by‑step instructions that would enable misuse. Instead it focuses on the attack *pattern*, detection, mitigation and safe analysis practices.
 
-## The Scam Playbook (high level)
+## The Scam Playbook
 
 Attackers combine social engineering and lightweight technical tricks. The pattern typically follows these steps:
 
@@ -33,7 +33,7 @@ Attackers combine social engineering and lightweight technical tricks. The patte
 
 This flow is elegant for attackers because it leverages trust: the target believes they’re performing a normal developer setup and rarely questions the presence of lifecycle scripts in simple projects.
 
-## Technical mechanics (non‑executable, conceptual)
+## Technical mechanics
 
 To understand detection and mitigation it helps to view the building blocks conceptually — without providing operational payloads.
 
@@ -66,7 +66,7 @@ When evaluating a repo or a challenge, these signs should raise suspicion (many 
 
 If you see any of the above, pause and perform safe analysis — do **not** run `npm install` on your host machine.
 
-## Safe analysis & testing checklist (defensive)
+## Safe analysis & testing checklist
 
 Whenever you need to run someone else’s code, follow a risk‑minimising workflow:
 
@@ -135,7 +135,7 @@ https://api[.]npoint[.]io/2c458612399c3b2031fb9
 ```  
 - **Human factors win.** The attackers relied on urgency, professional presentation, and social proof (company page, employees, LinkedIn posts) to lower suspicion.
 
-**What saved me:** a quick AI‑assisted code review prompt and a paranoid pause. I examined the flagged controller more closely and *did not* run the repository on my host. I fetched the remote payload only from an isolated environment, analysed it using safe tools, and confirmed it contained exfiltration‑style behavior. I then terminated the exercise and reported the incident to my team.
+**What saved David:** a quick AI‑assisted code review prompt and a paranoid pause. He examined the flagged controller more closely and *did not* run the repository on his host. David fetched the remote payload only from an isolated environment, analysed it using safe tools, and confirmed it contained exfiltration‑style behavior, then terminated the exercise and reported the incident to his team.
 
 This near miss shows how even cautious, security‑savvy developers are at risk when social engineering and plausible corporate setups are used as the delivery vehicle. The practical takeaway: a short automated scan or even a single careful manual read can stop a catastrophic outcome — and sandboxing should be the default, not an afterthought.
 
