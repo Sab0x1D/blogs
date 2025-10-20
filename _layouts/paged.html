@@ -26,8 +26,8 @@ layout: default
       {%- endunless -%}
     {%- endfor -%}
 
-    {%- assign base_page_size = 6 -%}  {# homepage shows 6 #}
-    {%- assign page_size      = 9 -%}  {# page 2+ show 9 #}
+    {%- assign base_page_size = 6 -%}  {%- comment -%} homepage shows 6 {%- endcomment -%}
+    {%- assign page_size      = 9 -%}  {%- comment -%} page 2+ show 9 {%- endcomment -%}
     {%- assign current        = page.page_num | plus: 0 -%}
     {%- if current <= 0 %}{% assign current = 1 %}{% endif %}
 
@@ -42,9 +42,7 @@ layout: default
     {%- if add_remainder > 0 -%}{%- assign total_pages = total_pages | plus: 1 -%}{%- endif -%}
     {%- assign total_pages   = total_pages | plus: 1 -%}
 
-    {%- comment -%}
-      For page >=2: offset = 6 + (current-2)*9 ; limit = 9
-    {%- endcomment -%}
+    {%- comment -%} For page >=2: offset = 6 + (current-2)*9 ; limit = 9 {%- endcomment -%}
     {%- assign offset = base_page_size | plus: page_size | times: (current | minus: 2) -%}
     {%- if current < 2 -%}{%- assign offset = 0 -%}{%- endif -%}
     {%- assign limit  = page_size -%}
@@ -59,7 +57,7 @@ layout: default
           <div class="body">
             <h3 class="title">{{ p.title }}</h3>
             {%- if p.excerpt -%}
-              <p class="excerpt">{{ p.excerpt | strip_html | truncate: excerpt_limit }}</p>
+              <p class="excerpt">{{ p.excerpt | strip_html | truncate: excerpt_limit }}"></p>
             {%- endif -%}
           </div>
         </a>
