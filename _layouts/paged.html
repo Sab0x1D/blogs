@@ -28,7 +28,7 @@ layout: default
       {%- endunless -%}
     {%- endfor -%}
 
-    {%- assign base_page_size = 6 -%}
+    {%- assign base_page_size = 9 -%}
     {%- assign page_size = 9 -%}
     {%- assign current = page.page_num | plus: 0 -%}
     {%- if current <= 0 %}{% assign current = 1 %}{% endif %}
@@ -40,7 +40,7 @@ layout: default
 
     {%- comment -%}
       Offset math:
-      - Page 1 = 6
+      - Page 1 = 9
       - Page 2 = 9 (offset 6)
       - Page 3 = 9 (offset 15)
       - Page N = 9 (offset keeps growing)
