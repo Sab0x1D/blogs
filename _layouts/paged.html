@@ -28,26 +28,32 @@ layout: default
       {%- endunless -%}
     {%- endfor -%}
 
-    {%- assign base_page_size = 9 -%}
-    {%- assign page_size = 9 -%}
-    {%- assign current = page.page_num | plus: 0 -%}
+    {%- assign base_page_size = 9 -%}   {%- comment -%} homepage shows 9 previous now {%- endcomment -%}
+    {%- assign page_size      = 9 -%}   {%- comment -%} page 2+ show 9 {%- endcomment -%}
+    {%- assign current        = page.page_num | plus: 0 -%}
     {%- if current <= 0 %}{% assign current = 1 %}{% endif %}
 
-    {%- assign base_pages = previous.size | divided_by: base_page_size -%}
-    {%- assign remainder = previous.size | modulo: base_page_size -%}
-    {%- assign total_pages = base_pages -%}
-    {%- if remainder > 0 -%}{%- assign total_pages = base_pages | plus: 1 -%}{%- endif -%}
+    {%- comment -%}
+      TOTAL PAGES:
+      1 (for page 1) + ceil(max(previous.size - 9, 0) / 9)
+    {%- endcomment -%}
+    {%- assign remaining     = previous.size | minus: base_page_size -%}
+    {%- if remaining < 0 -%}{%- assign remaining = 0 -%}{%- endif -%}
+    {%- assign add_pages     = remaining | divided_by: page_size -%}
+    {%- assign add_remainder = remaining | modulo: page_size -%}
+    {%- assign total_pages   = add_pages -%}
+    {%- if add_remainder > 0 -%}{%- assign total_pages = total_pages | plus: 1 -%}{%- endif -%}
+    {%- assign total_pages   = total_pages | plus: 1 -%}
 
     {%- comment -%}
-      Offset math:
-      - Page 1 = 9
-      - Page 2 = 9 (offset 6)
-      - Page 3 = 9 (offset 15)
-      - Page N = 9 (offset keeps growing)
+      OFFSET:
+      For page >= 2 → offset = 9 + (current - 2) * 9
     {%- endcomment -%}
-    {%- assign offset = base_page_size | plus: page_size | times: (current | minus: 2) | plus: base_page_size -%}
-    {%- if current == 2 -%}{%- assign offset = base_page_size -%}{%- endif -%}
-    {%- if current == 3 -%}{%- assign offset = base_page_size | plus: page_size -%}{%- endif -%}
+    {%- if current < 2 -%}
+      {%- assign offset = 0 -%}
+    {%- else -%}
+      {%- assign offset = base_page_size | plus: page_size | times: (current | minus: 2) -%}
+    {%- endif -%}
 
     <section class="grid" aria-label="Previous posts">
       {%- for p in previous offset: offset limit: page_size -%}
