@@ -2,19 +2,20 @@
 
 <h2 class="section-title">{{ heading }}</h2>
 <div class="topic-grid">
+
+  <a class="topic-card" href="{{ '/tag/ransomware/' | relative_url }}">
+    <div class="topic-thumb">
+      <img src="{{ '/assets/img/ransomware.avif' | relative_url }}"
+           alt="Weekly Trends" loading="lazy" decoding="async" fetchpriority="low">
+      <span class="topic-chip">Weekly Trends</span>
+    </div>
+  </a>
+  
   <a class="topic-card" href="{{ '/tag/malware/' | relative_url }}">
     <div class="topic-thumb">
       <img src="{{ '/assets/img/malware.png' | relative_url }}"
            alt="Malware" loading="lazy" decoding="async" fetchpriority="low">
       <span class="topic-chip">Malware</span>
-    </div>
-  </a>
-
-  <a class="topic-card" href="{{ '/tag/ransomware/' | relative_url }}">
-    <div class="topic-thumb">
-      <img src="{{ '/assets/img/ransomware.avif' | relative_url }}"
-           alt="Ransomware" loading="lazy" decoding="async" fetchpriority="low">
-      <span class="topic-chip">Ransomware</span>
     </div>
   </a>
 
