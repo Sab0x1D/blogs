@@ -38,37 +38,41 @@ layout: default
     {%- assign total_pages = base_pages -%}
     {%- if remainder > 0 -%}{%- assign total_pages = base_pages | plus: 1 -%}{%- endif -%}
 
-{%- comment -%}
-  Offset math (base=9, page_size=9):
-  Page 2 → 9
-  Page 3 → 18
-  Page 4 → 27
-  Page N → 9 + (N-2)*9
-{%- endcomment -%}
-{%- if current < 2 -%}
-  {%- assign offset = 0 -%}
-{%- elsif current == 2 -%}
-  {%- assign offset = base_page_size -%}
-{%- else -%}
-  {%- assign k = current | minus: 2 -%}
-  {%- assign offset = base_page_size | plus: page_size | times: k -%}
-{%- endif -%}
+    {%- comment -%}
+      Offset math (base=9, page_size=9):
+      Page 2 → 9
+      Page 3 → 18
+      Page 4 → 27
+      Page N → 9 + (N-2)*9
+    {%- endcomment -%}
+    {%- if current < 2 -%}
+      {%- assign offset = 0 -%}
+    {%- elsif current == 2 -%}
+      {%- assign offset = base_page_size -%}
+    {%- else -%}
+      {%- assign k = current | minus: 2 -%}
+      {%- assign offset = base_page_size | plus: page_size | times: k -%}
+    {%- endif -%}
 
     <section class="grid" aria-label="Previous posts">
-      {%- for p in previous offset: offset limit: page_size -%}
-        <a class="card card--lg" href="{{ p.url | relative_url }}">
-          <div class="media">
-            <img class="thumb" src="{{ (p.thumb | default: site.default_thumb) | relative_url }}" alt="{{ p.title }}">
-            <span class="meta-top">{{ p.date | date: "%d %b %Y" }}</span>
-          </div>
-          <div class="body">
-            <h3 class="title">{{ p.title }}</h3>
-            {%- if p.excerpt -%}
-              <p class="excerpt">{{ p.excerpt | strip_html | truncate: excerpt_limit }}</p>
-            {%- endif -%}
-          </div>
-        </a>
-      {%- endfor -%}
+      {{ previous.size }} | {{ total_pages }}
+      {%- assign remaining = previous.size | minus: offset -%}
+      {%- if remaining > 0 -%}
+        {%- for p in previous offset: offset limit: [page_size, remaining] | at: 0 -%}
+          <a class="card card--lg" href="{{ p.url | relative_url }}">
+            <div class="media">
+              <img class="thumb" src="{{ (p.thumb | default: site.default_thumb) | relative_url }}" alt="{{ p.title }}">
+              <span class="meta-top">{{ p.date | date: "%d %b %Y" }}</span>
+            </div>
+            <div class="body">
+              <h3 class="title">{{ p.title }}</h3>
+              {%- if p.excerpt -%}
+                <p class="excerpt">{{ p.excerpt | strip_html | truncate: excerpt_limit }}</p>
+              {%- endif -%}
+            </div>
+          </a>
+        {%- endfor -%}
+      {%- endif -%}
     </section>
 
     {%- if total_pages > 1 -%}
