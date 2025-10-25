@@ -55,7 +55,14 @@ layout: default
 {%- endif -%}
 
     <section class="grid" aria-label="Previous posts">
-      {%- for p in previous offset: offset limit: page_size -%}
+  {%- assign start_index = base_page_size | plus: page_size | times: (current | minus: 2) -%}
+  {%- if current < 2 -%}{%- assign start_index = 0 -%}{%- endif -%}
+  {%- assign end_index = start_index | plus: page_size | minus: 1 -%}
+
+  {%- assign idx = 0 -%}
+  {%- for p in coll -%}
+    {%- unless featured_urls contains p.url -%}
+      {%- if idx >= start_index and idx <= end_index -%}
         <a class="card card--lg" href="{{ p.url | relative_url }}">
           <div class="media">
             <img class="thumb" src="{{ (p.thumb | default: site.default_thumb) | relative_url }}" alt="{{ p.title }}">
@@ -68,8 +75,11 @@ layout: default
             {%- endif -%}
           </div>
         </a>
-      {%- endfor -%}
-    </section>
+      {%- endif -%}
+      {%- assign idx = idx | plus: 1 -%}
+    {%- endunless -%}
+  {%- endfor -%}
+</section>
 
     {%- if total_pages > 1 -%}
       {%- assign prev_num = current | minus: 1 -%}
