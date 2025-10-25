@@ -15,57 +15,58 @@ layout: default
 
     <h2 class="section-title">PREVIOUS POSTS</h2>
 
-    {%- comment -%} Newest 4 featured actually displayed on homepage {%- endcomment -%}
-    {%- assign featured_all  = coll | where: 'featured', true -%}
-    {%- assign featured_list = featured_all | slice: 0, 4 -%}
+    {%- comment -%}
+      Build list of previous posts (exclude only the 4 actually displayed featured).
+    {%- endcomment -%}
+    {%- assign featured_list = coll | where_exp: 'p', 'p.featured == true' | slice: 0, 4 -%}
     {%- assign featured_urls = featured_list | map: 'url' -%}
 
-    {%- assign base_page_size = 9 -%}  {%- comment -%} homepage shows 9 previous {%- endcomment -%}
-    {%- assign page_size      = 9 -%}  {%- comment -%} page 2+ show 9 {%- endcomment -%}
-    {%- assign current        = page.page_num | plus: 0 -%}
+    {%- assign previous = "" | split: "" -%}
+    {%- for p in coll -%}
+      {%- unless featured_urls contains p.url -%}
+        {%- assign previous = previous | push: p -%}
+      {%- endunless -%}
+    {%- endfor -%}
+
+    {%- assign base_page_size = 9 -%}
+    {%- assign page_size = 9 -%}
+    {%- assign current = page.page_num | plus: 0 -%}
     {%- if current <= 0 %}{% assign current = 1 %}{% endif %}
 
-    {%- comment -%} Compute total pages robustly without arrays {%- endcomment -%}
-    {%- assign previous_count = coll.size | minus: featured_list.size -%}
-    {%- assign remaining      = previous_count | minus: base_page_size -%}
-    {%- if remaining < 0 -%}{%- assign remaining = 0 -%}{%- endif -%}
-    {%- assign add_pages      = remaining | divided_by: page_size -%}
-    {%- assign add_remainder  = remaining | modulo: page_size -%}
-    {%- assign total_pages    = add_pages -%}
-    {%- if add_remainder > 0 -%}{%- assign total_pages = total_pages | plus: 1 -%}{%- endif -%}
-    {%- assign total_pages    = total_pages | plus: 1 -%}
+    {%- assign base_pages = previous.size | divided_by: base_page_size -%}
+    {%- assign remainder = previous.size | modulo: base_page_size -%}
+    {%- assign total_pages = base_pages -%}
+    {%- if remainder > 0 -%}{%- assign total_pages = base_pages | plus: 1 -%}{%- endif -%}
 
     {%- comment -%}
-      Determine which slice to render for this page (within the previous stream):
-      start_index = 9 + (current-2)*9  for current >= 2
+      Offset math (final fix):
+      • Page 2 → 9
+      • Page 3 → 18
+      • Page 4 → 27
+      • Page N → 9 × (N − 1)
     {%- endcomment -%}
-    {%- if current < 2 -%}
-      {%- assign start_index = 0 -%}
+    {%- if current == 2 -%}
+      {%- assign offset = base_page_size -%}
+    {%- elsif current > 2 -%}
+      {%- assign offset = base_page_size | times: (current | minus: 1) -%}
     {%- else -%}
-      {%- assign start_index = base_page_size | plus: page_size | times: (current | minus: 2) -%}
+      {%- assign offset = 0 -%}
     {%- endif -%}
-    {%- assign end_index = start_index | plus: page_size | minus: 1 -%}
 
     <section class="grid" aria-label="Previous posts">
-      {%- assign idx = 0 -%}
-      {%- for p in coll -%}
-        {%- unless featured_urls contains p.url -%}
-          {%- if current >= 2 and idx >= start_index and idx <= end_index -%}
-            <a class="card card--lg" href="{{ p.url | relative_url }}">
-              <div class="media">
-                <img class="thumb" src="{{ (p.thumb | default: site.default_thumb) | relative_url }}" alt="{{ p.title }}">
-                <span class="meta-top">{{ p.date | date: "%d %b %Y" }}</span>
-              </div>
-              <div class="body">
-                <h3 class="title">{{ p.title }}</h3>
-                {%- if p.excerpt -%}
-                  <p class="excerpt">{{ p.excerpt | strip_html | truncate: excerpt_limit }}</p>
-                {%- endif -%}
-              </div>
-            </a>
-          {%- endif -%}
-          {%- assign idx = idx | plus: 1 -%}
-        {%- endunless -%}
+      {%- for p in previous offset: offset limit: page_size -%}
+        <a class="card card--lg" href="{{ p.url | relative_url }}">
+          <div class="media">
+            <img class="thumb" src="{{ (p.thumb | default: site.default_thumb) | relative_url }}" alt="{{ p.title }}">
+            <span class="meta-top">{{ p.date | date: "%d %b %Y" }}</span>
+          </div>
+          <div class="body">
+            <h3 class="title">{{ p.title }}</h3>
+            {%- if p.excerpt -%}
+              <p class="excerpt">{{ p.excerpt | strip_html | truncate: excerpt_limit }}</p>
+            {%- endif -%}
+          </div>
+        </a>
       {%- endfor -%}
     </section>
 
