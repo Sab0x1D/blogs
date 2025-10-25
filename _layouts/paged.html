@@ -45,8 +45,9 @@ layout: default
       - Page 3 = 9 (offset 15)
       - Page N = 9 (offset keeps growing)
     {%- endcomment -%}
-    {%- assign offset = base_page_size | plus: page_size | times: (current | minus: 2) -%}
-    {%- if current < 2 -%}{%- assign offset = 0 -%}{%- endif -%}
+    {%- assign offset = base_page_size | plus: page_size | times: (current | minus: 2) | plus: base_page_size -%}
+    {%- if current == 2 -%}{%- assign offset = base_page_size -%}{%- endif -%}
+    {%- if current == 3 -%}{%- assign offset = base_page_size | plus: page_size -%}{%- endif -%}
 
     <section class="grid" aria-label="Previous posts">
       {%- for p in previous offset: offset limit: page_size -%}
