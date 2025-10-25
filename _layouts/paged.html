@@ -51,12 +51,17 @@ layout: default
       {%- assign offset = base_page_size -%}
     {%- else -%}
       {%- assign k = current | minus: 2 -%}
-      {%- assign offset = base_page_size | plus: page_size | times: k -%}
+      {{ 'k: ' | append: k }} <!-- Debug: Check k value -->
+      {%- assign temp_offset = base_page_size | plus: page_size | times: k -%}
+      {{ 'raw offset: ' | append: temp_offset }} <!-- Debug: Check raw offset -->
+      {%- assign offset = temp_offset -%}
+      {%- if offset >= previous.size -%}{%- assign offset = previous.size | minus: 1 -%}{%- endif -%}
+      {{ 'final offset: ' | append: offset }} <!-- Debug: Check final offset -->
     {%- endif -%}
+    {%- assign remaining = previous.size | minus: offset -%} <!-- Ensure remaining is calculated here -->
 
     <section class="grid" aria-label="Previous posts">
       {{ previous.size }} | {{ total_pages }} | offset: {{ offset }} | remaining: {{ remaining }}
-      {%- assign remaining = previous.size | minus: offset -%}
       {%- if remaining > 0 -%}
         {%- for p in previous offset: offset limit: [page_size, remaining] | at: 0 -%}
           <a class="card card--lg" href="{{ p.url | relative_url }}">
@@ -132,3 +137,4 @@ layout: default
     {%- endif -%}
   </div>
 </section>
+</DOCUMENT>
