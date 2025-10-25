@@ -58,7 +58,6 @@ layout: default
     {%- assign remaining = previous.size | minus: offset -%}
 
     <section class="grid" aria-label="Previous posts">
-      {{ previous.size }} | {{ total_pages }} | offset: {{ offset }} | remaining: {{ remaining }}
       {%- if remaining > 0 -%}
         {%- for p in previous offset: offset limit: [page_size, remaining] | at: 0 -%}
           <a class="card card--lg" href="{{ p.url | relative_url }}">
@@ -131,11 +130,3 @@ layout: default
     {%- endif -%}
   </div>
 </section>
-
-{%- comment -%}
-  Debug references (removed from active code):
-  - Debug: Rendering last post | index: {{ previous | size | minus: 1 }}
-  - Debug: No posts to render | offset: {{ offset }} | size: {{ previous.size }}
-  Use these lines inside the {%- elsif offset < previous.size -%} or {%- else -%} blocks if troubleshooting is needed later.
-{%- endcomment -%}
-</DOCUMENT>
