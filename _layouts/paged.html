@@ -72,6 +72,20 @@ layout: default
             </div>
           </a>
         {%- endfor -%}
+      {%- elsif offset < previous.size -%}
+        {%- assign last_post = previous | last -%}
+        <a class="card card--lg" href="{{ last_post.url | relative_url }}">
+          <div class="media">
+            <img class="thumb" src="{{ (last_post.thumb | default: site.default_thumb) | relative_url }}" alt="{{ last_post.title }}">
+            <span class="meta-top">{{ last_post.date | date: "%d %b %Y" }}</span>
+          </div>
+          <div class="body">
+            <h3 class="title">{{ last_post.title }}</h3>
+            {%- if last_post.excerpt -%}
+              <p class="excerpt">{{ last_post.excerpt | strip_html | truncate: excerpt_limit }}</p>
+            {%- endif -%}
+          </div>
+        </a>
       {%- endif -%}
     </section>
 
