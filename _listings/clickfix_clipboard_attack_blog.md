@@ -50,7 +50,7 @@ The goal is simple — get the user to click and land on the fake verification p
 
 ### Step 2. The ClickFix Page
 
-![Fake Verification Prompt]({{ '/assets/img/clickfix_prompt_example.webp' | relative_url }}){: .img-center }
+![Fake Verification Prompt]({{ '/assets/img/clickfix_prompt_example.png' | relative_url }}){: .img-center }
 
 Once the user clicks the lure, they’re redirected to a realistic-looking page that mimics a CAPTCHA, browser verification, or even a “Word Online” installation notice. The text usually reads:
 
