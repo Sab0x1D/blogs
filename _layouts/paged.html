@@ -55,7 +55,7 @@ layout: default
     {%- endif -%}
 
     <section class="grid" aria-label="Previous posts">
-      {{ previous.size }} | {{ total_pages }}
+      {{ previous.size }} | {{ total_pages }} | offset: {{ offset }} | remaining: {{ remaining }}
       {%- assign remaining = previous.size | minus: offset -%}
       {%- if remaining > 0 -%}
         {%- for p in previous offset: offset limit: [page_size, remaining] | at: 0 -%}
@@ -73,6 +73,7 @@ layout: default
           </a>
         {%- endfor -%}
       {%- elsif offset < previous.size -%}
+        Debug: Rendering last post | index: {{ previous | size | minus: 1 }}
         {%- assign last_post = previous | last -%}
         <a class="card card--lg" href="{{ last_post.url | relative_url }}">
           <div class="media">
@@ -86,9 +87,11 @@ layout: default
             {%- endif -%}
           </div>
         </a>
+      {%- else -%}
+        Debug: No posts to render | offset: {{ offset }} | size: {{ previous.size }}
       {%- endif -%}
     </section>
-
+      
     {%- if total_pages > 1 -%}
       {%- assign prev_num = current | minus: 1 -%}
       {%- assign next_num = current | plus: 1 -%}
