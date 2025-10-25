@@ -38,20 +38,21 @@ layout: default
     {%- assign total_pages = base_pages -%}
     {%- if remainder > 0 -%}{%- assign total_pages = base_pages | plus: 1 -%}{%- endif -%}
 
-    {%- comment -%}
-      Offset math (final fix):
-      • Page 2 → 9
-      • Page 3 → 18
-      • Page 4 → 27
-      • Page N → 9 × (N − 1)
-    {%- endcomment -%}
-    {%- if current == 2 -%}
-      {%- assign offset = base_page_size -%}
-    {%- elsif current > 2 -%}
-      {%- assign offset = base_page_size | times: (current | minus: 1) -%}
-    {%- else -%}
-      {%- assign offset = 0 -%}
-    {%- endif -%}
+{%- comment -%}
+  Offset math (base=9, page_size=9):
+  Page 2 → 9
+  Page 3 → 18
+  Page 4 → 27
+  Page N → 9 + (N-2)*9
+{%- endcomment -%}
+{%- if current < 2 -%}
+  {%- assign offset = 0 -%}
+{%- elsif current == 2 -%}
+  {%- assign offset = base_page_size -%}
+{%- else -%}
+  {%- assign k = current | minus: 2 -%}
+  {%- assign offset = base_page_size | plus: page_size | times: k -%}
+{%- endif -%}
 
     <section class="grid" aria-label="Previous posts">
       {%- for p in previous offset: offset limit: page_size -%}
