@@ -4,6 +4,7 @@ author_avatar: /assets/img/sab01xd-profile.jpeg
 
 layout: listing
 title: "Shortcut to Infection: XenoRAT via Malicious .lnk → WSF → Python"
+pretty_title: "Shortcut to Infection <br>XenoRAT via Malicious .lnk → WSF → Python"
 excerpt: "A fake invoice lure leads to a shortcut (.lnk) that fetches a WSF, stages dual ZIP archives (me.zip, deb.zip), and launches pythonw.exe from the user’s Contacts directory. Explorer.exe then takes over network comms, connecting to C2. "
 thumb: assets/img/xenorat_thumb.webp
 date: 2025-09-03
