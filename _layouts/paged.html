@@ -55,7 +55,7 @@ layout: default
       {%- assign offset = temp_offset -%}
       {%- if offset >= previous.size -%}{%- assign offset = previous.size | minus: 1 -%}{%- endif -%}
     {%- endif -%}
-    {%- assign remaining = previous.size | minus: offset -%}
+    {%- assign remaining = previous.size | minus: offset -%} <!-- Ensure remaining is calculated here -->
 
     <section class="grid" aria-label="Previous posts">
       {%- if remaining > 0 -%}
@@ -74,19 +74,21 @@ layout: default
           </a>
         {%- endfor -%}
       {%- elsif offset < previous.size -%}
-        {%- assign last_post = previous | last -%}
-        <a class="card card--lg" href="{{ last_post.url | relative_url }}">
-          <div class="media">
-            <img class="thumb" src="{{ (last_post.thumb | default: site.default_thumb) | relative_url }}" alt="{{ last_post.title }}">
-            <span class="meta-top">{{ last_post.date | date: "%d %b %Y" }}</span>
-          </div>
-          <div class="body">
-            <h3 class="title">{{ last_post.title }}</h3>
-            {%- if last_post.excerpt -%}
-              <p class="excerpt">{{ last_post.excerpt | strip_html | truncate: excerpt_limit }}</p>
-            {%- endif -%}
-          </div>
-        </a>
+        {%- comment -%} Fallback: Render remaining posts from offset to end {%- endcomment -%}
+        {%- for p in previous offset: offset -%}
+          <a class="card card--lg" href="{{ p.url | relative_url }}">
+            <div class="media">
+              <img class="thumb" src="{{ (p.thumb | default: site.default_thumb) | relative_url }}" alt="{{ p.title }}">
+              <span class="meta-top">{{ p.date | date: "%d %b %Y" }}</span>
+            </div>
+            <div class="body">
+              <h3 class="title">{{ p.title }}</h3>
+              {%- if p.excerpt -%}
+                <p class="excerpt">{{ p.excerpt | strip_html | truncate: excerpt_limit }}</p>
+              {%- endif -%}
+            </div>
+          </a>
+        {%- endfor -%}
       {%- endif -%}
     </section>
       
