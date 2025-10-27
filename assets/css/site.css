@@ -800,9 +800,9 @@ html.dark .post-content blockquote:not(.featured-quote){
   height: auto;
 }
 
-/* Hero uses the same 4-column rhythm as the featured grid */
-.hero-row { margin-bottom: 28px; }
-.hero-grid {
+/* Home hero section (scoped to homepage only) */
+.home .hero-row { margin-bottom: 28px; }
+.home .hero-grid {
   display: grid;
   grid-template-columns: repeat(4, minmax(0, 1fr));
   gap: var(--gap, 22px);
@@ -810,14 +810,14 @@ html.dark .post-content blockquote:not(.featured-quote){
 }
 
 /* Left: image spans 2 columns (same width as two small featured cards) */
-.hero-media {
+.home .hero-media {
   grid-column: 1 / span 2;
   position: relative;
   display: block;
   border-radius: var(--round);
   overflow: hidden;
 }
-.hero-img {
+.home .hero-img {
   width: 100%;
   height: 100%;
   object-fit: cover;
@@ -826,7 +826,7 @@ html.dark .post-content blockquote:not(.featured-quote){
 }
 
 /* Match hero date badge style with featured cards */
-.hero-media .meta-top {
+.home .hero-media .meta-top {
   position: absolute;
   left: 12px;
   top: 12px;
@@ -845,16 +845,14 @@ html.dark .post-content blockquote:not(.featured-quote){
 }
 
 /* Right: text spans the other 2 columns */
-.hero-copy {
-  grid-column: 3 / span 2;
-}
-.hero-title {
+.home .hero-copy { grid-column: 3 / span 2; }
+.home .hero-title {
   margin: 6px 0 10px;
   font-weight: 800;
   line-height: 1.12;
   font-size: clamp(28px, 4.6vw, 40px);
 }
-.hero-excerpt {
+.home .hero-excerpt {
   color: var(--muted);
   line-height: 1.6;
   max-width: 70ch;
@@ -862,39 +860,35 @@ html.dark .post-content blockquote:not(.featured-quote){
 
 /* Mobile: stack */
 @media (max-width: 900px) {
-  .hero-grid {
-    grid-template-columns: 1fr;
-  }
-  .hero-media,
-  .hero-copy {
-    grid-column: auto;
-  }
+  .home .hero-grid { grid-template-columns: 1fr; }
+  .home .hero-media,
+  .home .hero-copy { grid-column: auto; }
 }
+
 /* Make hero feel like a card (hover lift + shadow) */
-.hero-card{
+.home .hero-card{
   border: 1px solid var(--card-border);
   border-radius: var(--round);
   background: var(--card);
   overflow: hidden;
   transition: transform .16s ease, box-shadow .16s ease, border-color .16s ease;
 }
-.hero-card:hover{
+.home .hero-card:hover{
   transform: translateY(-3px);
   box-shadow: var(--shadow);
   border-color: rgba(15,23,42,.15);
 }
 
 /* Subtle image zoom on hover (matches other cards) */
-.hero-img{ transition: transform .25s ease; }
-.hero-card:hover .hero-img{ transform: scale(1.03); }
+.home .hero-img{ transition: transform .25s ease; }
+.home .hero-card:hover .hero-img{ transform: scale(1.03); }
 
 /* Title link style */
-.hero-title a{
+.home .hero-title a{
   color: inherit;
   text-decoration: none;
 }
-.hero-title a:hover{
+.home .hero-title a:hover{
   text-decoration: underline;
   text-underline-offset: 3px;
 }
-
