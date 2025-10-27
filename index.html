@@ -30,13 +30,8 @@ permalink: /
         <img class="hero-img" src="{{ hero_thumb | relative_url }}" alt="{{ hero_title }}">
         <span class="meta-top">{{ hero.date | date: "%d %b %Y" }}</span>
       </div>
-
       <!-- Right: copy (no nested links) -->
       <div class="hero-copy">
-        {%- if hero.tags and hero.tags.size > 0 -%}
-          {%- assign tag = hero.tags | first -%}
-          <span class="chip">{{ tag }}</span>
-        {%- endif -%}
         <h1 class="hero-title">{{ hero_title }}</h1>
         {%- if hero.excerpt -%}
           <p class="hero-excerpt">{{ hero.excerpt | strip_html | truncate: excerpt_limit }}</p>
