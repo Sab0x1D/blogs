@@ -22,22 +22,30 @@ permalink: /
 
 <h2 class="section-title">LATEST POST</h2>
 <section class="hero-row" aria-label="Latest post">
-  <div class="hero-grid">
-    <a class="hero-media" href="{{ hero.url | relative_url }}">
-      <img class="hero-img" src="{{ hero_thumb | relative_url }}" alt="{{ hero_title }}">
-      <span class="meta-top">{{ hero.date | date: "%d %b %Y" }}</span>
-    </a>
+  <div class="hero-card">
+    <div class="hero-grid">
+      <!-- Left: image (clickable) -->
+      <a class="hero-media" href="{{ hero.url | relative_url }}">
+        <img class="hero-img" src="{{ hero_thumb | relative_url }}" alt="{{ hero_title }}">
+        <span class="meta-top">{{ hero.date | date: "%d %b %Y" }}</span>
+      </a>
 
-    <div class="hero-copy">
-      {%- if hero.tags and hero.tags.size > 0 -%}
-        {%- assign tag = hero.tags | first -%}
-        {%- assign tag_slug = tag | downcase | replace: ' ', '-' -%}
-        <a class="chip" href="{{ '/tag/' | append: tag_slug | append: '/' | relative_url }}">{{ tag }}</a>
-      {%- endif -%}
-      <h1 class="hero-title">{{ hero_title }}</h1>
-      {%- if hero.excerpt -%}
-        <p class="hero-excerpt">{{ hero.excerpt | strip_html | truncate: excerpt_limit }}</p>
-      {%- endif -%}
+      <!-- Right: copy (title is clickable) -->
+      <div class="hero-copy">
+        {%- if hero.tags and hero.tags.size > 0 -%}
+          {%- assign tag = hero.tags | first -%}
+          {%- assign tag_slug = tag | downcase | replace: ' ', '-' -%}
+          <a class="chip" href="{{ '/tag/' | append: tag_slug | append: '/' | relative_url }}">{{ tag }}</a>
+        {%- endif -%}
+
+        <h1 class="hero-title">
+          <a href="{{ hero.url | relative_url }}">{{ hero_title }}</a>
+        </h1>
+
+        {%- if hero.excerpt -%}
+          <p class="hero-excerpt">{{ hero.excerpt | strip_html | truncate: excerpt_limit }}</p>
+        {%- endif -%}
+      </div>
     </div>
   </div>
 </section>
