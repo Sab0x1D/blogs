@@ -800,7 +800,9 @@ html.dark .post-content blockquote:not(.featured-quote){
   height: auto;
 }
 
+/* --------------------------------------------*/
 /* Home hero section (scoped to homepage only) */
+/* --------------------------------------------*/
 .home .hero-row { margin-bottom: 28px; }
 .home .hero-grid {
   display: grid;
@@ -856,7 +858,14 @@ html.dark .post-content blockquote:not(.featured-quote){
   color: var(--muted);
   line-height: 1.6;
   max-width: 70ch;
+  /* 5-line clamp */
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  -webkit-line-clamp: 5;
+  line-clamp: 5;
 }
+
 
 /* Mobile: stack */
 @media (max-width: 900px) {
@@ -893,7 +902,7 @@ html.dark .post-content blockquote:not(.featured-quote){
   text-underline-offset: 3px;
 }
 
-/* 👉 Make the entire hero behave like one big clickable card */
+/* Make the entire hero behave like one big clickable card */
 .home .hero-card{
   display: block;
   text-decoration: none;
