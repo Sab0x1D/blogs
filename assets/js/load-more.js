@@ -4,14 +4,13 @@ const grid = document.getElementById('posts-grid');
 
 if (btn && grid) {
   const base    = btn.dataset.baseurl || '';
-  let current   = parseInt(btn.dataset.currentPage || '1', 10);   // last fully-loaded page index (page 1 already on screen)
+  let current   = parseInt(btn.dataset.currentPage || '1', 10);
   const total   = parseInt(btn.dataset.totalPages || '1', 10);
-  const chunk   = parseInt(btn.dataset.chunkSize || '3', 10) || 3; // 3 per click by default
-  const pageCap = 9; // each paginated page contains 9 cards in your templates
+  const chunk   = parseInt(btn.dataset.chunkSize || '3', 10) || 3;
+  const pageCap = 9; // number of posts per page (your paged.html templates)
 
-  // Buffer holds nodes fetched from the NEXT page but not yet appended
   let buffer = [];
-  let bufferedPageNum = null; // which page 'buffer' belongs to
+  let bufferedPageNum = null;
 
   const setLoading = (on) => {
     if (on) {
@@ -42,7 +41,7 @@ if (btn && grid) {
     const nextGrid = doc.querySelector('#posts-grid');
     if (!nextGrid) throw new Error('Grid not found in next page');
     const nodes = Array.from(nextGrid.children);
-    buffer = nodes;               // up to 9 (or fewer on last page)
+    buffer = nodes;
     bufferedPageNum = n;
   };
 
@@ -53,7 +52,7 @@ if (btn && grid) {
   };
 
   const revealNextChunk = async () => {
-    // Ensure buffer; if empty and there are more pages, fetch the next page
+    // Refill buffer if empty and pages remain
     if (buffer.length === 0) {
       const nextPageToFetch = current + 1;
       if (nextPageToFetch > total) {
@@ -61,7 +60,6 @@ if (btn && grid) {
         return;
       }
       await fetchPageIntoBuffer(nextPageToFetch);
-      // If the fetched page is empty, consider it consumed and bail
       if (buffer.length === 0) {
         current = bufferedPageNum;
         if (current >= total) disable();
@@ -69,14 +67,20 @@ if (btn && grid) {
       }
     }
 
-    // Append up to `chunk` cards
+    // Append next `chunk` items
     appendChunk(chunk);
 
-    // If we exhausted the buffer, the page is fully revealed → update URL & state
+    // If we’ve emptied the current page buffer, advance the page tracker
     if (buffer.length === 0) {
       current = bufferedPageNum;
       history.replaceState(null, '', `${location.pathname}?page=${current}`);
-      if (current >= total) disable();
+    }
+
+    // Determine next state
+    if (current >= total && buffer.length === 0) {
+      disable();
+    } else {
+      setLoading(false); // ✅ reset every time a chunk finishes
     }
   };
 
@@ -90,16 +94,10 @@ if (btn && grid) {
       btn.classList.remove('loading');
       btn.textContent = 'Retry';
       btn.disabled = false;
-      return;
-    } finally {
-      // Always clear loading unless we've hit the end and disabled the button
-      if (!btn.disabled) {
-        setLoading(false);
-      }
     }
   });
 
-  // If user lands with ?page=N, reconstruct by fully loading pages 2..N
+  // Restore ?page=N state
   const params = new URLSearchParams(location.search);
   const target = parseInt(params.get('page') || '1', 10);
   if (target > 1) {
@@ -108,7 +106,6 @@ if (btn && grid) {
       try {
         for (let n = 2; n <= Math.min(target, total); n++) {
           await fetchPageIntoBuffer(n);
-          // append full page (all available cards) for reconstruction
           appendChunk(buffer.length);
           buffer = [];
           bufferedPageNum = null;
@@ -123,6 +120,5 @@ if (btn && grid) {
     })();
   }
 
-  // If there’s only one page total, no need to show the button
   if (total <= 1) disable();
 }
