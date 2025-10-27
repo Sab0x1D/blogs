@@ -892,3 +892,19 @@ html.dark .post-content blockquote:not(.featured-quote){
   text-decoration: underline;
   text-underline-offset: 3px;
 }
+
+/* 👉 Make the entire hero behave like one big clickable card */
+.home .hero-card{
+  display: block;
+  text-decoration: none;
+  color: inherit;
+  cursor: pointer;
+}
+.home .hero-card *{ text-decoration: none !important; }
+.home .hero-title, .home .hero-excerpt{ user-select: none; }
+.home .hero-card .chip{ pointer-events: none; }   /* chip won’t steal clicks */
+.home .hero-card:focus-visible{
+  outline: 2px solid #2563eb;
+  outline-offset: 3px;
+  border-radius: var(--round);
+}
