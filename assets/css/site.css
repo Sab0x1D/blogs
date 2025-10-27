@@ -918,3 +918,28 @@ html.dark .post-content blockquote:not(.featured-quote){
   outline-offset: 3px;
   border-radius: var(--round);
 }
+.btn-readmore {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  margin: var(--gap) auto 0;
+  padding: 12px 24px;
+  border: 1px solid var(--card-border);
+  border-radius: var(--round);
+  background: var(--chip-bg);
+  color: var(--text);
+  cursor: pointer;
+  font-weight: 600;
+  transition: background 0.2s ease, opacity 0.2s ease;
+}
+.btn-readmore:hover:not([disabled]) {
+  background: #f1f5f9;
+}
+.btn-readmore[disabled] {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+.noscript-only {
+  margin-top: var(--gap);
+}
+
