@@ -16,16 +16,17 @@ permalink: /
     {%- assign coll = site.listings | sort: 'date' | reverse -%}
     {%- assign excerpt_limit = site.excerpt_chars | default: 220 -%}
 
-    {%- comment -%} HERO: very latest post (excluded from featured and previous) {%- endcomment -%}
+    {%- comment -%} HERO: very latest post (exclude from Featured + Previous) {%- endcomment -%}
     {%- assign hero = coll | first -%}
     {%- if hero -%}
       {%- assign hero_title = hero.pretty_title | default: hero.title -%}
-      {%- assign hero_thumb_raw = hero.thumb | default: site.default_hero | default: site.default_thumb -%}
-      {%- assign hero_thumb = hero_thumb_raw | relative_url -%}
+      {%- assign hero_thumb_step1 = hero.thumb | default: site.default_hero -%}
+      {%- assign hero_thumb_step2 = hero_thumb_step1 | default: site.default_thumb -%}
+      {%- assign hero_thumb_url = hero_thumb_step2 | relative_url -%}
       <section class="home-hero" aria-label="Latest post">
         <a class="home-hero__card" href="{{ hero.url | relative_url }}">
           <div class="home-hero__media">
-            <img class="home-hero__img" src="{{ hero_thumb }}" alt="{{ hero_title | escape }}" loading="eager" decoding="async">
+            <img class="home-hero__img" src="{{ hero_thumb_url }}" alt="{{ hero_title | escape }}" loading="eager" decoding="async">
             <span class="home-hero__date">{{ hero.date | date: "%d %b %Y" }}</span>
           </div>
           <div class="home-hero__body">
@@ -45,6 +46,7 @@ permalink: /
 
     {%- comment -%}
       FEATURED: newest posts with `featured: true`, then top up with newest non-featured.
+      (Exclude hero from consideration)
     {%- endcomment -%}
     {%- assign featured_ids = "" -%}
     {%- assign featured_printed = 0 -%}
@@ -54,9 +56,11 @@ permalink: /
     <section class="featured-row" aria-label="Featured posts">
       {%- for p in manual -%}
         {%- if featured_printed < 4 -%}
+          {%- assign p_thumb_step1 = p.thumb | default: site.default_thumb -%}
+          {%- assign p_thumb_url  = p_thumb_step1 | relative_url -%}
           <a class="card card--sm" href="{{ p.url | relative_url }}">
             <div class="media">
-              <img class="thumb" src="{{ (p.thumb | default: site.default_thumb) | relative_url }}" alt="{{ p.title }}">
+              <img class="thumb" src="{{ p_thumb_url }}" alt="{{ p.title }}">
               <span class="meta-top">{{ p.date | date: "%d %b %Y" }}</span>
             </div>
             <div class="body"><h3 class="title">{{ p.title }}</h3></div>
@@ -69,9 +73,11 @@ permalink: /
       {%- if featured_printed < 4 -%}
         {%- for p in coll -%}
           {%- if featured_printed < 4 and (featured_ids contains p.url) == false and p.featured != true and p.url != hero.url -%}
+            {%- assign p_thumb_step1 = p.thumb | default: site.default_thumb -%}
+            {%- assign p_thumb_url  = p_thumb_step1 | relative_url -%}
             <a class="card card--sm" href="{{ p.url | relative_url }}">
               <div class="media">
-                <img class="thumb" src="{{ (p.thumb | default: site.default_thumb) | relative_url }}" alt="{{ p.title }}">
+                <img class="thumb" src="{{ p_thumb_url }}" alt="{{ p.title }}">
                 <span class="meta-top">{{ p.date | date: "%d %b %Y" }}</span>
               </div>
               <div class="body"><h3 class="title">{{ p.title }}</h3></div>
@@ -83,16 +89,14 @@ permalink: /
       {%- endif -%}
     </section> 
 
-    <!-- Previous posts: show all EXCEPT the 4 actually displayed in Featured -->
+    <!-- Previous posts: show all EXCEPT hero and the 4 actually displayed in Featured -->
     <h2 class="section-title">PREVIOUS POSTS</h2>
 
     {%- assign page_size = 9 -%}
     {%- assign current   = page.page_num | plus: 0 -%}
     {%- if current <= 0 %}{% assign current = 1 %}{% endif %}
 
-    {%- comment -%}
-      Build list of previous posts (exclude hero + featured)
-    {%- endcomment -%}
+    {%- comment -%} Build list of previous posts (exclude hero + featured) {%- endcomment -%}
     {%- assign featured_list = coll | where_exp: 'p', 'p.featured == true and p.url != hero.url' | slice: 0, 4 -%}
     {%- assign featured_urls = featured_list | map: 'url' -%}
 
@@ -112,9 +116,11 @@ permalink: /
 
     <section class="grid" aria-label="Previous posts">
       {%- for p in previous offset: offset limit: page_size -%}
+        {%- assign p_thumb_step1 = p.thumb | default: site.default_thumb -%}
+        {%- assign p_thumb_url  = p_thumb_step1 | relative_url -%}
         <a class="card card--lg" href="{{ p.url | relative_url }}">
           <div class="media">
-            <img class="thumb" src="{{ (p.thumb | default: site.default_thumb) | relative_url }}" alt="{{ p.title }}">
+            <img class="thumb" src="{{ p_thumb_url }}" alt="{{ p.title }}">
             <span class="meta-top">{{ p.date | date: "%d %b %Y" }}</span>
           </div>
           <div class="body">
