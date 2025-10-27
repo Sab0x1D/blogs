@@ -22,33 +22,30 @@ permalink: /
 
 <h2 class="section-title">LATEST POST</h2>
 <section class="hero-row" aria-label="Latest post">
-  <div class="hero-card">
+  <!-- Entire hero is ONE link -->
+  <a class="hero-card" href="{{ hero.url | relative_url }}">
     <div class="hero-grid">
-      <!-- Left: image (clickable) -->
-      <a class="hero-media" href="{{ hero.url | relative_url }}">
+      <!-- Left: image -->
+      <div class="hero-media">
         <img class="hero-img" src="{{ hero_thumb | relative_url }}" alt="{{ hero_title }}">
         <span class="meta-top">{{ hero.date | date: "%d %b %Y" }}</span>
-      </a>
+      </div>
 
-      <!-- Right: copy (title is clickable) -->
+      <!-- Right: copy (no nested links) -->
       <div class="hero-copy">
         {%- if hero.tags and hero.tags.size > 0 -%}
           {%- assign tag = hero.tags | first -%}
-          {%- assign tag_slug = tag | downcase | replace: ' ', '-' -%}
-          <a class="chip" href="{{ '/tag/' | append: tag_slug | append: '/' | relative_url }}">{{ tag }}</a>
+          <span class="chip">{{ tag }}</span>
         {%- endif -%}
-
-        <h1 class="hero-title">
-          <a href="{{ hero.url | relative_url }}">{{ hero_title }}</a>
-        </h1>
-
+        <h1 class="hero-title">{{ hero_title }}</h1>
         {%- if hero.excerpt -%}
           <p class="hero-excerpt">{{ hero.excerpt | strip_html | truncate: excerpt_limit }}</p>
         {%- endif -%}
       </div>
     </div>
-  </div>
+  </a>
 </section>
+
 
     {%- comment -%}
       FEATURED: newest posts with `featured: true`, then top up with newest non-featured.
