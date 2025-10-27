@@ -16,12 +16,11 @@ permalink: /
     {%- assign coll = site.listings | sort: 'date' | reverse -%}
     {%- assign excerpt_limit = site.excerpt_chars | default: 220 -%}
 
-    <!-- ================= HERO SECTION ================= -->
     {%- assign hero = coll | first -%}
     {%- if hero -%}
     <h2 class="section-title">LATEST POST</h2>
     <section class="hero-row" aria-label="Latest post">
-      <a class="card card--lg" href="{{ hero.url | relative_url }}">
+      <a class="card card--hero" href="{{ hero.url | relative_url }}">
         <div class="media">
           {%- assign hero_thumb = hero.thumb | default: site.default_thumb -%}
           <img class="thumb" src="{{ hero_thumb | relative_url }}" alt="{{ hero.title }}">
@@ -37,7 +36,6 @@ permalink: /
     </section>
     {%- endif -%}
 
-    <!-- ================= FEATURED SECTION ================= -->
     {%- assign featured_ids = "" -%}
     {%- assign featured_printed = 0 -%}
     {%- assign manual = coll | where_exp: 'p', 'p.featured == true and p.url != hero.url' -%}
@@ -77,7 +75,6 @@ permalink: /
       {%- endif -%}
     </section>
 
-    <!-- ================= PREVIOUS POSTS SECTION ================= -->
     <h2 class="section-title">PREVIOUS POSTS</h2>
 
     {%- assign page_size = 9 -%}
