@@ -16,22 +16,31 @@ permalink: /
     {%- assign coll = site.listings | sort: 'date' | reverse -%}
     {%- assign excerpt_limit = site.excerpt_chars | default: 220 -%}
 
-    {%- assign hero = coll | first -%}
-    <h2 class="section-title">LATEST POST</h2>
-    <section class="hero-row" aria-label="Latest post">
-      <a class="card card--sm card--hero" href="{{ hero.url | relative_url }}">
-        <div class="media">
-          <img class="thumb" src="{{ (hero.thumb | default: site.default_thumb) | relative_url }}" alt="{{ hero.title }}">
-          <span class="meta-top">{{ hero.date | date: "%d %b %Y" }}</span>
-        </div>
-        <div class="body">
-          <h3 class="title">{{ hero.pretty_title | default: hero.title }}</h3>
-          {%- if hero.excerpt -%}
-          <p class="excerpt">{{ hero.excerpt | strip_html | truncate: excerpt_limit }}</p>
-          {%- endif -%}
-        </div>
-      </a>
-    </section>
+{%- assign hero = coll | first -%}
+{%- assign hero_title = hero.pretty_title | default: hero.title -%}
+{%- assign hero_thumb = hero.thumb | default: site.default_thumb -%}
+
+<h2 class="section-title">LATEST POST</h2>
+<section class="hero-row" aria-label="Latest post">
+  <div class="hero-grid">
+    <a class="hero-media" href="{{ hero.url | relative_url }}">
+      <img class="hero-img" src="{{ hero_thumb | relative_url }}" alt="{{ hero_title }}">
+      <span class="meta-top">{{ hero.date | date: "%d %b %Y" }}</span>
+    </a>
+
+    <div class="hero-copy">
+      {%- if hero.tags and hero.tags.size > 0 -%}
+        {%- assign tag = hero.tags | first -%}
+        {%- assign tag_slug = tag | downcase | replace: ' ', '-' -%}
+        <a class="chip" href="{{ '/tag/' | append: tag_slug | append: '/' | relative_url }}">{{ tag }}</a>
+      {%- endif -%}
+      <h1 class="hero-title">{{ hero_title }}</h1>
+      {%- if hero.excerpt -%}
+        <p class="hero-excerpt">{{ hero.excerpt | strip_html | truncate: excerpt_limit }}</p>
+      {%- endif -%}
+    </div>
+  </div>
+</section>
 
     {%- comment -%}
       FEATURED: newest posts with `featured: true`, then top up with newest non-featured.
