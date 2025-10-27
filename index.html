@@ -1,6 +1,6 @@
 ---
 layout: default
-title: 
+title:
 page_num: 1
 permalink: /
 ---
@@ -16,12 +16,39 @@ permalink: /
     {%- assign coll = site.listings | sort: 'date' | reverse -%}
     {%- assign excerpt_limit = site.excerpt_chars | default: 220 -%}
 
+    {%- comment -%} HERO: very latest post (excluded from featured and previous) {%- endcomment -%}
+    {%- assign hero = coll | first -%}
+    {%- if hero -%}
+      {%- assign hero_title = hero.pretty_title | default: hero.title -%}
+      {%- assign hero_thumb_raw = hero.thumb | default: site.default_hero | default: site.default_thumb -%}
+      {%- assign hero_thumb = hero_thumb_raw | relative_url -%}
+      <section class="home-hero" aria-label="Latest post">
+        <a class="home-hero__card" href="{{ hero.url | relative_url }}">
+          <div class="home-hero__media">
+            <img class="home-hero__img" src="{{ hero_thumb }}" alt="{{ hero_title | escape }}" loading="eager" decoding="async">
+            <span class="home-hero__date">{{ hero.date | date: "%d %b %Y" }}</span>
+          </div>
+          <div class="home-hero__body">
+            {%- if hero.tags and hero.tags.size > 0 -%}
+              {%- assign hero_tag = hero.tags | first -%}
+              {%- assign hero_slug = hero_tag | downcase | replace: ' ', '-' -%}
+              <a class="chip" href="{{ '/tag/' | append: hero_slug | append: '/' | relative_url }}">{{ hero_tag }}</a>
+            {%- endif -%}
+            <h1 class="home-hero__title">{{ hero_title }}</h1>
+            {%- if hero.excerpt -%}
+              <p class="home-hero__excerpt">{{ hero.excerpt | strip_html | truncate: 260 }}</p>
+            {%- endif -%}
+          </div>
+        </a>
+      </section>
+    {%- endif -%}
+
     {%- comment -%}
       FEATURED: newest posts with `featured: true`, then top up with newest non-featured.
     {%- endcomment -%}
     {%- assign featured_ids = "" -%}
     {%- assign featured_printed = 0 -%}
-    {%- assign manual = coll | where_exp: 'p', 'p.featured == true' -%}
+    {%- assign manual = coll | where_exp: 'p', 'p.featured == true and p.url != hero.url' -%}
 
     <h2 class="section-title">FEATURED</h2>
     <section class="featured-row" aria-label="Featured posts">
@@ -41,7 +68,7 @@ permalink: /
 
       {%- if featured_printed < 4 -%}
         {%- for p in coll -%}
-          {%- if featured_printed < 4 and (featured_ids contains p.url) == false and p.featured != true -%}
+          {%- if featured_printed < 4 and (featured_ids contains p.url) == false and p.featured != true and p.url != hero.url -%}
             <a class="card card--sm" href="{{ p.url | relative_url }}">
               <div class="media">
                 <img class="thumb" src="{{ (p.thumb | default: site.default_thumb) | relative_url }}" alt="{{ p.title }}">
@@ -64,14 +91,14 @@ permalink: /
     {%- if current <= 0 %}{% assign current = 1 %}{% endif %}
 
     {%- comment -%}
-      Build list of previous posts (exclude only the 4 displayed featured).
+      Build list of previous posts (exclude hero + featured)
     {%- endcomment -%}
-    {%- assign featured_list = coll | where_exp: 'p', 'p.featured == true' | slice: 0, 4 -%}
+    {%- assign featured_list = coll | where_exp: 'p', 'p.featured == true and p.url != hero.url' | slice: 0, 4 -%}
     {%- assign featured_urls = featured_list | map: 'url' -%}
 
     {%- assign previous = "" | split: "" -%}
     {%- for p in coll -%}
-      {%- unless featured_urls contains p.url -%}
+      {%- unless featured_urls contains p.url or p.url == hero.url -%}
         {%- assign previous = previous | push: p -%}
       {%- endunless -%}
     {%- endfor -%}
