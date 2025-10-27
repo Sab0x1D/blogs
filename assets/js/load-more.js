@@ -14,11 +14,19 @@ if (btn && grid) {
   let bufferedPageNum = null; // which page 'buffer' belongs to
 
   const setLoading = (on) => {
-    btn.disabled = on;
-    btn.textContent = on ? 'Loading…' : 'Read more';
+    if (on) {
+      btn.classList.add('loading');
+      btn.disabled = true;
+      btn.textContent = 'Loading…';
+    } else {
+      btn.classList.remove('loading');
+      btn.disabled = false;
+      btn.textContent = 'Read more';
+    }
   };
 
   const disable = () => {
+    btn.classList.remove('loading');
     btn.disabled = true;
     btn.textContent = 'No more posts';
     btn.setAttribute('aria-disabled', 'true');
@@ -45,7 +53,7 @@ if (btn && grid) {
   };
 
   const revealNextChunk = async () => {
-    // make sure there’s something in the buffer; if not and there are more pages, fetch the next page
+    // Ensure buffer; if empty and there are more pages, fetch the next page
     if (buffer.length === 0) {
       const nextPageToFetch = current + 1;
       if (nextPageToFetch > total) {
@@ -53,18 +61,18 @@ if (btn && grid) {
         return;
       }
       await fetchPageIntoBuffer(nextPageToFetch);
-      // If the fetched page is empty (shouldn’t happen unless miscount), bail
+      // If the fetched page is empty, consider it consumed and bail
       if (buffer.length === 0) {
-        current = bufferedPageNum; // consider it consumed
+        current = bufferedPageNum;
         if (current >= total) disable();
         return;
       }
     }
 
-    // Append up to `chunk` cards from the buffer
+    // Append up to `chunk` cards
     appendChunk(chunk);
 
-    // If we exhausted the buffer, we’ve fully revealed bufferedPageNum => update URL & state
+    // If we exhausted the buffer, the page is fully revealed → update URL & state
     if (buffer.length === 0) {
       current = bufferedPageNum;
       history.replaceState(null, '', `${location.pathname}?page=${current}`);
@@ -79,11 +87,15 @@ if (btn && grid) {
       await revealNextChunk();
     } catch (e) {
       console.error('Load more failed:', e);
+      btn.classList.remove('loading');
       btn.textContent = 'Retry';
       btn.disabled = false;
       return;
     } finally {
-      if (!btn.disabled && current < total) setLoading(false);
+      // Always clear loading unless we've hit the end and disabled the button
+      if (!btn.disabled) {
+        setLoading(false);
+      }
     }
   });
 
@@ -91,8 +103,8 @@ if (btn && grid) {
   const params = new URLSearchParams(location.search);
   const target = parseInt(params.get('page') || '1', 10);
   if (target > 1) {
+    setLoading(true);
     (async () => {
-      setLoading(true);
       try {
         for (let n = 2; n <= Math.min(target, total); n++) {
           await fetchPageIntoBuffer(n);
