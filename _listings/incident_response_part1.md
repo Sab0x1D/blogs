@@ -4,7 +4,7 @@ author_avatar: /assets/img/sab01xd-profile.jpeg
 layout: listing
 title: "Incident Response 101 (Part 1) — What to Do If You Click a Bad Link"
 pretty_title: "Incident Response 101 (Part 1)<br>What to Do If You Click a Bad Link"
-excerpt: "Everyone slips up eventually — even professionals. This guide walks you through exactly what to do in the crucial first minutes after clicking a malicious link."
+excerpt: "Everyone slips up eventually — even professionals. This guide walks you through exactly what to do in the crucial first minutes after clicking a malicious link.But what matters most isn’t the click — it’s what you do *next.* This article breaks down the **critical first minutes and hours** after clicking a suspicious link or opening a malicious attachment, explaining the right steps to take, what not to do, and how to recover without panic."
 thumb: /assets/img/incident_response1_thumb.jpg
 date: 2025-10-26
 featured: false
