@@ -858,12 +858,13 @@ html.dark .post-content blockquote:not(.featured-quote){
   color: var(--muted);
   line-height: 1.6;
   max-width: 70ch;
-  /* 5-line clamp */
+  /* --- make it truly multiline and clamp to 5 lines --- */
   display: -webkit-box;
   -webkit-box-orient: vertical;
   overflow: hidden;
   -webkit-line-clamp: 5;
   line-clamp: 5;
+  white-space: normal;
 }
 
 
