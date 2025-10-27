@@ -109,7 +109,8 @@ permalink: /
 
     {%- assign offset = page_size | times: current | minus: page_size -%}
 
-    <section class="grid" aria-label="Previous posts">
+    <!-- CHANGED: added id="posts-grid" so JS can append more cards -->
+    <section id="posts-grid" class="grid" aria-label="Previous posts">
       {%- for p in previous offset: offset limit: page_size -%}
         <a class="card card--lg" href="{{ p.url | relative_url }}">
           <div class="media">
@@ -144,25 +145,42 @@ permalink: /
         {%- assign next_href = '/page/' | append: next_num | append: '/' | relative_url -%}
       {%- endif -%}
 
-      <nav class="pager" aria-label="Pagination">
-        <ul>
-          <li>
-            {%- if prev_href != '' -%}
-              <a href="{{ prev_href }}">‹ Prev</a>
-            {%- else -%}
-              <span>‹ Prev</span>
-            {%- endif -%}
-          </li>
-          <li><span>Page {{ current }} of {{ total_pages }}</span></li>
-          <li>
-            {%- if next_href != '' -%}
-              <a href="{{ next_href }}">Next ›</a>
-            {%- else -%}
-              <span>Next ›</span>
-            {%- endif -%}
-          </li>
-        </ul>
-      </nav>
+      <!-- CHANGED: replace old pager with "Read more" + noscript fallback -->
+      <button
+        id="load-more"
+        class="btn-readmore"
+        aria-label="Load more posts"
+        data-baseurl="{{ site.baseurl }}"
+        data-current-page="{{ current }}"
+        data-total-pages="{{ total_pages }}"
+      >
+        Read more
+      </button>
+
+      <noscript>
+        <nav class="pager noscript-only" aria-label="Pagination">
+          <ul>
+            <li>
+              {%- if prev_href != '' -%}
+                <a href="{{ prev_href }}">‹ Prev</a>
+              {%- else -%}
+                <span>‹ Prev</span>
+              {%- endif -%}
+            </li>
+            <li><span>Page {{ current }} of {{ total_pages }}</span></li>
+            <li>
+              {%- if next_href != '' -%}
+                <a href="{{ next_href }}">Next ›</a>
+              {%- else -%}
+                <span>Next ›</span>
+              {%- endif -%}
+            </li>
+          </ul>
+        </nav>
+      </noscript>
+
+      <!-- CHANGED: include the loader script -->
+      <script type="module" src="{{ '/assets/js/load-more.js' | relative_url }}"></script>
     {%- endif -%}
 
     {% include topics-grid.html title='POPULAR TOPICS' %}
