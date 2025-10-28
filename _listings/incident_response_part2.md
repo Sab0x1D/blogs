@@ -5,7 +5,7 @@ layout: listing
 title: "Incident Response 101 (Part 2) — Reporting, Containing, and Learning"
 pretty_title: "Incident Response 101 (Part 2)<br>Reporting, Containing, and Learning"
 excerpt: "From containment to communication, this post dives into the structured side of incident response — what your team should do once a threat has been confirmed."
-thumb: /assets/img/incident_response2_thumb.jpg
+thumb: /assets/img/nicident_response2_thumb.jpg
 date: 2025-10-28
 featured: false
 tags: [Incident Response, Awareness, Management]
