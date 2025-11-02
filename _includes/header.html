@@ -1,0 +1,39 @@
+<header class="site-header">
+  <div class="header-inner">
+    <!-- Logo / Title -->
+    <a class="brand" href="{{ '/' | relative_url }}">
+      <img class="brand-mark" src="{{ '/assets/img/sab01xd-profile.jpeg' | relative_url }}" alt="" loading="lazy">
+      <span class="brand-text">{{ site.title | default: "Sab0x1D :: Blogs" }}</span>
+    </a>
+
+    <!-- Mobile toggle -->
+    <button id="nav-toggle"
+            class="nav-toggle"
+            aria-label="Open menu"
+            aria-controls="site-nav"
+            aria-expanded="false">
+      <span class="nav-toggle-label">Menu</span>
+      <svg class="hamburger" viewBox="0 0 24 24" width="24" height="24" aria-hidden="true">
+        <path d="M4 6h16M4 12h16M4 18h16" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+      </svg>
+    </button>
+
+    <!-- Desktop nav -->
+    <nav id="site-nav" class="site-nav" aria-label="Primary">
+      <ul class="nav-list">
+        <li><a href="{{ '/' | relative_url }}" class="{% if page.url == '/' %}is-active{% endif %}">Home</a></li>
+        <li><a href="{{ '/ghostyara/' | relative_url }}" class="{% if page.url contains '/ghostyara/' %}is-active{% endif %}">ghostYara</a></li>
+        <li><a href="{{ '/tags/' | relative_url }}" class="{% if page.url contains '/tags/' %}is-active{% endif %}">_tags</a></li>
+      </ul>
+    </nav>
+  </div>
+
+  <!-- Mobile drawer renders UNDER the header block to avoid covering brand -->
+  <nav id="mobile-drawer" class="mobile-drawer" aria-label="Mobile">
+    <ul class="nav-list">
+      <li><a href="{{ '/' | relative_url }}">Home</a></li>
+      <li><a href="{{ '/ghostyara/' | relative_url }}">ghostYara</a></li>
+      <li><a href="{{ '/tags/' | relative_url }}">_tags</a></li>
+    </ul>
+  </nav>
+</header>
