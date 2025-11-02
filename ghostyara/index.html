@@ -4,6 +4,31 @@ title: "ghostYara"
 permalink: /ghostyara/
 ---
 
+<!-- Page-scoped tweaks for ghostYara -->
+<style>
+  /* Prevent tag chips from overlapping lines and keep neat spacing */
+  .gy-item p { word-break: break-word; }
+  .gy-item p strong { white-space: nowrap; }
+  .gy-item p strong + span { margin-left: 4px; }
+  .gy-item p span { display: inline-block; margin-top: 4px; }
+
+  /* Pin the bottom action bar and equalize card heights */
+  .gy-item { display: flex; flex-direction: column; }
+  .gy-item pre { flex-grow: 1; }
+  .gy-item > div:last-of-type {
+    margin-top: auto;                 /* push this bar to the bottom */
+    border-top: 1px solid var(--card-border);
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    align-items: center;
+    padding: 12px 16px;
+  }
+  .gy-item > div:last-of-type span:last-child {
+    margin-left: auto; color: var(--muted-2); font-size: .8rem; /* ID label to the right */
+  }
+</style>
+
 <!--
 Data-driven YARA catalog
 - Put your rules in _data/yara_rules.yml (recommended) with this schema:
@@ -67,7 +92,7 @@ If _data/yara_rules.* is missing, the page will show a helpful empty state.
                data-name="{{ r.name | downcase }}"
                data-family="{{ r.family | downcase }}"
                data-tags="{% if r.tags %}{{ r.tags | join: ',' | downcase }}{% endif %}"
-               style="background:var(--card);border:1px solid var(--card-border);border-radius:var(--round);overflow:hidden;display:flex;flex-direction:column;">
+               style="background:var(--card);border:1px solid var(--card-border);border-radius:var(--round);overflow:hidden;">
         <div style="padding:16px 16px 0 16px;">
           <div style="display:flex;justify-content:space-between;gap:8px;align-items:center;">
             <h2 style="margin:0;font-size:1.05rem;line-height:1.3;">{{ r.name }}</h2>
@@ -90,7 +115,7 @@ If _data/yara_rules.* is missing, the page will show a helpful empty state.
 
         <pre style="margin:0;padding:12px 16px;background:#0b0f1910;overflow:auto;max-height:320px;"><code>{{ r.rule | escape }}</code></pre>
 
-        <div style="display:flex;gap:8px;padding:12px 16px;border-top:1px solid var(--card-border);align-items:center;flex-wrap:wrap;">
+        <div>
           <button class="gy-copy"
                   data-copy="{{ r.rule | strip_newlines | escape }}"
                   type="button"
@@ -106,7 +131,7 @@ If _data/yara_rules.* is missing, the page will show a helpful empty state.
             {% endfor %}
           {% endif %}
           {% if r.id %}
-            <span style="margin-left:auto;color:var(--muted-2);font-size:.8rem;">ID: {{ r.id }}</span>
+            <span>ID: {{ r.id }}</span>
           {% endif %}
         </div>
       </article>
