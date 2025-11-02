@@ -1,0 +1,36 @@
+---
+layout: default
+permalink: /tag/:tag/
+---
+
+<section style="max-width:var(--container);margin:0 auto;padding:var(--gap);">
+  <h1 style="margin-bottom:8px;">Tag: {{ page.tag }}</h1>
+  <p style="color:var(--muted);margin-top:0;margin-bottom:20px;">
+    Posts labeled <strong>{{ page.tag }}</strong>
+  </p>
+
+  <div class="posts-list" style="display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:var(--gap);">
+    {% if site.tags[page.tag] %}
+      {% for post in site.tags[page.tag] %}
+        <article class="card" style="background:var(--card);border:1px solid var(--card-border);border-radius:var(--round);overflow:hidden;">
+          <a href="{{ post.url | relative_url }}" style="text-decoration:none;color:inherit;">
+            {% if post.thumb %}
+              <img src="{{ post.thumb | relative_url }}" alt="" loading="lazy" style="width:100%;height:160px;object-fit:cover;">
+            {% endif %}
+            <div style="padding:16px;">
+              <h2 style="margin:0 0 8px 0;font-size:1.05rem;line-height:1.3;">{{ post.pretty_title | default: post.title }}</h2>
+              {% if post.excerpt %}
+                <p style="color:var(--muted);margin:0;">{{ post.excerpt }}</p>
+              {% endif %}
+              <p style="color:var(--muted-2);margin:10px 0 0 0;font-size:.9rem;">
+                {{ post.date | date: "%b %d, %Y" }}
+              </p>
+            </div>
+          </a>
+        </article>
+      {% endfor %}
+    {% else %}
+      <p>No posts for this tag yet.</p>
+    {% endif %}
+  </div>
+</section>
