@@ -1015,3 +1015,27 @@ html.dark .post-content blockquote:not(.featured-quote){
     display:block; width:100%; margin:6px 0; padding:12px 14px; border-radius:12px;
   }
 }
+
+/* ===== ghostYara fixes ===== */
+.gy-item p { word-break: break-word; }
+.gy-item p strong { white-space: nowrap; }
+.gy-item p strong + span { margin-left: 4px; }
+.gy-item p span { display: inline-block; margin-top: 4px; }
+
+.gy-item { display: flex; flex-direction: column; }
+.gy-item pre { flex-grow: 1; }
+.gy-item > div:last-of-type {
+  margin-top: auto;
+  border-top: 1px solid var(--card-border);
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  align-items: center;
+  padding: 12px 16px;
+}
+.gy-item > div:last-of-type span:last-child {
+  margin-left: auto;
+  color: var(--muted-2);
+  font-size: .8rem;
+}
+
