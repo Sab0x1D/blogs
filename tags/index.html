@@ -1,0 +1,27 @@
+---
+layout: default
+title: "_tags"
+permalink: /tags/
+---
+
+<section class="tags-wrap" style="max-width:var(--container);margin:0 auto;padding:var(--gap);">
+  <h1 style="margin-bottom:12px;">All Tags</h1>
+
+  {% assign tags = site.tags | sort %}
+  {% if tags and tags.size > 0 %}
+    <ul class="tag-cloud" style="display:flex;flex-wrap:wrap;gap:10px;list-style:none;padding:0;margin:0;">
+      {% for tag in tags %}
+        {% assign t = tag[0] %}
+        <li>
+          <a href="{{ '/tag/' | append: t | append: '/' | relative_url }}"
+             class="chip"
+             style="display:inline-block;padding:8px 12px;border:1px solid var(--card-border);border-radius:999px;text-decoration:none;color:var(--text);background:var(--chip-bg);">
+            {{ t }} <span style="color:var(--muted);">({{ tag[1].size }})</span>
+          </a>
+        </li>
+      {% endfor %}
+    </ul>
+  {% else %}
+    <p style="color:var(--muted);">No tags yet.</p>
+  {% endif %}
+</section>
