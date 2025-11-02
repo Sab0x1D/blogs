@@ -978,6 +978,12 @@ html.dark .post-content blockquote:not(.featured-quote){
   box-shadow: none;
 }
 
+/* ============================================================
+   ghostYara + _tags Responsive Nav Overrides
+   ============================================================ */
+
+@import url('{{ "/assets/css/site-nav.css" | relative_url }}');
+
 /* Optional spinner animation when text = Loading… */
 .btn-readmore.loading {
   pointer-events: none;
