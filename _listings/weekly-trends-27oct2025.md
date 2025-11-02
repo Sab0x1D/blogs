@@ -133,8 +133,6 @@ Loader telemetry revealed continued abuse of **legitimate infrastructure**:
 The final week of October 2025 demonstrated how **attackers are refining their distribution frameworks** — replacing spam volume with precision targeting and delivery-as-a-service models.  
 Banking trojans, mobile spyware, and hybrid phishing all point to an ecosystem evolving toward **specialized, automated, and low-footprint compromise**.  
 
-For defenders, the message is clear:  
-visibility must extend beyond endpoints — into mobile, SaaS, and social platforms where compromise increasingly begins.  
-October closed with complexity, not chaos — and that’s the hardest kind of threat to detect.
+For defenders, the message is clear: visibility must extend beyond endpoints, into mobile, SaaS, and social platforms where compromise increasingly begins. October closed with complexity, not chaos, and that’s the hardest kind of threat to detect.
 
 ---
