@@ -4,51 +4,30 @@ title: "ghostYara"
 permalink: /ghostyara/
 ---
 
-<!-- Page-scoped tweaks for ghostYara -->
 <style>
-  /* Prevent tag chips from overlapping lines and keep neat spacing */
+  /* ghostYara layout fixes */
   .gy-item p { word-break: break-word; }
   .gy-item p strong { white-space: nowrap; }
   .gy-item p strong + span { margin-left: 4px; }
   .gy-item p span { display: inline-block; margin-top: 4px; }
 
-  /* Pin the bottom action bar and equalize card heights */
-  .gy-item { display: flex; flex-direction: column; }
-  .gy-item pre { flex-grow: 1; }
-  .gy-item > div:last-of-type {
-    margin-top: auto;                 /* push this bar to the bottom */
-    border-top: 1px solid var(--card-border);
-    display: flex;
-    flex-wrap: wrap;
-    gap: 8px;
-    align-items: center;
-    padding: 12px 16px;
+  .gy-item { display:flex; flex-direction:column; }
+  .gy-item pre { flex-grow:1; }
+  .gy-item > div:last-of-type{
+    margin-top:auto;
+    border-top:1px solid var(--card-border);
+    display:flex;
+    flex-wrap:wrap;
+    gap:8px;
+    align-items:center;
+    padding:12px 16px;
   }
-  .gy-item > div:last-of-type span:last-child {
-    margin-left: auto; color: var(--muted-2); font-size: .8rem; /* ID label to the right */
+  .gy-item > div:last-of-type span:last-child{
+    margin-left:auto;
+    color:var(--muted-2);
+    font-size:.8rem;
   }
 </style>
-
-<!--
-Data-driven YARA catalog
-- Put your rules in _data/yara_rules.yml (recommended) with this schema:
-
-- id: trojan_qakbot_001
-  name: "QakBot: Packed Loader"
-  family: "QakBot"
-  tags: ["banker","loader","malspam"]
-  author: "Sab0x1D"
-  last_updated: "2025-10-31"
-  tlp: "CLEAR"
-  threat_refs:
-    - "https://example.com/report"
-  rule: |
-    rule QakBot_Packed_Loader { meta: author="Sab0x1D" date="2025-10-31"
-      strings: $a = { 4D 5A 90 00 ?? ?? } condition: uint16(0) == 0x5A4D and $a
-    }
-
-If _data/yara_rules.* is missing, the page will show a helpful empty state.
--->
 
 <section style="max-width:var(--container);margin:0 auto;padding:var(--gap);">
   <header style="display:flex;flex-direction:column;gap:10px;margin-bottom:8px;">
@@ -122,14 +101,6 @@ If _data/yara_rules.* is missing, the page will show a helpful empty state.
                   style="padding:8px 10px;border:1px solid var(--card-border);border-radius:10px;background:var(--card);cursor:pointer;">
             Copy rule
           </button>
-          {% if r.threat_refs %}
-            {% for ref in r.threat_refs %}
-              <a href="{{ ref }}" target="_blank" rel="noopener"
-                 style="padding:8px 10px;border:1px solid var(--card-border);border-radius:10px;text-decoration:none;color:var(--text);background:var(--chip-bg);">
-                Ref {{ forloop.index }}
-              </a>
-            {% endfor %}
-          {% endif %}
           {% if r.id %}
             <span>ID: {{ r.id }}</span>
           {% endif %}
@@ -140,87 +111,50 @@ If _data/yara_rules.* is missing, the page will show a helpful empty state.
   {% else %}
     <div style="margin-top:16px;padding:16px;border:1px dashed var(--card-border);border-radius:var(--round);background:var(--chip-bg);">
       <p style="margin:0 0 6px 0;"><strong>No YARA rules found.</strong></p>
-      <p style="margin:0;color:var(--muted);">Create <code>_data/yara_rules.yml</code> using the schema in the comment at the top of this page, then rebuild.</p>
-      <details style="margin-top:10px;">
-        <summary style="cursor:pointer;">See sample</summary>
-<pre style="margin:10px 0 0 0;padding:12px;background:#0b0f1910;border-radius:10px;overflow:auto;"><code>- id: trojan_sample_001
-  name: "Sample: Suspicious MZ header"
-  family: "Generic"
-  tags: ["mz","pe","suspicious"]
-  author: "Sab0x1D"
-  last_updated: "2025-10-31"
-  tlp: "CLEAR"
-  threat_refs:
-    - "https://example.com/report"
-  rule: |
-    rule Suspicious_MZ_Header {
-      meta:
-        author = "Sab0x1D"
-        date = "2025-10-31"
-      strings:
-        $mz = { 4D 5A }
-      condition:
-        uint16(0) == 0x5A4D and $mz
-    }</code></pre>
-      </details>
+      <p style="margin:0;color:var(--muted);">Create <code>_data/yara_rules.yml</code> and rebuild.</p>
     </div>
   {% endif %}
 </section>
 
 <script>
 (function(){
-  const $$ = (s, r=document) => Array.from(r.querySelectorAll(s));
-  const q = document.getElementById('gy-search');
-  const fam = document.getElementById('gy-family');
-  const tag = document.getElementById('gy-tag');
-  const clearBtn = document.getElementById('gy-clear');
-  const items = $$('.gy-item');
+  const $$ = (s,r=document)=>Array.from(r.querySelectorAll(s));
+  const q=document.getElementById('gy-search'),
+        fam=document.getElementById('gy-family'),
+        tag=document.getElementById('gy-tag'),
+        clear=document.getElementById('gy-clear'),
+        items=$$('.gy-item');
 
-  function norm(x){ return (x||'').toLowerCase().trim(); }
+  const norm=x=>(x||'').toLowerCase().trim();
 
-  function applyFilters(){
-    const qv = norm(q.value);
-    const fv = norm(fam.value);
-    const tv = norm(tag.value);
-
-    let shown = 0;
+  function apply(){
+    const qv=norm(q.value), fv=norm(fam.value), tv=norm(tag.value);
     items.forEach(it=>{
-      const name = it.dataset.name || '';
-      const family = it.dataset.family || '';
-      const tags = it.dataset.tags || '';
-      const matchesQ = !qv || (name.includes(qv) || family.includes(qv) || tags.includes(qv));
-      const matchesF = !fv || family === fv;
-      const matchesT = !tv || tags.split(',').includes(tv);
-      const ok = matchesQ && matchesF && matchesT;
-      it.style.display = ok ? '' : 'none';
-      if(ok) shown++;
+      const name=it.dataset.name||'', f=it.dataset.family||'', t=it.dataset.tags||'';
+      const ok=(!qv||(name.includes(qv)||f.includes(qv)||t.includes(qv))) &&
+               (!fv||f===fv) &&
+               (!tv||t.split(',').includes(tv));
+      it.style.display=ok?'':'none';
     });
   }
+  [q,fam,tag].forEach(el=>el&&el.addEventListener('input',apply));
+  clear&&clear.addEventListener('click',()=>{q.value='';fam.value='';tag.value='';apply();});
 
-  [q, fam, tag].forEach(el=>el && el.addEventListener('input', applyFilters));
-  clearBtn && clearBtn.addEventListener('click', ()=>{
-    if(q) q.value = '';
-    if(fam) fam.value = '';
-    if(tag) tag.value = '';
-    applyFilters();
-  });
-
-  // Copy buttons
   $$('.gy-copy').forEach(btn=>{
-    btn.addEventListener('click', async ()=>{
-      const txt = btn.getAttribute('data-copy') || '';
+    btn.addEventListener('click',async()=>{
+      const txt=btn.getAttribute('data-copy')||'';
       try{
         await navigator.clipboard.writeText(txt.replaceAll('\\n','\n'));
-        const old = btn.textContent;
-        btn.textContent = 'Copied ✓';
-        setTimeout(()=>btn.textContent = old, 1200);
+        const old=btn.textContent;
+        btn.textContent='Copied ✓';
+        setTimeout(()=>btn.textContent=old,1200);
       }catch(e){
-        btn.textContent = 'Copy failed';
-        setTimeout(()=>btn.textContent = 'Copy rule', 1200);
+        btn.textContent='Copy failed';
+        setTimeout(()=>btn.textContent='Copy rule',1200);
       }
     });
   });
 
-  applyFilters();
+  apply();
 })();
 </script>
