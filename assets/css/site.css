@@ -1003,3 +1003,12 @@ html.dark .post-content blockquote:not(.featured-quote){
 @keyframes spin {
   to { transform: rotate(360deg); }
 }
+
+/* Hard fix: on small screens show only the burger; reveal links only when toggled */
+@media (max-width: 880px){
+  .site-header .site-nav .trigger{ display: none !important; }
+  .site-header .site-nav .nav-trigger:checked + label + .trigger{
+    display: block !important;
+  }
+}
+
