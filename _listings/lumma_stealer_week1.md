@@ -7,7 +7,7 @@ pretty_title: "Lumma Stealer — The Credential Bandit That Won’t Die"
 excerpt: "Once a low-tier stealer, Lumma evolved into one of 2025’s most persistent credential-harvesting threats. We dissect its infection flow, internal structure, and defense strategies from both blue-team and forensic perspectives."
 thumb: /assets/img/lumma_stealer_thumb.jpg
 date: 2025-11-02
-featured: false
+featured: true
 tags: [Malware, Threats, Forensics, Awareness]
 ---
 
