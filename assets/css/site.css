@@ -440,7 +440,7 @@ main.page-content > .wrapper,
 .site-title,
 .site-title:link,
 .site-title:visited{
-  font-family: 'Futuristic', sans-serif;
+  font-family: 'Futuristic', sans-serif !important;
   font-size: clamp(28px, 2.6vw, 36px);
   font-weight: 400;
   letter-spacing: 0.06em;
@@ -453,27 +453,36 @@ main.page-content > .wrapper,
 .site-title:hover,
 .site-title:focus{ color:#0f172a; text-decoration:none !important; }
 
-/* Nav links + hover underline + active dot */
+/* =======================
+   NAV — Bubble (pill) styling (desktop & mobile)
+   ======================= */
 .site-nav .page-link{
   font-family:'Inter', sans-serif;
-  text-decoration:none;
-  line-height:1;
-  padding:8px 10px;
+  font-weight: 700;
+  font-size: 15px;
+  line-height: 1;
   color: var(--text);
+  text-decoration: none;
+  padding: 10px 14px;
+  border: 1px solid var(--card-border);
+  border-radius: 999px;
+  background: transparent;
+  transition: background .18s ease, border-color .18s ease, box-shadow .18s ease, color .18s ease;
   position: relative;
 }
 .site-nav .page-link:hover,
 .site-nav .page-link:focus{
-  text-decoration: underline;
-  text-underline-offset: 3px;
+  text-decoration: none;
+  background: var(--chip-bg);
+  border-color: #dbe3f0;
 }
-.site-nav .page-link.is-active::before{
-  content:"";
-  position:absolute;
-  left:50%; transform:translateX(-50%);
-  top:-6px; width:6px; height:6px; border-radius:999px; background:#2563eb;
+.site-nav .page-link.is-active{
+  background: #ffffff;
+  border-color: #dbe3f0;
+  box-shadow: 0 0 0 4px rgba(99,102,241,.12);
 }
-@media (max-width:640px){ .site-nav .page-link.is-active::before{ display:none; } }
+/* remove legacy active dot */
+.site-nav .page-link.is-active::before{ display:none; }
 
 /* =======================
    Article / single post
@@ -569,10 +578,6 @@ main.page-content > .wrapper,
     letter-spacing: 0.075em;
   }
 }
-
-/* Nav underline + active dot (kept) */
-.site-nav .page-link { color: var(--text); }
-.site-nav .page-link:hover { text-decoration: underline; }
 
 /* =========================================================
    Sticky footer on short/empty pages (fallback + dvh)
@@ -978,12 +983,6 @@ html.dark .post-content blockquote:not(.featured-quote){
   box-shadow: none;
 }
 
-/* ============================================================
-   ghostYara + _tags Responsive Nav Overrides
-   ============================================================ */
-
-@import url('{{ "/assets/css/site-nav.css" | relative_url }}');
-
 /* Optional spinner animation when text = Loading… */
 .btn-readmore.loading {
   pointer-events: none;
@@ -1009,6 +1008,9 @@ html.dark .post-content blockquote:not(.featured-quote){
   .site-header .site-nav .trigger{ display: none !important; }
   .site-header .site-nav .nav-trigger:checked + label + .trigger{
     display: block !important;
+    /* mobile dropdown pills: full width for easier tapping */
+  }
+  .site-header .site-nav .trigger .page-link{
+    display:block; width:100%; margin:6px 0; padding:12px 14px; border-radius:12px;
   }
 }
-
