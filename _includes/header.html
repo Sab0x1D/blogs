@@ -1,39 +1,23 @@
 <header class="site-header">
-  <div class="header-inner">
-    <!-- Logo / Title -->
-    <a class="brand" href="{{ '/' | relative_url }}">
-      <img class="brand-mark" src="{{ '/assets/img/sab01xd-profile.jpeg' | relative_url }}" alt="" loading="lazy">
-      <span class="brand-text">{{ site.title | default: "Sab0x1D :: Blogs" }}</span>
-    </a>
+  <div class="wrapper">
+    <!-- Futuristic title (uses your .site-title styles) -->
+    <a class="site-title" href="{{ '/' | relative_url }}">SAB0X1D::CYBER AWARENESS</a>
 
-    <!-- Mobile toggle -->
-    <button id="nav-toggle"
-            class="nav-toggle"
-            aria-label="Open menu"
-            aria-controls="site-nav"
-            aria-expanded="false">
-      <span class="nav-toggle-label">Menu</span>
-      <svg class="hamburger" viewBox="0 0 24 24" width="24" height="24" aria-hidden="true">
-        <path d="M4 6h16M4 12h16M4 18h16" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
-      </svg>
-    </button>
+    <!-- Nav uses your checkbox+label pattern already styled in site.css -->
+    <nav class="site-nav" aria-label="Primary">
+      <input type="checkbox" id="nav-trigger" class="nav-trigger" aria-label="Toggle navigation">
+      <label for="nav-trigger" aria-label="Open menu">
+        <svg class="menu-icon" width="28" height="28" viewBox="0 0 24 24" aria-hidden="true">
+          <path d="M4 6h16M4 12h16M4 18h16" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+        </svg>
+        <span class="sr-only">Menu</span>
+      </label>
 
-    <!-- Desktop nav -->
-    <nav id="site-nav" class="site-nav" aria-label="Primary">
-      <ul class="nav-list">
-        <li><a href="{{ '/' | relative_url }}" class="{% if page.url == '/' %}is-active{% endif %}">Home</a></li>
-        <li><a href="{{ '/ghostyara/' | relative_url }}" class="{% if page.url contains '/ghostyara/' %}is-active{% endif %}">ghostYara</a></li>
-        <li><a href="{{ '/tags/' | relative_url }}" class="{% if page.url contains '/tags/' %}is-active{% endif %}">_tags</a></li>
-      </ul>
+      <div class="trigger" role="menu">
+        <a class="page-link {% if page.url == '/' %}is-active{% endif %}" href="{{ '/' | relative_url }}" role="menuitem">Home</a>
+        <a class="page-link {% if page.url contains '/ghostyara/' %}is-active{% endif %}" href="{{ '/ghostyara/' | relative_url }}" role="menuitem">ghostYara</a>
+        <a class="page-link {% if page.url contains '/tags/' %}is-active{% endif %}" href="{{ '/tags/' | relative_url }}" role="menuitem">_tags</a>
+      </div>
     </nav>
   </div>
-
-  <!-- Mobile drawer under header -->
-  <nav id="mobile-drawer" class="mobile-drawer" aria-label="Mobile">
-    <ul class="nav-list">
-      <li><a href="{{ '/' | relative_url }}">Home</a></li>
-      <li><a href="{{ '/ghostyara/' | relative_url }}">ghostYara</a></li>
-      <li><a href="{{ '/tags/' | relative_url }}">_tags</a></li>
-    </ul>
-  </nav>
 </header>
