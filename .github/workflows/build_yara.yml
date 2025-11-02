@@ -1,0 +1,35 @@
+name: Build YARA data
+
+on:
+  push:
+    paths:
+      - 'assets/yara/**.yar*'
+      - 'scripts/build_yara_data.py'
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.x'
+
+      - name: Install PyYAML
+        run: pip install pyyaml
+
+      - name: Build YARA data
+        run: python scripts/build_yara_data.py
+
+      - name: Commit generated YAML
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add _data/yara_rules.yml
+          git commit -m "Auto-build: update yara_rules.yml" || echo "No changes"
+          git push
