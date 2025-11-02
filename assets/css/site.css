@@ -477,9 +477,10 @@ main.page-content > .wrapper,
   border-color: #dbe3f0;
 }
 .site-nav .page-link.is-active{
-  background: #ffffff;
-  border-color: #dbe3f0;
-  box-shadow: 0 0 0 4px rgba(99,102,241,.12);
+  background: var(--text);
+  color: #fff;
+  border-color: var(--text);
+  box-shadow: none; /* optional: remove the outline glow */
 }
 /* remove legacy active dot */
 .site-nav .page-link.is-active::before{ display:none; }
