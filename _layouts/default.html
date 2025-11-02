@@ -2,9 +2,13 @@
 <!doctype html>
 <html lang="en">
 <head>
-  <link rel="icon" href="{{ '/assets/img/faviconi.png' | relative_url }}" type="image/x-icon">
+  <link rel="icon" href="{{ '/assets/img/favicon.png' | relative_url }}" type="image/x-icon">
   {% include head.html %}
+
+  <!-- 🔹 Add new nav stylesheet -->
+  <link rel="stylesheet" href="{{ '/assets/css/site-nav.css' | relative_url }}">
 </head>
+
 <body>
   {% include header.html %}
 
@@ -15,7 +19,12 @@
   </main>
 
   {% include footer.html %}
+
+  <!-- existing scripts -->
   <script defer src="{{ '/assets/js/theme.js' | relative_url }}"></script>
-  <script defer src="{{ '/assets/js/site.js'  | relative_url }}"></script>
+  <script defer src="{{ '/assets/js/site.js' | relative_url }}"></script>
+
+  <!-- 🔹 Add new nav script -->
+  <script defer src="{{ '/assets/js/site-nav.js' | relative_url }}"></script>
 </body>
 </html>
