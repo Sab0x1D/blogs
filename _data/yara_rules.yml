@@ -1,109 +1,57 @@
-# ==========================================================
-# ghostYara starter dataset
-# ==========================================================
-# Each rule block:
-# - id: unique id string
-# - name: readable title
-# - family: malware family or category
-# - tags: list of context tags
-# - author: who wrote the rule
-# - last_updated: YYYY-MM-DD
-# - tlp: optional (CLEAR / AMBER / RED)
-# - threat_refs: optional list of URLs
-# - rule: multiline YAML block for YARA code
-# ==========================================================
-
-- id: trojan_qakbot_loader
+- id: qakbot_loader
   name: "QakBot: Packed Loader"
   family: "QakBot"
   tags: ["banker", "loader", "malspam"]
   author: "Sab0x1D"
-  last_updated: "2025-10-31"
+  last_updated: "2025-11-03"
   tlp: "CLEAR"
-  threat_refs:
-    - "https://www.cisa.gov/news-events/alerts/2023/09/05/qakbot-malware-takedown"
   rule: |
     rule QakBot_Packed_Loader {
       meta:
         author = "Sab0x1D"
-        date = "2025-10-31"
         description = "Detects QakBot packed loader binaries"
       strings:
         $mz = { 4D 5A }
-        $qbot_str1 = "qbot" ascii nocase
-        $qbot_str2 = "bot_id" ascii
-        $pdb = /[A-Za-z]:\\\\[A-Za-z0-9_\\\\]+\\\\(qbot|qakbot)\\\\/
+        $marker1 = "qbot" ascii nocase
+        $marker2 = "bot_id" ascii
       condition:
-        uint16(0) == 0x5A4D and
-        any of ($qbot_str*) or $pdb
+        uint16(0) == 0x5A4D and any of them
     }
 
-- id: stealer_redline_strings
+- id: redline_config
   name: "RedLine Stealer: Config Markers"
   family: "RedLine"
-  tags: ["stealer", "infostealer", "c2"]
+  tags: ["stealer", "infostealer", "config"]
   author: "Sab0x1D"
-  last_updated: "2025-11-01"
+  last_updated: "2025-11-03"
   tlp: "CLEAR"
-  threat_refs:
-    - "https://unit42.paloaltonetworks.com/redline-stealer-malware/"
   rule: |
     rule RedLine_Config_Markers {
       meta:
         author = "Sab0x1D"
-        date = "2025-11-01"
-        description = "Detects RedLine Stealer binaries based on config markers"
+        description = "Detects RedLine Stealer config markers"
       strings:
-        $cfg1 = "Software\\RedLine" wide
-        $cfg2 = "Wallets\\Bitcoin" wide
-        $cfg3 = "Telegram Desktop\\tdata" wide
+        $a = "Software\\RedLine" wide
+        $b = "Wallets\\Bitcoin" wide
       condition:
         any of them
     }
 
-- id: stealer_lumma_api
-  name: "Lumma Stealer: API Imports"
-  family: "LummaStealer"
-  tags: ["stealer", "loader", "infostealer"]
+- id: asyncrat_mutex
+  name: "AsyncRAT: Mutex Pattern"
+  family: "AsyncRAT"
+  tags: ["rat", "mutex", "remote"]
   author: "Sab0x1D"
-  last_updated: "2025-11-01"
+  last_updated: "2025-11-03"
   tlp: "CLEAR"
-  threat_refs:
-    - "https://www.zscaler.com/blogs/security-research/lummastealer-evolution"
   rule: |
-    rule LummaStealer_API_Patterns {
+    rule AsyncRAT_Mutex {
       meta:
         author = "Sab0x1D"
-        date = "2025-11-01"
-        description = "Detects Lumma Stealer variants by import references"
+        description = "Detects AsyncRAT mutex artifacts"
       strings:
-        $s1 = "CryptUnprotectData" ascii
-        $s2 = "GetForegroundWindow" ascii
-        $s3 = "WinHttpOpenRequest" ascii
+        $m1 = "AsyncRAT" ascii
+        $m2 = "MutexName" ascii
       condition:
-        2 of them
-    }
-
-- id: trojan_agenttesla_config
-  name: "AgentTesla: SMTP Credential Pattern"
-  family: "AgentTesla"
-  tags: ["rat", "keylogger", "infostealer"]
-  author: "Sab0x1D"
-  last_updated: "2025-11-02"
-  tlp: "CLEAR"
-  threat_refs:
-    - "https://www.fortinet.com/blog/threat-research/agent-tesla-new-delivery-techniques"
-  rule: |
-    rule AgentTesla_SMTP_Config {
-      meta:
-        author = "Sab0x1D"
-        date = "2025-11-02"
-        description = "Detects AgentTesla config strings containing SMTP credentials"
-      strings:
-        $smtp1 = "smtp." ascii
-        $user = "UserName=" ascii
-        $pass = "Password=" ascii
-        $tesla = "AgentTesla" ascii
-      condition:
-        any of them
+        1 of them
     }
