@@ -1,0 +1,44 @@
+/* Uses tokens: --container, --round, --gap, --text, --muted, --card, --card-border */
+.site-header{
+  position: sticky; top:0; z-index:30;
+  background: var(--card); border-bottom:1px solid var(--card-border);
+}
+.header-inner{
+  max-width: var(--container); margin:0 auto; padding: 14px var(--gap);
+  display:flex; align-items:center; justify-content:space-between; gap: var(--gap);
+}
+.brand{ display:flex; align-items:center; gap:12px; text-decoration:none; }
+.brand-mark{ width:32px; height:32px; border-radius:50%; object-fit:cover; }
+.brand-text{ font-weight:800; color:var(--text); letter-spacing:.2px; }
+
+.site-nav{ display:block; }
+.nav-list{ display:flex; gap:22px; list-style:none; margin:0; padding:0; }
+.nav-list a{
+  color:var(--text); text-decoration:none; font-weight:600; padding:8px 10px; border-radius:10px;
+}
+.nav-list a:hover{ background: #f5f7fb; }
+.nav-list a.is-active{ outline:2px solid #dbe3f0; }
+
+.nav-toggle{
+  display:none; align-items:center; gap:8px;
+  border:1px solid var(--card-border); background:var(--card); color:var(--text);
+  padding:8px 12px; border-radius: var(--round); cursor:pointer;
+}
+.nav-toggle:focus-visible{ outline:2px solid #9ab6ff; outline-offset:2px; }
+.nav-toggle .nav-toggle-label{ font-weight:700; }
+
+/* Mobile drawer (hidden by default) */
+.mobile-drawer{
+  display:none; border-top:1px solid var(--card-border); background: var(--card);
+}
+.mobile-drawer .nav-list{ flex-direction:column; gap:0; }
+.mobile-drawer .nav-list a{ display:block; padding:14px var(--gap); border-bottom:1px solid var(--card-border); }
+.mobile-drawer .nav-list a:last-child{ border-bottom:none; }
+
+/* --- Responsive --- */
+@media (max-width: 860px){
+  /* Keep brand visible; move nav into drawer and show 'Menu' button */
+  .site-nav{ display:none; }
+  .nav-toggle{ display:flex; }
+  .mobile-drawer.is-open{ display:block; }
+}
