@@ -312,18 +312,18 @@ permalink: /ghostyara/
     const yara = `${YARA_BASE}${stem}.yara`;
 
     if (await urlExists(yar)) {
-      anchorEl.href = yar; anchorEl.download = `${stem}.yar`; anchorEl.textContent = 'Download';
+      anchorEl.href = yar; anchorEl.download = `${stem}.yar`; anchorEl.textContent = 'Download .yar';
       return;
     }
     if (await urlExists(yara)) {
-      anchorEl.href = yara; anchorEl.download = `${stem}.yara`; anchorEl.textContent = 'Download';
+      anchorEl.href = yara; anchorEl.download = `${stem}.yara`; anchorEl.textContent = 'Download .yar';
       return;
     }
 
     // Fallback: generate from text
     const blob = new Blob([codeText], {type: 'text/plain'});
     const url = URL.createObjectURL(blob);
-    anchorEl.href = url; anchorEl.download = `${stem}.yar`; anchorEl.textContent = 'Download';
+    anchorEl.href = url; anchorEl.download = `${stem}.yar`; anchorEl.textContent = 'Download .yar';
   }
 
   async function urlExists(url){
