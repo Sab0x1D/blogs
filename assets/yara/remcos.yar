@@ -1,7 +1,7 @@
 // ---
 // name: "Remcos"
 // family: "Remcos"
-// tags: ["rat","keylogger","malspam"]
+// tags: ["rat","keylogger"]
 // author: "Sab0x1D"
 // last_updated: "2025-11-03"
 // tlp: "CLEAR"
