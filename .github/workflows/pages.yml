@@ -1,9 +1,15 @@
-name: Deploy Jekyll site to Pages (self-enable)
+# GitHub Pages workflow
+name: Deploy Pages
 
 on:
+  # Standard rebuild on any direct push to main
   push:
     branches: ["main"]
-  workflow_dispatch:
+
+  # 👇 NEW: rebuild automatically after Build YARA data workflow finishes
+  workflow_run:
+    workflows: ["Build YARA data"]
+    types: [completed]
 
 permissions:
   contents: read
@@ -12,30 +18,28 @@ permissions:
 
 concurrency:
   group: "pages"
-  cancel-in-progress: true
+  cancel-in-progress: false
 
 jobs:
   build:
+    if: github.event_name != 'workflow_run' || github.event.workflow_run.conclusion == 'success'
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Setup Pages (create/enable site if needed)
-        uses: actions/configure-pages@v5
-        with:
-          enablement: true
+      - name: Setup Pages
+        uses: actions/configure-pages@v4
 
-      - name: Build with Jekyll (official)
-        uses: actions/jekyll-build-pages@v1
-        with:
-          source: ./
-          destination: ./_site
+      - name: Build site
+        run: |
+          bundle install
+          bundle exec jekyll build --trace
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          path: _site
+          path: ./_site
 
   deploy:
     environment:
