@@ -4,6 +4,11 @@ title: "ghostYara"
 permalink: /ghostyara/
 ---
 
+<!-- PrismJS for YARA syntax highlighting -->
+<link href="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/themes/prism-tomorrow.min.css" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/prism.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/components/prism-yara.min.js"></script>
+
 <style>
   /* ghostYara layout fixes */
   .gy-item p { word-break: break-word; }
@@ -163,8 +168,10 @@ permalink: /ghostyara/
           </p>
         </div>
 
-        <!-- add .rule-code to hide scrollbars while keeping scroll -->
-        <pre class="rule-code" style="margin:0;padding:12px 16px;background:#0b0f1910;overflow:auto;max-height:320px;"><code>{{ r.rule | escape }}</code></pre>
+        <!-- Prism requires language-yara on the <code> element -->
+        <pre class="rule-code" style="margin:0;padding:12px 16px;background:#0b0f1910;overflow:auto;max-height:320px;">
+<code class="language-yara">{{ r.rule | escape }}</code>
+        </pre>
 
         <div>
           <!-- download on the card -->
@@ -198,8 +205,8 @@ permalink: /ghostyara/
     </div>
     <div class="gy-modal__body">
       <div id="gy-modal-meta" class="gy-meta"></div>
-      <!-- add .rule-code here too -->
-      <pre class="rule-code"><code id="gy-modal-code"></code></pre>
+      <!-- Prism-ready modal code block -->
+      <pre class="rule-code"><code class="language-yara" id="gy-modal-code"></code></pre>
     </div>
     <div class="gy-modal__actions">
       <a id="gy-modal-download" class="gy-btn" href="#" download>Download .yar</a>
@@ -271,7 +278,12 @@ permalink: /ghostyara/
       data.author ? `By ${data.author}` : '',
       data.updated ? `· Updated ${data.updated}` : ''
     ].filter(Boolean).join('  ·  ');
+
+    // inject rule, then ask Prism to (re)highlight the dynamic code
     mCode.textContent = (data.rule||'').replaceAll('\\n','\n');
+    if (window.Prism && Prism.highlightElement) {
+      Prism.highlightElement(mCode);
+    }
 
     setDownloadLink(data, mDl); // set modal download
     modal.setAttribute('aria-hidden','false');
