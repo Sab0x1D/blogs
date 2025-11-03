@@ -32,3 +32,21 @@
     \n\t$str4 = \"net.tcp://\"\n\t$c2_2 = \"37.1.203.45\"\n\t$c2_1 = \"45.135.232.2\"\
     \n\t$c2_3 = \"5.42.64.70\"\n\t$c2_4 = \"185.29.9.108\"\n\t$c2_5 = \"147.45.45.81\"\
     \n\t$c2_6 = \"94.232.249.204\"\ncondition:\n  2 of them\n}"
+- name: Remcos
+  family: Remcos
+  tags:
+  - rat
+  - keylogger
+  - malspam
+  author: Sab0x1D
+  last_updated: '2025-11-03'
+  tlp: CLEAR
+  id: remcos
+  rule: "\nrule Remcos {\n  meta:\n    author = \"Sab0x1D\"\n    description = \"\
+    Detects Remcos malware\"\n  strings: \n    $str1 = \"Remcos\"\n\t  $str2 = \"\
+    remcos\"\n\t  $str3 = \"XWinRemcoso\"\n\t  $ip1 = \"212.193.30.230\"\n\t  $ip2\
+    \ = \"95.214.27.6\"\n\t  $ip3 = \"213.152.161.181\"\n\t  $ip4 = \"178.237.33.50\"\
+    \n\t  $ip5 = \"179.15.149.222\"\n\t  $c21 = \"allonsy.hopto.org\"\n\t  $c22 =\
+    \ \"181.131.217.242\"\n\t  $c24 = \"jelelaiyegba.duckdns.org\"\n\t  $c25 = \"\
+    bbuseruploads.s3.amazonaws.com\"\n\t  $c26 = \"estrillajuju.con-ip.com\"\n\t \
+    \ $c27 = \"148.113.165.11\"\n  condition:\n    any of them\n}"
