@@ -64,11 +64,14 @@ permalink: /ghostyara/
     display:flex; gap:10px; align-items:center; justify-content:flex-end;
     padding: 12px 20px; border-top:1px solid var(--card-border);
   }
+
+  /* Shared button style for cards + modal */
   .gy-btn{
     padding: 10px 14px; border-radius:12px; border:1px solid var(--card-border);
     background: var(--card); cursor:pointer; text-decoration:none; color:inherit;
   }
   .gy-btn.primary{ background: var(--text); color:#fff; border-color: var(--text); }
+
   .gy-close{
     margin-left:auto;
     border-radius:12px; padding: 8px 10px; border:1px solid var(--card-border);
@@ -148,10 +151,12 @@ permalink: /ghostyara/
         <pre style="margin:0;padding:12px 16px;background:#0b0f1910;overflow:auto;max-height:320px;"><code>{{ r.rule | escape }}</code></pre>
 
         <div>
+          <!-- NEW: download link on the card -->
+          <a class="gy-dl gy-btn" href="#" download>Download</a>
           <button class="gy-copy"
                   data-copy="{{ r.rule | strip_newlines | escape }}"
                   type="button"
-                  style="padding:8px 10px;border:1px solid var(--card-border);border-radius:10px;background:var(--card);cursor:pointer;">
+                  style="padding:10px 14px;border:1px solid var(--card-border);border-radius:12px;background:var(--card);cursor:pointer;">
             Copy rule
           </button>
           {% if r.id %}<span>ID: {{ r.id }}</span>{% endif %}
@@ -180,7 +185,6 @@ permalink: /ghostyara/
       <pre><code id="gy-modal-code"></code></pre>
     </div>
     <div class="gy-modal__actions">
-      <!-- New: Download button -->
       <a id="gy-modal-download" class="gy-btn" href="#" download>Download .yar</a>
       <button id="gy-modal-copy" class="gy-btn primary">Copy rule</button>
     </div>
@@ -252,8 +256,7 @@ permalink: /ghostyara/
     ].filter(Boolean).join('  ·  ');
     mCode.textContent = (data.rule||'').replaceAll('\\n','\n');
 
-    // Set download link (try .yar then .yara, else generate on the fly)
-    setDownloadLink(data).catch(()=>{});
+    setDownloadLink(data, mDl); // set modal download
     modal.setAttribute('aria-hidden','false');
     mClose.focus();
     document.addEventListener('keydown', escClose);
@@ -266,7 +269,6 @@ permalink: /ghostyara/
 
   function escClose(e){ if(e.key==='Escape') closeModal(); }
 
-  // Clicking backdrop closes
   modal.addEventListener('click', (e)=>{ if(e.target === modal) closeModal(); });
   mClose.addEventListener('click', closeModal);
 
@@ -279,9 +281,17 @@ permalink: /ghostyara/
 
   // Card click → open modal (ignore clicks on buttons/links inside)
   items.forEach(card=>{
+    // Set per-card download link on load
+    const dl = card.querySelector('.gy-dl');
+    setDownloadLink({
+      id: card.dataset.id,
+      name: card.dataset.name,
+      rule: card.dataset.rule
+    }, dl);
+
     card.addEventListener('click', (e)=>{
       const t = e.target;
-      if(t.closest('button') || t.closest('a')) return; // don't open when copying/clicking links
+      if(t.closest('button') || t.closest('a')) return; // ignore inner controls
       openModal({
         id: card.dataset.id,
         name: card.dataset.name,
@@ -295,25 +305,25 @@ permalink: /ghostyara/
     });
   });
 
-  async function setDownloadLink(data){
+  async function setDownloadLink(data, anchorEl){
+    const codeText = (data.rule||'').replaceAll('\\n','\n');
     const stem = (data.id || (data.name||'').toLowerCase().replace(/\s+/g,'_')).replace(/[^\w\-]/g,'');
     const yar  = `${YARA_BASE}${stem}.yar`;
     const yara = `${YARA_BASE}${stem}.yara`;
 
-    // Prefer .yar, then .yara
     if (await urlExists(yar)) {
-      mDl.href = yar; mDl.download = `${stem}.yar`; mDl.textContent = 'Download .yar';
+      anchorEl.href = yar; anchorEl.download = `${stem}.yar`; anchorEl.textContent = 'Download';
       return;
     }
     if (await urlExists(yara)) {
-      mDl.href = yara; mDl.download = `${stem}.yara`; mDl.textContent = 'Download .yara';
+      anchorEl.href = yara; anchorEl.download = `${stem}.yara`; anchorEl.textContent = 'Download';
       return;
     }
 
-    // Fallback: generate client-side file from the rule text
-    const blob = new Blob([mCode.textContent], {type: 'text/plain'});
+    // Fallback: generate from text
+    const blob = new Blob([codeText], {type: 'text/plain'});
     const url = URL.createObjectURL(blob);
-    mDl.href = url; mDl.download = `${stem}.yar`; mDl.textContent = 'Download .yar';
+    anchorEl.href = url; anchorEl.download = `${stem}.yar`; anchorEl.textContent = 'Download';
   }
 
   async function urlExists(url){
