@@ -1039,3 +1039,15 @@ html.dark .post-content blockquote:not(.featured-quote){
   font-size: .8rem;
 }
 
+/* ====== ghostYara scrollbar cleanup ====== */
+.rule-code {
+  overflow: auto;
+  -ms-overflow-style: none;   /* IE/Edge legacy */
+  scrollbar-width: none;      /* Firefox */
+}
+.rule-code::-webkit-scrollbar {
+  width: 0;
+  height: 0;
+  background: transparent;    /* Chrome/Safari */
+}
+.rule-code { overscroll-behavior: contain; }
