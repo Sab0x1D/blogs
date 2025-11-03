@@ -1,0 +1,18 @@
+# Jekyll build output
+_site/
+.jekyll-cache/
+.sass-cache/
+.DS_Store
+
+# Node / Ruby noise (if ever used)
+node_modules/
+vendor/
+
+# Ignore editor junk
+*.swp
+*.log
+
+# --- DO NOT ignore these ---
+# _data/yara_rules.yml must stay tracked
+!_data/
+!_data/yara_rules.yml
