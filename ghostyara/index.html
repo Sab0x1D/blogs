@@ -66,7 +66,7 @@ permalink: /ghostyara/
   }
   .gy-btn{
     padding: 10px 14px; border-radius:12px; border:1px solid var(--card-border);
-    background: var(--card); cursor:pointer;
+    background: var(--card); cursor:pointer; text-decoration:none; color:inherit;
   }
   .gy-btn.primary{ background: var(--text); color:#fff; border-color: var(--text); }
   .gy-close{
@@ -118,7 +118,7 @@ permalink: /ghostyara/
       <article class="card gy-item"
                data-id="{{ r.id | escape }}"
                data-name="{{ r.name | escape }}"
-               data-family="{{ r.family | downcase | escape }}"
+               data-family="{{ r.family | escape }}"
                data-tags="{% if r.tags %}{{ r.tags | join: ',' | downcase | escape }}{% endif %}"
                data-tags-human="{% if r.tags %}{{ r.tags | join: ', ' | escape }}{% endif %}"
                data-author="{{ r.author | escape }}"
@@ -180,6 +180,8 @@ permalink: /ghostyara/
       <pre><code id="gy-modal-code"></code></pre>
     </div>
     <div class="gy-modal__actions">
+      <!-- New: Download button -->
+      <a id="gy-modal-download" class="gy-btn" href="#" download>Download .yar</a>
       <button id="gy-modal-copy" class="gy-btn primary">Copy rule</button>
     </div>
   </div>
@@ -235,6 +237,9 @@ permalink: /ghostyara/
   const mTlp   = document.getElementById('gy-modal-tlp');
   const mClose = document.getElementById('gy-modal-close');
   const mCopy  = document.getElementById('gy-modal-copy');
+  const mDl    = document.getElementById('gy-modal-download');
+
+  const YARA_BASE = "{{ '/assets/yara/' | relative_url }}";
 
   function openModal(data){
     mTitle.textContent = data.name || 'YARA rule';
@@ -247,10 +252,10 @@ permalink: /ghostyara/
     ].filter(Boolean).join('  ·  ');
     mCode.textContent = (data.rule||'').replaceAll('\\n','\n');
 
+    // Set download link (try .yar then .yara, else generate on the fly)
+    setDownloadLink(data).catch(()=>{});
     modal.setAttribute('aria-hidden','false');
-    // focus the close button for accessibility
     mClose.focus();
-    // trap focus basic
     document.addEventListener('keydown', escClose);
   }
 
@@ -276,8 +281,9 @@ permalink: /ghostyara/
   items.forEach(card=>{
     card.addEventListener('click', (e)=>{
       const t = e.target;
-      if(t.closest('button') || t.closest('a')) return; // don't open when copying
+      if(t.closest('button') || t.closest('a')) return; // don't open when copying/clicking links
       openModal({
+        id: card.dataset.id,
         name: card.dataset.name,
         tlp: card.dataset.tlp,
         family: card.dataset.family,
@@ -288,5 +294,33 @@ permalink: /ghostyara/
       });
     });
   });
+
+  async function setDownloadLink(data){
+    const stem = (data.id || (data.name||'').toLowerCase().replace(/\s+/g,'_')).replace(/[^\w\-]/g,'');
+    const yar  = `${YARA_BASE}${stem}.yar`;
+    const yara = `${YARA_BASE}${stem}.yara`;
+
+    // Prefer .yar, then .yara
+    if (await urlExists(yar)) {
+      mDl.href = yar; mDl.download = `${stem}.yar`; mDl.textContent = 'Download .yar';
+      return;
+    }
+    if (await urlExists(yara)) {
+      mDl.href = yara; mDl.download = `${stem}.yara`; mDl.textContent = 'Download .yara';
+      return;
+    }
+
+    // Fallback: generate client-side file from the rule text
+    const blob = new Blob([mCode.textContent], {type: 'text/plain'});
+    const url = URL.createObjectURL(blob);
+    mDl.href = url; mDl.download = `${stem}.yar`; mDl.textContent = 'Download .yar';
+  }
+
+  async function urlExists(url){
+    try{
+      const res = await fetch(url, { method: 'HEAD' });
+      return res.ok;
+    }catch(e){ return false; }
+  }
 })();
 </script>
