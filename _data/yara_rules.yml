@@ -31,17 +31,18 @@
     \ = \"Detects QakBot packed loader binaries\"\n  strings:\n    $mz = { 4D 5A }\n\
     \    $marker1 = \"qbot\" ascii nocase\n    $marker2 = \"bot_id\" ascii\n  condition:\n\
     \    uint16(0) == 0x5A4D and any of them\n}"
-- name: 'RedLine Stealer: Config Markers'
+- name: RedLine Stealer
   family: RedLine
   tags:
   - stealer
   - infostealer
-  - config
   author: Sab0x1D
   last_updated: '2025-11-03'
   tlp: CLEAR
-  id: redline_config
-  rule: "rule RedLine_Config_Markers {\n  meta:\n    author = \"Sab0x1D\"\n    description\
-    \ = \"Detects RedLine Stealer config markers\"\n  strings:\n    $a = \"Software\\\
-    \\RedLine\" wide\n    $b = \"Wallets\\\\Bitcoin\" wide\n  condition:\n    any\
-    \ of them\n}"
+  id: redline
+  rule: "rule RedLine {\n  meta:\n    author = \"Sab0x1D\"\n    description = \"Detects\
+    \ RedLine Stealer malware\"\nstrings: \n\t$str1 = \"%userprofile%\\\\Desktop|*.txt,*.doc*,*key*,*wallet*,*seed*|0\"\
+    \n\t$str2 = \"Chrome\\\\User Data\\\\AutofillStates\\\\*\"\n\t$str3 = \"tempuri.org\"\
+    \n\t$str4 = \"net.tcp://\"\n\t$c2_2 = \"37.1.203.45\"\n\t$c2_1 = \"45.135.232.2\"\
+    \n\t$c2_3 = \"5.42.64.70\"\n\t$c2_4 = \"185.29.9.108\"\n\t$c2_5 = \"147.45.45.81\"\
+    \n\t$c2_6 = \"94.232.249.204\"\ncondition:\n  2 of them\n}"
