@@ -1,12 +1,9 @@
-# GitHub Pages workflow
 name: Deploy Pages
 
 on:
-  # Standard rebuild on any direct push to main
   push:
     branches: ["main"]
-
-  # 👇 NEW: rebuild automatically after Build YARA data workflow finishes
+  workflow_dispatch:
   workflow_run:
     workflows: ["Build YARA data"]
     types: [completed]
@@ -18,10 +15,11 @@ permissions:
 
 concurrency:
   group: "pages"
-  cancel-in-progress: false
+  cancel-in-progress: true
 
 jobs:
   build:
+    # only run if the YARA builder succeeded (or if it's a normal push/manual run)
     if: github.event_name != 'workflow_run' || github.event.workflow_run.conclusion == 'success'
     runs-on: ubuntu-latest
     steps:
@@ -29,12 +27,14 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Setup Pages
-        uses: actions/configure-pages@v4
+        uses: actions/configure-pages@v5
 
-      - name: Build site
-        run: |
-          bundle install
-          bundle exec jekyll build --trace
+      # This installs Ruby + Bundler and builds Jekyll for you
+      - name: Build with Jekyll
+        uses: actions/jekyll-build@v1
+        with:
+          source: ./
+          destination: ./_site
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
@@ -42,11 +42,11 @@ jobs:
           path: ./_site
 
   deploy:
+    needs: build
+    runs-on: ubuntu-latest
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
-    runs-on: ubuntu-latest
-    needs: build
     steps:
       - name: Deploy to GitHub Pages
         id: deployment
