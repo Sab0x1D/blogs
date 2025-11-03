@@ -11,7 +11,7 @@ permalink: /ghostyara/
   .gy-item p strong + span { margin-left: 4px; }
   .gy-item p span { display: inline-block; margin-top: 4px; }
 
-  .gy-item { display:flex; flex-direction:column; }
+  .gy-item { display:flex; flex-direction:column; cursor: zoom-in; }
   .gy-item pre { flex-grow:1; }
   .gy-item > div:last-of-type{
     margin-top:auto;
@@ -27,8 +27,60 @@ permalink: /ghostyara/
     color:var(--muted-2);
     font-size:.8rem;
   }
-  /* Space between search/filter bar and grid */
+
+  /* Space between filters and grid */
   #gy-grid { margin-top: 28px; }
+
+  /* ===== Modal (zoom view) ===== */
+  .gy-modal {
+    position: fixed; inset: 0;
+    background: rgba(11,15,25,.55);
+    display: none; /* toggled to flex */
+    align-items: center; justify-content: center;
+    z-index: 9999;
+    padding: 20px;
+  }
+  .gy-modal[aria-hidden="false"]{ display:flex; }
+  .gy-modal__panel{
+    background: var(--card);
+    color: var(--text);
+    width: min(980px, 100%);
+    max-height: 90vh;
+    border-radius: var(--round);
+    border: 1px solid var(--card-border);
+    box-shadow: 0 20px 60px rgba(0,0,0,.25);
+    display:flex; flex-direction:column;
+    overflow: hidden;
+  }
+  .gy-modal__head{
+    display:flex; align-items:center; gap: 12px;
+    padding: 16px 20px; border-bottom:1px solid var(--card-border);
+  }
+  .gy-modal__title{ margin:0; font-size:1.25rem; line-height:1.3; }
+  .gy-chip{ border:1px solid var(--card-border); background:var(--chip-bg); border-radius:999px; padding:3px 10px; font-size:.85rem; }
+  .gy-modal__body{ padding: 16px 20px; overflow:auto; }
+  .gy-meta{ color: var(--muted-2); font-size:.92rem; margin: 6px 0 10px 0; }
+  .gy-modal__actions{
+    display:flex; gap:10px; align-items:center; justify-content:flex-end;
+    padding: 12px 20px; border-top:1px solid var(--card-border);
+  }
+  .gy-btn{
+    padding: 10px 14px; border-radius:12px; border:1px solid var(--card-border);
+    background: var(--card); cursor:pointer;
+  }
+  .gy-btn.primary{ background: var(--text); color:#fff; border-color: var(--text); }
+  .gy-close{
+    margin-left:auto;
+    border-radius:12px; padding: 8px 10px; border:1px solid var(--card-border);
+    background: var(--chip-bg); cursor:pointer;
+  }
+  .gy-modal pre{
+    background:#0b0f1910; border:1px solid var(--card-border);
+    padding:14px; border-radius:12px; overflow:auto; max-height:60vh;
+  }
+  @media (max-width: 640px){
+    .gy-modal__title{ font-size:1.1rem; }
+  }
 </style>
 
 <section style="max-width:var(--container);margin:0 auto;padding:var(--gap);">
@@ -42,21 +94,15 @@ permalink: /ghostyara/
               style="padding:10px 12px;border:1px solid var(--card-border);border-radius:12px;background:var(--card);">
         <option value="">All families</option>
         {% assign families = site.data.yara_rules | map: "family" | uniq | sort %}
-        {% for fam in families %}
-          {% if fam %}<option value="{{ fam | escape }}">{{ fam }}</option>{% endif %}
-        {% endfor %}
+        {% for fam in families %}{% if fam %}<option value="{{ fam | escape }}">{{ fam }}</option>{% endif %}{% endfor %}
       </select>
       <select id="gy-tag" aria-label="Filter by tag"
               style="padding:10px 12px;border:1px solid var(--card-border);border-radius:12px;background:var(--card);">
         <option value="">All tags</option>
         {% assign all_tags = "" | split: "" %}
-        {% for r in site.data.yara_rules %}
-          {% if r.tags %}{% assign all_tags = all_tags | concat: r.tags %}{% endif %}
-        {% endfor %}
+        {% for r in site.data.yara_rules %}{% if r.tags %}{% assign all_tags = all_tags | concat: r.tags %}{% endif %}{% endfor %}
         {% assign tagset = all_tags | uniq | sort %}
-        {% for t in tagset %}
-          {% if t %}<option value="{{ t | escape }}">{{ t }}</option>{% endif %}
-        {% endfor %}
+        {% for t in tagset %}{% if t %}<option value="{{ t | escape }}">{{ t }}</option>{% endif %}{% endfor %}
       </select>
       <button id="gy-clear" type="button"
               style="padding:10px 12px;border:1px solid var(--card-border);border-radius:12px;background:var(--chip-bg);cursor:pointer;">
@@ -70,27 +116,32 @@ permalink: /ghostyara/
     <div id="gy-grid" style="display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:var(--gap);">
       {% for r in rules %}
       <article class="card gy-item"
-               data-name="{{ r.name | downcase }}"
-               data-family="{{ r.family | downcase }}"
-               data-tags="{% if r.tags %}{{ r.tags | join: ',' | downcase }}{% endif %}"
+               data-id="{{ r.id | escape }}"
+               data-name="{{ r.name | escape }}"
+               data-family="{{ r.family | downcase | escape }}"
+               data-tags="{% if r.tags %}{{ r.tags | join: ',' | downcase | escape }}{% endif %}"
+               data-tags-human="{% if r.tags %}{{ r.tags | join: ', ' | escape }}{% endif %}"
+               data-author="{{ r.author | escape }}"
+               data-updated="{{ r.last_updated | escape }}"
+               data-tlp="{{ r.tlp | default: 'CLEAR' | escape }}"
+               data-rule="{{ r.rule | escape }}"
                style="background:var(--card);border:1px solid var(--card-border);border-radius:var(--round);overflow:hidden;">
         <div style="padding:16px 16px 0 16px;">
           <div style="display:flex;justify-content:space-between;gap:8px;align-items:center;">
             <h2 style="margin:0;font-size:1.05rem;line-height:1.3;">{{ r.name }}</h2>
-            <span style="font-size:.78rem;color:var(--muted-2);">{{ r.tlp | default: "TLP:CLEAR" }}</span>
+            <span class="gy-chip" style="font-size:.78rem;">{{ r.tlp | default: "CLEAR" }}</span>
           </div>
           <p style="margin:8px 0 10px 0;color:var(--muted);">
             <strong>Family:</strong> {{ r.family | default: "—" }}
             {% if r.tags and r.tags.size > 0 %}
               · <strong>Tags:</strong>
               {% for t in r.tags %}
-                <span style="border:1px solid var(--card-border);border-radius:999px;padding:2px 8px;margin-left:4px;background:var(--chip-bg);">{{ t }}</span>
+                <span class="gy-chip" style="margin-left:4px;">{{ t }}</span>
               {% endfor %}
             {% endif %}
           </p>
           <p style="margin:0 0 12px 0;color:var(--muted-2);font-size:.9rem;">
-            {% if r.author %}By {{ r.author }}{% endif %}
-            {% if r.last_updated %} · Updated {{ r.last_updated }}{% endif %}
+            {% if r.author %}By {{ r.author }}{% endif %}{% if r.last_updated %} · Updated {{ r.last_updated }}{% endif %}
           </p>
         </div>
 
@@ -103,9 +154,7 @@ permalink: /ghostyara/
                   style="padding:8px 10px;border:1px solid var(--card-border);border-radius:10px;background:var(--card);cursor:pointer;">
             Copy rule
           </button>
-          {% if r.id %}
-            <span>ID: {{ r.id }}</span>
-          {% endif %}
+          {% if r.id %}<span>ID: {{ r.id }}</span>{% endif %}
         </div>
       </article>
       {% endfor %}
@@ -118,45 +167,126 @@ permalink: /ghostyara/
   {% endif %}
 </section>
 
+<!-- Zoom Modal -->
+<div class="gy-modal" id="gy-modal" aria-hidden="true" role="dialog" aria-modal="true" aria-labelledby="gy-modal-title">
+  <div class="gy-modal__panel">
+    <div class="gy-modal__head">
+      <h2 id="gy-modal-title" class="gy-modal__title">Rule</h2>
+      <span id="gy-modal-tlp" class="gy-chip">CLEAR</span>
+      <button id="gy-modal-close" class="gy-close" aria-label="Close">Close ✕</button>
+    </div>
+    <div class="gy-modal__body">
+      <div id="gy-modal-meta" class="gy-meta"></div>
+      <pre><code id="gy-modal-code"></code></pre>
+    </div>
+    <div class="gy-modal__actions">
+      <button id="gy-modal-copy" class="gy-btn primary">Copy rule</button>
+    </div>
+  </div>
+</div>
+
 <script>
 (function(){
-  const $$ = (s,r=document)=>Array.from(r.querySelectorAll(s));
-  const q=document.getElementById('gy-search'),
-        fam=document.getElementById('gy-family'),
-        tag=document.getElementById('gy-tag'),
-        clear=document.getElementById('gy-clear'),
-        items=$$('.gy-item');
+  const $$ = (s, r=document) => Array.from(r.querySelectorAll(s));
+  const q = document.getElementById('gy-search');
+  const fam = document.getElementById('gy-family');
+  const tag = document.getElementById('gy-tag');
+  const clearBtn = document.getElementById('gy-clear');
+  const items = $$('.gy-item');
 
-  const norm=x=>(x||'').toLowerCase().trim();
+  function norm(x){ return (x||'').toLowerCase().trim(); }
 
-  function apply(){
-    const qv=norm(q.value), fv=norm(fam.value), tv=norm(tag.value);
+  function applyFilters(){
+    const qv = norm(q.value), fv = norm(fam.value), tv = norm(tag.value);
     items.forEach(it=>{
-      const name=it.dataset.name||'', f=it.dataset.family||'', t=it.dataset.tags||'';
-      const ok=(!qv||(name.includes(qv)||f.includes(qv)||t.includes(qv))) &&
-               (!fv||f===fv) &&
-               (!tv||t.split(',').includes(tv));
-      it.style.display=ok?'':'none';
+      const name = (it.dataset.name||'').toLowerCase();
+      const family = (it.dataset.family||'').toLowerCase();
+      const tags = (it.dataset.tags||'').toLowerCase();
+      const ok = (!qv||(name.includes(qv)||family.includes(qv)||tags.includes(qv)))
+              && (!fv||family===fv)
+              && (!tv||tags.split(',').includes(tv));
+      it.style.display = ok ? '' : 'none';
     });
   }
-  [q,fam,tag].forEach(el=>el&&el.addEventListener('input',apply));
-  clear&&clear.addEventListener('click',()=>{q.value='';fam.value='';tag.value='';apply();});
 
+  [q,fam,tag].forEach(el=>el && el.addEventListener('input', applyFilters));
+  clearBtn && clearBtn.addEventListener('click', ()=>{ if(q) q.value=''; if(fam) fam.value=''; if(tag) tag.value=''; applyFilters(); });
+
+  // Inline copy buttons
   $$('.gy-copy').forEach(btn=>{
-    btn.addEventListener('click',async()=>{
-      const txt=btn.getAttribute('data-copy')||'';
+    btn.addEventListener('click', async (e)=>{
+      e.stopPropagation();
+      const txt = btn.getAttribute('data-copy') || '';
       try{
         await navigator.clipboard.writeText(txt.replaceAll('\\n','\n'));
-        const old=btn.textContent;
-        btn.textContent='Copied ✓';
-        setTimeout(()=>btn.textContent=old,1200);
-      }catch(e){
-        btn.textContent='Copy failed';
-        setTimeout(()=>btn.textContent='Copy rule',1200);
-      }
+        const old = btn.textContent; btn.textContent = 'Copied ✓';
+        setTimeout(()=>btn.textContent = old, 1200);
+      }catch(e){ btn.textContent='Copy failed'; setTimeout(()=>btn.textContent='Copy rule',1200); }
     });
   });
 
-  apply();
+  applyFilters();
+
+  /* ===== Modal behavior ===== */
+  const modal = document.getElementById('gy-modal');
+  const mTitle = document.getElementById('gy-modal-title');
+  const mMeta  = document.getElementById('gy-modal-meta');
+  const mCode  = document.getElementById('gy-modal-code');
+  const mTlp   = document.getElementById('gy-modal-tlp');
+  const mClose = document.getElementById('gy-modal-close');
+  const mCopy  = document.getElementById('gy-modal-copy');
+
+  function openModal(data){
+    mTitle.textContent = data.name || 'YARA rule';
+    mTlp.textContent = (data.tlp||'CLEAR').toUpperCase();
+    mMeta.textContent = [
+      data.family ? `Family: ${data.family}` : '',
+      data.tags ? `Tags: ${data.tags}` : '',
+      data.author ? `By ${data.author}` : '',
+      data.updated ? `· Updated ${data.updated}` : ''
+    ].filter(Boolean).join('  ·  ');
+    mCode.textContent = (data.rule||'').replaceAll('\\n','\n');
+
+    modal.setAttribute('aria-hidden','false');
+    // focus the close button for accessibility
+    mClose.focus();
+    // trap focus basic
+    document.addEventListener('keydown', escClose);
+  }
+
+  function closeModal(){
+    modal.setAttribute('aria-hidden','true');
+    document.removeEventListener('keydown', escClose);
+  }
+
+  function escClose(e){ if(e.key==='Escape') closeModal(); }
+
+  // Clicking backdrop closes
+  modal.addEventListener('click', (e)=>{ if(e.target === modal) closeModal(); });
+  mClose.addEventListener('click', closeModal);
+
+  mCopy.addEventListener('click', async ()=>{
+    try{
+      await navigator.clipboard.writeText(mCode.textContent);
+      mCopy.textContent='Copied ✓'; setTimeout(()=>mCopy.textContent='Copy rule',1200);
+    }catch(e){ mCopy.textContent='Copy failed'; setTimeout(()=>mCopy.textContent='Copy rule',1200); }
+  });
+
+  // Card click → open modal (ignore clicks on buttons/links inside)
+  items.forEach(card=>{
+    card.addEventListener('click', (e)=>{
+      const t = e.target;
+      if(t.closest('button') || t.closest('a')) return; // don't open when copying
+      openModal({
+        name: card.dataset.name,
+        tlp: card.dataset.tlp,
+        family: card.dataset.family,
+        tags: card.dataset.tagsHuman,
+        author: card.dataset.author,
+        updated: card.dataset.updated,
+        rule: card.dataset.rule
+      });
+    });
+  });
 })();
 </script>
