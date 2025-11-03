@@ -6,6 +6,7 @@
 // last_updated: "2025-11-03"
 // tlp: "CLEAR"
 // ---
+
 rule AsyncRAT {
   meta:
     author = "Sab0x1D"
