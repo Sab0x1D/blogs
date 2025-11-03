@@ -19,7 +19,7 @@ concurrency:
 
 jobs:
   build:
-    # only run if the YARA builder succeeded (or if it's a normal push/manual run)
+    # run on normal pushes OR after YARA build succeeds
     if: github.event_name != 'workflow_run' || github.event.workflow_run.conclusion == 'success'
     runs-on: ubuntu-latest
     steps:
@@ -29,12 +29,18 @@ jobs:
       - name: Setup Pages
         uses: actions/configure-pages@v5
 
-      # This installs Ruby + Bundler and builds Jekyll for you
-      - name: Build with Jekyll
-        uses: actions/jekyll-build@v1
+      # Install Ruby + Bundler (uses your Gemfile)
+      - name: Setup Ruby
+        uses: ruby/setup-ruby@v1
         with:
-          source: ./
-          destination: ./_site
+          ruby-version: '3.3'
+          bundler-cache: true
+
+      # Build Jekyll site
+      - name: Build site
+        run: |
+          bundle install
+          bundle exec jekyll build --trace
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
