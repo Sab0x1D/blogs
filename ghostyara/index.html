@@ -84,6 +84,18 @@ permalink: /ghostyara/
   @media (max-width: 640px){
     .gy-modal__title{ font-size:1.1rem; }
   }
+  /* ghostYara: hide scrollbars but keep scroll */
+  .rule-code {
+    overflow: auto;
+    -ms-overflow-style: none;        /* old IE/Edge */
+    scrollbar-width: none;           /* Firefox */
+    overscroll-behavior: contain;
+  }
+  .rule-code::-webkit-scrollbar {
+    width: 0;
+    height: 0;
+    background: transparent;         /* Chrome/Safari/Edge */
+  }
 </style>
 
 <section style="max-width:var(--container);margin:0 auto;padding:var(--gap);">
