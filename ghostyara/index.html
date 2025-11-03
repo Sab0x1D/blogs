@@ -4,13 +4,16 @@ title: "ghostYara"
 permalink: /ghostyara/
 ---
 
-<!-- PrismJS for YARA syntax highlighting -->
-<link href="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/themes/prism-tomorrow.min.css" rel="stylesheet">
-<script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/prism.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/components/prism-yara.min.js"></script>
+<!-- highlight.js (YARA syntax highlighting) -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@11.9.0/styles/github.min.css">
+<script src="https://cdn.jsdelivr.net/npm/highlight.js@11.9.0/lib/highlight.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/highlight.js@11.9.0/lib/languages/yara.min.js"></script>
+<script>
+  hljs.registerLanguage('yara', window.hljsDefineYara);
+  document.addEventListener('DOMContentLoaded', () => hljs.highlightAll());
+</script>
 
 <style>
-  /* ghostYara layout fixes */
   .gy-item p { word-break: break-word; }
   .gy-item p strong { white-space: nowrap; }
   .gy-item p strong + span { margin-left: 4px; }
@@ -33,14 +36,12 @@ permalink: /ghostyara/
     font-size:.8rem;
   }
 
-  /* Space between filters and grid */
   #gy-grid { margin-top: 28px; }
 
-  /* ===== Modal (zoom view) ===== */
   .gy-modal {
     position: fixed; inset: 0;
     background: rgba(11,15,25,.55);
-    display: none; /* toggled to flex */
+    display: none;
     align-items: center; justify-content: center;
     z-index: 9999;
     padding: 20px;
@@ -70,7 +71,6 @@ permalink: /ghostyara/
     padding: 12px 20px; border-top:1px solid var(--card-border);
   }
 
-  /* Shared button style for cards + modal */
   .gy-btn{
     padding: 10px 14px; border-radius:12px; border:1px solid var(--card-border);
     background: var(--card); cursor:pointer; text-decoration:none; color:inherit;
@@ -84,7 +84,7 @@ permalink: /ghostyara/
   }
 
   .gy-modal pre{
-    background:#0b0f1910; border:1px solid var(--card-border);
+    border:1px solid var(--card-border);
     padding:14px; border-radius:12px; overflow:auto; max-height:60vh;
   }
 
@@ -92,17 +92,16 @@ permalink: /ghostyara/
     .gy-modal__title{ font-size:1.1rem; }
   }
 
-  /* ghostYara: hide scrollbars but keep scroll */
   .rule-code {
     overflow: auto;
-    -ms-overflow-style: none;        /* old IE/Edge */
-    scrollbar-width: none;           /* Firefox */
+    -ms-overflow-style: none;
+    scrollbar-width: none;
     overscroll-behavior: contain;
   }
   .rule-code::-webkit-scrollbar {
     width: 0;
     height: 0;
-    background: transparent;         /* Chrome/Safari/Edge */
+    background: transparent;
   }
 </style>
 
@@ -168,13 +167,11 @@ permalink: /ghostyara/
           </p>
         </div>
 
-        <!-- Prism requires language-yara on the <code> element -->
-        <pre class="rule-code" style="margin:0;padding:12px 16px;background:#0b0f1910;overflow:auto;max-height:320px;">
+        <pre class="rule-code" style="margin:0;padding:12px 16px;overflow:auto;max-height:320px;">
 <code class="language-yara">{{ r.rule | escape }}</code>
         </pre>
 
         <div>
-          <!-- download on the card -->
           <a class="gy-dl gy-btn" href="#" download>Download .yar</a>
           <button class="gy-copy"
                   data-copy="{{ r.rule | strip_newlines | escape }}"
@@ -195,7 +192,6 @@ permalink: /ghostyara/
   {% endif %}
 </section>
 
-<!-- Zoom Modal -->
 <div class="gy-modal" id="gy-modal" aria-hidden="true" role="dialog" aria-modal="true" aria-labelledby="gy-modal-title">
   <div class="gy-modal__panel">
     <div class="gy-modal__head">
@@ -205,7 +201,6 @@ permalink: /ghostyara/
     </div>
     <div class="gy-modal__body">
       <div id="gy-modal-meta" class="gy-meta"></div>
-      <!-- Prism-ready modal code block -->
       <pre class="rule-code"><code class="language-yara" id="gy-modal-code"></code></pre>
     </div>
     <div class="gy-modal__actions">
@@ -242,7 +237,6 @@ permalink: /ghostyara/
   [q,fam,tag].forEach(el=>el && el.addEventListener('input', applyFilters));
   clearBtn && clearBtn.addEventListener('click', ()=>{ if(q) q.value=''; if(fam) fam.value=''; if(tag) tag.value=''; applyFilters(); });
 
-  // Inline copy buttons
   $$('.gy-copy').forEach(btn=>{
     btn.addEventListener('click', async (e)=>{
       e.stopPropagation();
@@ -257,7 +251,6 @@ permalink: /ghostyara/
 
   applyFilters();
 
-  /* ===== Modal behavior ===== */
   const modal = document.getElementById('gy-modal');
   const mTitle = document.getElementById('gy-modal-title');
   const mMeta  = document.getElementById('gy-modal-meta');
@@ -279,13 +272,10 @@ permalink: /ghostyara/
       data.updated ? `· Updated ${data.updated}` : ''
     ].filter(Boolean).join('  ·  ');
 
-    // inject rule, then ask Prism to (re)highlight the dynamic code
     mCode.textContent = (data.rule||'').replaceAll('\\n','\n');
-    if (window.Prism && Prism.highlightElement) {
-      Prism.highlightElement(mCode);
-    }
+    if (window.hljs) { hljs.highlightElement(mCode); }
 
-    setDownloadLink(data, mDl); // set modal download
+    setDownloadLink(data, mDl);
     modal.setAttribute('aria-hidden','false');
     mClose.focus();
     document.addEventListener('keydown', escClose);
@@ -308,9 +298,7 @@ permalink: /ghostyara/
     }catch(e){ mCopy.textContent='Copy failed'; setTimeout(()=>mCopy.textContent='Copy rule',1200); }
   });
 
-  // Card click → open modal (ignore clicks on buttons/links inside)
   items.forEach(card=>{
-    // Set per-card download link on load
     const dl = card.querySelector('.gy-dl');
     setDownloadLink({
       id: card.dataset.id,
@@ -320,7 +308,7 @@ permalink: /ghostyara/
 
     card.addEventListener('click', (e)=>{
       const t = e.target;
-      if(t.closest('button') || t.closest('a')) return; // ignore inner controls
+      if(t.closest('button') || t.closest('a')) return;
       openModal({
         id: card.dataset.id,
         name: card.dataset.name,
@@ -349,7 +337,6 @@ permalink: /ghostyara/
       return;
     }
 
-    // Fallback: generate from text
     const blob = new Blob([codeText], {type: 'text/plain'});
     const url = URL.createObjectURL(blob);
     anchorEl.href = url; anchorEl.download = `${stem}.yar`; anchorEl.textContent = 'Download .yar';
