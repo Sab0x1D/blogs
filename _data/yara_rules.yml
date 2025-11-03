@@ -17,20 +17,6 @@
     \n\t  $ip1 = \"181.131.219.51\"\n\t  $ip2 = \"45.40.96.97\"\n\t  $ip3 = \"191.88.249.120\"\
     \n\t  $ip4 = \"104.156.247.38\"\n\t  $ip5 = \"179.14.8.215\"\ncondition:\n  2\
     \ of them\n}"
-- name: 'QakBot: Packed Loader'
-  family: QakBot
-  tags:
-  - banker
-  - loader
-  - malspam
-  author: Sab0x1D
-  last_updated: '2025-11-03'
-  tlp: CLEAR
-  id: qakbot_loader
-  rule: "rule QakBot_Packed_Loader {\n  meta:\n    author = \"Sab0x1D\"\n    description\
-    \ = \"Detects QakBot packed loader binaries\"\n  strings:\n    $mz = { 4D 5A }\n\
-    \    $marker1 = \"qbot\" ascii nocase\n    $marker2 = \"bot_id\" ascii\n  condition:\n\
-    \    uint16(0) == 0x5A4D and any of them\n}"
 - name: RedLine Stealer
   family: RedLine
   tags:
