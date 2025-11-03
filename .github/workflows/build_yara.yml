@@ -3,37 +3,32 @@ name: Build YARA data
 on:
   push:
     paths:
-      - 'blogs/assets/yara/**'
+      - 'blogs/assets/yara/**'          # any .yar/.yara you edit or add
       - 'blogs/scripts/build_yara_data.py'
-  workflow_dispatch:
+  workflow_dispatch:                     # lets you run it manually from Actions tab
 
 permissions:
-  contents: write   # <-- needed to push back the generated file
+  contents: write                        # allow committing _data/yara_rules.yml
 
 jobs:
   build:
     runs-on: ubuntu-latest
-
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
-        with:
-          fetch-depth: 0
+        with: { fetch-depth: 0 }
 
       - name: Set up Python
         uses: actions/setup-python@v5
-        with:
-          python-version: '3.x'
+        with: { python-version: '3.x' }
 
       - name: Install PyYAML
         run: pip install pyyaml
 
-      # Run the builder from the blogs/ directory
-      - name: Build YARA data
+      - name: Build YARA data (from blogs/)
         working-directory: blogs
         run: python scripts/build_yara_data.py
 
-      # Commit the generated _data/yara_rules.yml back into blogs/
       - name: Commit generated YAML
         working-directory: blogs
         run: |
