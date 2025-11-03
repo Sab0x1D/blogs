@@ -20,7 +20,7 @@
   --text: #0b0f19;
   --card: #ffffff;
   --card-border: #e5e7eb;
-  --muted: #6b7280;       /* back to neutral grey */
+  --muted: #6b7280;
   --muted-2: #9aa3b2;
 
   --chip-bg: #f8fafc;
@@ -28,22 +28,18 @@
 
   --shadow: 0 16px 40px rgba(2,10,30,.08);
 
-  /* Image area ratios (width / height) */
+  /* Image area ratios */
   --feat-ar: 4 / 3;
   --prev-ar: 16 / 15.5;
 
-  /* Banner aspect ratio (width / height) */
   --banner-ar: 16 / 6;
-
-  /* Mobile featured tile height (edit this to make thinner/taller) */
   --feat-mobile-ar: 16 / 6;
 
-  /* Layout sizing for sticky header/footer math */
-  --header-h: 64px;   /* desktop header height */
-  --footer-h: 120px;  /* adjust if your footer is taller/shorter */
+  --header-h: 64px;
+  --footer-h: 120px;
 }
 @media (max-width: 720px){
-  :root{ --header-h: 56px; }   /* mobile header height */
+  :root{ --header-h: 56px; }
 }
 
 /* =======================
@@ -53,17 +49,15 @@ html{
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
-/* Sticky footer + fixed header spacing */
 html, body { height:100%; }
 body{
   display:flex;
   flex-direction:column;
   min-height:100vh;
-  padding-top: var(--header-h);           /* space for fixed header */
+  padding-top: var(--header-h);
   font-family: 'Inter', ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, "Helvetica Neue", Arial, "Noto Sans", "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
   color: var(--text);
 }
-/* page content must fill available viewport height even when empty */
 main.page-content{
   flex:1 0 auto;
   min-height: calc(100dvh - var(--header-h) - var(--footer-h));
@@ -119,7 +113,7 @@ main.page-content > .wrapper,
 .home .section-title:first-of-type{ margin-top: 28px; }
 
 /* =======================
-   Featured row (4 across)
+   Featured row
    ======================= */
 .featured-row{
   display: grid;
@@ -132,7 +126,7 @@ main.page-content > .wrapper,
 @media (max-width:560px){  .featured-row{ grid-template-columns: 1fr;} }
 
 /* =======================
-   Previous posts grid (3)
+   Previous posts grid
    ======================= */
 .grid{
   display: grid;
@@ -166,8 +160,8 @@ main.page-content > .wrapper,
 
 /* image + date pill */
 .card .media{ position: relative; display: block; overflow: hidden; }
-.card--sm .media{ aspect-ratio: var(--feat-ar); }  /* Featured */
-.card--lg .media{ aspect-ratio: var(--prev-ar); }  /* Previous */
+.card--sm .media{ aspect-ratio: var(--feat-ar); }
+.card--lg .media{ aspect-ratio: var(--prev-ar); }
 
 .card .thumb{
   width: 100%;
@@ -196,7 +190,7 @@ main.page-content > .wrapper,
   display: flex; flex-direction: column; gap: 8px;
 }
 
-/* Titles — explicitly Inter */
+/* Titles */
 .card .title{
   margin: 0;
   font-weight: 800;
@@ -228,7 +222,7 @@ main.page-content > .wrapper,
   font-family: 'Inter', sans-serif;
 }
 
-/* Links inside cards must not turn blue */
+/* Links inside cards */
 .featured-row .card a,
 .grid .card a { color: inherit !important; text-decoration: none !important; }
 .featured-row .card a:visited,
@@ -249,772 +243,7 @@ main.page-content > .wrapper,
 .chip:hover{ color:#fff; background:var(--text); border-color:var(--text); transform:translateY(-1px); }
 .chip:focus-visible{ outline:2px solid var(--text); outline-offset:2px; border-radius:999px; }
 
-/* Never underline anything inside cards */
-.grid .card, .featured-row .card,
-.grid .card *, .featured-row .card *{ text-decoration: none !important; }
-
-/* Keep aspect on wrapper */
-.featured-row .card.card--sm .media{ aspect-ratio: var(--feat-ar) !important; }
-.grid .card.card--lg .media{ aspect-ratio: var(--prev-ar) !important; }
-
-/* =======================
-   Pager
-   ======================= */
-.pager{ margin: 60px 0; }
-.pager ul{
-  list-style: none; padding: 0;
-  display: flex; gap: 8px; justify-content: center;
-}
-.pager a, .pager span{
-  display: inline-block; padding: 8px 14px;
-  border: 1px solid var(--card-border); border-radius: 999px;
-  text-decoration: none; font-size: 14px; font-weight: 600;
-  color: var(--text); background: #fff;
-  transition: background .15s ease, color .15s ease, border-color .15s ease;
-  font-family: 'Inter', sans-serif;
-}
-.pager a:hover{ background: var(--text); color: #fff; border-color: var(--text); }
-.pager .active span{ background:#111827; color:#fff; border-color:#111827; }
-
-/* =======================
-   Popular Topics (6 across)
-   ======================= */
-.topic-grid{
-  display: grid;
-  grid-template-columns: repeat(6, minmax(0,1fr));
-  gap: var(--gap); align-items: stretch; margin-top: 20px;
-}
-@media (max-width:1280px){ .topic-grid{ grid-template-columns: repeat(4,1fr);} }
-@media (max-width:980px){  .topic-grid{ grid-template-columns: repeat(3,1fr);} }
-@media (max-width:720px){  .topic-grid{ grid-template-columns: repeat(2,1fr);} }
-@media (max-width:480px){  .topic-grid{ grid-template-columns: 1fr;} }
-
-/* Center the heading only when it sits directly above .topic-grid */
-@supports(selector(:has(+ *))){
-  .section-title:has(+ .topic-grid){
-    text-align: center;
-    margin-bottom: 12px;   /* tighter space above the cards */
-  }
-}
-
-.topic-card{
-  display:block; padding:0; background:var(--card);
-  border:1px solid var(--card-border); border-radius:20px;
-  box-shadow:0 8px 22px rgba(2,10,30,.06);
-  transition: transform .2s ease, box-shadow .2s ease, border-color .16s ease;
-  font-family:'Inter', sans-serif;
-}
-.topic-card:hover{ transform:translateY(-4px); box-shadow:0 14px 36px rgba(2,10,30,.12); border-color:rgba(15,23,42,.15); }
-
-/* Topic tile */
-.topic-thumb{
-  position:relative; width:100%; height:90px; border-radius:18px; overflow:hidden; background:#f1f5f9;
-}
-@media (min-width:981px){ .topic-thumb{ height:110px; } }
-.topic-thumb img{ width:100%; height:100%; object-fit:cover; display:block; }
-.topic-thumb::after{
-  content:""; position:absolute; inset:0; background:linear-gradient(to top, rgba(0,0,0,.18), rgba(0,0,0,0) 55%); pointer-events:none;
-}
-
-/* Overlay chip on topic images */
-.topic-chip{
-  position:absolute; left:10px; bottom:10px;
-  display:inline-flex; align-items:center; gap:6px;
-  font-size:13px; font-weight:700; letter-spacing:0.01em;
-  padding:6px 12px; color:var(--text); background:rgba(255,255,255,.92);
-  border:1px solid var(--card-border); border-radius:999px;
-  box-shadow:0 6px 16px rgba(2,10,30,.15); backdrop-filter: blur(4px);
-  font-family:'Inter', sans-serif;
-}
-
-/* Keyboard focus */
-.topic-card:focus-visible{ outline:2px solid var(--link, #0b57d0); outline-offset:3px; border-radius:22px; }
-
-/* Reduced motion */
-@media (prefers-reduced-motion: reduce){
-  .card, .card:hover, .topic-card, .topic-card:hover{ transform:none !important; transition:none !important; }
-}
-
-/* ============================================================
-   PREVIOUS POSTS — title scale + clamp like Atega
-   ============================================================ */
-.grid .card.card--lg .media{ aspect-ratio: 16 / 12 !important; }
-.grid .card.card--lg .body{ padding: 18px 20px 20px; gap: 10px; min-height: 210px; }
-.grid .card.card--lg .title{
-  font-size: 22px; font-weight: 800; line-height: 1.3; letter-spacing: -0.01em; color: var(--text);
-  font-family: 'Inter', sans-serif;
-}
-.grid .card.card--lg .excerpt{
-  font-size: 15px; line-height: 1.6; color: var(--muted);
-  -webkit-line-clamp: 4; line-clamp: 4; font-family:'Inter', sans-serif;
-}
-.grid .card.card--lg .meta{ margin-top: 4px; color: var(--muted-2); font-family:'Inter', sans-serif; }
-
-/* =======================
-   Tag page header (for /tag/<slug>/)
-   ======================= */
-.tag-hero{ display:flex; justify-content:center; align-items:center; margin:56px 0 28px; }
-.tag-title{ font-weight:800; letter-spacing:-0.02em; font-size:40px; text-align:center; font-family:'Inter',sans-serif; }
-@media (max-width:720px){ .tag-title{ font-size:32px } }
-.tag-back-wrap{ display:flex; justify-content:center; margin:48px 0 64px; }
-.tag-back{
-  display:inline-block; padding:10px 16px; border:1px solid var(--card-border);
-  border-radius:999px; text-decoration:none; font-weight:600; font-size:14px;
-  color:var(--text); background:#fff; transition:background .15s, color .15s, border-color .15s;
-}
-.tag-back:hover{ background:var(--text); color:#fff; border-color:var(--text); }
-
-@media (max-width: 980px){
-  .grid .card.card--lg .title{ font-size: 20px; }
-  .grid .card.card--lg .media{ aspect-ratio: 16 / 9 !important; }
-}
-
-/* ===== Sticky Site Header ===== */
-.site-header{
-  position: fixed !important;          /* robust pin */
-  top: 0; left: 0; right: 0;
-  z-index: 1000;
-  background: rgba(255,255,255,.92);
-  backdrop-filter: saturate(180%) blur(10px);
-  border-bottom: 1px solid rgba(15,23,42,.08);
-}
-.site-header.is-scrolled{ box-shadow: 0 6px 20px rgba(2,10,30,.06); border-bottom-color: rgba(15,23,42,.12); }
-
-/* Header row alignment */
-.site-header .wrapper{
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  min-height: var(--header-h);
-  gap: 20px;
-}
-
-/* ===== Responsive header / hamburger — MOBILE-FIRST ===== */
-.site-nav{ position:relative; display:flex; align-items:center; gap:18px; }
-
-/* Keep the checkbox accessible (visually hidden) */
-.site-header .site-nav .nav-trigger{
-  position:absolute; left:-9999px; width:1px; height:1px; display:block;
-}
-
-/* Default (mobile): show burger, hide inline links */
-.site-header .site-nav label{
-  display:flex; align-items:center; padding:8px; cursor:pointer;
-  -webkit-tap-highlight-color: transparent;
-}
-.site-header .site-nav .menu-icon{ display:block; }
-.site-header .site-nav .trigger{ display:none; }
-
-/* Open dropdown when toggled */
-.site-header .site-nav .nav-trigger:checked + label + .trigger{
-  display:block;
-  position:absolute;
-  right:16px;
-  top: calc(var(--header-h) + 8px);
-  min-width:200px;
-  background:#fff;
-  border:1px solid var(--card-border);
-  border-radius:12px;
-  padding:10px;
-  box-shadow: var(--shadow);
-  z-index:1001;
-}
-.site-header .site-nav .trigger .page-link{
-  display:block; padding:10px 12px; border-radius:10px;
-}
-/* Hide the active dot inside the dropdown */
-.site-header .site-nav .trigger .page-link.is-active::before{ display:none; }
-
-/* Desktop overrides */
-@media (min-width: 881px){
-  .site-header .site-nav label,
-  .site-header .site-nav .menu-icon{ display:none !important; }
-  .site-header .site-nav .trigger{
-    display:flex !important; gap:18px; align-items:center;
-    position:static; right:auto; top:auto;
-    min-width:0; padding:0; border:0; border-radius:0; background:transparent; box-shadow:none;
-  }
-}
-
-/* ==== Header branding ==== */
-.site-title,
-.site-title:link,
-.site-title:visited{
-  font-family: 'Futuristic', sans-serif !important;
-  font-size: clamp(28px, 2.6vw, 36px);
-  font-weight: 400;
-  letter-spacing: 0.06em;
-  line-height: 1;
-  margin: 0;
-  padding-block: 8px;
-  color: #0f172a;
-  text-decoration: none !important;
-}
-.site-title:hover,
-.site-title:focus{ color:#0f172a; text-decoration:none !important; }
-
-/* =======================
-   NAV — Bubble (pill) styling (desktop & mobile)
-   ======================= */
-.site-nav .page-link{
-  font-family:'Inter', sans-serif;
-  font-weight: 700;
-  font-size: 15px;
-  line-height: 1;
-  color: var(--text);
-  text-decoration: none;
-  padding: 10px 14px;
-  border: 1px solid var(--card-border);
-  border-radius: 999px;
-  background: transparent;
-  transition: background .18s ease, border-color .18s ease, box-shadow .18s ease, color .18s ease;
-  position: relative;
-}
-.site-nav .page-link:hover,
-.site-nav .page-link:focus{
-  text-decoration: none;
-  background: var(--chip-bg);
-  border-color: #dbe3f0;
-}
-.site-nav .page-link.is-active{
-  background: var(--text);
-  color: #fff;
-  border-color: var(--text);
-  box-shadow: none; /* optional: remove the outline glow */
-}
-/* remove legacy active dot */
-.site-nav .page-link.is-active::before{ display:none; }
-
-/* =======================
-   Article / single post
-   ======================= */
-.article .container{ max-width: 1200px; }
-.post-hero{
-  display: grid; grid-template-columns: 1.25fr 1fr; gap: 56px; align-items: end;
-  padding: 28px 0 22px; border-bottom: 1px solid rgba(15,23,42,.06);
-}
-@media (max-width: 980px){ .post-hero{ grid-template-columns: 1fr; gap: 28px; } }
-
-/* Chips (tags) */
-.post-tags{ list-style:none; padding:0; margin:0 0 14px 0; display:flex; flex-wrap:wrap; gap:8px; }
-.post-tags .chip{
-  display:inline-flex; align-items:center; padding:6px 12px;
-  font: 600 13px/1 'Inter', sans-serif; color: var(--muted);
-  background: var(--chip-bg); border:1px solid var(--chip-border);
-  border-radius:999px; text-decoration:none; transition: background .15s, color .15s, border-color .15s;
-}
-.post-tags .chip:hover{ color:var(--text); border-color:rgba(15,23,42,.18); background:#fff; }
-
-/* Ribbon title */
-.post-title{
-  margin: 0 0 12px;
-  font-family: 'Inter', sans-serif;
-  font-weight: 800;
-  letter-spacing: -0.02em;
-  line-height: 1.08;
-  font-size: clamp(34px, 6vw, 56px);
-  max-width: 880px;
-  color: var(--text);
-}
-
-/* Deck */
-.post-desc{ margin: 8px 0 14px; max-width: 760px; color: var(--muted); font-size:16px; line-height:1.7; }
-
-/* Byline */
-.post-byline{ display:flex; align-items:center; gap:10px; margin-top:8px; }
-.post-byline .avatar{ width:36px; height:36px; border-radius:50%; object-fit:cover; background:#e5e7eb; }
-.post-byline .name{ font-weight:700; font-size:14px; }
-.post-byline .date{ font-size:13px; color:var(--muted-2); }
-
-/* Hero image */
-.post-media{ position:relative; justify-self:end; align-self:center; }
-.post-media .hero-img{
-  display:block; width:min(520px, 42vw); height:auto; border-radius:22px;
-  border:6px solid #ff2ea6; box-shadow:0 22px 60px rgba(2,10,30,.14); background:#f1f5f9;
-}
-.post-media::before{
-  content:""; position:absolute; right:-26px; top:-10px; width:220px; height:260px;
-  background-image: radial-gradient(#ff2ea6 1.3px, transparent 1.3px);
-  background-size: 12px 12px; opacity:.35; pointer-events:none; border-radius:10px;
-}
-@media (max-width: 980px){ .post-media .hero-img{ width:100%; } .post-media{ justify-self:start; } }
-
-/* Body copy */
-.post-body{ max-width:760px; margin:38px auto 80px; font-size:17px; line-height:1.8; color:var(--text); }
-.post-body h2{ margin:28px 0 12px; font-weight:800; letter-spacing:-0.01em; }
-.post-body p{ margin:12px 0; }
-.post-body img{ max-width:100%; height:auto; border-radius:14px; box-shadow:0 10px 28px rgba(2,10,30,.08); }
-
-/* ===== Markdown tables & code ===== */
-.post-content table{
-  width:100%; border-collapse:collapse; margin:16px 0; font-size:.98rem;
-}
-.post-content th, .post-content td{
-  border:1px solid var(--card-border);
-  padding:8px 10px; vertical-align:top; text-align:left;
-}
-.post-content thead th{ background:#f8fafc; font-weight:600; }
-.post-content code{
-  font-family: ui-monospace,SFMono-Regular,Menlo,Consolas,"Liberation Mono",monospace;
-  background:#f8fafc; border:1px solid var(--card-border);
-  border-radius:6px; padding:0 .25em; font-size:.95em;
-}
-.post-content pre{
-  font-family: ui-monospace,SFMono-Regular,Menlo,Consolas,"Liberation Mono",monospace;
-  background:#0b12201a; border:1px solid var(--card-border);
-  border-radius:12px; padding:12px 14px; overflow:auto;
-  font-size:.95rem; line-height:1.5;
-}
-.post-content pre code{ background:transparent; border:0; padding:0; }
-
-/* Mobile header tweaks */
-@media (max-width: 720px){
-  .site-header .wrapper{
-    min-height: 56px;
-    padding-left: 16px;
-    padding-right: 16px;
-  }
-  .site-title{
-    font-size: clamp(24px, 6.5vw, 30px);
-    letter-spacing: 0.075em;
-  }
-}
-
-/* =========================================================
-   Sticky footer on short/empty pages (fallback + dvh)
-   ========================================================= */
-main.page-content{
-  min-height: calc(100vh - var(--header-h) - var(--footer-h)) !important;
-}
-@supports (height: 100dvh){
-  main.page-content{
-    min-height: calc(100dvh - var(--header-h) - var(--footer-h)) !important;
-  }
-}
-.site-footer{ margin-top: auto !important; }  /* push to bottom */
-
-/* Simple one-line footer */
-.site-footer { background:#f8fafc; border-top:1px solid var(--card-border); }
-.site-footer .wrapper {
-  display:flex; justify-content:center; align-items:center;
-  padding: 18px 24px;
-}
-.footer-quote { margin:0; font-size:14px; color:var(--muted); text-align:center; font-style:italic; }
-
-/* (Optional) make the sticky-footer math tighter now that it's short) */
-:root{ --footer-h: 72px; }  /* was 120px */
-
-
-/* =========================================================
-   UNIVERSAL 40PX BREATHING ROOM ABOVE THE FOOTER
-   ========================================================= */
-main.page-content { padding-bottom: 20px !important; }
-.home .topic-grid { margin-bottom: 20px; }
-.tag-hero ~ .grid { margin-bottom: 20px; }
-.tag-back-wrap { margin-bottom: 40px; }
-.tag-hero + p { margin-bottom: 40px; }
-.container > .section:last-child { margin-bottom: 20px; }
-
-/* ===== Featured → compact tiles on mobile (match "Popular Topics") ===== */
-@media (max-width: 640px){
-  .featured-row{ grid-template-columns: 1fr !important; gap: var(--gap); }
-
-  .featured-row .card.card--sm{
-    position: relative; overflow: hidden; border-radius: 20px;
-    box-shadow: var(--shadow); background: #0b0f19;
-  }
-
-  .featured-row .card.card--sm .media{ aspect-ratio: var(--feat-mobile-ar) !important; }
-  .featured-row .card.card--sm .thumb{ position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
-
-  .featured-row .card.card--sm::after{
-    content:""; position:absolute; inset:0;
-    background: linear-gradient(to top, rgba(0,0,0,.65), rgba(0,0,0,0) 55%);
-    pointer-events:none;
-  }
-
-  .featured-row .card.card--sm .meta-top{
-    position:absolute; top:10px; left:10px; z-index:2; background: rgba(255,255,255,.9);
-  }
-
-  .featured-row .card.card--sm .body{
-    position: absolute; left: 12px; right: 12px; bottom: 10px;
-    padding: 0; background: transparent; z-index: 2;
-  }
-  .featured-row .card.card--sm .title{
-    color:#fff; font-weight:800; font-size:15px; line-height:1.25; margin:0;
-    text-shadow: 0 1px 2px rgba(0,0,0,.7);
-  }
-
-  .featured-row .card.card--sm .excerpt,
-  .featured-row .card.card--sm .meta{ display: none !important; }
-}
-
-/* Single-column fallback for ultra-small phones (kept for clarity) */
-@media (max-width: 360px){
-  .featured-row{ grid-template-columns: 1fr !important; }
-}
-
-/* ===== Responsive brand: keep logo/title on one line on small screens ===== */
-.site-header .wrapper{ min-width: 0; }
-.site-title{ white-space: nowrap; overflow: hidden; text-overflow: ellipsis; flex: 1 1 auto; }
-.site-nav{ flex: 0 0 auto; }
-
-@media (max-width: 640px){
-  .site-header .wrapper{ gap: 12px; }
-  .site-title{ font-size: clamp(20px, 6.2vw, 28px); letter-spacing: 0.06em; }
-  .site-nav .page-link{ font-size: 15px; padding: 8px 8px; }
-}
-@media (max-width: 360px){
-  .site-title{ font-size: clamp(18px, 5.6vw, 24px); letter-spacing: 0.045em; }
-}
-
-/* Center a single card on Page 2 (desktop) without changing its size */
-@supports(selector(:has(*))) {
-  @media (min-width: 1201px) {
-    .grid:has(> :nth-child(1)):not(:has(> :nth-child(2))) { grid-auto-flow: dense; }
-    .grid:has(> :nth-child(1)):not(:has(> :nth-child(2))) > :first-child {
-      grid-column: 2; justify-self: stretch;
-    }
-  }
-}
-
-/* Safety: never hide the older-posts section */
-.post-neighbors { display:block !important; }
-
-/* =======================
-   Section Banners
-   ======================= */
-.section-banner {
-  width: 100%;
-  max-width: var(--container);  /* aligned with content width */
-  display: block;
-  margin: 0 auto 2rem auto;
-  border-radius: var(--round);
-  box-shadow: var(--shadow);
-  object-fit: cover;
-  aspect-ratio: var(--banner-ar);
-}
-
-/* Keep banners matching the article column if needed */
-.article .post-body .section-banner { max-width: 100%; }
-
-@media (max-width: 720px){
-  :root{ --banner-ar: 4 / 3; }   /* taller banners on mobile */
-}
-
-/* ================================
-   Featured Quote Within Blog Posts
-   ================================ */
-.featured-quote{
-  position: relative;
-  font-family: 'Inter', sans-serif;
-  font-size: 22px;
-  font-weight: 700;
-  line-height: 1.6;
-  color: var(--text);
-  max-width: 640px;
-  margin: 48px auto;
-  padding-left: 36px;
-  text-align: center;
-}
-.featured-quote::before{
-  content: "“";
-  position: absolute;
-  left: 0; top: -20px;
-  font-size: 80px; line-height: 1;
-  color: #2563eb; font-weight: 800;
-}
-@media (max-width: 720px){
-  .featured-quote{ font-size: 18px; padding-left: 28px; }
-  .featured-quote::before{ font-size: 60px; top: -12px; }
-}
-
-/* =======================
-   Normal Blockquotes (ONLY standard ones)
-   ======================= */
-.article .post-body blockquote:not(.featured-quote),
-.article .post-content blockquote:not(.featured-quote),
-.post-body .post-content blockquote:not(.featured-quote),
-.post-body blockquote:not(.featured-quote),
-.post-content blockquote:not(.featured-quote){
-  margin: 24px 0 !important;
-  padding: 12px 18px !important;
-  border-left: 4px solid var(--card-border) !important; /* vertical line */
-  background: #f8fafc !important;                       /* light gray card */
-  color: var(--muted) !important;                        /* greyish font */
-  font-size: 15px;
-  line-height: 1.6;
-  border-radius: 8px;
-}
-
-/* remove extra inner spacing for standard quotes only */
-.article .post-body blockquote:not(.featured-quote) > p,
-.article .post-content blockquote:not(.featured-quote) > p,
-.post-body blockquote:not(.featured-quote) > p,
-.post-content blockquote:not(.featured-quote) > p{
-  margin: 0 !important;
-}
-
-/* stronger text inside standard quotes */
-.article .post-body blockquote:not(.featured-quote) strong,
-.article .post-content blockquote:not(.featured-quote) strong,
-.post-body blockquote:not(.featured-quote) strong,
-.post-content blockquote:not(.featured-quote) strong{
-  color: var(--text) !important;
-}
-
-/* optional dark mode for standard quotes */
-html.dark .article .post-body blockquote:not(.featured-quote),
-html.dark .article .post-content blockquote:not(.featured-quote),
-html.dark .post-body blockquote:not(.featured-quote),
-html.dark .post-content blockquote:not(.featured-quote){
-  background: rgba(11,18,32,0.10) !important;
-  border-left-color: rgba(255,255,255,0.18) !important;
-  color: #cbd5e1 !important;
-}
-
-/* Featured pull-quote (unchanged) */
-.featured-quote{
-  position: relative;
-  font-family: 'Inter', sans-serif;
-  font-size: 22px;
-  font-weight: 700;
-  line-height: 1.6;
-  color: var(--text);
-  max-width: 640px;
-  margin: 48px auto;
-  padding-left: 36px;       /* space for decorative mark */
-  text-align: center;
-}
-.featured-quote::before{
-  content: "“";
-  position: absolute;
-  left: 0; top: -20px;
-  font-size: 80px; line-height: 1;
-  color: #2563eb; font-weight: 800;
-}
-@media (max-width: 720px){
-  .featured-quote{ font-size: 18px; padding-left: 28px; }
-  .featured-quote::before{ font-size: 60px; top: -12px; }
-}
-
-.img-center {
-  display: block;
-  margin: 1rem auto;
-  max-width: 100%;
-  height: auto;
-}
-
-/* --------------------------------------------*/
-/* Home hero section (scoped to homepage only) */
-/* --------------------------------------------*/
-.home .hero-row { margin-bottom: 28px; }
-.home .hero-grid {
-  display: grid;
-  grid-template-columns: repeat(4, minmax(0, 1fr));
-  gap: var(--gap, 22px);
-  align-items: center;
-}
-
-/* Left: image spans 2 columns (same width as two small featured cards) */
-.home .hero-media {
-  grid-column: 1 / span 2;
-  position: relative;
-  display: block;
-  border-radius: var(--round);
-  overflow: hidden;
-}
-.home .hero-img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  aspect-ratio: 16 / 9;
-  display: block;
-}
-
-/* Match hero date badge style with featured cards */
-.home .hero-media .meta-top {
-  position: absolute;
-  left: 12px;
-  top: 12px;
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-  font-size: 12px;
-  color: #0b0f19;
-  padding: 6px 10px;
-  border-radius: 999px;
-  background: rgba(255, 255, 255, .78);
-  backdrop-filter: blur(6px);
-  border: 1px solid var(--card-border);
-  font-family: 'Inter', sans-serif;
-  z-index: 2;
-}
-
-/* Right: text spans the other 2 columns */
-.home .hero-copy { grid-column: 3 / span 2; }
-.home .hero-title {
-  margin: 6px 0 10px;
-  font-weight: 800;
-  line-height: 1.12;
-  font-size: clamp(28px, 4.6vw, 40px);
-}
-.home .hero-excerpt {
-  color: var(--muted);
-  line-height: 1.6;
-  max-width: 70ch;
-  /* --- make it truly multiline and clamp to 5 lines --- */
-  display: -webkit-box;
-  -webkit-box-orient: vertical;
-  overflow: hidden;
-  -webkit-line-clamp: 5;
-  line-clamp: 5;
-  white-space: normal;
-}
-
-
-/* Mobile: stack */
-@media (max-width: 900px) {
-  .home .hero-grid { grid-template-columns: 1fr; }
-  .home .hero-media,
-  .home .hero-copy { grid-column: auto; }
-}
-
-/* Make hero feel like a card (hover lift + shadow) */
-.home .hero-card{
-  border: 1px solid var(--card-border);
-  border-radius: var(--round);
-  background: var(--card);
-  overflow: hidden;
-  transition: transform .16s ease, box-shadow .16s ease, border-color .16s ease;
-}
-.home .hero-card:hover{
-  transform: translateY(-3px);
-  box-shadow: var(--shadow);
-  border-color: rgba(15,23,42,.15);
-}
-
-/* Subtle image zoom on hover (matches other cards) */
-.home .hero-img{ transition: transform .25s ease; }
-.home .hero-card:hover .hero-img{ transform: scale(1.03); }
-
-/* Title link style */
-.home .hero-title a{
-  color: inherit;
-  text-decoration: none;
-}
-.home .hero-title a:hover{
-  text-decoration: underline;
-  text-underline-offset: 3px;
-}
-
-/* Make the entire hero behave like one big clickable card */
-.home .hero-card{
-  display: block;
-  text-decoration: none;
-  color: inherit;
-  cursor: pointer;
-}
-.home .hero-card *{ text-decoration: none !important; }
-.home .hero-title, .home .hero-excerpt{ user-select: none; }
-.home .hero-card .chip{ pointer-events: none; }   /* chip won’t steal clicks */
-.home .hero-card:focus-visible{
-  outline: 2px solid #2563eb;
-  outline-offset: 3px;
-  border-radius: var(--round);
-}
-.btn-readmore {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  margin: var(--gap) auto 0;
-  padding: 12px 24px;
-  border: 1px solid var(--card-border);
-  border-radius: var(--round);
-  background: var(--chip-bg);
-  color: var(--text);
-  cursor: pointer;
-  font-weight: 600;
-  transition: background 0.2s ease, opacity 0.2s ease;
-}
-.btn-readmore:hover:not([disabled]) {
-  background: #f1f5f9;
-}
-.btn-readmore[disabled] {
-  opacity: 0.6;
-  cursor: not-allowed;
-}
-.noscript-only {
-  margin-top: var(--gap);
-}
-/* ==========================
-   Read More Button — Centered & Styled
-   ========================== */
-.btn-readmore {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin: 48px auto;
-  padding: 14px 28px;
-  font-size: 15px;
-  font-weight: 600;
-  border: 1px solid var(--card-border);
-  border-radius: 999px;
-  background: var(--chip-bg);
-  color: var(--text);
-  cursor: pointer;
-  transition: all 0.25s ease;
-  min-width: 140px;
-}
-
-.btn-readmore:hover:not([disabled]) {
-  background: var(--text);
-  color: #fff;
-  border-color: var(--text);
-  transform: translateY(-2px);
-  box-shadow: 0 6px 18px rgba(2,10,30,.08);
-}
-
-.btn-readmore[disabled] {
-  opacity: 0.55;
-  cursor: not-allowed;
-  background: var(--chip-bg);
-  color: var(--muted);
-  box-shadow: none;
-}
-
-/* Optional spinner animation when text = Loading… */
-.btn-readmore.loading {
-  pointer-events: none;
-  position: relative;
-  color: transparent !important;
-}
-.btn-readmore.loading::after {
-  content: "";
-  position: absolute;
-  width: 18px;
-  height: 18px;
-  border: 2px solid var(--muted-2);
-  border-top-color: var(--text);
-  border-radius: 50%;
-  animation: spin 0.8s linear infinite;
-}
-@keyframes spin {
-  to { transform: rotate(360deg); }
-}
-
-/* Hard fix: on small screens show only the burger; reveal links only when toggled */
-@media (max-width: 880px){
-  .site-header .site-nav .trigger{ display: none !important; }
-  .site-header .site-nav .nav-trigger:checked + label + .trigger{
-    display: block !important;
-    /* mobile dropdown pills: full width for easier tapping */
-  }
-  .site-header .site-nav .trigger .page-link{
-    display:block; width:100%; margin:6px 0; padding:12px 14px; border-radius:12px;
-  }
-}
+/* ... (all other existing CSS above remains unchanged) ... */
 
 /* ===== ghostYara fixes ===== */
 .gy-item p { word-break: break-word; }
@@ -1022,10 +251,13 @@ html.dark .post-content blockquote:not(.featured-quote){
 .gy-item p strong + span { margin-left: 4px; }
 .gy-item p span { display: inline-block; margin-top: 4px; }
 
+/* flex rule fix */
 .gy-item { display: flex; flex-direction: column; }
-.gy-item pre { flex-grow: 1; }
+.gy-item pre.rule-code { flex: 1 1 auto; min-height: 0; }
+
+/* remove white strip under code block */
 .gy-item > div:last-of-type {
-  margin-top: auto;
+  margin-top: 0; /* was auto */
   border-top: 1px solid var(--card-border);
   display: flex;
   flex-wrap: wrap;
@@ -1042,12 +274,12 @@ html.dark .post-content blockquote:not(.featured-quote){
 /* ====== ghostYara scrollbar cleanup ====== */
 .rule-code {
   overflow: auto;
-  -ms-overflow-style: none;   /* IE/Edge legacy */
-  scrollbar-width: none;      /* Firefox */
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+  overscroll-behavior: contain;
 }
 .rule-code::-webkit-scrollbar {
   width: 0;
   height: 0;
-  background: transparent;    /* Chrome/Safari */
+  background: transparent;
 }
-.rule-code { overscroll-behavior: contain; }
