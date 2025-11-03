@@ -4,15 +4,6 @@ title: "ghostYara"
 permalink: /ghostyara/
 ---
 
-<!-- highlight.js (YARA syntax highlighting) -->
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@11.9.0/styles/github.min.css">
-<script src="https://cdn.jsdelivr.net/npm/highlight.js@11.9.0/lib/highlight.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/highlight.js@11.9.0/lib/languages/yara.min.js"></script>
-<script>
-  hljs.registerLanguage('yara', window.hljsDefineYara);
-  document.addEventListener('DOMContentLoaded', () => hljs.highlightAll());
-</script>
-
 <style>
   .gy-item p { word-break: break-word; }
   .gy-item p strong { white-space: nowrap; }
@@ -84,8 +75,12 @@ permalink: /ghostyara/
   }
 
   .gy-modal pre{
+    background:#0b0f1910;
     border:1px solid var(--card-border);
-    padding:14px; border-radius:12px; overflow:auto; max-height:60vh;
+    padding:14px;
+    border-radius:12px;
+    overflow:auto;
+    max-height:60vh;
   }
 
   @media (max-width: 640px){
@@ -167,8 +162,8 @@ permalink: /ghostyara/
           </p>
         </div>
 
-        <pre class="rule-code" style="margin:0;padding:12px 16px;overflow:auto;max-height:320px;">
-<code class="language-yara">{{ r.rule | escape }}</code>
+        <pre class="rule-code" style="margin:0;padding:12px 16px;background:#0b0f1910;overflow:auto;max-height:320px;">
+<code>{{ r.rule | escape }}</code>
         </pre>
 
         <div>
@@ -201,7 +196,7 @@ permalink: /ghostyara/
     </div>
     <div class="gy-modal__body">
       <div id="gy-modal-meta" class="gy-meta"></div>
-      <pre class="rule-code"><code class="language-yara" id="gy-modal-code"></code></pre>
+      <pre class="rule-code"><code id="gy-modal-code"></code></pre>
     </div>
     <div class="gy-modal__actions">
       <a id="gy-modal-download" class="gy-btn" href="#" download>Download .yar</a>
@@ -273,8 +268,6 @@ permalink: /ghostyara/
     ].filter(Boolean).join('  ·  ');
 
     mCode.textContent = (data.rule||'').replaceAll('\\n','\n');
-    if (window.hljs) { hljs.highlightElement(mCode); }
-
     setDownloadLink(data, mDl);
     modal.setAttribute('aria-hidden','false');
     mClose.focus();
