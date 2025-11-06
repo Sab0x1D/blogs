@@ -17,6 +17,49 @@
     \n\t  $ip1 = \"181.131.219.51\"\n\t  $ip2 = \"45.40.96.97\"\n\t  $ip3 = \"191.88.249.120\"\
     \n\t  $ip4 = \"104.156.247.38\"\n\t  $ip5 = \"179.14.8.215\"\ncondition:\n  2\
     \ of them\n}"
+- name: DcRAT
+  family: DcRAT
+  tags:
+  - rat
+  - remote
+  author: Sab0x1D
+  last_updated: '2025-11-06'
+  tlp: CLEAR
+  id: dcRat
+  rule: "\nrule DcRAT\n{\nmeta:\n\tdescription = \"Detects DcRat\"\nstrings: \n  \t\
+    $str1 = \"DcRat\" nocase\n\t$str3 = \"DcRatByqwqdanchun\"\n\t$str4 = \"DcRatMutex\"\
+    \ nocase\n\t$str5 = \"DCRat-Log\"\n\t$str6 = \"Mozilla/5.0 (Windows NT 10.0; Win64;\
+    \ x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/95.0.4638.69 Safari/537.36\
+    \ Edg/95.0.1020.53\"\n\t$c21 = \"wins23octok.duckdns.org\"\n\t$c22 = \"enviasept.duckdns.org\"\
+    \n\t$str7 = \"DcRat By qwqdanchun1\"\n\t$str8 = \"DarkCrystal RAT\"\n\t$str9 =\
+    \ \"DCRat-Log#\"\ncondition:\n  2 of them\n}"
+- name: GhostRAT
+  family: GhostRAT
+  tags:
+  - rat
+  - remote
+  author: Sab0x1D
+  last_updated: '2025-11-06'
+  tlp: CLEAR
+  id: ghostRat
+  rule: "\nrule GhostRAT\n{\nmeta:\n\tdescription = \"Detects GhostRAT malware\"\n\
+    strings: \n    $str1 = \"WinSta0\\\\Default\"\n\t$str2 = \"GetClipboardData\"\n\
+    \t$str3 = /(%)s\\\\shell\\\\open\\\\command/\n\t$ip1 = \"129.226.170.223\"\n\t\
+    $str4 = \"ZhuDongFangYu.exe\"\n\t$str5 = \"Software\\\\Tencent\\\\Plugin\\\\VAS\"\
+    \n\t$str6 = \"UnThreat.exe\" \n\t$str7 = \"LogonTrigger\"\n\t$str8 = \"AdjustTokenPrivileges\"\
+    \ncondition:\n  4 of them\n}\n"
+- name: GotoRAT
+  family: GotoRAT
+  tags:
+  - rat
+  - remote
+  author: Sab0x1D
+  last_updated: '2025-11-06'
+  tlp: CLEAR
+  id: gotoRat
+  rule: "\nrule GotoRAT{\nmeta:\n\tdescription = \"detects GotoRAT malware\"\nstrings:\
+    \ \n\t$str1 = \"GoTo Resolve\"\n\t$str2 = \"GoToResolve\"\n\t$c21 = \"https://dumpster.console.gotoresolve.com/api/sendEventsV2\"\
+    \n\t$c22 = \"34.120.195.249\"\ncondition:\n  any of them\n}\n\n"
 - name: Lumma Stealer
   family: LummaStealer
   tags:
