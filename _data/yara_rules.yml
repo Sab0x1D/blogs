@@ -17,6 +17,28 @@
     \n\t  $ip1 = \"181.131.219.51\"\n\t  $ip2 = \"45.40.96.97\"\n\t  $ip3 = \"191.88.249.120\"\
     \n\t  $ip4 = \"104.156.247.38\"\n\t  $ip5 = \"179.14.8.215\"\ncondition:\n  2\
     \ of them\n}"
+- name: Lumma Stealer
+  family: LummaStealer
+  tags:
+  - infostealer
+  - stealer
+  author: Sab0x1D
+  last_updated: '2025-11-06'
+  tlp: CLEAR
+  id: lumma
+  rule: "\nrule LummaStealer\n{\nmeta:\n\tdescription = \"Detects Lumma Stealer malware\"\
+    \nstrings: \n  \t$str1 = \"valleydod.fun\"\n\t$str2 = \"magaway.fun\"\n\t$str4\
+    \ = \"TeslaBrowser/5.5\"\n\t$str5 = \"AutoFillStates\"\n\t$str6 = \"c2sock\"\n\
+    \t$str7 = \"africathrillthes.pw\"\n\t$str8 = \".pw/api\"\n\t$str9 = \".site/api\"\
+    \n\t$str10 = \".shop/api\"\n\t$str11 = \"User-Agent: Mozilla/5.0 (Windows NT 10.0;\
+    \ Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/119.0.0.0\"\n\t$ip1\
+    \ = \"172.67.176.254\"\n\t$ip2 = \"188.114.97.7\"\n\t$ip3 = \"172.67.136.213\"\
+    \n\t$ip4 = \"89.23.98.56\"\n\t$ip5 = \"91.215.85.210\"\n\t$ip6 = \"172.67.171.214\"\
+    \n\t$ip7 = \"95.164.87.61\"\n\t$ip8 = \"104.21.32.39\"\n\t$c21 = \"https://secretionsuitcasenioise.shop/api\"\
+    \n\t$c22 = \"racedsuitreow.shop\"\n\t$wallet1 = \"Wallets/Electrum\"\n\t$wallet2\
+    \ = \"Wallets/Bitcoin core\"\n\t$wallet3 = \"Wallets/Ethereum\"\n\t$wallet4 =\
+    \ \"Wallets/Ledger Live\"\n\t$wallet5 = \"Wallets/Authy Desktop\"\ncondition:\n\
+    \  any of them\n}\n\n\n"
 - name: RedLine Stealer
   family: RedLine
   tags:
@@ -49,3 +71,31 @@
     \ \"181.131.217.242\"\n\t  $c24 = \"jelelaiyegba.duckdns.org\"\n\t  $c25 = \"\
     bbuseruploads.s3.amazonaws.com\"\n\t  $c26 = \"estrillajuju.con-ip.com\"\n\t \
     \ $c27 = \"148.113.165.11\"\n  condition:\n    any of them\n}"
+- name: Rhadamanthys Stealer
+  family: Rhadamanthys
+  tags:
+  - infostealer
+  - stealer
+  author: Sab0x1D
+  last_updated: '2025-11-06'
+  tlp: CLEAR
+  id: rhadamanthys
+  rule: "\nrule Rhadamanthys {\n  meta:\n    author = \"Sab0x1D\"\n    description\
+    \ = \"Detects Rhadamanthys Stealer variant of the RedLine malware\"\n  strings:\
+    \ \n    $str1 = \"Notepad++\\\\plugins\\\\config\"\n    $str2 = \"atomic_qt\\\\\
+    config\"\n    $str3 = \"Qtum-Electrum\\\\config\"\n    $str4 = \"Electrum-LTC\\\
+    \\config\"\n    $str5 = \".gir3n\"\n    $ip1 = \"45.128.234.63\"\n    $ip2 = \"\
+    185.172.128.163\"\n  condition:\n    3 of them\n}"
+- name: XenoRAT
+  family: XenoRAT
+  tags:
+  - rat
+  - remote
+  author: Sab0x1D
+  last_updated: '2025-11-06'
+  tlp: CLEAR
+  id: xeno
+  rule: "\nrule XenoRAT\n{\nmeta:\n\tdescription = \"Detects Xeno RAT malware\"\n\
+    strings: \n    $str1 = \"xeno rat client\"\n\t$str2 = \"XenoManager\"\n\t$str3\
+    \ = \"xeno_rat_client\"\n\t$str4 = \"xeno rat\" nocase\ncondition:\n  any of them\n\
+    }\n"
