@@ -220,6 +220,8 @@ If you take only three actions this week:
 2) Add WebSocket + cloud‑storage anomaly hunts to your SOC daily routine.  
 3) Deploy the self‑rewrite + image‑config hunts to surface early‑stage activity before payloads fully arm.
 
+<blockquote class="featured-quote">
 This is an era of **credible deception**. Our best advantage remains speed, visibility, and disciplined playbooks.
+</blockquote>
 
 ---
