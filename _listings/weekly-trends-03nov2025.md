@@ -215,7 +215,7 @@ A one‑page PDF/slide with these bullets + two annotated screenshots (fake upda
 ## 9) Week in Summary
 The first week of November marks a pivot from **volume to variability**. Attackers aren’t merely sending more; they’re sending **mutating** payloads through trustworthy channels. The combination of self‑modifying loaders, session‑stealing phishing, and cloud‑native staging means static indicators fade within hours. The defensive response must lean harder on **behaviour, provenance, and policy**: bind sessions to devices, watch for odd ways legitimate services are used, and instrument your fleet for the tell‑tale patterns of regeneration and stealth.
 
-If you take only three actions this week:
+If you take only three actions this week:  
 1) Roll FIDO2 to your riskiest groups and enable device‑bound sessions.  
 2) Add WebSocket + cloud‑storage anomaly hunts to your SOC daily routine.  
 3) Deploy the self‑rewrite + image‑config hunts to surface early‑stage activity before payloads fully arm.
