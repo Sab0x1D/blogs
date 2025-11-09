@@ -221,7 +221,7 @@ If you take only three actions this week:
 3) Deploy the self‑rewrite + image‑config hunts to surface early‑stage activity before payloads fully arm.
 
 <blockquote class="featured-quote">
-This is an era of **credible deception**. Our best advantage remains speed, visibility, and disciplined playbooks.
+This is an era of credible deception. Our best advantage remains speed, visibility, and disciplined playbooks.
 </blockquote>
 
 ---
