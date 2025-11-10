@@ -159,6 +159,33 @@
   rule: "\nrule GotoRAT{\nmeta:\n\tdescription = \"detects GotoRAT malware\"\nstrings:\
     \ \n\t$str1 = \"GoTo Resolve\"\n\t$str2 = \"GoToResolve\"\n\t$c21 = \"https://dumpster.console.gotoresolve.com/api/sendEventsV2\"\
     \n\t$c22 = \"34.120.195.249\"\ncondition:\n  any of them\n}\n\n"
+- name: Grandoreiro
+  family: Grandoreiro
+  tags:
+  - trojan
+  - banker
+  - infostealer
+  - keylogger
+  author: Sab0x1D
+  last_updated: '2025-11-10'
+  tlp: CLEAR
+  id: gradoreiro
+  rule: "\n\nrule Grandoreiro {\n  meta:\n    description = \"Detecting Grandoreiro\
+    \ malware\"\n  strings: \n    $str1 = \"Binary.EoAKtlbmxJOYOsaVKGCVNhNF.dll\"\n\
+    condition:\n  any of them\n}"
+- name: LodaRAT
+  family: LodaRAT
+  tags:
+  - rat
+  - infostealer
+  - cookies
+  author: Sab0x1D
+  last_updated: '2025-11-10'
+  tlp: CLEAR
+  id: lodarat
+  rule: "\nrule LodaRAT {\n  meta:\n    description = \"Detects LodaRAT malware\"\n\
+    \  strings: \n    $ip1 = \"172.111.138.100\"\n    $str1 = \"mp3quran.net\"\ncondition:\n\
+    \  any of them\n}"
 - name: Lumma Stealer
   family: LummaStealer
   tags:
@@ -181,6 +208,66 @@
     \ = \"Wallets/Bitcoin core\"\n\t$wallet3 = \"Wallets/Ethereum\"\n\t$wallet4 =\
     \ \"Wallets/Ledger Live\"\n\t$wallet5 = \"Wallets/Authy Desktop\"\ncondition:\n\
     \  any of them\n}\n\n\n"
+- name: Mispadu
+  family: Mispadu
+  tags:
+  - trojan
+  - banker
+  - infostealer
+  author: Sab0x1D
+  last_updated: '2025-11-10'
+  tlp: CLEAR
+  id: mispadu
+  rule: "\nrule Mispadu {\n  meta:\n    description = \"Detects Mispadu malware\"\n\
+    \  strings: \n    $str1 = \"geradcontsad.pro\"\n    $str2 = \"contadcom.pro\"\n\
+    \    $str3 = \"pat2wx\"\n    $str4 = \"contou infect\"\n    $dom1 = \".zapto.org\"\
+    \n    $dom2 = \".viewdns.net\"\n    $dom3 = \"archivodzb.pro\"\n    $dom4 = \"\
+    host.secureserver.net/g1/\"\n    $dom5 = \"up.ddnsking.com\"\n    $ip1 = \"91.92.244.191\"\
+    \n    $ip2 = \"208.109.188.20\"\t\ncondition:\n  2 of them\t\n}"
+- name: NetSupport Manager
+  family: NetSupport
+  tags:
+  - rat
+  - remote
+  - legitimate-tool
+  author: Sab0x1D
+  last_updated: '2025-11-10'
+  tlp: CLEAR
+  id: netsupport
+  rule: "\nrule NetSupport {\n  meta:\n    description = \"Detects NetSupport Manager\
+    \ RAT\"\n  strings: \n    $str1 = \"NetSupport Manager\"\n    $str2 = \"f36a7294ff7aa92571a3fd7c91282dd5\"\
+    \n    $str4 = \"geo.netsupportsoftware.com\"\n    $str6 = \"client32.exe\"\n \
+    \   $c21 = \"81.19.137.226\"\n    $c22 = \"192.236.192.48\"\n    $c23 = \"blawx.com/letter.php\"\
+    \ncondition:\n  any of them\n}"
+- name: NjRAT
+  family: NjRAT
+  tags:
+  - rat
+  - remote
+  - keylogger
+  author: Sab0x1D
+  last_updated: '2025-11-10'
+  tlp: CLEAR
+  id: njrat
+  rule: "\nrule NjRAT {\n  meta:\n    description = \"Detects NjRAT malware\"\n  strings:\
+    \ \n    $str1 = \"njnjnjs.duckdns.org\"\n    $str2 = \"junio2023.duckdns.org\"\
+    \n    $str3 = \"njz.txt\"\n    $str4 = \"mofers\"\n    $str5 = \"NYAN CAT\"\n\
+    \    $str6 = \"nj.txt\"\n    $str7 = \"dfasdfasdgs.duckdns.org\"\n    $ip1 = \"\
+    46.246.86.16\"\n    $ip2 = \"154.12.254.215\"\ncondition:\n  any of them\t\n}"
+- name: PDQ Connect
+  family: PDQRAT
+  tags:
+  - rat
+  - rmm
+  - remote
+  - legitimate-tool
+  author: Sab0x1D
+  last_updated: '2025-11-10'
+  tlp: CLEAR
+  id: pdqrat
+  rule: "\nrule PDQConnect {\n  meta:\n    description = \"Detects PDQ RAT\"\n  strings:\
+    \ \n    $str1 = \"PDQConnectAgent\"\n    $str2 = \"pdq-connect-agent.exe\"\n \
+    \   $ip1 = \"34.54.45.198\"\ncondition:\n  any of them\n}"
 - name: RedLine Stealer
   family: RedLine
   tags:
