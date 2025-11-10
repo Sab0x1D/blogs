@@ -268,6 +268,20 @@
   rule: "\nrule PDQConnect {\n  meta:\n    description = \"Detects PDQ RAT\"\n  strings:\
     \ \n    $str1 = \"PDQConnectAgent\"\n    $str2 = \"pdq-connect-agent.exe\"\n \
     \   $ip1 = \"34.54.45.198\"\ncondition:\n  any of them\n}"
+- name: PocoRAT
+  family: PocoRAT
+  tags:
+  - rat
+  - remote
+  - infostealer
+  author: Sab0x1D
+  last_updated: '2025-11-10'
+  tlp: CLEAR
+  id: pocorat
+  rule: "\nrule PocoRAT {\n  meta:\n    description = \"Detects PocoRAT malware\"\n\
+    \  strings: \n    $str1 = \"Poco\"\n    $str2 = \"x:\\\\poco-1.12.4-all\\\\foundation\\\
+    \\include\\\\poco\"\n    $ip1 = \"94.131.119.126\"\t\ncondition:\n  2 of them\t\
+    \n}"
 - name: RedLine Stealer
   family: RedLine
   tags:
@@ -315,6 +329,82 @@
     config\"\n    $str3 = \"Qtum-Electrum\\\\config\"\n    $str4 = \"Electrum-LTC\\\
     \\config\"\n    $str5 = \".gir3n\"\n    $ip1 = \"45.128.234.63\"\n    $ip2 = \"\
     185.172.128.163\"\n  condition:\n    3 of them\n}"
+- name: Snake Keylogger
+  family: Snake Keylogger
+  tags:
+  - keylogger
+  - infostealer
+  - stealer
+  author: Sab0x1D
+  last_updated: '2025-11-03'
+  tlp: CLEAR
+  id: snakekeylogger
+  rule: "\nrule SnakeKeylogger {\n  meta:\n    description = \"Detects Snake Keylogger\
+    \ malware\"\n  strings:\n    $str1 = \"SnakeKeylogger\"\n    $str3 = \"Snake Tracker\"\
+    \n    $str4 = \"User-Agent: Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.2;\
+    \ .NET CLR1.0.3705;)\"\n    $ip1 = \"77.81.142.87\"\n    $ip2 = \"51.38.247.67\"\
+    \ncondition:\n  2 of them\t\n}"
+- name: StrRAT
+  family: StrRAT
+  tags:
+  - rat
+  - java
+  - infostealer
+  - keylogger
+  - plugin-based
+  author: Sab0x1D
+  last_updated: '2025-11-10'
+  tlp: CLEAR
+  id: strrat
+  rule: "\nrule StrRAT {\n  meta:\n    description = \"Detects StrRAT malware\"\n\
+    \  strings: \n    $str1 = \"STRRAT\"\n    $str2 = \"carLambo\"\n    $str3 = \"\
+    RegisterClipboardFormat(Ljava/lang/String;)\"\n    $str4 = \"HBrowserNativeApis\"\
+    \n    $str5 = \"jbfrost.livestrigoi\"\n    $str6 = \"Branchlock\"\n    $str7 =\
+    \ \"strigoi\"\n    $c21 = \"lastdopelast.ddns.net\"\n    $c22 = \"mysaviourlives.ddns.net\"\
+    \ncondition:\n  any of them\t\n}"
+- name: StrRAT -Cyber Raiju
+  family: StrRAT
+  tags:
+  - rat
+  - java
+  - infostealer
+  - keylogger
+  - plugin-based
+  author: Sab0x1D
+  last_updated: '2025-11-10'
+  tlp: CLEAR
+  id: strrat_cyberraiju
+  rule: "\nrule StrRAT_CyberRaiju {\n  meta:\n    description = \"Detects components\
+    \ or the presence of STRRat used in eCrime operations\"\n    author = \"@CyberRaiju\"\
+    \n    date = \"2022-05-19\"\n    hash1 = \"ec48d708eb393d94b995eb7d0194bded701c456c666c7bb967ced016d9f1eff5\"\
+    \n    hash2 = \"0A6D2526077276F4D0141E9B4D94F373CC1AE9D6437A02887BE96A16E2D864CF\"\
+    \n    reference = \"https://www.jaiminton.com/reverse-engineering/strrat\"\n \
+    \ strings:\n    $ntwk1 = \"wshsoft.company\" fullword ascii\n    $ntwk2 = \"str-master.pw\"\
+    \ fullword ascii\n    $ntwk3 = \"jbfrost.live\" fullword ascii\n    $ntwk4 = \"\
+    ip-api.com\" fullword ascii\n    $ntwk5 = \"strigoi\" fullword ascii\n    $host1\
+    \ = \"ntfsmgr\" fullword ascii\n    $host2 = \"Skype\" fullword ascii\n    $host3\
+    \ = \"lock.file\" fullword ascii\n    $rat1 = \"HBrowserNativeApis\" fullword\
+    \ ascii\n    $rat2 = \"carLambo\" fullword ascii\n    $rat3 = \"config\" fullword\
+    \ ascii\n    $rat4 = \"loorqhustq\" fullword ascii\t  \ncondition:\n  filesize\
+    \ < 2000KB and (2 of ($ntwk*) or all of ($host*) or 2 of ($rat*)) \n}"
+- name: StrRAT -Elastic Security
+  family: StrRAT
+  tags:
+  - rat
+  - java
+  - infostealer
+  - keylogger
+  - plugin-based
+  author: Sab0x1D
+  last_updated: '2025-11-10'
+  tlp: CLEAR
+  id: strrat_elastic
+  rule: "\nrule StrRAT_ElasticSec {\n  meta:\n    author = \"Elastic Security\"\n\
+    \    id = \"a3e48cd2-e65f-40db-ab55-8015ad871dd6\"\n    fingerprint = \"efda9a8bd5f9e227a6696de1b4ea7eb7343b08563cfcbe73fdd75164593bd111\"\
+    \n    creation_date = \"2024-03-13\"\n    modified = \"2024-03-21\"\n    threat_name\
+    \ = \"Windows.Trojan.STRRAT\"\n    reference_sample = \"97e67ac77d80d26af4897acff2a3f6075e0efe7997a67d8194e799006ed5efc9\"\
+    \n  strings:\n    $str1 = \"strigoi/server/ping.php?lid=\"\n    $str2 = \"/strigoi/server/?hwid=\"\
+    \ncondition:\n  all of them\n}"
 - name: XenoRAT
   family: XenoRAT
   tags:
@@ -328,3 +418,23 @@
     strings: \n    $str1 = \"xeno rat client\"\n\t$str2 = \"XenoManager\"\n\t$str3\
     \ = \"xeno_rat_client\"\n\t$str4 = \"xeno rat\" nocase\ncondition:\n  any of them\n\
     }\n"
+- name: XWorm
+  family: XWorm
+  tags:
+  - rat
+  - remote
+  - infostealer
+  - keylogger
+  - c2
+  author: Sab0x1D
+  last_updated: '2025-11-10'
+  tlp: CLEAR
+  id: xworm
+  rule: "\nrule XWorm {\n  meta:\n    description = \"Detects the XWorm malware\"\n\
+    \  strings: \n    $str1 = \"freshinxworm.ddns.net\"\n    $str2 = \"colmbat82.duckdns.org\"\
+    \n    $str3 = \"XWorm\"\n    $str5 = \"L_optReArmSku\"\n    $str6 = \"futurist2.ddns.net\"\
+    \n    $str7 = \"<Xwormmm>\"\n    $str8 = \"XWorm V5.2\"\n    $str9 = \"plat.zip\"\
+    \n    $dom1 = \"xw9402may.duckdns.org\"\n    $dom2 = \"dcxwq1.duckdns.org\"\n\
+    \    $dom3 = \"xw9402may.duckdns.org\"\n    $dom4 = \"xwrmmone.duckdns.org\"\n\
+    \    $ip1 = \"154.53.51.233\"\n    $ip2 = \"154.12.233.76\"\n    $ip3 = \"91.207.57.115\"\
+    \n    $ip4 = \"157.20.182.172\"\ncondition:\n  any of them\t\n}"
