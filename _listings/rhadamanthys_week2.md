@@ -42,6 +42,7 @@ The loader often drops with `md5.dll` or `auth.dll` filenames to mimic legitimat
 Rhadamanthys binaries contain a **main loader stub** and optional **plug-in modules** packed with UPX or custom PE crypter.
 
 #### 3.1 Core Modules
+
 | Module | Function |
 |---------|-----------|
 | `core.dll` | Main orchestrator, plugin loader |
