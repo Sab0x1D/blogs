@@ -1,6 +1,6 @@
 ---
 layout: page
-title: "ghostYara Tool (gY Tool)"
+title: "ghostYara Tool"
 permalink: /gy-tool/
 author: Sab0x1D
 author_avatar: /assets/img/sab01xd-profile.jpeg
