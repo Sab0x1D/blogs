@@ -1,5 +1,5 @@
 ---
-layout: page
+layout: default
 permalink: /gy-tool/
 author: Sab0x1D
 author_avatar: /assets/img/sab01xd-profile.jpeg
