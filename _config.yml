@@ -1,7 +1,7 @@
-title: "Sab0x1D::Cyber Awareness"
-description: "Cybersecurity awareness series and threat education by Sab0x1D"
+title: "Sab0x1D::Threat Intel"
+description: "Cybersecurity awareness series and threat intelligence by Sab0x1D"
 url: "https://sab0x1d.github.io"
-baseurl: "/blogs"
+baseurl: ""
 future: true
 timezone: "Australia/Adelaide"
 
