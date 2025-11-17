@@ -1,12 +1,16 @@
 ---
 layout: page
-title: "ghostYara Tool"
+title: "ghostYara Tool (gY Tool)"
 permalink: /gy-tool/
 author: Sab0x1D
 author_avatar: /assets/img/sab01xd-profile.jpeg
 ---
 
-# gY Tool — YaraScanTUI + ghostYara rules
+<p style="text-align:center; margin: 2rem 0;">
+  <img src="/assets/img/yarascantui-banner.png" alt="YaraScanTUI banner">
+</p>
+
+<h1 style="text-align:center;">gY Tool — YaraScanTUI + ghostYara rules</h1>
 
 > **gY Tool** is the front-end name for your local **YaraScanTUI** setup — a clean, fast terminal UI that lets you take the YARA rules published on this site and use them locally with almost zero setup.  
 > Install Python → run the launcher → drop rules in a folder → start scanning. That’s it.
@@ -142,7 +146,7 @@ What the launcher does:
 - Installs dependencies  
 - Launches **YaraScanTUI**
 
-> `![YaraScanTUI running on Windows terminal](/assets/img/gytool1.png)`
+![YaraScanTUI running on Windows terminal](/assets/img/gytool1.png)
 
 Next runs are instant unless `requirements.txt` changes.
 
@@ -179,8 +183,8 @@ yara_rules/
 └── DarkGate_Loader.yar
 ```
 
-> `![ghostYara rule card with Download .yar button](/assets/img/gyrulessab0x1d.png)`
-> `![ghostYara rule](/assets/img/gytool2.png)`
+![ghostYara rule card with Download .yar button](/assets/img/gyrulessab0x1d.png)
+![ghostYara rule](/assets/img/gytool2.png)
 
 4. Re-run `run.bat`, `run.ps1`, or `run.sh`.  
 5. Scan your samples and confirm hits.
@@ -202,17 +206,19 @@ cd YaraScanTUI
 5. Scan via TUI — single file or whole folder.  
 6. Review hits, tune rules, rescan until satisfied.
 
-> `![YaraScanTUI scan view with matches](/assets/img/gytool3.png)`
+![YaraScanTUI scan view with matches](/assets/img/gytool3.png)
 
-### Rule Editing within our TUI environment
-Choose Edit Rule from top menu, and select rule from drop-down. 
+### Rule editing within our TUI environment
 
-> `![YaraScanTUI rule editing](/assets/img/gytool4.png)`
+Choose **Edit Rule** from top menu, and select rule from drop-down. 
+
+![YaraScanTUI rule editing](/assets/img/gytool4.png)
 
 ### Scan report export
-Choose Export from top menu, where our tool will export a `.json`, `.md`, and `.html` file of our match.
 
-> `![YaraScanTUI match export](/assets/img/gytool5.png)`
+Choose **Export** from top menu, where the tool will export a `.json`, `.md`, and `.html` file of your matches.
+
+![YaraScanTUI match export](/assets/img/gytool5.png)
 
 ---
 
