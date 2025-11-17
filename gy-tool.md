@@ -6,7 +6,7 @@ author: Sab0x1D
 author_avatar: /assets/img/sab01xd-profile.jpeg
 ---
 
-![YaraScanTUI banner]({{ '/assets/img/yarascantui-banner.png' | relative_url }}){: .img-center }
+![YaraScanTUI banner]({{ '/assets/img/banners/yarascantui-banner.png' | relative_url }}){: .img-center }
 
 ## gY Tool — YaraScanTUI + ghostYara rules
 
