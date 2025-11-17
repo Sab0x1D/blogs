@@ -7,7 +7,7 @@ author_avatar: /assets/img/sab01xd-profile.jpeg
 ---
 
 <p style="text-align:center; margin: 2rem 0;">
-  <img src="/assets/img/yarascantui-banner.png" alt="YaraScanTUI banner">
+  <img src="/assets/img/banners/yarascantui-banner.png" alt="YaraScanTUI banner">
 </p>
 
 <h1 style="text-align:center;">gY Tool — YaraScanTUI + ghostYara rules</h1>
