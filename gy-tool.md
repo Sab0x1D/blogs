@@ -1,14 +1,11 @@
 ---
 layout: page
-title: "ghostYara Tool"
 permalink: /gy-tool/
 author: Sab0x1D
 author_avatar: /assets/img/sab01xd-profile.jpeg
 ---
 
 ![YaraScanTUI banner]({{ '/assets/img/banners/yarascantui-banner.png' | relative_url }}){: .img-center }
-
-## gY Tool — YaraScanTUI + ghostYara rules
 
 > **gY Tool** is the front-end name for your local **YaraScanTUI** setup — a clean, fast terminal UI that lets you take the YARA rules published on this site and use them locally with almost zero setup.  
 > Install Python → run the launcher → drop rules in a folder → start scanning. That’s it.
