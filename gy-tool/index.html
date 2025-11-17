@@ -4,80 +4,86 @@ title: "ghostYara Tool"
 permalink: /gy-tool/
 ---
 
-<main class="site-main">
-  <div class="wrapper">
-    <article class="page">
+<section style="max-width:var(--container);margin:0 auto;padding:var(--gap);">
 
-      <header class="page-header">
-        <h1 class="page-title">ghostYara Tool (gY Tool)</h1>
-        <p class="page-subtitle">gY Tool — YaraScanTUI + ghostYara rules</p>
-      </header>
+  <!-- Header / hero (same width/feel as ghostYara) -->
+  <header style="display:flex;flex-direction:column;gap:10px;margin-bottom:24px;">
+    <h1 style="margin:0;">ghostYara Tool (gY Tool)</h1>
+    <p style="color:var(--muted);margin:0;">gY Tool — YaraScanTUI + ghostYara rules</p>
+  </header>
 
-      <figure class="page-banner">
-        <img src="{{ '/assets/img/yarascantui-banner.png' | relative_url }}" alt="YaraScanTUI banner" class="img-center">
-      </figure>
+  <figure class="page-banner" style="margin:0 0 24px 0;text-align:center;">
+    <img src="{{ '/assets/img/yarascantui-banner.png' | relative_url }}"
+         alt="YaraScanTUI banner"
+         class="img-center">
+  </figure>
 
-      <section class="page-intro">
-        <blockquote class="featured-quote">
-          <strong>gY Tool</strong> is the front-end name for your local <strong>YaraScanTUI</strong> setup —
-          a clean, fast terminal UI that lets you take the YARA rules published on this site and use them locally
-          with almost zero setup. Install Python → run the launcher → drop rules in a folder → start scanning.
-        </blockquote>
+  <section style="margin-bottom:24px;">
+    <blockquote class="featured-quote">
+      <strong>gY Tool</strong> is the front-end name for your local <strong>YaraScanTUI</strong> setup —
+      a clean, fast terminal UI that lets you take the YARA rules published on this site and use them
+      locally with almost zero setup. Install Python → run the launcher → drop rules in a folder
+      → start scanning. That’s it.
+    </blockquote>
 
-        <p>This page covers:</p>
-        <ul>
-          <li>Where to get the tool</li>
-          <li>How to clone or download it</li>
-          <li>What the launchers do behind the scenes</li>
-          <li>How to use ghostYara rules with the tool</li>
-          <li>How to start scanning files or folders immediately</li>
-        </ul>
-      </section>
+    <p><strong>This page covers:</strong></p>
+    <ul>
+      <li>Where to get the tool</li>
+      <li>How to clone or download it</li>
+      <li>What the launchers do behind the scenes</li>
+      <li>How to use ghostYara rules with the tool</li>
+      <li>How to start scanning files or folders immediately</li>
+    </ul>
+  </section>
 
-      <hr>
+  <hr>
 
-      <section>
-        <h2 id="get-yarascantui">1. Where to get YaraScanTUI</h2>
-        <p>YaraScanTUI now lives in its own dedicated repo:</p>
-        <ul>
-          <li><strong>Repo:</strong> <a href="https://github.com/Sab0x1D/YaraScanTUI" target="_blank" rel="noopener">https://github.com/Sab0x1D/YaraScanTUI</a></li>
-          <li><strong>Direct ZIP download:</strong> <a href="https://github.com/Sab0x1D/YaraScanTUI/archive/refs/heads/main.zip" target="_blank" rel="noopener">https://github.com/Sab0x1D/YaraScanTUI/archive/refs/heads/main.zip</a></li>
-        </ul>
+  <!-- 1. Where to get YaraScanTUI -->
+  <section style="margin-top:24px;">
+    <h2 id="get-yarascantui">1. Where to get YaraScanTUI</h2>
 
-        <p>You can either <strong>clone the repo</strong> or <strong>grab the ZIP</strong>.</p>
+    <p>YaraScanTUI now lives in its own dedicated repo:</p>
+    <ul>
+      <li><strong>Repo:</strong> <a href="https://github.com/Sab0x1D/YaraScanTUI" target="_blank" rel="noopener">https://github.com/Sab0x1D/YaraScanTUI</a></li>
+      <li><strong>Direct ZIP download:</strong> <a href="https://github.com/Sab0x1D/YaraScanTUI/archive/refs/heads/main.zip" target="_blank" rel="noopener">https://github.com/Sab0x1D/YaraScanTUI/archive/refs/heads/main.zip</a></li>
+    </ul>
 
-        <h3>Option A — Clone via git (recommended)</h3>
+    <p>You can either <strong>clone the repo</strong> or <strong>grab the ZIP</strong>.</p>
+
+    <h3>Option A — Clone via git (recommended)</h3>
 <pre><code>git clone https://github.com/Sab0x1D/YaraScanTUI.git
 cd YaraScanTUI
 </code></pre>
 
-        <h3>Option B — Download as ZIP</h3>
-        <ol>
-          <li>Visit: <a href="https://github.com/Sab0x1D/YaraScanTUI" target="_blank" rel="noopener">https://github.com/Sab0x1D/YaraScanTUI</a></li>
-          <li>Click <strong>Code → Download ZIP</strong> or use the direct link above</li>
-          <li>Extract</li>
-          <li>Open the extracted <code>YaraScanTUI</code> folder</li>
-        </ol>
+    <h3>Option B — Download as ZIP</h3>
+    <ol>
+      <li>Visit: <a href="https://github.com/Sab0x1D/YaraScanTUI" target="_blank" rel="noopener">https://github.com/Sab0x1D/YaraScanTUI</a></li>
+      <li>Click <strong>Code → Download ZIP</strong> or use the direct link above</li>
+      <li>Extract</li>
+      <li>Open the extracted <code>YaraScanTUI</code> folder</li>
+    </ol>
 
-        <p>Once inside that folder, everything else is automatic.</p>
-      </section>
+    <p>Once inside that folder, everything else is automatic.</p>
+  </section>
 
-      <section>
-        <h2 id="requirements">2. Requirements</h2>
+  <!-- 2. Requirements -->
+  <section style="margin-top:32px;">
+    <h2 id="requirements">2. Requirements</h2>
 
-        <p>Very minimal:</p>
-        <ul>
-          <li><strong>Windows 10/11</strong>, <strong>macOS</strong>, or <strong>Linux</strong></li>
-          <li><strong>Python 3.10+</strong></li>
-          <li>Internet (for dependency install)</li>
-        </ul>
+    <p>Very minimal:</p>
+    <ul>
+      <li><strong>Windows 10/11</strong>, <strong>macOS</strong>, or <strong>Linux</strong></li>
+      <li><strong>Python 3.10+</strong></li>
+      <li>Internet (for dependency install)</li>
+    </ul>
 
-        <p>You do <strong>not</strong> manually create venvs or run pip.
-        The run scripts do all setup automatically.</p>
-      </section>
+    <p>You do <strong>not</strong> manually create venvs or run pip.
+       The run scripts do all setup automatically.</p>
+  </section>
 
-      <section>
-        <h2 id="structure">3. Folder structure</h2>
+  <!-- 3. Folder structure -->
+  <section style="margin-top:32px;">
+    <h2 id="structure">3. Folder structure</h2>
 
 <pre><code>YaraScanTUI/
 ├── add-python-to-path.bat               # &lt;-- run right after your Python installation (run as admin)
@@ -120,71 +126,78 @@ cd YaraScanTUI
 10 directories, 27 files
 </code></pre>
 
-        <h3>Important</h3>
-        <p><strong>yara_rules/ must remain a flat folder.</strong> No subdirectories. Drop <code>.yar</code> / <code>.yara</code> files directly inside it.</p>
+    <h3>Important</h3>
+    <p><strong>yara_rules/ must remain a flat folder.</strong> No subdirectories.
+       Drop <code>.yar</code> / <code>.yara</code> files directly inside it.</p>
 
-        <p>If you want to group families, use filename prefixes such as:</p>
+    <p>If you want to group families, use filename prefixes such as:</p>
 <pre><code>stealer_Formbook.yar
 loader_DarkGate.yar
 banker_Mispadu.yar
 </code></pre>
-      </section>
+  </section>
 
-      <section>
-        <h2 id="first-run">4. Installation &amp; first run</h2>
+  <!-- 4. Installation & first run -->
+  <section style="margin-top:32px;">
+    <h2 id="first-run">4. Installation &amp; first run</h2>
 
-        <h3>Windows</h3>
-        <ol>
-          <li>Install Python 3.10+
-            <ul>
-              <li>Make sure <strong>Add Python to PATH</strong> is enabled</li>
-              <li>If not, run <code>add-python-to-path.bat</code></li>
-            </ul>
-          </li>
-          <li>Run the tool:
-            <ul>
-              <li>Double-click <code>run.bat</code>, or</li>
-              <li>Right-click <code>run.ps1</code> → <em>Run with PowerShell</em></li>
-            </ul>
-          </li>
-        </ol>
-
-        <p>What the launcher does:</p>
+    <h3>Windows</h3>
+    <ol>
+      <li>Install Python 3.10+
         <ul>
-          <li>Detects Python</li>
-          <li>Creates <code>.venv</code> if missing</li>
-          <li>Installs dependencies</li>
-          <li>Launches <strong>YaraScanTUI</strong></li>
+          <li>Make sure <strong>Add Python to PATH</strong> is enabled</li>
+          <li>If not, run <code>add-python-to-path.bat</code></li>
         </ul>
+      </li>
+      <li>Run the tool:
+        <ul>
+          <li>Double-click <code>run.bat</code>, or</li>
+          <li>Right-click <code>run.ps1</code> → <em>Run with PowerShell</em></li>
+        </ul>
+      </li>
+    </ol>
 
-        <p><img src="{{ '/assets/img/gytool1.png' | relative_url }}" alt="YaraScanTUI running on Windows terminal" class="img-center"></p>
+    <p>What the launcher does:</p>
+    <ul>
+      <li>Detects Python</li>
+      <li>Creates <code>.venv</code> if missing</li>
+      <li>Installs dependencies</li>
+      <li>Launches <strong>YaraScanTUI</strong></li>
+    </ul>
 
-        <p>Next runs are instant unless <code>requirements.txt</code> changes.</p>
+    <p style="text-align:center;">
+      <img src="{{ '/assets/img/gytool1.png' | relative_url }}"
+           alt="YaraScanTUI running on Windows terminal"
+           class="img-center">
+    </p>
 
-        <h3>macOS / Linux</h3>
-        <ol>
-          <li>Install Python 3.10+ (macOS example: <code>brew install python</code>)</li>
-          <li>Open terminal and run:</li>
-        </ol>
+    <p>Next runs are instant unless <code>requirements.txt</code> changes.</p>
+
+    <h3>macOS / Linux</h3>
+    <ol>
+      <li>Install Python 3.10+ (macOS example: <code>brew install python</code>)</li>
+      <li>Open terminal and run:</li>
+    </ol>
 
 <pre><code>cd /path/to/YaraScanTUI
 chmod +x run.sh   # one-time
 ./run.sh
 </code></pre>
 
-        <p>Same behaviour as Windows — automated venv setup and launch.</p>
-      </section>
+    <p>Same behaviour as Windows — automated venv setup and launch.</p>
+  </section>
 
-      <section>
-        <h2 id="ghostyara">5. Adding ghostYara rules</h2>
+  <!-- 5. Adding ghostYara rules -->
+  <section style="margin-top:32px;">
+    <h2 id="ghostyara">5. Adding ghostYara rules</h2>
 
-        <p>This is where gY Tool becomes useful.</p>
+    <p>This is where gY Tool becomes useful.</p>
 
-        <ol>
-          <li>Go to the <strong>ghostYara</strong> section on this site.</li>
-          <li>Use <strong>Download .yar</strong> OR copy/paste into a new <code>.yar</code> file.</li>
-          <li>Save rules <strong>directly</strong> into your local <code>yara_rules/</code> folder:</li>
-        </ol>
+    <ol>
+      <li>Go to the <strong>ghostYara</strong> section on this site.</li>
+      <li>Use <strong>Download .yar</strong> OR copy/paste into a new <code>.yar</code> file.</li>
+      <li>Save rules <strong>directly</strong> into your local <code>yara_rules/</code> folder:</li>
+    </ol>
 
 <pre><code>yara_rules/
 ├── Formbook_ElasticSecurity.yar
@@ -192,85 +205,107 @@ chmod +x run.sh   # one-time
 └── DarkGate_Loader.yar
 </code></pre>
 
-        <p><img src="{{ '/assets/img/gyrulessab0x1d.png' | relative_url }}" alt="ghostYara rule card with Download .yar button" class="img-center"></p>
-        <p><img src="{{ '/assets/img/gytool2.png' | relative_url }}" alt="ghostYara rule example" class="img-center"></p>
+    <p style="text-align:center;">
+      <img src="{{ '/assets/img/gyrulessab0x1d.png' | relative_url }}"
+           alt="ghostYara rule card with Download .yar button"
+           class="img-center">
+    </p>
+    <p style="text-align:center;">
+      <img src="{{ '/assets/img/gytool2.png' | relative_url }}"
+           alt="ghostYara rule example"
+           class="img-center">
+    </p>
 
-        <ol start="4">
-          <li>Re-run <code>run.bat</code>, <code>run.ps1</code>, or <code>run.sh</code>.</li>
-          <li>Scan your samples and confirm hits.</li>
-        </ol>
-      </section>
+    <ol start="4">
+      <li>Re-run <code>run.bat</code>, <code>run.ps1</code>, or <code>run.sh</code>.</li>
+      <li>Scan your samples and confirm hits.</li>
+    </ol>
+  </section>
 
-      <section>
-        <h2 id="workflow">6. Example lab workflow</h2>
+  <!-- 6. Example lab workflow -->
+  <section style="margin-top:32px;">
+    <h2 id="workflow">6. Example lab workflow</h2>
 
-        <ol>
-          <li>Clone the repo:</li>
-        </ol>
+    <ol>
+      <li>Clone the repo:</li>
+    </ol>
 
 <pre><code>git clone https://github.com/Sab0x1D/YaraScanTUI.git
 cd YaraScanTUI
 </code></pre>
 
-        <ol start="2">
-          <li>Launch once to let it set itself up.</li>
-          <li>Drop samples into <code>workspace/</code> (any structure you prefer).</li>
-          <li>Drop rules from ghostYara into <code>/yara_rules/</code> (flat folder).</li>
-          <li>Scan via TUI — single file or whole folder.</li>
-          <li>Review hits, tune rules, rescan until satisfied.</li>
-        </ol>
+    <ol start="2">
+      <li>Launch once to let it set itself up.</li>
+      <li>Drop samples into <code>workspace/</code> (any structure you prefer).</li>
+      <li>Drop rules from ghostYara into <code>/yara_rules/</code> (flat folder).</li>
+      <li>Scan via TUI — single file or whole folder.</li>
+      <li>Review hits, tune rules, rescan until satisfied.</li>
+    </ol>
 
-        <p><img src="{{ '/assets/img/gytool3.png' | relative_url }}" alt="YaraScanTUI scan view with matches" class="img-center"></p>
+    <p style="text-align:center;">
+      <img src="{{ '/assets/img/gytool3.png' | relative_url }}"
+           alt="YaraScanTUI scan view with matches"
+           class="img-center">
+    </p>
 
-        <h3>Rule editing within our TUI environment</h3>
-        <p>Choose <strong>Edit Rule</strong> from top menu and select the rule from the drop-down.</p>
+    <h3>Rule editing within our TUI environment</h3>
+    <p>Choose <strong>Edit Rule</strong> from top menu and select the rule from the drop-down.</p>
 
-        <p><img src="{{ '/assets/img/gytool4.png' | relative_url }}" alt="YaraScanTUI rule editing" class="img-center"></p>
+    <p style="text-align:center;">
+      <img src="{{ '/assets/img/gytool4.png' | relative_url }}"
+           alt="YaraScanTUI rule editing"
+           class="img-center">
+    </p>
 
-        <h3>Scan report export</h3>
-        <p>Choose <strong>Export</strong> from top menu; the tool will export a <code>.json</code>, <code>.md</code>, and <code>.html</code> file of your matches.</p>
+    <h3>Scan report export</h3>
+    <p>Choose <strong>Export</strong> from top menu; the tool will export a <code>.json</code>,
+       <code>.md</code>, and <code>.html</code> file of your matches.</p>
 
-        <p><img src="{{ '/assets/img/gytool5.png' | relative_url }}" alt="YaraScanTUI match export" class="img-center"></p>
-      </section>
+    <p style="text-align:center;">
+      <img src="{{ '/assets/img/gytool5.png' | relative_url }}"
+           alt="YaraScanTUI match export"
+           class="img-center">
+    </p>
+  </section>
 
-      <section>
-        <h2 id="troubleshooting">7. Troubleshooting</h2>
+  <!-- 7. Troubleshooting -->
+  <section style="margin-top:32px;">
+    <h2 id="troubleshooting">7. Troubleshooting</h2>
 
-        <h3>“Python not found”</h3>
-        <p>Install Python 3.10+ and ensure PATH is set. Use <code>add-python-to-path.bat</code> if needed.</p>
+    <h3>“Python not found”</h3>
+    <p>Install Python 3.10+ and ensure PATH is set. Use <code>add-python-to-path.bat</code> if needed.</p>
 
-        <h3>Dependency install slow or stuck</h3>
-        <p>Ensure internet on first run. Reset environment:</p>
+    <h3>Dependency install slow or stuck</h3>
+    <p>Ensure internet on first run. Reset environment:</p>
 
 <pre><code>rm -rf .venv          # macOS/Linux
 rmdir /S /Q .venv     # Windows
 </code></pre>
 
-        <p>Then run the launcher again.</p>
+    <p>Then run the launcher again.</p>
 
-        <h3>Rules not loading</h3>
-        <ul>
-          <li>Ensure files go into <strong>yara_rules/</strong>, not <code>workspace/</code>.</li>
-          <li>Ensure file extension is <code>.yar</code> or <code>.yara</code>.</li>
-          <li>A syntax error in a rule can block compilation.</li>
-        </ul>
+    <h3>Rules not loading</h3>
+    <ul>
+      <li>Ensure files go into <strong>yara_rules/</strong>, not <code>workspace/</code>.</li>
+      <li>Ensure file extension is <code>.yar</code> or <code>.yara</code>.</li>
+      <li>A syntax error in a rule can block compilation.</li>
+    </ul>
 
-        <h3>No matches for known malware</h3>
-        <ul>
-          <li>Confirm correct sample path.</li>
-          <li>Confirm the right rule is present in <code>yara_rules/</code>.</li>
-          <li>Loosen rules temporarily to sanity-check detection.</li>
-        </ul>
-      </section>
+    <h3>No matches for known malware</h3>
+    <ul>
+      <li>Confirm correct sample path.</li>
+      <li>Confirm the right rule is present in <code>yara_rules/</code>.</li>
+      <li>Loosen rules temporarily to sanity-check detection.</li>
+    </ul>
+  </section>
 
-      <section>
-        <h2 id="final-notes">8. Final notes</h2>
+  <!-- 8. Final notes -->
+  <section style="margin-top:32px;">
+    <h2 id="final-notes">8. Final notes</h2>
 
-        <p><strong>gY Tool + YaraScanTUI</strong> gives you a portable, repeatable, dead-simple YARA scanning workflow.
-        As the ghostYara rule section on this site grows, you can keep pulling new rules into your local
-        <code>yara_rules/</code> folder and instantly use them against any sample set you’re analysing.</p>
-      </section>
+    <p><strong>gY Tool + YaraScanTUI</strong> gives you a portable, repeatable, dead-simple YARA scanning workflow.
+       As the ghostYara rule section on this site grows, you can keep pulling new rules into your local
+       <code>yara_rules/</code> folder and instantly use them against any sample set you’re analysing.</p>
+  </section>
 
-    </article>
-  </div>
-</main>
+</section>
