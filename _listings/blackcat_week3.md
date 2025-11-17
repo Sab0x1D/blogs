@@ -11,8 +11,6 @@ featured: false
 tags: [Malware, Ransomware, Forensics, Threats]
 ---
 
-## TL;DR
-
 BlackCat (aka ALPHV) was a commercially engineered ransomware family that combined performance, modularity, and a mature affiliate marketplace. Its developers focused on speed, reliable cross-platform encryption, and double/extortion pressure. In late 2024–2025 activity splintered into multiple clones and imitators. This post dissects the architecture, encryption design, deployment tradecraft, forensic artefacts, network behaviour, and practical detection/remediation steps for defenders.
 
 ---
