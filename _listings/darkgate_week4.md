@@ -35,7 +35,7 @@ DarkGate is a **Windows malware family** that has evolved from a relatively simp
 Threat intel teams and vendors consistently describe DarkGate as:
 
 - A **commercial / commodity malware** sold on invite‑only Russian‑language forums.
-- Actively developed, with multiple tracked versions and a large **command set (dozens of opcodes)** exposed by C2. citeturn0search0turn0search6turn0search13
+- Actively developed, with multiple tracked versions and a large **command set (dozens of opcodes)** exposed by C2.
 - A tool that **any motivated affiliate** can rent and plug into their own phishing or malvertising campaigns.
 
 From a defender’s point of view, you can think of DarkGate as a **Swiss‑army knife for access and monetisation**: once it’s running, the attacker can choose whether to quietly steal data, stage a bigger intrusion, or bring in ransomware partners.
