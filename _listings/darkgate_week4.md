@@ -52,7 +52,7 @@ For several years DarkGate campaigns looked very similar to Emotet‑style malsp
 
 - **Lures**: fake invoices, HR documents, shipping notifications, banking messages.
 - **Attachments**: malicious **Office docs, PDFs, ZIPs, or MSI installers**.
-- **Goal**: convince the user to open a file or run an “update / viewer / document unlocker” that silently loads the malware. citeturn0search7turn0search9
+- **Goal**: convince the user to open a file or run an “update / viewer / document unlocker” that silently loads the malware.
 
 Common attachment patterns you’ll still see in telemetry:
 
@@ -66,7 +66,7 @@ As email filtering improved, some operators shifted to **collaboration apps**:
 
 - Threat actors compromise accounts or spin up fake identities.
 - Targets receive a **Teams or Skype chat** from someone impersonating IT, HR, or a senior exec.
-- The message includes a **SharePoint/OneDrive link or attached file** that kicks off the DarkGate chain. citeturn0search1turn0search5turn0search16
+- The message includes a **SharePoint/OneDrive link or attached file** that kicks off the DarkGate chain.
 
 This technique works because chat platforms:
 
@@ -75,7 +75,7 @@ This technique works because chat platforms:
 
 ### 2.3 Fake installers and SmartScreen bypass
 
-One of the more worrying campaigns associated with DarkGate exploited **CVE‑2024‑21412**, a Windows SmartScreen bypass. citeturn0search2
+One of the more worrying campaigns associated with DarkGate exploited **CVE‑2024‑21412**, a Windows SmartScreen bypass.
 
 The chain, simplified:
 
@@ -92,7 +92,7 @@ DarkGate operators also borrow tricks from other loaders like GootLoader and Fak
 
 - **SEO poisoning**: create rogue download pages for popular tools such as “Advanced IP Scanner”.
 - **Malvertising**: buy search ads or place malicious JavaScript on compromised sites.
-- Unsuspecting admins who search for these tools click the first result, download a Trojanised installer, and run it. citeturn0search8turn0search14
+- Unsuspecting admins who search for these tools click the first result, download a Trojanised installer, and run it.
 
 The net effect: **administrators** — the people you most want to protect — are a prime target.
 
@@ -113,7 +113,7 @@ The first stage usually:
 
 - Downloads a **cab/zip/msi** from a remote server; or
 - Extracts an embedded resource that looks like a **legitimate tool or DLL**; then
-- Executes scripting logic (often **AutoIt**, PowerShell, or batch) that prepares the main payload. citeturn0search7turn0search15
+- Executes scripting logic (often **AutoIt**, PowerShell, or batch) that prepares the main payload.
 
 In many DarkGate chains, defenders see:
 
@@ -131,7 +131,7 @@ DarkGate heavily abuses **AutoIt**, a legitimate Windows automation language:
 Benefits for the attacker:
 
 - AutoIt executables look like **generic admin tooling**.
-- The language is flexible; operators can add **anti‑VM, anti‑debug, delay execution, and evasion logic** as simple script flags. citeturn0search7turn0search13
+- The language is flexible; operators can add **anti‑VM, anti‑debug, delay execution, and evasion logic** as simple script flags.
 
 ### 3.4 Stage 3 — Payload execution and persistence
 
@@ -153,7 +153,7 @@ Different versions support slightly different features, but broadly DarkGate pro
 
 - Collects OS version, architecture, hostname, domain/workgroup.
 - Enumerates running processes, installed AV/EDR, and sometimes **virtualisation artefacts**.
-- Can perform **anti‑VM and anti‑sandbox checks**, delaying or aborting execution if suspicious conditions are detected. citeturn0search0turn0search6turn0search13
+- Can perform **anti‑VM and anti‑sandbox checks**, delaying or aborting execution if suspicious conditions are detected.
 
 ### 4.2 Credential and data theft
 
@@ -162,7 +162,7 @@ DarkGate often includes or can load modules to:
 - Steal **browser credentials** (cookies, saved passwords, session tokens).
 - Target **crypto wallets** and browser extensions holding keys.
 - Grab **RDP, VPN, and messaging client** credentials where possible.
-- Enumerate and exfiltrate documents from specific folders (Desktop, Documents, cloud sync directories). citeturn0search8turn0search10
+- Enumerate and exfiltrate documents from specific folders (Desktop, Documents, cloud sync directories).
 
 Even if the operator never runs “hands‑on keyboard”, credentials alone can fuel **future BEC, account takeover, and lateral movement**.
 
@@ -173,7 +173,7 @@ As a RAT, DarkGate supports a large command set, commonly including:
 - File operations: upload, download, delete, rename.
 - Process operations: start, kill, inject into other processes.
 - Shell interaction: spawn an interactive shell or run arbitrary commands.
-- Screenshot capture and sometimes **hidden VNC (HVNC)** to control the desktop invisibly. citeturn0search13turn0search7
+- Screenshot capture and sometimes **hidden VNC (HVNC)** to control the desktop invisibly.
 
 In practice, once a host is “DarkGate‑ed”, the operator has **near‑full control**.
 
@@ -181,7 +181,7 @@ In practice, once a host is “DarkGate‑ed”, the operator has **near‑full 
 
 DarkGate is rarely the final goal. Affiliates and crime groups use it to stage:
 
-- **Ransomware** (including families like Black Basta and others). citeturn0search3turn0search11
+- **Ransomware** (including families like Black Basta and others).
 - Additional **stealers** such as Lumma or RedLine.
 - Lateral‑movement tooling (Cobalt Strike beacons, custom loaders, tunnelling tools).
 
@@ -219,7 +219,7 @@ DarkGate chains frequently involve:
 
 - Office apps (`winword.exe`, `excel.exe`) or readers launching **`msiexec.exe`, `wscript.exe`, `powershell.exe`**.
 - AutoIt executables spawning child processes and then disappearing, leaving a hollowed parent.
-- LOLBins like `forfiles.exe`, `rundll32.exe`, `regsvr32.exe` used to execute scripts or DLLs. citeturn0search7turn0search14
+- LOLBins like `forfiles.exe`, `rundll32.exe`, `regsvr32.exe` used to execute scripts or DLLs.
 
 If your EDR supports it, hunt for **process ancestry** patterns like:
 
@@ -238,7 +238,7 @@ Correlate:
 
 - First connection time to a suspicious domain.
 - The process owning the socket (often the injected host process).
-- Any **DNS queries** that align with the phishing / lure timeline. citeturn0search8turn0search10
+- Any **DNS queries** that align with the phishing / lure timeline.
 
 ### 5.5 Log sources to prioritise
 
@@ -272,7 +272,7 @@ Working backwards you find:
 5. 09:09:40 – AutoIt process writes `config.dat` and an encrypted blob, then launches `setup.ps1`.
 6. 09:09:45 – `powershell.exe` with base64 parameters spawns, injects code into a living‑off‑the‑land process, and deletes some on‑disk artefacts.
 
-This chain is textbook **DarkGate or similar loader** behaviour. citeturn0search7turn0search8turn0search13
+This chain is textbook **DarkGate or similar loader** behaviour.
 
 ### 6.3 Confirming DarkGate
 
