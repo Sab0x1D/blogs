@@ -58,7 +58,7 @@ Common attachment patterns you’ll still see in telemetry:
 
 - `Invoice_<random>.pdf` or `Doc_<random>.pdf` containing a link or embedded script.
 - `ScannerResults.zip` masquerading as output from tools like “Advanced IP Scanner”.
-- `Update_NVIDIA_Driver.msi`, `NotionSetup.msi`, etc. that pretend to be legitimate installers. citeturn0search2turn0search8
+- `Update_NVIDIA_Driver.msi`, `NotionSetup.msi`, etc. that pretend to be legitimate installers.
 
 ### 2.2 Microsoft Teams and Skype abuse
 
@@ -199,7 +199,7 @@ Look for:
 
 - Recently created **AutoIt executables**, often with generic names like `setup.exe`, `updater.exe`, or tool‑themed names.
 - Unusual **.cab, .msi, or .zip** files in `Downloads`, `%TEMP%`, or installer staging directories.
-- Dropped DLLs next to legitimate binaries (potential **DLL sideloading pairs**). citeturn0search2turn0search7
+- Dropped DLLs next to legitimate binaries (potential **DLL sideloading pairs**).
 
 File hashing + VT/TI enrichment is your friend here.
 
@@ -254,7 +254,7 @@ To investigate or hunt DarkGate at scale, prioritise:
 
 ## 6. A Simulated DarkGate Incident Walkthrough
 
-To tie this together, here’s a realistic (but anonymised) scenario.
+To tie this together, here’s a realistic scenario.
 
 ### 6.1 The initial alert
 
