@@ -45,6 +45,45 @@
     \n    $str4 = \"blackmoon\"\n    $str5 = \"WPS.lnk\"\n    $ip1 = \"206.238.199.123\"\
     \n    $ip2 = \"203.107.1.33\"\n    $ip3 = \"206.238.220.51\"\n    $ip4 = \"154.55.135.78\"\
     \ncondition:\n  2 of them\n}"
+- name: ClickFix Stego Loader - LummaC2 / Rhadamanthys
+  family: ClickFix
+  tags:
+  - stego
+  - dotnet
+  - loader
+  - lumma
+  - rhadamanthys
+  author: Sab0x1D
+  last_updated: '2025-11-30'
+  tlp: CLEAR
+  reference: 'Huntress - ClickFix Gets Creative: Malware Buried in Images'
+  id: clickfix_stego
+  rule: "\nrule ClickFix_StegoLoader\n{\n  meta:\n    description = \"Heuristic detection\
+    \ of the ClickFix .NET stego loader that extracts shellcode from PNG pixels and\
+    \ injects into explorer.exe\"\n    author      = \"Sab0x1D\"\n    date       \
+    \ = \"2025-11-30\"\n    reference   = \"https://www.huntress.com/blog/clickfix-malware-buried-in-images\"\
+    \n    tlp         = \"CLEAR\"\n    malware_families = \"LummaC2, Rhadamanthys\"\
+    \n    confidence  = \"medium\"\n\n  strings:\n    // .NET image-processing / stego-related\
+    \ strings\n    $s_bitmap       = \"System.Drawing.Bitmap\" wide ascii\n    $s_lockbits\
+    \     = \"LockBits\" wide ascii\n    $s_unlockbits   = \"UnlockBits\" wide ascii\n\
+    \    $s_pixelformat  = \"PixelFormat.Format32bppArgb\" wide ascii\n    $s_bgra\
+    \         = \"Format32bppArgb\" wide ascii\n\n    // Common Win32 injection APIs\n\
+    \    $api_vaex       = \"VirtualAllocEx\" ascii\n    $api_wpm        = \"WriteProcessMemory\"\
+    \ ascii\n    $api_crt        = \"CreateRemoteThread\" ascii\n    $api_op     \
+    \    = \"OpenProcess\" ascii\n\n    // Explorer injection / process targeting\
+    \ hints\n    $s_explorer     = \"explorer.exe\" wide ascii\n    $s_inject    \
+    \   = \"CreateRemoteThread in explorer\" wide ascii nocase\n\n    // AES / config\
+    \ hints\n    $s_aes          = \"System.Security.Cryptography.AesCryptoServiceProvider\"\
+    \ wide ascii\n    $s_rijndael     = \"System.Security.Cryptography.RijndaelManaged\"\
+    \ wide ascii\n    $s_iv           = \"IV\" wide ascii\n    $s_key          = \"\
+    Key\" wide ascii\n\n  condition:\n    // PE file\n    uint16(0) == 0x5A4D and\n\
+    \n    // Likely PE/.NET (simple heuristic PE signature check)\n    for any i in\
+    \ (0..2) : (uint32(i*0x200 + 0x3C) < filesize and\n                          \
+    \ uint32(uint32(i*0x200 + 0x3C)) == 0x00004550) and\n\n    // Image processing\
+    \ + injection combo\n    3 of ($s_bitmap, $s_lockbits, $s_unlockbits, $s_pixelformat,\
+    \ $s_bgra) and\n    2 of ($api_vaex, $api_wpm, $api_crt, $api_op) and\n\n    //\
+    \ Plus at least one extra hint to reduce FPs\n    (1 of ($s_explorer, $s_inject)\
+    \ or 1 of ($s_aes, $s_rijndael, $s_iv, $s_key))\n}"
 - name: Cobalt Strike Ransomware
   family: Cobalt Strike
   tags:
