@@ -18,8 +18,6 @@ tags: ["Malware", "ClickFix", "Steganography", "Threat Intel"]
 
 Original research and full technical details: Huntress — [ClickFix Gets Creative: Malware Buried in Images](https://www.huntress.com/blog/clickfix-malware-buried-in-images) by [Anna Pham / @RussianPanda9xx](https://x.com/RussianPanda9xx?s=20) and [Ben Folland / @polygonben](https://x.com/polygonben?s=20).
 
-## Why this post exists
-
 Every so often a vendor blog drops that makes you stop what you’re doing, grab a coffee and read it front to back.
 
 I was going to use this Sunday slot for the usual **Weekly Threat Trends** post, but this ClickFix stego campaign is far more interesting than rehashing the same families again. So this week, the trends are taking a back seat to a proper deep dive instead.
@@ -33,7 +31,7 @@ If you haven’t read their article yet, go do that first. Think of this as:
 - A defender-friendly breakdown of the chain,
 - Plus some detection / DFIR angles and user-awareness takeaways.
 
-I’m not going to pretend this is original research – this is me standing on Anna and Ben’s shoulders and pointing at the cool bits.
+I’m not going to pretend this is original research, this is me standing on Anna and Ben’s shoulders and pointing at the cool bits.
 
 ---
 
@@ -226,7 +224,7 @@ Again, I’d treat their post as the canonical source and sync it into your envi
 
 ---
 
-## Detection & DFIR: how I’d hunt this (Sab0x1D notes)
+## Detection & DFIR: how I’d hunt this
 
 Here’s the part a lot of you will care about: **How do we spot this in the wild?**
 
@@ -292,7 +290,7 @@ Some low-hanging fruit based on Huntress’ recommendations and my own experienc
 ## YARA detection rule for the stego loader
 
 Below is a heuristic YARA rule aimed at the **.NET steganographic loader** used in this ClickFix campaign.  
-It does **not** try to match the Lumma or Rhadamanthys core binaries directly – instead it focuses on the stage that, regardless of the final payload, does the heavy lifting for this chain.  
+It does **not** try to match the Lumma or Rhadamanthys core binaries directly, instead it focuses on the stage that, regardless of the final payload, does the heavy lifting for this chain.  
 In other words: this should still be useful even if the actor swaps Lumma/Rhadamanthys for a different infostealer in the future.
 
 - Loads PNGs via `System.Drawing.Bitmap`,
