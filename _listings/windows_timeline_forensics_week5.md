@@ -6,7 +6,7 @@ title: "Windows Endpoint Timeline Forensics — Rebuilding the Story from Artefa
 pretty_title: "Windows Endpoint Timeline Forensics — Rebuilding the Story from Artefacts"
 excerpt: "Good DFIR is really good storytelling backed by artefacts. This post breaks down how to reconstruct a Windows endpoint timeline using Prefetch, Amcache, Shimcache, SRUM, event logs, and more — so you can explain exactly what happened, and when."
 thumb: /assets/img/windows_timeline_forensics_thumb.jpg
-date: 2025-12-02
+date: 2025-12-05
 featured: false
 tags: [DFIR, Forensics, Windows, Timelines]
 ---
