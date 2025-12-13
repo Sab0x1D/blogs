@@ -5,8 +5,8 @@ layout: listing
 title: "Weekly Threat Trends — Week Commencing 8th December 2025"
 pretty_title: "Weekly Threat Trends — Week Commencing 8th December 2025"
 excerpt: "This week focuses on telemetry tampering, large-scale cloud session hijacking, Telegram-driven stealer ecosystems, and how defenders can respond when logs and signals are no longer automatically trustworthy."
-thumb: /assets/img/weekly_trends_generic_thumb.webp
-date: 2025-12-08
+thumb: /assets/img/weekly_trends_thumb.jpg
+date: 2025-12-14
 featured: false
 tags: [Weekly Trends, Weekly Threats, Awareness]
 ---
