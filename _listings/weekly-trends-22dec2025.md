@@ -6,7 +6,7 @@ title: "Weekly Threat Trends — Week Commencing 22nd December 2025"
 pretty_title: "Weekly Threat Trends — Week Commencing 22nd December 2025"
 excerpt: "With staff on leave, change freezes in place, and everyone distracted by end-of-year deadlines, threat actors use December to push BEC, gift-card fraud, shipping scams, and high-impact ransomware. This week’s post focuses on holiday operating risk and how to keep control when the lights are dimmed."
 thumb: /assets/img/weekly_trends_thumb.jpg
-date: 2025-12-22
+date: 2025-12-28
 featured: false
 tags: [Weekly Trends, Weekly Threats, Awareness]
 ---
