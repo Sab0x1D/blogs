@@ -16,9 +16,9 @@ The week of **5–11 January 2026** is the first full working week of the new ye
 On paper it should be quiet: people are still easing back in, budgets are being locked, strategies are being
 signed off. In practice, the threat landscape did not take a break:
 
-- Vendors are racing to buy and build **identity-first and AI-aware security** capabilities. :contentReference[oaicite:0]{index=0}  
-- Reports are showing a steep rise in **GenAI-related data policy violations** and “Shadow AI” usage by staff. :contentReference[oaicite:1]{index=1}  
-- State actors and cybercrime crews are already back at work with **SEO poisoning, QR-code phishing, cloud abuse and new ransomware brands**. :contentReference[oaicite:2]{index=2}  
+- Vendors are racing to buy and build **identity-first and AI-aware security** capabilities.  
+- Reports are showing a steep rise in **GenAI-related data policy violations** and “Shadow AI” usage by staff.  
+- State actors and cybercrime crews are already back at work with **SEO poisoning, QR-code phishing, cloud abuse and new ransomware brands**.  
 
 If 2025 was the year everyone talked about AI risk, 2026 is the year those risks start to show up in **live
 incident data**. This post looks at what is emerging in this first week — and what is worth turning into
@@ -41,13 +41,13 @@ security resolutions while the year is still young.
 
 Two early-January acquisitions set the tone for the year:
 
-- **CrowdStrike announced it will acquire SGNL**, an identity security startup focused on “continuous identity” access decisions, explicitly to tackle AI-driven threats and autonomous access. :contentReference[oaicite:3]{index=3}  
-- **Ping Identity acquired Keyless**, a zero-knowledge biometric authentication firm, to strengthen passwordless and deepfake-resistant authentication. :contentReference[oaicite:4]{index=4}  
+- **CrowdStrike announced it will acquire SGNL**, an identity security startup focused on “continuous identity” access decisions, explicitly to tackle AI-driven threats and autonomous access.   
+- **Ping Identity acquired Keyless**, a zero-knowledge biometric authentication firm, to strengthen passwordless and deepfake-resistant authentication.   
 
 At the same time, multiple industry predictions for 2026 are converging around the same headline:
 
 - AI and autonomous agents are expanding the attack surface.
-- Identity is becoming the **easiest and most high-risk entry point** to those systems. :contentReference[oaicite:5]{index=5}  
+- Identity is becoming the **easiest and most high-risk entry point** to those systems.   
 
 The message is blunt: as organisations let AI agents act on behalf of users and services, **identity is no
 longer just a login problem**; it is the central control layer for:
@@ -77,13 +77,13 @@ pretty:
 
 - Enterprise use of GenAI SaaS platforms **tripled** over the past year.
 - The average organisation is now making **over 18,000 prompts per month** to GenAI tools.
-- The average organisation is already seeing **223 GenAI-related data policy violations per month**, a figure that has doubled year-on-year. :contentReference[oaicite:6]{index=6}  
+- The average organisation is already seeing **223 GenAI-related data policy violations per month**, a figure that has doubled year-on-year.   
 
 Crucially:
 
 - Almost half of GenAI use comes from **personal or unsanctioned AI apps** (“Shadow AI”).
 - Around 60% of insider incidents in the report involved personal AI tools rather than corporate-approved
-  ones. :contentReference[oaicite:7]{index=7}  
+  ones.   
 
 The pattern is simple:
 
@@ -125,7 +125,7 @@ pointing at the same emerging risk:
   - Change infrastructure.
 - …will become both:
   - Extremely helpful.
-  - A new class of insider-like risk. :contentReference[oaicite:8]{index=8}  
+  - A new class of insider-like risk.   
 
 Key ideas from those analyses:
 
@@ -166,10 +166,10 @@ and SaaS platforms** in phishing and initial access.
 Highlights from this week’s reporting:
 
 - Threat actors abusing **Google Cloud Application Integration** to send fake Google notifications from a
-  legitimate `noreply-application-integration@google[.]com` address, in order to steal Microsoft credentials via phishing pages. :contentReference[oaicite:9]{index=9}  
-- A fresh advisory detailing **North Korean Kimsuky operators using QR codes** in spearphishing emails towards NGOs, think tanks and academia — QR codes embedded in PDFs and images that redirect to credential harvesting. :contentReference[oaicite:10]{index=10}  
-- A “ColdFusion++ Christmas Campaign” that continues into January, with millions of malicious requests targeting Adobe ColdFusion servers via exposed endpoints, likely operated by an initial access broker. :contentReference[oaicite:11]{index=11}  
-- A new ClickFix-style multi-stage malware campaign (PHALT#BLYX) targeting hospitality, abusing **MSBuild and social engineering** to get victims to effectively “fix” their own security by running attacker commands. :contentReference[oaicite:12]{index=12}  
+  legitimate `noreply-application-integration@google[.]com` address, in order to steal Microsoft credentials via phishing pages.   
+- A fresh advisory detailing **North Korean Kimsuky operators using QR codes** in spearphishing emails towards NGOs, think tanks and academia — QR codes embedded in PDFs and images that redirect to credential harvesting.   
+- A “ColdFusion++ Christmas Campaign” that continues into January, with millions of malicious requests targeting Adobe ColdFusion servers via exposed endpoints, likely operated by an initial access broker.   
+- A new ClickFix-style multi-stage malware campaign (PHALT#BLYX) targeting hospitality, abusing **MSBuild and social engineering** to get victims to effectively “fix” their own security by running attacker commands.   
 
 Takeaways:
 
@@ -198,7 +198,7 @@ Resolutions worth writing down:
 
 Ransomware is not waiting for February to warm up.
 
-A threat intel snapshot covering **late December into the first days of January** shows: :contentReference[oaicite:13]{index=13}  
+A threat intel snapshot covering **late December into the first days of January** shows:   
 
 - **LockBit 5** currently responsible for more than a third of observed incidents in that period — leak-site
   activity and incident reports both point to sustained, high-volume operations.
@@ -225,7 +225,7 @@ For defenders, that means:
   - Data staging and unusual exfil patterns.
 - Regulatory pressure is rising:
   - In Australia and elsewhere, ransomware and extortion payments are now subject to **mandatory reporting**
-    within tight timeframes, increasing both visibility and legal risk. :contentReference[oaicite:14]{index=14}  
+    within tight timeframes, increasing both visibility and legal risk.   
 
 If you want one ransomware resolution for 2026, make it this:
 
@@ -238,10 +238,10 @@ If you want one ransomware resolution for 2026, make it this:
 Early-year reporting also shows a continuation of **browser-centric and SEO-driven malware campaigns**:
 
 - A long-running family dubbed **“ShadyPanda”** has quietly accumulated millions of installs via Chrome and
-  Edge extensions that started as legitimate utilities and later morphed into spyware. :contentReference[oaicite:15]{index=15}  
+  Edge extensions that started as legitimate utilities and later morphed into spyware.   
 - A group referred to as **Black Cat** (not to be confused with ALPHV ransomware) used **SEO poisoning and
   fake software downloads** to infect nearly 278,000 systems in China with data-stealing malware, focusing on
-  browser data, keystrokes and crypto theft. :contentReference[oaicite:16]{index=16}  
+  browser data, keystrokes and crypto theft.   
 
 These campaigns are important for two reasons:
 
@@ -273,11 +273,11 @@ instrumentation.
 Finally, the policy and reporting landscape is quietly reshaping how incidents are handled:
 
 - In Australia and several other jurisdictions, **mandatory ransomware and cyber extortion payment reporting**
-  is now in force, with 72-hour windows after payment. :contentReference[oaicite:17]{index=17}  
+  is now in force, with 72-hour windows after payment.   
 - National and regional cyber strategies are:
   - Increasing breach reporting obligations.
   - Considering personal accountability for executives.
-  - Investing in centralised government cyber units to coordinate response. :contentReference[oaicite:18]{index=18}  
+  - Investing in centralised government cyber units to coordinate response.   
 
 For incident responders and CISOs, this means:
 
