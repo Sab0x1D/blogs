@@ -6,7 +6,7 @@ title: "Weekly Threat Trends — Week Commencing 5th January 2026"
 pretty_title: "Weekly Threat Trends — Week Commencing 5th January 2026"
 excerpt: "The first full week of 2026 is already shaping up around three themes: AI and identity converging into a single attack surface, data leaking through 'Shadow AI' and cloud abuse, and old-school ransomware and malware quietly evolving in the background. This post looks at what is emerging right now, and the security 'resolutions' that actually matter."
 thumb: /assets/img/weekly_trends_thumb.jpg
-date: 2026-01-05
+date: 2026-01-11
 featured: false
 tags: [Weekly Trends, Weekly Threats, Awareness]
 ---
