@@ -6,7 +6,7 @@ title: "Casefile: The Fake Browser Update That Dropped a Loader"
 pretty_title: "Fake Browser Update → Loader Execution in Minutes"
 excerpt: "A user clicks what looks like a routine browser update. Within minutes, a ‘legit’ installer chain pivots into rundll32 execution, persistence via scheduled tasks, and outbound beaconing to fresh infrastructure. This casefile walks through the investigation flow, the key artifacts that mattered, and the practical detections that catch the pattern early."
 thumb: /assets/img/casefile-fake-browser-update.jpg
-date: 2026-01-14
+date: 2026-01-15
 featured: false
 tags: ["Casefile", "Malware", "Loader", "Initial Access", "DFIR"]
 ---
