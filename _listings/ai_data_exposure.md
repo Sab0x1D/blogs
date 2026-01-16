@@ -7,7 +7,7 @@ pretty_title: "AI Data Exposure —<br>The Human Factor Behind GPT Incidents"
 excerpt: "When confidential data meets conversational AI, the result isn’t innovation — it’s exposure. This post unpacks how human error and overtrust in generative AI have triggered real-world data breaches, from NSW to Fortune 500 firms, and what can be done to prevent them."
 thumb: /assets/img/ai_data_exposure_thumb.webp
 date: 2025-10-18
-featured: true
+featured: false
 tags: [AI, Data, Awareness, Security]
 ---
 
