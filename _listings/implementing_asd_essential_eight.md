@@ -7,7 +7,7 @@ pretty_title: "Implementing the ASD Essential Eight: Practical Hardening for Win
 excerpt: "The ASD Essential Eight is more than a checklist – it is a practical hardening baseline that can materially reduce the impact of real-world attacks. This guide walks through step-by-step implementation examples for each of the eight strategies across Windows and Linux. From application control and macro settings to MFA and automated backups, the focus is on controls you can actually deploy with minimal guesswork."
 thumb: /assets/img/essential-eight.webp
 date: 2026-01-14
-featured: false
+featured: true
 tags: ["Essential Eight", "Hardening", "Security Baselines", "ASD", "GRC"]
 ---
 
