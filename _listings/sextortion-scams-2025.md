@@ -9,7 +9,7 @@ excerpt: "Sextortion scams are resurfacing — exploiting fear, shame, and priva
 thumb: /assets/img/sextortion.jpg
 hero: /assets/img/sextortion.jpg
 date: 2025-10-12
-featured: true
+featured: false
 tags: [Cyber Awareness, Sextortion, Scam, Bitcoin, Social Engineering]
 ---
 
