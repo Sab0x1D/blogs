@@ -33,7 +33,6 @@ For each Essential Eight strategy, we walk through:
 
 - What the control is trying to achieve
 - Concrete implementation examples on Windows and/or Linux
-- Screenshot placeholders you can use when documenting your own environment
 
 ---
 
@@ -76,8 +75,6 @@ For smaller environments or standalone hosts, **Software Restriction Policies (S
 3. In the left-hand pane, expand:
    - `Security Settings → Software Restriction Policies`.
 
-> [Screenshot placeholder – Local Security Policy console with “Software Restriction Policies” selected.]
-
 If no policy exists, right-click **Software Restriction Policies** and select **New Software Restriction Policies**.
 
 ### Step 2 – Flip the default model to “deny-by-default”
@@ -87,8 +84,6 @@ If no policy exists, right-click **Software Restriction Policies** and select **
 3. Confirm that the default security level is now **Disallowed**, not **Unrestricted**.
 
 This is the core shift: everything is blocked unless explicitly permitted.
-
-> [Screenshot placeholder – Security Levels view showing “Disallowed” as Default Security Level.]
 
 ### Step 3 – Allow known-good locations
 
@@ -104,8 +99,6 @@ You now need to create explicit “allow” rules for trusted paths.
 
 You can also add hash or certificate rules for specific binaries where path-based rules are too coarse.
 
-> [Screenshot placeholder – Path rule dialog allowing C:\Program Files\* as Unrestricted.]
-
 ### Step 4 – Harden script execution
 
 Script file types are a common initial access vector. You should ensure they are treated as “executable” so SRP controls them.
@@ -118,8 +111,6 @@ Script file types are a common initial access vector. You should ensure they are
    - `.wsf` (Windows Script File)
    - `.bat`, `.cmd` (batch files), where appropriate
 3. Remove filetypes that are safe to ignore if they cause noise (e.g. some shortcut types), but do so deliberately.
-
-> [Screenshot placeholder – Designated File Types window listing script extensions such as .ps1, .vbs, .js, .wsf.]
 
 Test with a non-critical machine first: drop a `.ps1` script into a non-whitelisted folder and confirm that it is blocked.
 
@@ -150,8 +141,6 @@ This should be automated via:
 - Configuration management (Ansible, Puppet, etc.).
 - Scheduled tasks (cron, systemd timers).
 - Managed tooling (e.g. Landscape, Canonical Livepatch, or equivalents).
-
-> [Screenshot placeholder – Terminal output showing `sudo apt-get update` and `sudo apt-get upgrade` completing successfully.]
 
 ### Step 2 – Apply source-level patches safely
 
@@ -188,8 +177,6 @@ For custom applications managed in-house, a common workflow uses `diff` and `pat
    patch -R < app.patch
    ```
 
-> [Screenshot placeholder – Terminal showing creation of app.patch, a successful `patch --dry-run`, and then applying the patch.]
-
 This pattern generalises: always test, always back up, always confirm the outcome.
 
 ---
@@ -217,8 +204,6 @@ Recommended baseline:
 - Choose **Disable all macros except digitally signed macros**.
 - Optionally, also tick **Trust access to the VBA project object model** *off* unless required.
 
-> [Screenshot placeholder – Office Trust Center “Macro Settings” tab showing “Disable all macros except digitally signed macros” selected.]
-
 ### Step 2 – Use trusted locations and signed macros
 
 To support legitimate automation:
@@ -228,8 +213,6 @@ To support legitimate automation:
 3. Educate users that:
    - Macros outside trusted locations and unsigned macros will not run.
    - Random macro-enabled files from email or the internet should never be enabled.
-
-> [Screenshot placeholder – Trust Center “Trusted Locations” view with a controlled network share added.]
 
 ---
 
@@ -255,8 +238,6 @@ In managed environments:
 - Use Group Policy (for Edge/Chrome) to prevent re-enabling any legacy plugin behaviour.
 - Block access to sites that require legacy plugins and isolate those use-cases if absolutely unavoidable.
 
-> [Screenshot placeholder – Microsoft Edge settings showing no Flash/Java plugin options and a note that Flash is deprecated.]
-
 ### Step 2 – Harden browser configuration
 
 For each browser standard:
@@ -274,8 +255,6 @@ In Edge/Chrome:
    - Secure DNS (DoH) with an approved resolver.
 3. Lock these settings via Group Policy where possible.
 
-> [Screenshot placeholder – Edge/Chrome privacy settings with tracking prevention and secure DNS enabled.]
-
 ### Step 3 – Use security-focused extensions
 
 Deploy approved extensions such as:
@@ -288,8 +267,6 @@ These should be:
 
 - Centrally managed and pushed (e.g. via Edge/Chrome extension policies).
 - Reviewed periodically to ensure they remain trustworthy.
-
-> [Screenshot placeholder – Browser extensions page showing approved ad blocker and enterprise password manager installed and enabled.]
 
 ---
 
@@ -309,15 +286,11 @@ On Windows:
 2. Ensure the daily account is a member of **Users**, not **Administrators**.
 3. Place the admin account into an appropriate group (e.g. **Administrators**, or a delegated admin group in AD).
 
-> [Screenshot placeholder – Local Users and Groups view showing separate standard and admin accounts.]
-
 On Linux:
 
 - Use **named user accounts** for normal work.
 - Use `sudo` for privileged actions, not direct `root` logins.
 - Configure `/etc/sudoers` (via `visudo`) to limit what each admin can do, and log all `sudo` actions.
-
-> [Screenshot placeholder – Terminal showing `id` output of a standard user and `sudo -l` listing allowed commands.]
 
 ### Step 2 – Apply least privilege to files and services
 
@@ -332,8 +305,6 @@ On Linux:
 
 - Use `chown` and `chmod` to control file ownership and permissions.
 - Use systemd service unit permissions (e.g. `User=`, `Group=`, `ProtectSystem=`) to sandbox services.
-
-> [Screenshot placeholder – Windows folder properties “Security” tab showing restricted ACLs; or Linux terminal showing `ls -l` with least-privilege permissions.]
 
 ---
 
@@ -357,8 +328,6 @@ In managed environments:
   - Ring deployments (test → pilot → broad).
   - Report on compliance.
 
-> [Screenshot placeholder – Windows Update settings screen showing updates being downloaded and installed.]
-
 ### Step 2 – Configure Linux OS updates
 
 On Ubuntu:
@@ -375,8 +344,6 @@ For servers, consider:
 
 - Unattended-upgrades for security updates.
 - Centralised management and reporting tooling.
-
-> [Screenshot placeholder – Ubuntu Software Updater window showing available updates.]
 
 Tie both OS and application patching into a regular cadence:
 
@@ -404,8 +371,6 @@ MFA is critical for:
    - All users, or
    - High-risk groups first (admins, remote workers), then expand.
 
-> [Screenshot placeholder – Azure AD portal showing MFA enabled for user accounts.]
-
 ### Step 2 – Register authenticator app
 
 From the user’s perspective:
@@ -415,8 +380,6 @@ From the user’s perspective:
 3. Sign in with the corporate account.
 4. Scan the QR code presented in the browser using the Authenticator app.
 5. Confirm a test notification or code.
-
-> [Screenshot placeholder – Microsoft Authenticator app showing a newly added work account, alongside browser page with QR code.]
 
 For VPNs and SSH access:
 
@@ -448,8 +411,6 @@ tar -czf /backups/data-$(date +%F).tar.gz /srv/data
 - `-z` compresses with gzip.
 - `-f` specifies the output file.
 
-> [Screenshot placeholder – Terminal showing execution of a `tar -czf` command and resulting archive in /backups.]
-
 ### Step 2 – Use `cpio` or `dd` when appropriate
 
 - `cpio` is useful when combined with `find` for more complex selections:
@@ -463,8 +424,6 @@ tar -czf /backups/data-$(date +%F).tar.gz /srv/data
   ```bash
   sudo dd if=/dev/sda of=/backups/disk-$(date +%F).img bs=4M status=progress
   ```
-
-> [Screenshot placeholder – Terminal showing a `dd` backup with the `status=progress` output as the image is created.]
 
 These tools underpin many higher-level backup solutions.
 
@@ -502,8 +461,6 @@ To run a backup script regularly:
    ```bash
    grep CRON /var/log/syslog
    ```
-
-> [Screenshot placeholder – `crontab -e` editor showing a nightly backup job, plus terminal snippet of `grep CRON /var/log/syslog` confirming execution.]
 
 Remember: a backup strategy is incomplete without regular **restore testing** and secure offsite/immutable storage.
 
