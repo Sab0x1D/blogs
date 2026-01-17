@@ -5,7 +5,7 @@ layout: listing
 title: "Weekly Threat Trends — Week Commencing 12th January 2026"
 pretty_title: "Weekly Threat Trends — Week Commencing 12th January 2026"
 excerpt: "The second full week of 2026 is already busy: actively exploited vulnerabilities in core infrastructure and developer tooling, targeted ransomware against healthcare and claims processors, major breaches in education and space, and a clear shift in executive risk focus towards AI-driven threats and cyber-enabled fraud."
-thumb: /assets/img/weekly_trends_generic_thumb.webp
+thumb: /assets/img/weekly_trends_thumb.jpg
 date: 2026-01-18
 featured: false
 tags: [Weekly Trends, Weekly Threats, Awareness]
