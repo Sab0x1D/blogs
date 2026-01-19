@@ -25,12 +25,12 @@ This post is not a rewrite of Fortinet’s analysis. It is a **defender-first co
 
 **Why this matters:** This chain combines three defensive pain points:
 1. **Remote template abuse** (content is pulled after the doc is opened, defeating static-only scanning).
-2. **Legacy exploit reliability** (CVE-2017-11882 remains a top “still works” vector on poorly patched estates). :contentReference[oaicite:3]{index=3}  
+2. **Legacy exploit reliability** (CVE-2017-11882 remains a top “still works” vector on poorly patched estates). 
 3. **Fileless staging + living-off-the-land execution** (wscript/powershell/WMI) with **in-memory loading** and **process hollowing**, which stresses traditional EDR baselines.
 
 **What to hunt first (priority order):**
-- `WINWORD.EXE`/Office spawning or interacting with **EQNEDT32.EXE** (Equation Editor) or loading remote templates. :contentReference[oaicite:4]{index=4}  
-- `wscript.exe` / `.vbs` launched via scheduled tasks repeating every minute (suspicious persistence profile). :contentReference[oaicite:5]{index=5}  
+- `WINWORD.EXE`/Office spawning or interacting with **EQNEDT32.EXE** (Equation Editor) or loading remote templates. 
+- `wscript.exe` / `.vbs` launched via scheduled tasks repeating every minute (suspicious persistence profile). 
 - PowerShell command lines containing reflective assembly load behaviors (e.g., `[Reflection.Assembly]::Load()` plus Base64 decode patterns). 
 - `colorcpl.exe` (or other signed Windows binaries) spawned from abnormal parents (PowerShell / WMI / script hosts), indicating potential hollowing. 
 
