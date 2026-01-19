@@ -1,0 +1,64 @@
+---
+layout: page
+title: "Blog Index"
+permalink: /blog-index/
+---
+
+<section class="blog-tree">
+  {%- assign listings_src = site.listings | default: site.collections['listings'].docs -%}
+  {%- assign items_sorted = listings_src | sort: "date" | reverse -%}
+
+  {%- assign years = items_sorted | group_by_exp: "p", "p.date | date: '%Y'" -%}
+
+  {%- for year in years -%}
+    <details class="blog-tree__year" open>
+      <summary class="blog-tree__summary">
+        <span class="blog-tree__label">{{ year.name }}</span>
+        <span class="blog-tree__count">{{ year.items | size }} posts</span>
+      </summary>
+
+      {%- assign months = year.items | group_by_exp: "p", "p.date | date: '%m'" -%}
+
+      {%- for month in months -%}
+        {%- assign month_name = month.items[0].date | date: "%B" -%}
+
+        <details class="blog-tree__month">
+          <summary class="blog-tree__summary blog-tree__summary--month">
+            <span class="blog-tree__label">{{ month_name }}</span>
+            <span class="blog-tree__count">{{ month.items | size }}</span>
+          </summary>
+
+          <ul class="blog-tree__list">
+            {%- for post in month.items -%}
+              {%- assign thumb = post.thumbnail | default: post.image | default: post.hero_image | default: post.author_avatar -%}
+              <li class="blog-tree__item">
+                <a class="blog-tree__link" href="{{ post.url | relative_url }}">
+                  <span class="blog-tree__thumb">
+                    {%- if thumb -%}
+                      <img
+                        src="{{ thumb | relative_url }}"
+                        alt=""
+                        loading="lazy"
+                        width="56"
+                        height="56"
+                      >
+                    {%- else -%}
+                      <span class="blog-tree__thumbFallback" aria-hidden="true"></span>
+                    {%- endif -%}
+                  </span>
+
+                  <span class="blog-tree__title">
+                    {{ post.pretty_title | default: post.title }}
+                    <span class="blog-tree__meta">
+                      {{ post.date | date: "%d %b %Y" }}
+                    </span>
+                  </span>
+                </a>
+              </li>
+            {%- endfor -%}
+          </ul>
+        </details>
+      {%- endfor -%}
+    </details>
+  {%- endfor -%}
+</section>
