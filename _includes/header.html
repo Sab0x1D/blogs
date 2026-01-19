@@ -15,6 +15,7 @@
 
       <div class="trigger" role="menu">
         <a class="page-link {% if page.url == '/' %}is-active{% endif %}" href="{{ '/' | relative_url }}" role="menuitem">Home</a>
+        <a class="page-link {% if page.url == '/blog-index/' %}is-active{% endif %}" href="{{ '/blog-index/' | relative_url }}" role="menuitem">Blog Index</a>
         <a class="page-link {% if page.url contains '/ghostyara/' %}is-active{% endif %}" href="{{ '/ghostyara/' | relative_url }}" role="menuitem">ghostYara</a>
         <a class="page-link {% if page.url contains '/gy-tool/' %}is-active{% endif %}" href="{{ '/gy-tool/' | relative_url }}" role="menuitem">gY Tool</a>
       </div>
