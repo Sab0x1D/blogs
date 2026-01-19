@@ -1059,49 +1059,54 @@ html.dark .post-content blockquote:not(.featured-quote){
 .blog-tree { margin: 1.25rem 0; }
 
 .blog-tree__year,
-.blog-tree__month {
-  border: 1px solid rgba(255,255,255,0.08);
-  border-radius: 12px;
-  padding: 0.35rem 0.75rem;
-  margin: 0.75rem 0;
-  background: rgba(255,255,255,0.02);
+.blog-tree__month{
+  border: 1px solid var(--card-border);
+  border-radius: 16px;
+  padding: 0.5rem 0.75rem;
+  margin: 0.9rem 0;
+  background: rgba(15, 23, 42, 0.015);
 }
 
-.blog-tree__month {
-  margin: 0.75rem 0 0.75rem 1rem;
+.blog-tree__month{
+  margin: 0.9rem 0 0.9rem 1.25rem;
 }
 
-.blog-tree__summary {
+.blog-tree__summary{
   cursor: pointer;
   display: flex;
   align-items: baseline;
   justify-content: space-between;
   gap: 1rem;
-  padding: 0.35rem 0.15rem;
+  padding: 0.55rem 0.5rem;     /* button-like padding */
+  border-radius: 12px;         /* button-like rounding */
   list-style: none;
 }
 
-.blog-tree__summary::-webkit-details-marker { display: none; }
+.blog-tree__summary:hover{
+  background: rgba(15, 23, 42, 0.04);
+}
 
-.blog-tree__label {
+.blog-tree__summary::-webkit-details-marker{ display: none; }
+
+.blog-tree__label{
   font-weight: 800;
   letter-spacing: 0.2px;
 }
 
-.blog-tree__count {
+.blog-tree__count{
   opacity: 0.75;
   font-size: 0.9rem;
 }
 
-.blog-tree__list {
+.blog-tree__list{
   list-style: none;
-  padding: 0.5rem 0.25rem 0.25rem;
+  padding: 0.5rem 0.25rem 0.25rem 0.5rem; /* slightly more left padding */
   margin: 0;
 }
 
-.blog-tree__item { margin: 0; }
+.blog-tree__item{ margin: 0; }
 
-.blog-tree__link {
+.blog-tree__link{
   display: grid;
   grid-template-columns: 56px 1fr;
   align-items: center;
@@ -1111,11 +1116,11 @@ html.dark .post-content blockquote:not(.featured-quote){
   text-decoration: none;
 }
 
-.blog-tree__link:hover {
-  background: rgba(255,255,255,0.05);
+.blog-tree__link:hover{
+  background: rgba(15, 23, 42, 0.04);
 }
 
-.blog-tree__thumb img {
+.blog-tree__thumb img{
   width: 56px;
   height: 56px;
   object-fit: cover;
@@ -1123,15 +1128,14 @@ html.dark .post-content blockquote:not(.featured-quote){
   display: block;
 }
 
-.blog-tree__title {
+.blog-tree__title{
   display: flex;
   flex-direction: column;
   gap: 0.15rem;
   line-height: 1.25;
 }
 
-.blog-tree__meta {
+.blog-tree__meta{
   opacity: 0.7;
   font-size: 0.85rem;
 }
-
