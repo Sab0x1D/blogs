@@ -19,7 +19,7 @@ This post is not a rewrite of Fortinet’s analysis. It is a **defender-first co
 
 ---
 
-## Executive summary (for busy defenders)
+## Executive summary
 
 **What happened (in one breath):** A phishing email posing as a Vietnamese shipping company lures victims into opening a Word document, which automatically retrieves a remote RTF template via URL shorteners; the RTF triggers **CVE-2017-11882** in **EQNEDT32.EXE**, dropping/launching a VBScript that WMI-spawns PowerShell; PowerShell downloads an “image” that actually contains Base64-bounded .NET data, reflectively loads a disguised .NET assembly (**Microsoft.Win32.TaskScheduler**), creates a **scheduled task** that runs **wscript.exe every minute**, downloads the Remcos payload (Base64 + reversed string) into memory, and **process-hollows it into colorcpl.exe**. 
 
@@ -36,7 +36,7 @@ This post is not a rewrite of Fortinet’s analysis. It is a **defender-first co
 
 ---
 
-## The infection chain, annotated (what matters and why)
+## The infection chain (what matters and why)
 
 ### 1) Initial access: phishing that’s designed to survive “document-only” defenses
 FortiGuard’s captured email impersonates a shipping company in Vietnam and pushes a Word attachment framed as an updated shipping document. 
@@ -146,7 +146,7 @@ They also describe packet structure starting with a magic value `0xff0424`, then
 
 ---
 
-## MITRE ATT&CK mapping (practical, not academic)
+## MITRE ATT&CK mapping 
 
 This campaign cleanly maps to a set of ATT&CK techniques that you can operationalize:
 
