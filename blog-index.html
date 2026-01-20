@@ -87,10 +87,20 @@ permalink: /blog-index/
   const monthBlocks = $$('.blog-tree__month');
   const yearBlocks  = $$('.blog-tree__year');
 
+  // Capture initial open/closed state so we can restore it after clearing search
+  const initialMonthOpen = monthBlocks.map(m => m.open);
+  const initialYearOpen  = yearBlocks.map(y => y.open);
+
   function norm(x){ return (x || '').toLowerCase().trim(); }
 
   function applyFilters(){
     const qv = norm(q && q.value);
+
+    // Restore default open/closed state when search is cleared
+    if (!qv) {
+      monthBlocks.forEach((m, i) => { m.open = initialMonthOpen[i]; });
+      yearBlocks.forEach((y, i) => { y.open = initialYearOpen[i]; });
+    }
 
     // 1) Filter individual posts
     items.forEach(li => {
