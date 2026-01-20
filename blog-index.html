@@ -46,7 +46,10 @@ permalink: /blog-index/
               <ul class="blog-tree__list">
                 {%- for post in month.items -%}
                   {%- assign thumb = post.thumb | default: site.default_thumb -%}
-                  <li class="blog-tree__item">
+                  <li class="blog-tree__item"
+                      data-title="{{ post.pretty_title | default: post.title | downcase | escape }}"
+                      data-month="{{ post.date | date: '%B' | downcase | escape }}"
+                      data-year="{{ post.date | date: '%Y' | escape }}">
                     <a class="blog-tree__link" href="{{ post.url | relative_url }}">
                       <span class="blog-tree__thumb">
                         <img
