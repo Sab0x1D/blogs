@@ -73,3 +73,55 @@ permalink: /blog-index/
     </section>
   </div>
 </section>
+
+<script>
+(function(){
+  const $$ = (s, r=document) => Array.from(r.querySelectorAll(s));
+  const q = document.getElementById('bi-search');
+  const clearBtn = document.getElementById('bi-clear');
+
+  const items = $$('.blog-tree__item');
+  const monthBlocks = $$('.blog-tree__month');
+  const yearBlocks  = $$('.blog-tree__year');
+
+  function norm(x){ return (x || '').toLowerCase().trim(); }
+
+  function applyFilters(){
+    const qv = norm(q && q.value);
+
+    // 1) Filter individual posts
+    items.forEach(li => {
+      const title = norm(li.dataset.title);
+      const month = norm(li.dataset.month);
+      const year  = norm(li.dataset.year);
+
+      const ok = !qv || title.includes(qv) || month.includes(qv) || year.includes(qv);
+      li.style.display = ok ? '' : 'none';
+    });
+
+    // 2) Hide month buckets with zero visible posts
+    monthBlocks.forEach(m => {
+      const visible = $$('.blog-tree__item', m).some(li => li.style.display !== 'none');
+      m.style.display = visible ? '' : 'none';
+      if (qv && visible) m.open = true;
+    });
+
+    // 3) Hide year buckets with zero visible months
+    yearBlocks.forEach(y => {
+      const visible = $$('.blog-tree__month', y).some(m => m.style.display !== 'none');
+      y.style.display = visible ? '' : 'none';
+      if (qv && visible) y.open = true;
+    });
+  }
+
+  if (q) q.addEventListener('input', applyFilters);
+
+  if (clearBtn) clearBtn.addEventListener('click', () => {
+    if (q) q.value = '';
+    applyFilters();
+    if (q) q.focus();
+  });
+
+  applyFilters();
+})();
+</script>
