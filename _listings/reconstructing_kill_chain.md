@@ -194,11 +194,11 @@ You already have proof of **hostile behavior**:
 That’s enough.
 
 ### Immediate actions I would take
-1) Isolate the host (or at minimum restrict egress immediately)
-2) Capture volatile triage data (process tree, task XML, network connections)
-3) Reset credentials for the user (and review privileged access exposure)
-4) Block the domain/URI pattern via change control
-5) Scope: hunt enterprise-wide for the scheduled task + DLL path + rundll32 pattern
+1) Isolate the host (or at minimum restrict egress immediately)  
+2) Capture volatile triage data (process tree, task XML, network connections)  
+3) Reset credentials for the user (and review privileged access exposure)  
+4) Block the domain/URI pattern via change control  
+5) Scope: hunt enterprise-wide for the scheduled task + DLL path + rundll32 pattern  
 
 ---
 
