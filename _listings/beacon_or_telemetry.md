@@ -6,7 +6,7 @@ title: "Beacon or Telemetry? A Practical Way to Tell in 10 Minutes"
 pretty_title: "Beacon vs Telemetry: The 10-Minute Triage Method"
 excerpt: "Not all periodic traffic is C2. And not all C2 looks scary. This post gives a fast, practical method to separate beaconing from benign telemetry using only what most SOCs already have: timing, URI structure, headers, reputation context, and correlation to endpoint behavior. No lab needed. No PCAP required."
 thumb: /assets/img/beacon-vs-telemetry.webp
-date: 2026-01-28
+date: 2026-01-29
 featured: false
 tags: ["Threat Hunting", "DFIR", "Network Analysis", "C2", "SOC"]
 ---
