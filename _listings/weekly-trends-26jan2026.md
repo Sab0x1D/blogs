@@ -5,9 +5,10 @@ layout: listing
 title: "Weekly Threat Trends — Week Commencing 26 Jan 2026"
 pretty_title: "Weekly Threat Trends — Week of 26 Jan 2026"
 excerpt: "AI-led intrusion campaigns, identity-layer attacks, ICS advisories, and high-impact data breaches defined the week of 26 January 2026. This roundup walks defenders through what mattered and what to prioritise next."
+thumb: /assets/img/weekly_trends_thumb.jpg
 date: 2026-02-01
-categories: ["weekly-trends"]
-tags: ["weekly-trends","ransomware","AI","identity","ICS","supply-chain","data-breach"]
+featured: false
+tags: [Weekly Trends, Weekly Threats, Awareness]
 ---
 
 ## Top trends at a glance
