@@ -6,7 +6,7 @@ title: "Rundll32 Abuse: The 5 Command Lines I Treat as 'Stop and Look'"
 pretty_title: "Rundll32: Five Command Lines That Should Trigger Triage"
 excerpt: "rundll32.exe is a legitimate Windows binary, which is exactly why it gets abused. Most rundll32 execution is normal. Some is a gift-wrapped incident waiting to happen. This post lists five high-signal rundll32 command-line patterns I treat as 'stop and look', why they matter, and what to check next."
 thumb: /assets/img/rundll32-stop-and-look.webp
-date: 2026-01-30
+date: 2026-02-03
 featured: false
 tags: ["Windows", "LOLBin", "Threat Hunting", "DFIR", "Malware"]
 ---
