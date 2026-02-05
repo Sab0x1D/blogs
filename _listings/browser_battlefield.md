@@ -4,7 +4,7 @@ author_avatar: /assets/img/sab01xd-profile.jpeg
 layout: listing
 title: "Credential Theft Without Malware: When the Browser Is the Battlefield"
 pretty_title: "No Malware Required: How Browsers Get Looted"
-excerpt: "Credential theft does not always require a classic malware payload. In many real intrusions, the browser is the prize—cookies, session tokens, saved passwords, and synced identities. This post walks through how attackers steal access without dropping obvious malware, what artifacts that leaves behind, and the practical defenses that actually reduce impact."
+excerpt: "Credential theft does not always require a classic malware payload. In many real intrusions, the browser is the prize-cookies, session tokens, saved passwords, and synced identities. This post walks through how attackers steal access without dropping obvious malware, what artifacts that leaves behind, and the practical defenses that actually reduce impact."
 thumb: /assets/img/browser-battlefield.webp
 date: 2026-02-05
 featured: false
@@ -25,7 +25,7 @@ But the bigger modern truth is this: **the browser already holds everything an a
 - single sign-on sessions
 - cloud app access
 
-If an attacker can steal or reuse that browser state, they can log in like you—often without triggering the “password failed” signals everyone expects.
+If an attacker can steal or reuse that browser state, they can log in like you, often without triggering the “password failed” signals everyone expects.
 
 And sometimes they do it **without deploying any obvious malware**.
 
@@ -101,7 +101,7 @@ You might see no host artifacts at all—just identity-level activity.
 
 ---
 
-## What it looks like in telemetry (the signals that matter)
+## What it looks like in telemetry 
 This is where defenders usually lose time: they hunt for malware artifacts that may not exist.
 
 Instead, look for **browser-access patterns + identity abuse patterns**.
@@ -134,10 +134,10 @@ If you only hunt on endpoint signals, you miss the part that matters: **the stol
 ## A quick casefile pattern: “No malware, but the browser got looted”
 Here is a pattern I have seen repeatedly:
 
-1) User reports nothing unusual.
-2) Identity logs show a successful sign-in from an unusual location.
-3) Within minutes, mailbox rules appear (forwarding, delete, hide).
-4) EDR shows no obvious malware.
+1) User reports nothing unusual.  
+2) Identity logs show a successful sign-in from an unusual location.  
+3) Within minutes, mailbox rules appear (forwarding, delete, hide).  
+4) EDR shows no obvious malware.  
 5) Later, endpoint logs reveal non-browser processes accessed:
    - `Login Data`
    - `Cookies`
@@ -177,12 +177,12 @@ If your detections only trigger when ransomware executes, you are too late.
 ---
 
 ## What to do when you suspect browser-session theft
-1) Assume credentials and sessions are compromised
-2) Revoke sessions and refresh tokens where possible
-3) Reset passwords (but don’t stop there)
-4) Review OAuth app consents and remove suspicious grants
-5) Audit mailbox rules, forwarding, delegated access
-6) Hunt for other impacted users with similar sign-in patterns
+1) Assume credentials and sessions are compromised  
+2) Revoke sessions and refresh tokens where possible  
+3) Reset passwords (but don’t stop there)  
+4) Review OAuth app consents and remove suspicious grants  
+5) Audit mailbox rules, forwarding, delegated access  
+6) Hunt for other impacted users with similar sign-in patterns  
 
 The point is not “find malware.” The point is “remove stolen access.”
 
