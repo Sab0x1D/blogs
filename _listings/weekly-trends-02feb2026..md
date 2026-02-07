@@ -5,7 +5,7 @@ layout: listing
 title: "Weekly Threat Trends — Week Commencing 2nd February 2026"
 pretty_title: "Weekly Threat Trends — Week Commencing 2nd February 2026"
 excerpt: "The first week of February 2026 brings a clean picture of where the fight is headed: selective supply-chain compromises of dev tooling, hypervisor and mail-server exploits wired into ransomware playbooks, AI platforms abused as malware infrastructure, a major DeFi treasury drain, and the usual long tail of healthcare, retail and airport data breaches."
-thumb: /assets/img/weekly_trends_generic_thumb.webp
+thumb: /assets/img/weekly_trends_thumb.jpg
 date: 2026-02-08
 featured: false
 tags: [Weekly Trends, Weekly Threats, Ransomware, Supply Chain, AI, Identity, ICS, Data Breach]
