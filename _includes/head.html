@@ -4,5 +4,14 @@
 <title>{{ page.title | default: site.title }}</title>
 
 <link rel="stylesheet" href="{{ '/assets/css/theme.css' | relative_url }}">
-<link rel="stylesheet" href="{{ '/assets/css/site.css'  | relative_url }}">
+<link rel="stylesheet" href="{{ '/assets/css/site.css' | relative_url }}">
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+{%- comment -%}
+  Plausible Analytics (privacy-first, cookie-less)
+  - Only loads in production builds (GitHub Pages build = production)
+  - Tracks x1dlabs.com
+{%- endcomment -%}
+{% if jekyll.environment == "production" %}
+  <script defer data-domain="x1dlabs.com" src="https://plausible.io/js/script.js"></script>
+{% endif %}
