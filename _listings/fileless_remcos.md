@@ -8,7 +8,7 @@ excerpt: "FortiGuard Labs documented a 2026 Remcos campaign abusing remote Word 
 thumb: /assets/img/fileless_remcos.webp
 date: 2026-01-20
 tags: [Malware, remcos, phishing, ttp-analysis, detection-engineering, windows, incident-response]
-featured: false
+featured: true
 ---
 
 ## Context and why this write-up exists
