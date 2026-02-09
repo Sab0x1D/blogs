@@ -14,14 +14,11 @@
 {%- endcomment -%}
 {% if jekyll.environment == "production" %}
   <!-- Google tag (gtag.js) -->
-  <script async src="https://www.googletagmanager.com/gtag/js?id=G-GT96Q0LSPP"></script>
-  <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
-    gtag('js', new Date());
-
-    gtag('config', 'G-GT96Q0LSPP', {
-      anonymize_ip: true
-    });
-  </script>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-GT96Q0LSPP"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-GT96Q0LSPP', { anonymize_ip: true });
+</script>
 {% endif %}
