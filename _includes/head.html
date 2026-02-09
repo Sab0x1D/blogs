@@ -7,12 +7,6 @@
 <link rel="stylesheet" href="{{ '/assets/css/site.css' | relative_url }}">
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 
-{%- comment -%}
-  Google Analytics 4 (GA4)
-  - Only loads in production builds
-  - Uses IP anonymization
-{%- endcomment -%}
-{% if jekyll.environment == "production" %}
   <!-- Google tag (gtag.js) -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-GT96Q0LSPP"></script>
 <script>
@@ -21,4 +15,3 @@
   gtag('js', new Date());
   gtag('config', 'G-GT96Q0LSPP', { anonymize_ip: true });
 </script>
-{% endif %}
