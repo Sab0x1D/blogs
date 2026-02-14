@@ -28,13 +28,13 @@ Below is how those pieces fit together, and what’s worth acting on.
 
 Key themes from 9–15 February:
 
-- **Ransomware economics are shifting again** – data-only extortion is underperforming, and crews are leaning back into **encrypt-and-exfiltrate** as the default. :contentReference[oaicite:0]{index=0}  
-- **Critical gov and financial pipelines exposed** – Conduent’s mega-breach (25M+ Americans, many on social programs) and BridgePay’s outage show how fragile outsourced benefits and payment back-ends can be. :contentReference[oaicite:1]{index=1}  
-- **Unmanaged edge infrastructure bites back** – Warlock ransomware’s breach of SmarterTools through a single unpatched SmarterMail VM is a textbook “shadow IT” story. :contentReference[oaicite:2]{index=2}  
-- **IoT and consumer devices at internet scale** – the Kimwolf botnet built largely from compromised Android TV/streaming devices drove a 31.4 Tbps DDoS, while home gadgets are now entry points for tailored phishing. :contentReference[oaicite:3]{index=3}  
-- **Privacy and surveillance under scrutiny** – Mountain View, CA shut down its Flock license plate reader network after learning data was shared with hundreds of agencies without proper permission. :contentReference[oaicite:4]{index=4}  
-- **Australia’s threat surface remains busy** – reports highlight a new 0APT healthcare extortion case (Epworth HealthCare), AI-linked risk (DeepSeek ban), and sustained targeting of identity systems and edge SaaS in the local context. :contentReference[oaicite:5]{index=5}  
-- **OT/ICS keeps getting more guidance and more advisories** – CISA pushes new ICS advisories (Airleader Master and others) and publishes fresh OT security guidance to reduce cost/complexity barriers. :contentReference[oaicite:6]{index=6}  
+- **Ransomware economics are shifting again** – data-only extortion is underperforming, and crews are leaning back into **encrypt-and-exfiltrate** as the default. 
+- **Critical gov and financial pipelines exposed** – Conduent’s mega-breach (25M+ Americans, many on social programs) and BridgePay’s outage show how fragile outsourced benefits and payment back-ends can be. 
+- **Unmanaged edge infrastructure bites back** – Warlock ransomware’s breach of SmarterTools through a single unpatched SmarterMail VM is a textbook “shadow IT” story. 
+- **IoT and consumer devices at internet scale** – the Kimwolf botnet built largely from compromised Android TV/streaming devices drove a 31.4 Tbps DDoS, while home gadgets are now entry points for tailored phishing. 
+- **Privacy and surveillance under scrutiny** – Mountain View, CA shut down its Flock license plate reader network after learning data was shared with hundreds of agencies without proper permission. 
+- **Australia’s threat surface remains busy** – reports highlight a new 0APT healthcare extortion case (Epworth HealthCare), AI-linked risk (DeepSeek ban), and sustained targeting of identity systems and edge SaaS in the local context. 
+- **OT/ICS keeps getting more guidance and more advisories** – CISA pushes new ICS advisories (Airleader Master and others) and publishes fresh OT security guidance to reduce cost/complexity barriers. 
 
 ---
 
@@ -45,17 +45,17 @@ A useful macro signal this week is a **SecurityWeek analysis** arguing that many
 - Pure data theft extortion (steal → threaten to leak) has underperformed:
   - Victims gamble on the data not being used.
   - Insurers push back on paying.
-- Crews are now more likely to **encrypt *and* exfiltrate**, re-increasing operational impact as leverage. :contentReference[oaicite:7]{index=7}  
+- Crews are now more likely to **encrypt *and* exfiltrate**, re-increasing operational impact as leverage. 
 
 Stack that against a few other data points:
 
 - **Check Point’s January 2026 global trends** show:
   - Global cyberattacks up, with ransomware incidents and multi-extortion tactics still strong.
-  - Qilin, LockBit and Akira collectively responsible for a big slice of disclosed ransomware activity. :contentReference[oaicite:8]{index=8}  
-- A **January ransomware roundup** tallies over **100 TB of stolen data** and highlights Qilin as the most prolific gang by attack count for the month. :contentReference[oaicite:9]{index=9}  
+  - Qilin, LockBit and Akira collectively responsible for a big slice of disclosed ransomware activity. 
+- A **January ransomware roundup** tallies over **100 TB of stolen data** and highlights Qilin as the most prolific gang by attack count for the month. 
 - A **Check Point threat intel bulletin** published on 9 Feb notes:
   - **451 ransomware incidents** in 2025 in the financial sector alone.
-  - Increasing use of aggressive **multi-extortion** and data-leak tactics. :contentReference[oaicite:10]{index=10}  
+  - Increasing use of aggressive **multi-extortion** and data-leak tactics. 
 
 The picture:
 
@@ -84,15 +84,15 @@ Two incidents this week show how fragile core **government and payment pipelines
 
 A big one: **Conduent**, a New Jersey-based IT contractor that runs technology for US government programs, is dealing with the fallout of a major ransomware/data breach:
 
-- A group calling itself **SafePay** claims it compromised Conduent from **October 2024** until detection in January 2025, exfiltrating up to **8.5 TB of data**. :contentReference[oaicite:11]{index=11}  
-- New reporting this week suggests at least **25 million Americans** affected, including roughly **15.4 million Texans** – about half the state. :contentReference[oaicite:12]{index=12}  
-- Conduent runs systems for **Medicaid, SNAP/food assistance, unemployment insurance, child support** and more across **46 states**. :contentReference[oaicite:13]{index=13}  
+- A group calling itself **SafePay** claims it compromised Conduent from **October 2024** until detection in January 2025, exfiltrating up to **8.5 TB of data**. 
+- New reporting this week suggests at least **25 million Americans** affected, including roughly **15.4 million Texans** – about half the state. 
+- Conduent runs systems for **Medicaid, SNAP/food assistance, unemployment insurance, child support** and more across **46 states**. 
 - Stolen data includes:
   - Names, addresses.
   - Social Security numbers.
   - Health information and program details.
 
-Multiple class-action suits are now in motion, alleging **slow notification and weak controls**. :contentReference[oaicite:14]{index=14}  
+Multiple class-action suits are now in motion, alleging **slow notification and weak controls**. 
 
 Key lesson:
 
@@ -105,9 +105,9 @@ On the private-sector side, **BridgePay**, a US payment gateway, was hit by a ra
 - Incident late last week, with the company confirming a ransomware attack and pulling multiple services:
   - BridgeComm.
   - PayGuardian Cloud API.
-  - MyBridgePay virtual terminal, etc. :contentReference[oaicite:15]{index=15}  
+  - MyBridgePay virtual terminal, etc. 
 - Many downstream businesses were forced into **cash-only** or manual fallbacks.
-- Early investigation suggests **no payment card data exposed**; accessed files appear only to have been encrypted. :contentReference[oaicite:16]{index=16}  
+- Early investigation suggests **no payment card data exposed**; accessed files appear only to have been encrypted. 
 
 This is a clean example of **availability risk**:
 
@@ -131,22 +131,22 @@ The week also gave us a neat case study in **how one stray asset can undo a lot 
 
 SmarterTools (maker of SmarterMail) confirmed that:
 
-- The **Warlock ransomware gang (aka Storm-2603)** breached their network via a **single unpatched SmarterMail virtual machine**. :contentReference[oaicite:17]{index=17}  
+- The **Warlock ransomware gang (aka Storm-2603)** breached their network via a **single unpatched SmarterMail virtual machine**. 
 - The VM was:
   - Spun up by an employee.
   - Not part of formal patch/asset management.
-  - Running a vulnerable SmarterMail build affected by **CVE-2026-23760**, an **authentication bypass** that lets attackers reset admin passwords and gain control. :contentReference[oaicite:18]{index=18}  
+  - Running a vulnerable SmarterMail build affected by **CVE-2026-23760**, an **authentication bypass** that lets attackers reset admin passwords and gain control. 
 - Once inside, Warlock:
   - Used the compromised server and **Active Directory** to pivot.
   - Targeted a set of **Windows servers** for encryption.
 - Damage was limited:
   - SmarterTools says only **12 Windows servers** were impacted, mostly mitigated by antivirus.
-  - Their primary services run on Linux and were isolated, so customer portals and main infra stayed up. :contentReference[oaicite:19]{index=19}  
+  - Their primary services run on Linux and were isolated, so customer portals and main infra stayed up. 
 
 Post-incident, SmarterTools is:
 
 - Migrating away from **Windows and AD** for internal services.
-- Urging customers to **upgrade SmarterMail** to builds that fix the auth bypass. :contentReference[oaicite:20]{index=20}  
+- Urging customers to **upgrade SmarterMail** to builds that fix the auth bypass. 
 
 ### Why It Matters
 
@@ -154,7 +154,7 @@ Several patterns worth noting:
 
 - This is **not** a mass customer compromise; it is an **internal hygiene failure**:
   - A single “lab” or “test” VM, never onboarded into the patch pipeline.
-- The vulnerability in question had **already been publicly called out by CISA** as actively exploited and placed into KEV. :contentReference[oaicite:21]{index=21}  
+- The vulnerability in question had **already been publicly called out by CISA** as actively exploited and placed into KEV. 
 - It shows that “we run Linux for most things” doesn’t save you if:
   - Attackers can reach one forgotten Windows server.
   - That server is wired into the same identity plane.
@@ -180,7 +180,7 @@ Grant Thornton Ireland and Cloudflare reporting, amplified in local media, highl
 - A **November 2025 DDoS attack** that peaked at **31.4 Tbps** and lasted ~35 seconds.
 - The attack was driven by a botnet dubbed **Kimwolf**, made up largely of:
   - **Android TV boxes**, “Android telly” units.
-  - Low-cost **streaming gadgets and smart devices** with almost no hardening. :contentReference[oaicite:22]{index=22}  
+  - Low-cost **streaming gadgets and smart devices** with almost no hardening. 
 - These devices are:
   - Shipped with default credentials.
   - Rarely updated by users.
@@ -191,14 +191,14 @@ Experts are warning that:
 - Once inside a home network, attackers can:
   - Observe usage patterns (when people are home, what apps they use).
   - Feed highly tailored **phishing or scam campaigns**.
-- Cheap smart TVs, lightbulbs, and boxes are now an **entry point into households and small offices**, not just a nuisance. :contentReference[oaicite:23]{index=23}  
+- Cheap smart TVs, lightbulbs, and boxes are now an **entry point into households and small offices**, not just a nuisance. 
 
 ### License Plate Readers & Data Sharing: The Flock Case
 
 On the municipal side, Malwarebytes highlighted a privacy story with security implications:
 
 - **Mountain View, California** shut down its entire network of **Flock Safety license plate reader cameras**.
-- Reason: it discovered Flock had been **sharing city plate data with hundreds of law-enforcement agencies**, including federal, without explicit permission. :contentReference[oaicite:24]{index=24}  
+- Reason: it discovered Flock had been **sharing city plate data with hundreds of law-enforcement agencies**, including federal, without explicit permission. 
 - This raises:
   - Governance and consent issues.
   - Questions about **data minimisation, retention, and access control**.
@@ -221,7 +221,7 @@ Zooming into the Australian region, local threat briefings for the first half of
 
 Lean Security’s daily briefing flagged a new threat actor dubbed **0APT** claiming:
 
-- Theft of approximately **920 GB of sensitive data** from **Epworth HealthCare**, one of Victoria’s largest private hospital groups. :contentReference[oaicite:25]{index=25}  
+- Theft of approximately **920 GB of sensitive data** from **Epworth HealthCare**, one of Victoria’s largest private hospital groups. 
 - Data is said to include:
   - Patient information.
   - Financial data.
@@ -235,7 +235,7 @@ The same and related briefings note:
 
 - A “distinct escalation” in **human-led attacks on identity systems (SSO)** and:
   - Targeted campaigns against **edge SaaS and collaboration tools**.
-  - Renewed focus on **MFA bypass** and session hijacking. :contentReference[oaicite:26]{index=26}  
+  - Renewed focus on **MFA bypass** and session hijacking. 
 
 This ties neatly into what we saw the previous week with Evilginx2 and SSO vishing – the pattern hasn’t changed; if anything, the intensity has.
 
@@ -246,7 +246,7 @@ Australia-focused commentary also picks up on policy moves like the **ban on Dee
 - A response to **data exposure and model-abuse risk**.
 - An example of organisations beginning to **treat GenAI providers as high-risk third parties**, especially where:
   - Sensitive workloads might leak into training sets.
-  - Outputs might be influenced by prompt injection. :contentReference[oaicite:27]{index=27}  
+  - Outputs might be influenced by prompt injection. 
 
 Overall, the local message:
 
@@ -264,7 +264,7 @@ On the OT side, this week was light on spectacular outages but heavy on **adviso
 CISA’s ICS portal shows fresh advisories dated **12 February 2026**, including:
 
 - **ICSA-26-043-10**: targeting **Airleader Master**, a compressed air management system used in industrial environments.
-- Additional advisories for other ICS products, continuing a pattern of regular updates for OT vendors and integrators. :contentReference[oaicite:28]{index=28}  
+- Additional advisories for other ICS products, continuing a pattern of regular updates for OT vendors and integrators. 
 
 These advisories typically involve:
 
@@ -280,7 +280,7 @@ CISA also released new OT security guidance aimed at **overcoming cost and compl
   - Secure remote access.
   - Segmenting OT from IT networks.
   - “Secure-by-design” control device procurement.
-- Explicitly acknowledges that **complexity, operational risk and budget** are the main reasons OT environments lag behind IT in security, and offers structured mitigations. :contentReference[oaicite:29]{index=29}  
+- Explicitly acknowledges that **complexity, operational risk and budget** are the main reasons OT environments lag behind IT in security, and offers structured mitigations. 
 
 The thread across all of this:
 
