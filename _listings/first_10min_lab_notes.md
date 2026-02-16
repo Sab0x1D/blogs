@@ -208,12 +208,12 @@ Loader stage is where you can still stop it cheaply.
 ## The checklist version (because you’ll want it)
 In the first 10 minutes, I aim to answer:
 
-1) What was the first unusual event, and when?
-2) What executed, from where, and who spawned it?
-3) Did it create persistence?
-4) Did it start outbound communications?
-5) Is there a signal of objective (credential stores, token abuse)?
-6) Can I find a sibling host with the same pivots?
+1) What was the first unusual event, and when?  
+2) What executed, from where, and who spawned it?  
+3) Did it create persistence?  
+4) Did it start outbound communications?  
+5) Is there a signal of objective (credential stores, token abuse)?  
+6) Can I find a sibling host with the same pivots?  
 
 That’s it. Everything else can come later.
 
