@@ -276,6 +276,6 @@ If you can classify a stealer incident by **artifact behavior**, you can:
 - scope better
 - reduce impact
 
-Call it Lumma, call it commodity, call it “stealer-style intrusion.”
-The artifacts will still tell you what to do next.
----
+Call it Lumma, call it commodity, call it “stealer-style intrusion.”  
+The artifacts will still tell you what to do next.  
+
