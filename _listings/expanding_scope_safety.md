@@ -3,7 +3,7 @@ author: Sab0x1D
 author_avatar: /assets/img/sab01xd-profile.jpeg
 layout: listing
 title: "From One Phish to Fleet-Wide Hunt: How I Expand Scope Safely"
-pretty_title: "From One Phish to Fleet-Wide Hunt (Without Breaking Everything)"
+pretty_title: "From One Phish to Fleet-Wide Hunt"
 excerpt: "One phish is rarely one phish. The trick is expanding scope fast without detonating false positives, overwhelming teams, or blocking legitimate business traffic. This casefile-style post shows the exact pivots I use—from email artifacts to endpoints to network—and how I stage containment safely while I hunt for siblings."
 thumb: /assets/img/one-phish-fleet-hunt.webp
 date: 2026-02-24
