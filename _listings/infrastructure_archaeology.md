@@ -5,7 +5,7 @@ layout: listing
 title: "Infrastructure Archaeology: What TLS Certificates Can Reveal"
 pretty_title: "TLS Cert Archaeology: Pivoting Infrastructure Without a PCAP"
 excerpt: "TLS certificates are more than encryption—they’re fingerprints. Even without packet capture, certificate metadata can help you map infrastructure, find sibling domains, identify staging patterns, and separate commodity noise from deliberate operations. This post shows how I use TLS cert pivots in investigations and what signals are actually meaningful."
-thumb: /assets/img/tls-cert-archaeology.webp
+thumb: /assets/img/tls-cert-archaeology.png
 date: 2026-02-26
 featured: false
 tags: ["Threat Intelligence", "OSINT", "Network Analysis", "Infrastructure", "Threat Hunting"]
